@@ -16,6 +16,11 @@ export class ContactListComponent {
     
   }
 
+  selectedIndex: number | null = null;
+  selectItem(index: number) {
+    this.selectedIndex = index;
+  }
+
   addContact(){
     
       let contact = {

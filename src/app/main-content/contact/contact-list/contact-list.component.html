@@ -1,18 +1,18 @@
 <section>
-    <button>Add new contact</button>
+    <button (click)="addContact()">Add new contact</button>
     @for (latter of (contactService.contactListLater); track latter; let index = $index) {
         @if(latter){
             <div>
                 <p>{{latter}}</p>
                 <div class="latter-container">
-                    @for (item of (contactService.contactList); track item) {
+                    @for (item of (contactService.contactList); track item; let index = $index) {
                         @if(item['name'].startsWith(latter)){
-                            <div class="contact">
+                            <div class="contact" (click)="selectItem(index)"  [ngClass]="{ 'selected': selectedIndex === index }">
                                 <div class="contact-img">{{latter}} {{item['name'].split(' ')[1]?.charAt(0) || ''}}</div>
-                                <div class="name-email">
-                                    <p (click)="addContact()">{{ item['name'] }}</p>
-                                    <p>{{ item['email'] }}</p>
-                                </div>
+                                <ul class="name-email">
+                                    <p>{{ item['name'] }}</p>
+                                    <a>{{ item['email'] }}</a>
+                                </ul>
                             </div>
                         }
                     }
