@@ -1,0 +1,100 @@
+.overlay {
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 0;
+    right: 0;
+    width: 100%;
+    
+    height: 100vh;
+    background-color: rgba(255, 255, 255, 0.247);
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
+    transform: translateX(100%);
+    transition: transform 250ms ease-in-out;
+    z-index: 1000;
+  }
+  .overlay.open {
+    transform: translateX(0);
+  }
+  
+  .overlay.closed {
+    transform: translateX(100%);
+  }
+.content-wrapper{
+    
+    display:flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 50vh;
+    width: 80%;
+    gap:72px;
+    
+    
+}
+
+.logo-div{
+    border-top-left-radius:30px;
+    border-bottom-left-radius:30px;
+    background-color: #2A3647;
+    display:flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    width: 30%;
+    height: 100%;
+    padding: 0 20px;
+
+    .line-div{
+        background-color:#29ABE2;
+        width: 90px;
+        height: 3px;
+    }
+}
+
+.form-div{
+    flex:1;
+    display:flex;
+    justify-content: start;
+    position: relative;
+    border-top-right-radius:30px;
+    border-bottom-right-radius:30px;
+    >a{
+        position:absolute;
+        top: -60px;
+        right: 20px;
+    }
+    
+
+    .form-wrapper{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 32px;
+        >div{
+            position: relative;
+            display: inline-block;
+            >input{
+                padding-right: 36px; 
+                padding-left: 12px;
+                width: 250px;
+                height: 36px;
+                font-size: 14px;
+                border-radius: 14px;
+                border: 1px solid #D1D1D1;
+            }
+            >img{
+                position: absolute;
+                right: 10px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: 16px;
+                height: 16px;
+                pointer-events: none; 
+            }
+        }
+       
+    }
+
+}

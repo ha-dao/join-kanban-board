@@ -1,1 +1,76 @@
-<p>contact-overlay works!</p>
+<div class="overlay" [ngClass]="{ 'open': isOpen, 'closed': !isOpen }">
+    <div class="content-wrapper">
+ 
+  <div class="logo-div">
+    <img src="../../../../assets/img/addContactOverlay/joinLogo.svg" alt="" />
+    <h1>Add contact</h1>
+    <span>Tasks are better with a team!</span>
+    <div class="line-div"></div>
+  </div>
+  <div class="profile-image">
+    <img
+      src="../../../../assets/img/addContactOverlay/profile-image-empty.svg"
+      alt=""
+    />
+  </div>
+  <div class="form-div">
+    <a href="#"
+    ><img src="../../../../assets/img/addContactOverlay/X.svg" alt="" (click)="toggleOverlay()"
+  /></a>
+    <div class="form-wrapper">
+      <div class="input-div">
+        <img src="../../../../assets/img/addContactOverlay/person.svg" alt="search" />
+        <input
+          class="input-field"
+          type="text"
+          id="name-input"                    
+          name="name"
+          required
+          [(ngModel)]="contactData.name"
+          minlength="3"          
+          (blur)="validateForm('name')"
+          [class.invalid]="invalidFields.includes('name')"
+          [attr.placeholder]="invalidFields.includes('name') ? 'Please enter at least 3 characters' : 'Name'"
+        />
+      </div>
+      <div class="input-div">
+        <img src="../../../../assets/img/addContactOverlay/mail.svg" alt="search" />
+        <input
+          class="input-field"
+          type="text"
+          id="email-input"          
+          name="email"
+          required
+          [(ngModel)]="contactData.email"
+          minlength="3"          
+          (blur)="validateForm('email')"
+          [class.invalid]="invalidFields.includes('email')"
+          [attr.placeholder]="invalidFields.includes('email') ? 'Your Email seems invalid' : 'Mail'"
+        />
+      </div>
+      <div class="input-div">
+        <img src="../../../../assets/img/addContactOverlay/phone.svg" alt="search" />
+        <input
+          class="input-field"
+          type="text"
+          id="phone-input"          
+          name="phone"
+          required
+          minlength="9"  
+          [(ngModel)]="contactData.phone"        
+          (blur)="validateForm('phone')"
+          [class.invalid]="invalidFields.includes('phone')"
+          [attr.placeholder]="invalidFields.includes('phone') ? 'Please enter a valid phonenumber' : 'Phone'"
+        />
+      </div>
+      <div class="button-div">
+        <button class="cancel-button" (click)="toggleOverlay()">
+          Cancel
+          <img src="../../../../assets/img/addContactOverlay/X.svg" alt="" />
+        </button>
+        <button class="create-button"[disabled]="!isFormValid()">Create Contact</button>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
