@@ -1,0 +1,43 @@
+.content-wrapper{
+    border-radius: 30px;
+    display:flex;
+    align-items: center;
+    height: 50vh;
+    width: 100%;
+}
+
+.logo-div{
+    background-color: #2A3647;
+    display:flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    width: 30%;
+    height: 100%;
+    padding: 0 20px;
+
+    .line-div{
+        background-color:#29ABE2;
+        width: 90px;
+        height: 3px;
+    }
+}
+
+.form-div{
+    display:flex;
+    position: relative;
+    
+    >a{
+        position:absolute;
+        top: 0;
+        right: 0;
+    }
+
+    .form-wrapper{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        gap: 32px;
+    }
+}
