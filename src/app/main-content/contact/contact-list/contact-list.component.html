@@ -1,1 +1,8 @@
-<p>contact-list works!</p>
+<ul>
+    @for (item of (contactService.contactList); track item) {
+    <li>
+        <p (click)="addContact()">{{ item['name'] }}</p>
+        <p>{{ item['email'] }}</p>
+    </li>
+    }
+</ul>
