@@ -17,9 +17,10 @@ export class ContactListComponent {
   }
 
   addContact(){
+    
       let contact = {
         'id': 'string',
-        'name': 'string',
+        'name': 'String',
         'email': 'string',
         'phone': 'string'
       }
