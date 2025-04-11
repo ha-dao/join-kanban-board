@@ -61,15 +61,19 @@ export class ContactOverlayComponent {
     this.toggleBodyScroll(this.isOpen);
   }
 
-  // onCancelClick() {
-  //   this.closeOverlay.emit();
-  // }
+ 
   toggleBodyScroll(disable: boolean) {
     if (disable) {
       document.body.classList.add('no-scroll');
     } else {
       document.body.classList.remove('no-scroll');
     }
+  }
+
+  clearForm(){
+    this.contactData.name= '';
+    this.contactData.email = '';
+    this.contactData.phone= '';
   }
   
 }
