@@ -1,6 +1,25 @@
+// sidebar background-color
 $primary-color: #2A3647;
+
+// sidebar menu background-color on hover
+$primary-hover-color: #091931;
+
+// content background-color
 $background-color: #F6F7F8;
+
+// background-color or text color like h1,h2.. <p>..
 $white: #ffffff;
 $black: #000000;
 
+// button background-color or text-color on hover (e.g. email links or input border color on focus)
 $hover-color: #29ABE2;
+
+// footer text/link color and sidebar menu color
+$footer-link-color: #A8A8A8;
+
+// red alert color for input field or text
+$text-alert-color: #FF8190;
+$border-alert-color: #FF001F;
+
+// input placeholder text color or inactive menu text color
+$grey: #D1D1D1;
