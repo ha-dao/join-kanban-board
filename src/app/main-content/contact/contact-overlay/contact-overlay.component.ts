@@ -1,6 +1,7 @@
 import { Component, ViewChild, Input, Output, EventEmitter  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormsModule, NgForm, NgModel } from '@angular/forms';
+import { ContactService } from '../../../services/contact.service';
 
 @Component({
   selector: 'app-contact-overlay',
@@ -12,7 +13,9 @@ import { FormControl, FormsModule, NgForm, NgModel } from '@angular/forms';
 export class ContactOverlayComponent {
   @Input() isOpen: boolean = false;
   @Output() closeOverlay = new EventEmitter<void>();
-
+  constructor(public contactService: ContactService){
+    
+  }
   contactData: {
     name: string;
     email: string;

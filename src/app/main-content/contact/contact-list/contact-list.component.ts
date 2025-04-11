@@ -29,13 +29,5 @@ export class ContactListComponent {
     this.selectedIndex = index;
   }
 
-  addContact(){    
-      let contact:Contact = {
-        'id': '',
-        'name': '',
-        'email': '',
-        'phone': ''
-      }
-      this.contactService.addContact(contact);
-  }
+  
 }
