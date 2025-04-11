@@ -1,0 +1,54 @@
+:host{
+  display: flex;
+  justify-content: flex-start;
+  height: 100vh;
+}
+
+.sidebar {
+  width: 232px;
+  height: 100vh;
+  background-color: #2a3647;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  .sidebar-header {
+    display: flex;
+    justify-content: center;
+    padding-top: 64px;
+    .logo {
+      width: 100px;
+      height: 121px;
+    }
+  }
+
+  .sidebar-nav a {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%; 
+    height: 46px;
+    padding-inline: 56px;
+    margin-bottom: 15px;
+    gap: 8px;
+    color: #CDCDCD;
+    text-decoration: none;
+    font-size: 16px;
+    box-sizing: border-box;
+    transition: background 0.3s;
+
+    &.active {
+      background-color: #091931;
+    }
+
+    &:hover {
+      background-color: #2a3d59;
+      cursor: pointer;
+    }
+
+    img {
+      width: 30px;
+      height: 30px;
+    }
+  }
+}
