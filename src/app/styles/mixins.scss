@@ -1,7 +1,7 @@
 @import './variables.scss';
 
-@mixin displayFlex($flex-direction: row, $justify-content: center, $align-items: center, $gap: 0, $flex-wrap: wrap) {
-  display: flex;
+@mixin displayFlex($display: flex, $flex-direction: row, $justify-content: center, $align-items: center, $gap: 0, $flex-wrap: wrap) {
+  display: $display;
   flex-direction: $flex-direction;
   justify-content: $justify-content;
   align-items: $align-items;
@@ -9,8 +9,9 @@
   flex-wrap: $flex-wrap;
 }
 
-@mixin fontStyle($font-size: clamp(16px, 18px, 20px), $font-weigt: 400, $color: $primary-color) {
+@mixin fontStyle($font-size: clamp(16px, 18px, 20px), $font-weight: 400, $font-color: $primary-color, $text-transform: none) {
   font-size: $font-size;
   font-weight: $font-weight;
   color: $font-color;
+  text-transform: $text-transform;
 }
