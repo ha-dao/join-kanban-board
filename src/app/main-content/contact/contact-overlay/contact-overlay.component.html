@@ -67,7 +67,7 @@
           Cancel
           <img src="../../../../assets/img/addContactOverlay/X.svg" alt="" />
         </button>
-        <button class="create-button"[disabled]="!isFormValid()">Create Contact <img src="../../../../assets/img/addContactOverlay/check.svg" alt=""></button>
+        <button class="create-button"[disabled]="!isFormValid()" (click)="this.contactService.addContact(contactData); toggleOverlay(); clearForm()">Create Contact <img src="../../../../assets/img/addContactOverlay/check.svg" alt=""></button>
       </div>
     </div>
   </div>
