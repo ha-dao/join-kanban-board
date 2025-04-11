@@ -10,7 +10,7 @@ import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
   selector: 'app-root',
   standalone: true,
   
-  imports: [CommonModule, RouterOutlet, ContactOverlayComponent, ContactComponent, HeaderComponent, SidebarComponent],
+  imports: [CommonModule, RouterOutlet, ContactComponent, HeaderComponent, SidebarComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
