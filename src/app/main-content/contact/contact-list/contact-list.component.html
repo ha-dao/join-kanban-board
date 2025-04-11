@@ -1,5 +1,5 @@
 <section>
-    <button (click)="openOverlay()">Add new contact</button>
+    <button (click)="toggleOverlayFromList()">Add new contact</button>
     @for (latter of (contactService.contactListLater); track latter; let index = $index) {
         @if(latter){
             <div>
@@ -21,3 +21,4 @@
         }
     }
 </section>
+<app-contact-overlay #contactOverlay></app-contact-overlay>
