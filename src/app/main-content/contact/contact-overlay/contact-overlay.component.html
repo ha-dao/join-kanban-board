@@ -1,6 +1,6 @@
 <div class="overlay" [ngClass]="{ 'open': isOpen, 'closed': !isOpen }">
     <div class="content-wrapper">
- 
+
   <div class="logo-div">
     <img src="../../../../assets/img/addContactOverlay/joinLogo.svg" alt="" />
     <h1>Add contact</h1>
@@ -23,11 +23,11 @@
         <input
           class="input-field"
           type="text"
-          id="name-input"                    
+          id="name-input"
           name="name"
           required
           [(ngModel)]="contactData.name"
-          minlength="3"          
+          minlength="3"
           (blur)="validateForm('name')"
           [class.invalid]="invalidFields.includes('name')"
           [attr.placeholder]="invalidFields.includes('name') ? 'Please enter at least 3 characters' : 'Name'"
@@ -38,11 +38,11 @@
         <input
           class="input-field"
           type="text"
-          id="email-input"          
+          id="email-input"
           name="email"
           required
           [(ngModel)]="contactData.email"
-          minlength="3"          
+          minlength="3"
           (blur)="validateForm('email')"
           [class.invalid]="invalidFields.includes('email')"
           [attr.placeholder]="invalidFields.includes('email') ? 'Your Email seems invalid' : 'Mail'"
@@ -53,11 +53,11 @@
         <input
           class="input-field"
           type="text"
-          id="phone-input"          
+          id="phone-input"
           name="phone"
           required
-          minlength="9"  
-          [(ngModel)]="contactData.phone"        
+          minlength="9"
+          [(ngModel)]="contactData.phone"
           (blur)="validateForm('phone')"
           [class.invalid]="invalidFields.includes('phone')"
           [attr.placeholder]="invalidFields.includes('phone') ? 'Please enter a valid phonenumber' : 'Phone'"
