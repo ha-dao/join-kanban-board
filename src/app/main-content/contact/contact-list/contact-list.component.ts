@@ -24,10 +24,5 @@ export class ContactListComponent {
       this.contactOverlay.toggleOverlay();
     }  
 
-  selectedIndex: number | null = null;
-  selectItem(index: number) {
-    this.selectedIndex = index;
-  }
-
   
 }
