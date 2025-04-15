@@ -21,7 +21,7 @@ export class ContactListComponent {
   @ViewChild('contactOverlay') contactOverlay!: ContactOverlayComponent;
 
   toggleOverlayFromList() {    
-      this.contactOverlay.toggleOverlay();
+      this.contactOverlay.toggleOverlay('Cancle', 'Create Contact');
     }  
 
   
