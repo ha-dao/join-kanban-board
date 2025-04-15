@@ -9,12 +9,13 @@
   </div>
 
   <div class="profile-section">
-    <img
-      class="help-icon"
-      src="./../../../../assets/img/header/help.svg"
-      alt="Help Icon"
-      (click)="navigateToHelp($event)"
-    />
+    <a [routerLink]="'/help'">
+      <img
+        class="help-icon"
+        src="./../../../../assets/img/header/help.svg"
+        alt="Help Icon"
+      />
+    </a>
 
     <div class="profile" (click)="toggleMenu($event)">G</div>
 
