@@ -4,7 +4,7 @@
       ><img
         src="../../../../assets/img/addContactOverlay/X.svg"
         alt=""
-        (click)="toggleOverlay(); clearForm()"
+        (click)="toggleOverlay('', ''); clearForm()"
     /></a>
 
     <div class="logo-div">
@@ -88,20 +88,16 @@
           />
         </div>
         <div class="button-div">
-          <button class="cancel-button" (click)="toggleOverlay(); clearForm()">
-            Cancel
+          <button class="cancel-button" (click)="cancleOrDelete()">
+            {{buttonLeft}}
             <img src="../../../../assets/img/addContactOverlay/X.svg" alt="" />
           </button>
           <button
             class="create-button"
             [disabled]="!isFormValid()"
-            (click)="
-              this.contactService.addContact(contactData);              
-              clearForm();
-              toggleSuccessMessage()
-            "
+            (click)="addOrSave()"
           >
-            Create Contact
+          {{buttonRight}}
             <img
               src="../../../../assets/img/addContactOverlay/check.svg"
               alt=""
