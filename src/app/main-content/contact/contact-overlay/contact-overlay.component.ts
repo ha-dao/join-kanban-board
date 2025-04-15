@@ -32,7 +32,7 @@ export class ContactOverlayComponent {
   validateForm(field: string) {
     this.invalidFields = this.invalidFields.filter(f => f !== field);
     if(field === 'name'){
-    if (!this.contactData.name || this.contactData.name.length < 3) {
+    if (!this.contactData.name || this.contactData.name.length < 2) {
       this.invalidFields.push('name');
       this.contactData.name = ''; 
     }
@@ -55,7 +55,7 @@ export class ContactOverlayComponent {
 
   isFormValid(): boolean {
     return (
-      this.contactData.name.length >= 3 &&
+      this.contactData.name.length >= 2 &&
       /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(this.contactData.email) &&
       /^(?:\+?\d{1,4}[ \-]?)?(\(?\d{1,4}\)?[ \-]?)?[\d\- ]{5,15}$/.test(this.contactData.phone)
     );

@@ -1,10 +1,12 @@
 <header class="header">
   <div class="header-content">
+    <a href="">
     <img
       class="mobile-logo"
       src="./../../../../assets/img/header/join-logo-mobile.svg"
       alt="JOIN Logo"
     />
+  </a>
     <h1 class="header-title">Kanban Project Management Tool</h1>
   </div>
 
@@ -26,12 +28,14 @@
         Help
       </a>
       <a
+        href="/legal-notice"
         class="menu-item"
         (click)="handleMenuItemClick('legal-notice'); $event.stopPropagation()"
       >
         Legal Notice
       </a>
       <a
+        href="/privacy"    
         class="menu-item"
         (click)="
           handleMenuItemClick('privacy-policy'); $event.stopPropagation()

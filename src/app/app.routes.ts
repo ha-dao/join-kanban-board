@@ -1,6 +1,18 @@
 import { Routes } from '@angular/router';
+import { LegalNoticeComponent } from './shared/components/header/legal-notice/legal-notice.component';
+import { PrivacyPolicyComponent } from './shared/components/header/privacy-policy/privacy-policy.component';
+import { ContactComponent } from './main-content/contact/contact.component';
 
 export const routes: Routes = [
+    {
+        path: '', component: ContactComponent
+    },
+    {
+        path: 'legal-notice', component: LegalNoticeComponent
+    },
+    {
+        path: 'privacy', component: PrivacyPolicyComponent
+    }
 //   {
 //     path: '', redirectTo: 'summary', pathMatch: 'full',
 //   },
