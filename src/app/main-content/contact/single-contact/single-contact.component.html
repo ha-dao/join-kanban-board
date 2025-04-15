@@ -1,1 +1,22 @@
-
+<div class="title">
+    <h2>Contacts</h2>
+    <div class="separator"></div>
+    <p>Better with a team</p>
+</div>
+<div class="singel-contact-overlay" [ngStyle]="{display: contactService.overlayDisplay}">
+    <div class="name-and-img">
+        <div class="img"></div>
+        <div class="name-and-bttns">
+            <h3>{{contactService.currentContact.name}}</h3>
+            <div class="bttns">
+                <button (click)="editContact()">Edit</button>
+                <button (click)="deleteContact()">delete</button>
+            </div>
+        </div>
+    </div>
+    <p>Contact Informationen</p>
+    <b>Email</b>
+    <a href="">{{contactService.currentContact.email}}</a>
+    <b>Phone</b>
+    <p>{{contactService.currentContact.phone}}</p>
+</div>

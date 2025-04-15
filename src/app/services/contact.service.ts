@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy} from '@angular/core';
 import { inject } from '@angular/core';
-import { Firestore, collectionData, collection, doc, onSnapshot, addDoc} from '@angular/fire/firestore';
+import { Firestore, collectionData, collection, doc, onSnapshot, addDoc, deleteDoc} from '@angular/fire/firestore';
 import { Contact } from '../interfaces/contact';
 import { query, orderBy, limit } from 'firebase/firestore'; 
 
@@ -15,6 +15,8 @@ export class ContactService implements OnDestroy{
   contactList: Contact[] = [];
   contactListLaters: number[] = [];
   contactListLater: string[] = [];
+  currentContact: Contact = {name: '', email: '', phone: ''};
+  overlayDisplay: string = 'none';
   constructor() {
     this.snap();
     this.checkContactListLaters();
@@ -74,6 +76,10 @@ export class ContactService implements OnDestroy{
     this.checkContactListLaters();
   }
 
+  async deleteContact(docId: string){
+    await deleteDoc(this.getSingleContact('contacts', docId))
+  }
+
   setContactObj(obj: any, id: string):Contact{
     return {
       id: id,
@@ -89,5 +95,12 @@ export class ContactService implements OnDestroy{
 
   getSingleContact(collectionRef: string, docId: string){
     return doc( collection(this.firestore, collectionRef), docId);
+  }
+
+  selectedIndex: number | null = null;
+  selectItem(index: number) {
+    this.selectedIndex = index;
+    this.currentContact = this.contactList[index];
+    this.overlayDisplay = 'flex';
   }
 }

@@ -1,0 +1,9 @@
+.title{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    >div{
+        height: 53px;
+        border: solid 3px #29ABE2;
+    }
+}
