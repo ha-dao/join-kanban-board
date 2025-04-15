@@ -1,7 +1,19 @@
 import { Routes } from '@angular/router';
+import { LegalNoticeComponent } from './shared/components/header/legal-notice/legal-notice.component';
+import { PrivacyPolicyComponent } from './shared/components/header/privacy-policy/privacy-policy.component';
+import { ContactComponent } from './main-content/contact/contact.component';
 import { HelpComponent } from './shared/components/header/help/help.component';
 
 export const routes: Routes = [
+    {
+        path: '', component: ContactComponent
+    },
+    {
+        path: 'legal-notice', component: LegalNoticeComponent
+    },
+    {
+        path: 'privacy', component: PrivacyPolicyComponent
+    },
 //   {
 //     path: '', redirectTo: 'summary', pathMatch: 'full',
 //   },
@@ -23,6 +35,6 @@ export const routes: Routes = [
 //   {
 //     path: 'legal-notice',loadComponent: () => import('./pages/legal-notice/legal-notice.component').then((m) => m.LegalNoticeComponent),
 //   },
-{ path: '', component: HelpComponent},
+
 { path: 'help', component: HelpComponent }, 
 ];
