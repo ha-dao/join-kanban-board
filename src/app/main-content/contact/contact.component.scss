@@ -1,14 +1,19 @@
-section{
+@import './../../styles/variables.scss';
+@import './../../styles/mixins.scss';
+@import './../../styles/buttons.scss';
+
+section {
     width: 100%;
     display: flex;
 }
-app-contact-list{
+app-contact-list {
     width: 37.5%;
     margin: 0 3px;
     background-color: white;
+    @include displayFlex($display: flex, $flex-direction: column, $justify-content: flex-start, $align-items: center, $gap: 40px, $flex-wrap: wrap);
 }
 
-app-single-contact{
+app-single-contact {
     width: 62.5%;
     background-color: white;
 }
