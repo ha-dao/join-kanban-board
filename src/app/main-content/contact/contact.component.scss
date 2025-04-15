@@ -1,19 +1,19 @@
-@import './../../styles/variables.scss';
-@import './../../styles/mixins.scss';
-@import './../../styles/buttons.scss';
-
-section {
-    width: 100%;
+section{
+    position: fixed;
+    top: 96px;
+    left: 232px;
+    width: calc(100% - 232px);
     display: flex;
+
 }
-app-contact-list {
-    width: 37.5%;
+app-contact-list{
+    width:calc((100% - 232px) + 32.5%);
     margin: 0 3px;
     background-color: white;
     @include displayFlex($display: flex, $flex-direction: column, $justify-content: flex-start, $align-items: center, $gap: 40px, $flex-wrap: wrap);
 }
 
-app-single-contact {
-    width: 62.5%;
+app-single-contact{
+    width: calc((100% - 232px) + 67.5%);
     background-color: white;
 }

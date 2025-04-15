@@ -1,8 +1,9 @@
-<section>
-  <app-sidebar></app-sidebar>
-  <div>
-      <app-header></app-header>
-      <app-contact></app-contact>
-  </div>
-</section>
-<router-outlet></router-outlet>
+<section class="layout">
+    <app-header></app-header>
+    <app-sidebar></app-sidebar>
+    <main class="content-wrapper">
+      <div class="content-scroll">
+        <router-outlet></router-outlet>
+      </div>
+    </main>
+  </section>
