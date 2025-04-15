@@ -1,6 +1,33 @@
 section{
+    height: 100vh;
+    position: relative;
+}
+app-header{
+    position:absolute;
+    top: 0;
+    right: 0;
+    width: calc(100% - 232px);
+}
+
+app-sidebar{
+    position: absolute;
+    left: 0;
+    top: 0;
+    max-height: 100vh;
+}
+
+.content.wrapper{
+    margin-top: 96px;
+    margin-left: 232px;
+    height: calc(100vh - 96px);
+    overflow: hidden;
+    box-sizing: border-box;
+    max-width: 90%;
     display: flex;
-    >div{
-        width: 100%;
-    }
+    flex-direction: row;
+   
+}
+
+app-sigle-contact{
+    width: 10%;
 }
