@@ -1,4 +1,4 @@
-import { Component, ViewChild, Input, Output, EventEmitter  } from '@angular/core';
+import { Component, ViewChild, Input, Output, EventEmitter, HostListener, ElementRef  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormsModule, NgForm, NgModel } from '@angular/forms';
 import { ContactService } from '../../../services/contact.service';
@@ -14,6 +14,7 @@ export class ContactOverlayComponent {
   @Input() isOpen: boolean = false;
   @Output() closeOverlay = new EventEmitter<void>();
   constructor(public contactService: ContactService){
+
     
   }
   contactData: {
@@ -26,6 +27,7 @@ export class ContactOverlayComponent {
     phone: '',
   };
   invalidFields: string[] = [];
+  showSuccessMessage:boolean = false;
 
   validateForm(field: string) {
     this.invalidFields = this.invalidFields.filter(f => f !== field);
@@ -78,5 +80,14 @@ export class ContactOverlayComponent {
     this.contactData.email = '';
     this.contactData.phone= '';
   }
+
+  toggleSuccessMessage(){
+    this.showSuccessMessage = !this.showSuccessMessage;
+    setTimeout(() => {
+      this.showSuccessMessage = false;
+    }, 2000);
+  }
+
+
   
 }
