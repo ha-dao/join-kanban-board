@@ -1,6 +1,6 @@
 import { Injectable, OnDestroy} from '@angular/core';
 import { inject } from '@angular/core';
-import { Firestore, collectionData, collection, doc, onSnapshot, addDoc, deleteDoc} from '@angular/fire/firestore';
+import { Firestore, collectionData, collection, doc, onSnapshot, addDoc, deleteDoc, updateDoc} from '@angular/fire/firestore';
 import { Contact } from '../interfaces/contact';
 import { query, orderBy, limit } from 'firebase/firestore'; 
 
@@ -54,8 +54,6 @@ export class ContactService implements OnDestroy{
       }
       condition = true;
       latter = 0;
-      console.log(this.contactListLater);
-      
     });
 
   }
@@ -76,8 +74,19 @@ export class ContactService implements OnDestroy{
     this.checkContactListLaters();
   }
 
-  async deleteContact(docId: string){
-    await deleteDoc(this.getSingleContact('contacts', docId))
+  async updateContact(contactData: {}){
+    if(this.currentContact.id){
+      await updateDoc(this.getSingleContact('contacts', this.currentContact.id), contactData);
+      this.selectItem(this.currentContact.id);
+    }
+  }
+
+  async deleteContact(){
+    if(this.currentContact.id){
+      await deleteDoc(this.getSingleContact('contacts', this.currentContact.id))
+      this.selectItem('');
+      this.overlayDisplay = 'none';
+    }
   }
 
   setContactObj(obj: any, id: string):Contact{
@@ -97,10 +106,15 @@ export class ContactService implements OnDestroy{
     return doc( collection(this.firestore, collectionRef), docId);
   }
 
-  selectedIndex: number | null = null;
-  selectItem(index: number) {
-    this.selectedIndex = index;
-    this.currentContact = this.contactList[index];
+  selectedIndex: string | undefined = '';
+  selectItem(id: string | undefined) {
+    this.selectedIndex = id;
+    this.contactList.forEach(contact => {
+      if(contact.id === id ){
+        this.currentContact = contact;
+      }
+    });
     this.overlayDisplay = 'flex';
   }
 }
+
