@@ -8,7 +8,7 @@
                     @for (item of (contactService.contactList); track item; let index = $index) {
                         @if(item['name'].startsWith(latter)){
                             <div class="contact" (click)="contactService.selectItem(item.id)"  [ngClass]="{ 'selected': contactService.selectedIndex === item.id}">
-                                <div class="contact-img">{{latter}} {{item['name'].split(' ')[1]?.charAt(0) || ''}}</div>
+                                <div class="contact-img" [ngStyle]="{background: contactService.colours[index]}">{{latter}} {{item['name'].split(' ')[1]?.charAt(0) || ''}}</div>
                                 <ul class="name-email">
                                     <p>{{ item['name'] }}</p>
                                     <a>{{ item['email'] }}</a>
