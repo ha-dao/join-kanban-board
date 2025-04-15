@@ -1,9 +1,76 @@
+@import './../../../styles/variables.scss';
+@import './../../../styles/mixins.scss';
+@import './../../../styles/buttons.scss';
+
 .title{
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: flex-start;
+    gap: 40px;
     >div{
         height: 53px;
         border: solid 3px #29ABE2;
     }
+}
+
+.single-contact-overlay {
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0;
+  .name-and-img {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    .img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      background-color: $primary-color;
+    }
+    h3 {
+      font-size: 47px;
+      font-weight: 500;
+    }
+    .bttns {
+      display: flex;
+      button {
+        background-color: transparent;
+        border: none;
+        font-size: 16px;
+        font-weight: 400;
+        margin-right: 24px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        &:hover {
+          font-weight: 700;
+          color: $hover-color;
+          img {
+            filter: invert(55%) sepia(85%) saturate(714%) hue-rotate(165deg) brightness(92%) contrast(91%);
+          }
+        }
+      }
+    }
+
+  }
+  .single-contact-info {
+    display: flex;
+    flex-direction: column;
+    margin-top: 40px;
+    gap: 16px;
+    >p {
+      font-size: 20px;
+      font-weight: 400;
+    }
+    .single-contact-email {
+      color: $blue-link;
+    }
+  }
+
+}
+
+@media (max-width: 1440px) {
+  .single-contact-overlay {
+  padding: 24px;
+  }
 }
