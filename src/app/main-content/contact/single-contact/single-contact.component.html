@@ -1,23 +1,25 @@
 <div class="title">
     <h2>Contacts</h2>
     <div class="separator"></div>
-    <p>Better with a team</p>
+    <p class="subtitle">Better with a team</p>
 </div>
-<div class="singel-contact-overlay" [ngStyle]="{display: contactService.overlayDisplay}">
+<div class="single-contact-overlay" [ngStyle]="{display: contactService.overlayDisplay}">
     <div class="name-and-img">
         <div class="img"></div>
         <div class="name-and-bttns">
             <h3>{{contactService.currentContact.name}}</h3>
             <div class="bttns">
-                <button (click)="editContact()">Edit</button>
-                <button (click)="deleteContact()">delete</button>
+                <button (click)="editContact()"><img src="assets/img/4-contacts/edit-icon.svg" alt="Edit Icon">Edit</button>
+                <button (click)="deleteContact()"><img src="assets/img/4-contacts/delete-icon.svg" alt="Delete Icon">Delete</button>
             </div>
         </div>
     </div>
-    <p>Contact Informationen</p>
-    <b>Email</b>
-    <a href="">{{contactService.currentContact.email}}</a>
-    <b>Phone</b>
-    <p>{{contactService.currentContact.phone}}</p>
+    <div class="single-contact-info">
+      <p>Contact Informationen</p>
+      <b>Email</b>
+      <a class="single-contact-email" href="mailto:{{contactService.currentContact.email}}">{{contactService.currentContact.email}}</a>
+      <b>Phone</b>
+      <a href="tel:{{contactService.currentContact.phone}}">{{contactService.currentContact.phone}}</a>
+    </div>
 </div>
 <app-contact-overlay #editContactOverlay></app-contact-overlay>
