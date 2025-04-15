@@ -1,73 +1,70 @@
 
-button{
-    width: 100%;
-    height: 70px;
-    border-radius: 10px;
-    border: 0;
-    background-color: #2A3647;
-    color: white;
+button {
+  width: 100%;
+  height: 70px;
+  border-radius: 10px;
+  border: 0;
+  background-color: #2A3647;
+  color: white;
 }
 
-section{
-    height: 100vh;
-    overflow-y: scroll;
-    
+section {
+  height: 100vh;
+  overflow-y: scroll;
 }
 
-.contact{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 10px;
-    padding: 15px 24px;
-    &:hover{
-        background-color: rgba(21, 20, 20, 0.221);
-        cursor: pointer;
+.contact {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 10px;
+  padding: 15px 24px;
+  &:hover {
+    background-color: rgba(21, 20, 20, 0.221);
+    cursor: pointer;
+  }
+  > ul {
+    > p {
+      color: black;
     }
-
-    >ul{
-        >p{
-            color: black;
-        }
-        >a{
-            color: #007CEE;
-        }
+    > a {
+      color: #007CEE;
     }
+  }
 }
 
 .contact.selected {
-    background-color: #2A3647;
-    >ul{
-        >p{
-            color: white;
-        }
+  background-color: #2A3647;
+  > ul {
+    > p {
+      color: white;
     }
+  }
 }
 
-.contact-img{
-    background-color: aqua;
-    width: 42px;
-    height: 42px;
-    border-radius: 100%;
-}
-p{
-    text-align: start;
-    
+.contact-img {
+  background-color: aqua;
+  width: 42px;
+  height: 42px;
+  border-radius: 100%;
 }
 
-.name-email{
-    width: 70%;
+p {
+  text-align: start;
 }
 
-.contact-img{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.name-email {
+  width: 70%;
 }
 
-.latter-container{
-    border-top: solid 1px black;
-    padding-top: 8px;
-    margin-top: 25px;
-    
+.contact-img {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.latter-container {
+  border-top: solid 1px black;
+  padding-top: 8px;
+  margin-top: 25px;
 }
