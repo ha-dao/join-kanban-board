@@ -17,6 +17,8 @@ export class ContactOverlayComponent {
 
     
   }
+  buttonLeft: string = 'Cancel';
+  buttonRight: string = 'Create Contact';
   contactData: {
     name: string;
     email: string;
@@ -61,11 +63,33 @@ export class ContactOverlayComponent {
     );
   }
 
-  toggleOverlay() {
+  toggleOverlay(buttonLeft: string, buttonRight: string) {
     this.isOpen = !this.isOpen;
     this.toggleBodyScroll(this.isOpen);
+    this.buttonLeft = buttonLeft;
+    this.buttonRight = buttonRight;
+    
   }
 
+
+  cancleOrDelete(){
+    if(this.buttonLeft == 'Delete'){
+      this.contactService.deleteContact();
+    }
+    this.toggleOverlay('', '');
+    this.clearForm();
+  }
+
+  addOrSave(){
+    if(this.buttonRight == 'Create Contact'){
+      this.contactService.addContact(this.contactData);
+      this.clearForm();
+      this.toggleSuccessMessage()
+    }else if(this.buttonRight == 'Save'){
+      this.contactService.updateContact(this.contactData);
+      this.clearForm();
+    }
+  }
  
   toggleBodyScroll(disable: boolean) {
     if (disable) {
