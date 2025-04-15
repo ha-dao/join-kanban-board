@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { HelpComponent } from './shared/components/header/help/help.component';
 
 export const routes: Routes = [
 //   {
@@ -22,4 +23,6 @@ export const routes: Routes = [
 //   {
 //     path: 'legal-notice',loadComponent: () => import('./pages/legal-notice/legal-notice.component').then((m) => m.LegalNoticeComponent),
 //   },
+{ path: '', component: HelpComponent},
+{ path: 'help', component: HelpComponent }, 
 ];
