@@ -6,6 +6,7 @@ section {
   >div {
     overflow-y: scroll;
     height: calc(100vh - 96px - 32px);
+    width: 100%;
     position: relative;
     margin: 32px 0;
     >div {
@@ -120,4 +121,37 @@ p {
   border-top: solid 1px #D1D1D1;
   padding-top: 8px;
   margin-top: 25px;
+}
+
+@media (max-width: 768px) {
+
+}
+
+@media (max-width: 480px) {
+  section {
+    >div {
+      >div {
+        margin: 0;
+        button {
+          font-size: 16px;
+        }
+      }
+    }
+  }
+  a {
+    overflow-wrap: break-word;
+  }
+
+}
+
+@media (max-width: 320px) {
+  section {
+    >div {
+      >div {
+        button {
+          font-size: 16px;
+        }
+      }
+    }
+  }
 }
