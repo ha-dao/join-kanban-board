@@ -7,3 +7,12 @@
       </div>
     </main>
   </section>
+  @if (feedbackService.message()) {
+    <span
+      class="feedback-message"
+      [class.visible]="feedbackService.visible()"
+    >
+      {{ feedbackService.message() }}
+    </span>
+  }
+  
