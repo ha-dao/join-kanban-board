@@ -76,7 +76,7 @@ export class ContactOverlayComponent {
   cancelOrDelete(){
     if(this.buttonLeft == 'Delete'){
       this.contactService.deleteContact();
-      
+      this.feedbackService.show('Kontakt erfolgreich gelöscht!');
     }
     this.toggleOverlay('', '');
     this.clearForm();
