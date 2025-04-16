@@ -16,7 +16,46 @@ export class ContactService implements OnDestroy{
   contactListLaters: number[] = [];
   contactListLater: string[] = [];
   currentContact: Contact = {name: '', email: '', phone: ''};
+  currentIdex: number = 0;
   overlayDisplay: string = 'none';
+  colours = [
+    '#C1C88F',
+    '#F6B68D',
+    '#A0B9F9',
+    '#F8E57D',
+    '#A9D87B',
+    '#B8E4E2',
+    '#E1A58B',
+    '#D8A2C8',
+    '#F0D48A',
+    '#B6A9F6',
+    '#F4A6B7',
+    '#D4E88D',
+    '#D3C57C',
+    '#A49AC8',
+    '#B4A7F6',
+    '#B6A68C',
+    '#D1D4E7',
+    '#F1B7D2',
+    '#C1C88F',
+    '#F6B68D',
+    '#A0B9F9',
+    '#F8E57D',
+    '#A9D87B',
+    '#B8E4E2',
+    '#E1A58B',
+    '#D8A2C8',
+    '#F0D48A',
+    '#B6A9F6',
+    '#F4A6B7',
+    '#D4E88D',
+    '#D3C57C',
+    '#A49AC8',
+    '#B4A7F6',
+    '#B6A68C',
+    '#D1D4E7',
+    '#F1B7D2',
+  ];
   constructor() {
     this.snap();
     this.checkContactListLaters();
@@ -109,9 +148,12 @@ export class ContactService implements OnDestroy{
   selectedIndex: string | undefined = '';
   selectItem(id: string | undefined) {
     this.selectedIndex = id;
-    this.contactList.forEach(contact => {
+    this.contactList.forEach((contact, index) => {
       if(contact.id === id ){
         this.currentContact = contact;
+        this.currentIdex = index;
+        console.log(this.currentIdex);
+        
       }
     });
     this.overlayDisplay = 'flex';

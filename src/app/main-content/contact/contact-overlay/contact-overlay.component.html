@@ -3,14 +3,14 @@
     <a href="#"
       ><img
         src="../../../../assets/img/addContactOverlay/X.svg"
-        alt=""
+        alt="x-icon close button"
         (click)="toggleOverlay('', ''); clearForm()"
     /></a>
 
     <div class="logo-div">
       <img src="../../../../assets/img/addContactOverlay/joinLogo.svg" alt="" />
       <h2>Add contact</h2>
-      <span>Tasks are better with a team!</span>
+      <span class="subtitle">Tasks are better with a team!</span>
       <div class="line-div"></div>
     </div>
     <div class="profile-image">
@@ -88,7 +88,7 @@
           />
         </div>
         <div class="button-div">
-          <button class="cancel-button" (click)="cancleOrDelete()">
+          <button class="cancel-button" (click)="cancelOrDelete()">
             {{buttonLeft}}
             <img src="../../../../assets/img/addContactOverlay/X.svg" alt="" />
           </button>

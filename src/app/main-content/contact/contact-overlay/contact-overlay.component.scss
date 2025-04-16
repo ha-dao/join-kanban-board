@@ -1,5 +1,4 @@
 @import '../../../styles/buttons.scss';
-@import '../../../styles/fonts.scss';
 @import '../../../styles/variables.scss';
 @import '../../../styles/mixins.scss';
 
@@ -12,124 +11,141 @@
     top: 0;
     right: 0;
     width: 100%;
-    
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.274);
-    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0);
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0);
     transform: translateX(100%);
-    transition: transform 250ms ease-in-out;
-    z-index: 1000;
+    transition: all 250ms ease-in-out;
+    z-index: 3000;
   }
   .overlay.open {
     transform: translateX(0);
+    background-color: rgba(0, 0, 0, 0.274);
+    box-shadow: -2px 0 8px rgba(0, 0, 0, 0.2);
   }
-  
+
   .overlay.closed {
     transform: translateX(100%);
   }
-.content-wrapper{
-    
+
+.content-wrapper {
     display:flex;
     align-items: center;
     justify-content: space-around;
     position: relative;
     height: 50vh;
-    width: 80%;    
+    width: clamp(800px, 1212px, 100%);
     gap:72px;
     border-radius: 32px;
     background-color: white;
-    >a{
+    >a {
         position:absolute;
-        top: 10px;
-        right:20px;
+        top: 50px;
+        right: 120px;
+        padding: 8px;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        img {
+          width: 16px;
+          height: 16px;
+        }
+    &:hover {
+      background-color: darken($grey, 0.5);
     }
-    
-    
-    
+    }
 }
 
-.logo-div{
+.logo-div {
     border-top-left-radius:30px;
     border-bottom-left-radius:30px;
     background-color: #2A3647;
     display:flex;
     justify-content: center;
-    align-items: start;
+    align-items: flex-start;
     flex-direction: column;
-    width: 30%;
+    gap: 16px;
+    width: 40%;
     height: 100%;
-    padding: 0 20px;
-    >h2{
+    padding: 0 48px;
+    margin: 0 auto;
+    >h2 {
         @include fontStyle(clamp(24px, 4vw, 60px), 700, white)
     }
-    >span{
+    >span {
         @include fontStyle(clamp(18px, 2.2vw, 27px), 400, white)
     }
-    
-
-    .line-div{
+    .line-div {
         background-color:#29ABE2;
         width: 90px;
         height: 3px;
     }
 }
 
-.profile-image{
-    >img{
-        height: clamp(40px, 7vw, 120px)
-    }
+.profile-image {
+  >img{
+    height: clamp(40px, 7vw, 120px)
+  }
 }
 
-.form-div{
-    flex:1;
-    display:flex;
-    justify-content: start;
-    position: relative;
-    border-top-right-radius:30px;
-    border-bottom-right-radius:30px;
-    background-color: white;
-   
-    
-
-    .form-wrapper{
-        display: flex;
-        justify-content: center;
-        align-items: start;
-        flex-direction: column;
-        gap: 32px;
-        padding-right: 10px;
-        >div{
-            position: relative;
-            display: inline-block;
-            width: 100%;
-            >input{
-                
-                padding-right: 36px; 
-                padding-left: 12px;
-                width: 100%;
-                height: 36px;
-                font-size: 14px;
-                border-radius: 14px;
-                border: 1px solid #D1D1D1;               
-            }
-            input.invalid::placeholder{
-                color: red;
-            }
-            >img{
-                position: absolute;
-                right: 10px;
-                top: 50%;
-                transform: translateY(-50%);
-                width: 16px;
-                height: 16px;
-                pointer-events: none; 
-                
-            }
+.form-div {
+  flex:1;
+  display:flex;
+  justify-content: flex-start;
+  position: relative;
+  background-color: white;
+  padding: 0;
+  margin: 0;
+  .form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    flex-direction: column;
+    gap: 32px;
+    >div {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+      >input {
+        padding-right: 36px;
+        padding-left: 12px;
+        width: 100%;
+        height: 48px;
+        font-size: 14px;
+        border-radius: 10px;
+        border: 1px solid #D1D1D1;
+        &:focus {
+          outline: none;
+          border: 1px solid $hover-color;
         }
-       
+      }
+      input.invalid::placeholder {
+        color: $text-alert-color;
+      }
+      >img {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 24px;
+        height: 24px;
+        pointer-events: none;
+      }
     }
-
+    .button-div {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 16px;
+    }
+  }
 }
+
+
+
 .confirmed-div{
     @include fontStyle(clamp(18px, 1vw, 20px), 400, white);
     @include displayFlex(flex, row, center, center, 0, wrap);
@@ -140,4 +156,103 @@
     text-align: center;
     flex:1;
     transition: transform 350ms ease-in-out;
+}
+
+@media (max-width: 1280px) {
+  .content-wrapper {
+  flex-direction: column;
+  height: auto;
+  width: 100%;
+  margin: 24px;
+  padding: 0 0 40px 0;
+  gap: 0;
+  .logo-div {
+    width: 100%;
+    border-top-left-radius:30px;
+    border-top-right-radius:30px;
+    border-bottom-left-radius: 0;
+    padding: 24px;
+    height: 320px;
+  }
+}
+
+  .profile-image {
+    margin-top: -60px;
+    margin-bottom: 60px;
+    z-index: 10;
+    >img{
+      height: 120px;
+    }
+  }
+
+  .form-div {
+    width: 100%;
+    .form-wrapper {
+      width: 100%;
+      padding: 0 40px;
+      >div {
+        >input {
+          width: 100%;
+        }
+      }
+      .button-div {
+        justify-content: center;
+      }
+    }
+  }
+
+  .content-wrapper {
+    >a {
+      background-color: transparent;
+      right: 40px;
+      img {
+        filter: invert(100%) sepia(100%) saturate(0%) hue-rotate(48deg) brightness(107%) contrast(101%);
+      }
+      &:hover {
+        background-color: darken($hover-color, 0.5);
+      }
+    }
+  }
+
+}
+
+
+@media (max-width: 480px) {
+  .content-wrapper {
+  margin: 16px;
+  padding: 0 0 40px 0;
+  .logo-div {
+    width: 100%;
+    border-top-left-radius:30px;
+    border-top-right-radius:30px;
+    border-bottom-left-radius: 0;
+    padding: 24px;
+    height: 320px;
+  }
+}
+
+  .profile-image {
+    >img{
+      height: 120px;
+    }
+  }
+
+  .form-div {
+    .form-wrapper {
+      padding: 0 16px;
+      >div {
+        >input {
+          width: 100%;
+        }
+      }
+      .button-div {
+        flex-direction: column-reverse;
+        align-items: center;
+        button {
+          justify-content: center;
+        }
+      }
+    }
+  }
+
 }
