@@ -15,19 +15,14 @@ export class ContactListComponent {
 
 
   constructor(public contactService: ContactService){
-    
+
   }
- 
+
   @ViewChild('contactOverlay') contactOverlay!: ContactOverlayComponent;
 
-  toggleOverlayFromList() {    
-      this.contactOverlay.toggleOverlay();
-    }  
+  toggleOverlayFromList() {
+      this.contactOverlay.toggleOverlay('Cancel', 'Create Contact');
+    }
 
-  selectedIndex: number | null = null;
-  selectItem(index: number) {
-    this.selectedIndex = index;
-  }
 
-  
 }

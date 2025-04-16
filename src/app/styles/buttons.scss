@@ -5,7 +5,6 @@
   background-color: $primary-color;
   @include fontStyle($font-size: clamp(16px, 18px, 20px), $font-weight: 700, $font-color: $white, $text-transform: none);
   padding: 15px 24px;
-  margin: 16px;
   border: 2px solid $primary-color;
   border-radius: 8px;
   transition: all 200ms ease;
@@ -16,19 +15,25 @@
     height: 20px;
     padding-left: 8px;
   }
-  &:hover {
+}
+.create-button:disabled{
+  background-color: $grey ;
+  border-color: $grey;
+  cursor: not-allowed;
+}
+
+.create-button:not(:disabled):hover {
     background-color: $hover-color;
     border: 2px solid $hover-color;
     -webkit-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
     box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
   }
-}
+
 
 .cancel-button {
   background-color: transparent;
   @include fontStyle($font-size: clamp(16px, 18px, 20px), $font-weight: 400, $font-color: $primary-color, $text-transform: none);
   padding: 15px 24px;
-  margin: 16px;
   border: 2px solid $primary-color;
   border-radius: 8px;
   transition: all 200ms ease;

@@ -4,8 +4,8 @@ import { Component } from '@angular/core';
   selector: 'app-bord',
   standalone: true,
   imports: [],
-  templateUrl: './bord.component.html',
-  styleUrl: './bord.component.scss'
+  templateUrl: './board.component.html',
+  styleUrl: './board.component.scss'
 })
 export class BordComponent {
 

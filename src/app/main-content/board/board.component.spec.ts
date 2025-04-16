@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { BordComponent } from './bord.component';
+import { BordComponent } from './board.component';
 
 describe('BordComponent', () => {
   let component: BordComponent;

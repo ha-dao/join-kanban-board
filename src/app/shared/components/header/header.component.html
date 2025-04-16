@@ -1,40 +1,42 @@
 <header class="header">
   <div class="header-content">
-  <img
-    class="mobile-logo"
-    src="./../../../../assets/img/header/join-logo-mobile.svg"
-    alt="JOIN Logo"
-  />
-  <h1 class="header-title">Kanban Project Management Tool</h1>
-</div>
+    <a href="">
+    <img
+      class="mobile-logo"
+      src="./../../../../assets/img/header/join-logo-mobile.svg"
+      alt="JOIN Logo"
+    />
+  </a>
+    <h1 class="header-title">Kanban Project Management Tool</h1>
+  </div>
 
   <div class="profile-section">
-    <a href="">
+    <a [routerLink]="'/help'">
       <img
-        class="help-img"
+        class="help-icon"
         src="./../../../../assets/img/header/help.svg"
-        alt="Help"
+        alt="Help Icon"
       />
     </a>
-
- <!-- <img class="help-icon" src="./assets/img/header/help.svg" alt="Help Icon" (click)="navigateToHelp($event)" /> -->
 
     <div class="profile" (click)="toggleMenu($event)">G</div>
 
     <div class="dropdown-menu" [class.active]="showMenu">
       <a
-      class="menu-item"
-      (click)="handleMenuItemClick('legal-notice'); $event.stopPropagation()"
-    >
-      Help
-    </a>
+        class="menu-item"
+        (click)="handleMenuItemClick('legal-notice'); $event.stopPropagation()"
+      >
+        Help
+      </a>
       <a
+        href="/legal-notice"
         class="menu-item"
         (click)="handleMenuItemClick('legal-notice'); $event.stopPropagation()"
       >
         Legal Notice
       </a>
       <a
+        href="/privacy"    
         class="menu-item"
         (click)="
           handleMenuItemClick('privacy-policy'); $event.stopPropagation()
