@@ -2,6 +2,7 @@ import { Component, ViewChild, Input, Output, EventEmitter, HostListener, Elemen
 import { CommonModule } from '@angular/common';
 import { FormControl, FormsModule, NgForm, NgModel } from '@angular/forms';
 import { ContactService } from '../../../services/contact.service';
+import { FeedbackServiceService } from '../../../services/feedback.service';
 
 @Component({
   selector: 'app-contact-overlay',
@@ -13,7 +14,7 @@ import { ContactService } from '../../../services/contact.service';
 export class ContactOverlayComponent {
   @Input() isOpen: boolean = false;
   @Output() closeOverlay = new EventEmitter<void>();
-  constructor(public contactService: ContactService){
+  constructor(public contactService: ContactService, public feedbackService: FeedbackServiceService){
 
 
   }
@@ -75,19 +76,25 @@ export class ContactOverlayComponent {
   cancelOrDelete(){
     if(this.buttonLeft == 'Delete'){
       this.contactService.deleteContact();
+      
     }
     this.toggleOverlay('', '');
     this.clearForm();
+    
   }
 
   addOrSave(){
     if(this.buttonRight == 'Create Contact'){
       this.contactService.addContact(this.contactData);
       this.clearForm();
-      this.toggleSuccessMessage()
+           
+      this.toggleOverlay('', '')
+      this.feedbackService.show('Kontakt erfolgreich angelegt!');
     }else if(this.buttonRight == 'Save'){
       this.contactService.updateContact(this.contactData);
+      this.feedbackService.show('Kontakt erfolgreich geändert!');
       this.clearForm();
+      this.toggleOverlay('','')
     }
   }
 
@@ -105,12 +112,7 @@ export class ContactOverlayComponent {
     this.contactData.phone= '';
   }
 
-  toggleSuccessMessage(){
-    this.showSuccessMessage = !this.showSuccessMessage;
-    setTimeout(() => {
-      this.showSuccessMessage = false;
-    }, 2000);
-  }
+ 
 
 
 
