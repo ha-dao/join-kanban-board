@@ -1,8 +1,4 @@
-:host{
-  display: flex;
-  justify-content: flex-start;
-  height: 100vh;
-}
+@import './../../../styles/mixins.scss';
 
 .sidebar {
   width: 232px;
@@ -35,20 +31,23 @@
     text-decoration: none;
     font-size: 16px;
     box-sizing: border-box;
-    transition: background 0.3s;
+    transition: all 0.3s;
 
     &.active {
-      background-color: #091931;
+      background-color: #091931 !important;
+      pointer-events: none; 
     }
-
-    &:hover {
+  
+    &:not(.active):hover {
       background-color: #2a3d59;
       cursor: pointer;
     }
-
+  
     img {
       width: 30px;
       height: 30px;
     }
   }
+  
 }
+
