@@ -1,14 +1,67 @@
+@import './../../styles/variables.scss';
+@import './../../styles/mixins.scss';
+@import './../../styles/buttons.scss';
+
 section{
-    width: 100%;
+    position: fixed;
+    top: 96px;
+    left: 232px;
+    width: calc(100% - 232px);
+    height: 100vh;
     display: flex;
 }
 app-contact-list{
-    width: 37.5%;
+    width: 35%;
     margin: 0 3px;
     background-color: white;
+    padding: 0;
+    @include displayFlex($display: flex, $flex-direction: column, $justify-content: flex-start, $align-items: stretch, $gap: 40px, $flex-wrap: nowrap);
 }
 
 app-single-contact{
-    width: 62.5%;
-    background-color: white;
+    width: 65%;
+    height: calc(100vh - 96px);
+    background-color: $background-color;
+    padding: 80px;
+}
+
+@media (max-width: 1440px) {
+  app-contact-list{
+    width: 40%;
+  }
+
+  app-single-contact{
+    width: 60%;
+  padding: 40px;
+  }
+}
+
+@media (max-width: 1280px) {
+  app-contact-list{
+    width: 100%;
+  }
+
+  app-single-contact{
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  section{
+  width: 100%;
+  top: 80px;
+  left: 0;
+  }
+}
+
+@media (max-width: 480px) {
+  section{
+  top: 70px;
+  }
+}
+
+@media (max-width: 320px) {
+  section{
+  top: 55px;
+  }
 }

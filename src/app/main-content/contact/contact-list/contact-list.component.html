@@ -1,5 +1,9 @@
 <section>
-    <button (click)="toggleOverlayFromList()">Add new contact</button>
+  <div class="contact-list-wrapper">
+  <div>
+    <button (click)="toggleOverlayFromList()">Add new contact<img src="assets/img/4-contacts/person-add-icon.svg" alt="Edit Icon"></button>
+  </div>
+  <div class="list-content">
     @for (latter of (contactService.contactListLater); track latter; let index = $index) {
         @if(latter){
             <div>
@@ -7,10 +11,10 @@
                 <div class="latter-container">
                     @for (item of (contactService.contactList); track item; let index = $index) {
                         @if(item['name'].startsWith(latter)){
-                            <div class="contact" (click)="selectItem(index)"  [ngClass]="{ 'selected': selectedIndex === index }">
-                                <div class="contact-img">{{latter}} {{item['name'].split(' ')[1]?.charAt(0) || ''}}</div>
+                            <div class="contact" (click)="contactService.selectItem(item.id)"  [ngClass]="{ 'selected': contactService.selectedIndex === item.id}">
+                                <div class="contact-img" [ngStyle]="{background: contactService.colours[index]}">{{latter}} {{item['name'].split(' ')[1]?.charAt(0) || ''}}</div>
                                 <ul class="name-email">
-                                    <p>{{ item['name'] }}</p>
+                                    <p>{{ item['name'].split(' ').slice(0, 2).join(' ') }}</p>
                                     <a>{{ item['email'] }}</a>
                                 </ul>
                             </div>
@@ -20,5 +24,7 @@
             </div>
         }
     }
+  </div>
+</div>
 </section>
 <app-contact-overlay #contactOverlay></app-contact-overlay>
