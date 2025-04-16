@@ -5,7 +5,6 @@
   background-color: $primary-color;
   @include fontStyle($font-size: clamp(16px, 18px, 20px), $font-weight: 700, $font-color: $white, $text-transform: none);
   padding: 15px 24px;
-  margin: 16px;
   border: 2px solid $primary-color;
   border-radius: 8px;
   transition: all 200ms ease;
@@ -20,6 +19,7 @@
 .create-button:disabled{
   background-color: $grey ;
   border-color: $grey;
+  cursor: not-allowed;
 }
 
 .create-button:not(:disabled):hover {
@@ -34,7 +34,6 @@
   background-color: transparent;
   @include fontStyle($font-size: clamp(16px, 18px, 20px), $font-weight: 400, $font-color: $primary-color, $text-transform: none);
   padding: 15px 24px;
-  margin: 16px;
   border: 2px solid $primary-color;
   border-radius: 8px;
   transition: all 200ms ease;

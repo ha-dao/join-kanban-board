@@ -26,6 +26,14 @@
       height: 120px;
       border-radius: 50%;
       background-color: $primary-color;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 40px;
+      border: 3px solid $white;
+      color: $white;
+      -webkit-box-shadow: 0px 0px 4px 4px #00000010;
+      box-shadow: 0px 0px 4px 4px #00000010;
     }
     h3 {
       font-size: 47px;
@@ -71,6 +79,18 @@
 
 @media (max-width: 1440px) {
   .single-contact-overlay {
-  padding: 24px;
+    padding: 24px;
+  }
+}
+
+@media (max-width: 1280px) {
+  .title {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    >div {
+      height: 3px;
+      width: 53px;
+    }
   }
 }
