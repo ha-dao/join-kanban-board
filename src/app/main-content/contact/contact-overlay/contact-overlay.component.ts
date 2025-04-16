@@ -15,7 +15,7 @@ export class ContactOverlayComponent {
   @Output() closeOverlay = new EventEmitter<void>();
   constructor(public contactService: ContactService){
 
-    
+
   }
   buttonLeft: string = 'Cancel';
   buttonRight: string = 'Create Contact';
@@ -36,23 +36,23 @@ export class ContactOverlayComponent {
     if(field === 'name'){
     if (!this.contactData.name || this.contactData.name.length < 2) {
       this.invalidFields.push('name');
-      this.contactData.name = ''; 
+      this.contactData.name = '';
     }
   }
     if(field === 'email'){
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (!this.contactData.email || !emailRegex.test(this.contactData.email)) {
-      this.invalidFields.push('email');      
-      this.contactData.email = ''; 
+      this.invalidFields.push('email');
+      this.contactData.email = '';
     }
   }
   if( field === 'phone'){
     const phoneRegex = /^(?:\+?\d{1,4}[ \-]?)?(\(?\d{1,4}\)?[ \-]?)?[\d\- ]{5,15}$/;
     if (!this.contactData.phone || !phoneRegex.test(this.contactData.phone)) {
       this.invalidFields.push('phone');
-      this.contactData.phone = ''; 
+      this.contactData.phone = '';
     }
-  }   
+  }
   }
 
   isFormValid(): boolean {
@@ -68,11 +68,11 @@ export class ContactOverlayComponent {
     this.toggleBodyScroll(this.isOpen);
     this.buttonLeft = buttonLeft;
     this.buttonRight = buttonRight;
-    
+
   }
 
 
-  cancleOrDelete(){
+  cancelOrDelete(){
     if(this.buttonLeft == 'Delete'){
       this.contactService.deleteContact();
     }
@@ -90,7 +90,7 @@ export class ContactOverlayComponent {
       this.clearForm();
     }
   }
- 
+
   toggleBodyScroll(disable: boolean) {
     if (disable) {
       document.body.classList.add('no-scroll');
@@ -113,5 +113,5 @@ export class ContactOverlayComponent {
   }
 
 
-  
+
 }
