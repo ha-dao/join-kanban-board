@@ -25,6 +25,14 @@ app-single-contact{
     padding: 80px;
 }
 
+.mobile-add-edit-btn {
+  display: none;
+}
+
+.edit-delete-menu-toggle {
+  display: none;
+}
+
 @media (max-width: 1440px) {
   app-contact-list{
     width: 40%;
@@ -42,8 +50,78 @@ app-single-contact{
   }
 
   app-single-contact{
-    display: none;
+    position: absolute;
+    right: 0;
+    width: 100%;
+    transition: all 250ms ease;
+    transform: translateX(100%); // hier kannst du denn app single contact ein und ausblenden
+    z-index: 200;
   }
+
+  .mobile-add-edit-btn {
+    display: block;
+    position: fixed;
+    right: 32px;
+    bottom: 100px;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: $primary-color;
+    transition: all 250ms ease;
+    z-index: 50;
+    img {
+      width: 24px;
+      height: 24px;
+    }
+    &:hover {
+      background-color: $hover-color;
+      border: 1px solid $hover-color;
+      ~ .edit-delete-menu-toggle {
+        transform: translateX(0);
+      }
+    }
+  }
+  .edit-delete-menu-toggle {
+    position: fixed;
+    right: 32px;
+    bottom: 100px;
+    width: 120px;
+    height: 100px;
+    padding: 24px;
+    border-radius: 10px 0 10px 10px;
+    background-color: $white;
+    color: $black;
+    -webkit-box-shadow: 0px 2px 8px 2px rgba(0,0,0,0.25);
+    box-shadow: 0px 2px 8px 2px rgba(0,0,0,0.25);
+
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    justify-content: center;
+    align-items: flex-start;
+    transition: all 250ms ease;
+    transform: translateX(200%);
+
+    z-index: 60;
+    button {
+      background-color: transparent;
+      border: none;
+      font-size: 16px;
+      font-weight: 400;
+
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      gap: 8px;
+      &:hover {
+        font-weight: 700;
+        color: $hover-color;
+        img {
+          filter: invert(55%) sepia(85%) saturate(714%) hue-rotate(165deg) brightness(92%) contrast(91%);
+        }
+      }
+    }
+}
 }
 
 @media (max-width: 768px) {
