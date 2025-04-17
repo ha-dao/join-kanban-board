@@ -39,33 +39,28 @@
 }
 
 h2 {
-  font-size: clamp(48px, 56px, 64px);
   font-weight: 700;
   margin-bottom: 20px;
   margin: 0;
 }
 
-h3 {
-  font-size: clamp(35px, 45px, 50px);
+h3 { 
   color: #000;
   margin-top: 40px;
   margin-bottom: 16px;
 }
 
 h4 {
-  font-size: clamp(30px, 40px, 45px);
   font-weight: 600;
   margin-top: 20px;
 }
 
 .intro,
 .step-intro {
-  font-size: 16px;
   margin-bottom: 24px;
 }
 
 p {
-  font-size: clamp(14px, 16px, 18px);
   line-height: 1.6;
   margin-bottom: 16px;
 }
@@ -74,8 +69,7 @@ ol {
   padding-left: 20px;
 
   li {
-    font-size: clamp(30px, 40px, 45px);
-    margin-left: 20px;
+    margin-left: 10px;
   }
 }
 .join-blue {
