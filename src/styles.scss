@@ -52,19 +52,19 @@ h1 {
 h2 {
   font-size: clamp(30px, 8vw, 61px);
   font-weight: 700;
- 
+
 }
 
 h3 {
   font-size: clamp(18px, 5.5vw, 27px);
   font-weight: 700;
- 
+
 }
 
 h4 {
   font-size: clamp(16px, 4.5vw, 24px);
   font-weight: 700;
- 
+
 }
 
 h5 {
@@ -92,4 +92,10 @@ button {
 p.subtitle {
   font-size: 27px;
   color: $primary-color;
+}
+
+@media (max-width: 768px) {
+  p.subtitle {
+    font-size: 20px;
+  }
 }

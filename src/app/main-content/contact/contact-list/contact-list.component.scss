@@ -38,7 +38,7 @@ section {
       }
     }
     .list-content {
-      padding: 0 16px;
+      padding: 40px 16px;
       z-index: 9;
       >div {
         >p {
@@ -67,7 +67,7 @@ section {
   > ul {
     > p {
       color: black;
-      font-size: 20px;
+      font-size: 18px;
     }
     > a {
       color: $blue-link;
@@ -138,7 +138,40 @@ p {
 }
 
 @media (max-width: 768px) {
+  section {
+    div {
+      .list-content {
+        padding: 0 16px 80px 16px;
+        div {
+          >p {
+            padding: 0 24px;
+          }
+        }
+      }
+    }
+  }
 
+  .contact {
+    justify-content: flex-start;
+    padding: 12px;
+    gap: 8px;
+    flex: 1 2;
+    .contact-img {
+      font-size: 14px;
+      width: 50px;
+      height: 50px;
+    }
+    > ul {
+      width: 70%;
+      > a {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .name-email {
+    width: 90%;
+  }
 }
 
 @media (max-width: 480px) {

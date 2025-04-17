@@ -173,6 +173,12 @@
     border-bottom-left-radius: 0;
     padding: 24px;
     height: 320px;
+    span {
+      font-size: 16px;
+    }
+    .line-div {
+      width: 50px;
+    }
   }
 }
 
@@ -217,23 +223,41 @@
 }
 
 
+@media (max-width: 768px) {
+  .content-wrapper {
+    height: 740px;
+    >a {
+      right: 24px;
+      top: 24px;
+    }
+    .logo-div {
+      img {
+        display: none;
+      }
+    }
+  }
+}
+
 @media (max-width: 480px) {
   .content-wrapper {
   margin: 16px;
   padding: 0 0 40px 0;
+  height: 620px;
   .logo-div {
     width: 100%;
     border-top-left-radius:30px;
     border-top-right-radius:30px;
     border-bottom-left-radius: 0;
-    padding: 24px;
+    padding: 8px 24px;
     height: 320px;
   }
 }
 
   .profile-image {
+    margin-top: -40px;
+    margin-bottom: 8px;
     >img{
-      height: 120px;
+      height: 80px;
     }
   }
 

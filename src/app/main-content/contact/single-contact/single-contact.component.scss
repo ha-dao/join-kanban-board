@@ -12,6 +12,9 @@
     height: 53px;
     border: solid 3px #29ABE2;
   }
+  .separator2 {
+    display: none;
+  }
 }
 
 .single-contact-overlay {
@@ -67,7 +70,9 @@
         }
       }
     }
-
+app-contact-overlay {
+  z-index: 9999;
+}
   }
 
   .back-btn {
@@ -127,6 +132,12 @@
       height: 3px;
       width: 53px;
     }
+    .separator {
+      display: none;
+    }
+    .separator2 {
+      display: block;
+    }
   }
 
   .single-contact-overlay {
@@ -156,16 +167,20 @@
       }
     }
   }
+
+  .bttns {
+    width: 70%;
+    h3 {
+      font-size: 18px;
+    }
+  }
 }
 
 @media (max-width: 480px) {
   .single-contact-overlay {
-    display: flex;
-    flex-direction: column;
     padding: 40px 0;
 
     .name-and-img {
-      display: flex;
       align-items: none;
       gap: 16px;
       h3 {
@@ -175,7 +190,7 @@
         width: 60px;
         height: 60px;
         border-radius: 50%;
-        font-size: 12px;
+        font-size: 16px;
       }
     }
   }

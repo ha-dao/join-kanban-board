@@ -14,7 +14,6 @@
 .header-content {
   display: flex;
   align-items: center;
-  gap: 40px;
 }
 
 .mobile-logo {
@@ -22,7 +21,7 @@
 }
 
 .header-title {
-  font-size: 24px;
+  font-size: 20px;
   color: #2a3647;
   flex-basis: 100%;
   text-align: center;
@@ -147,6 +146,10 @@
     a:nth-child(1) {
       display: block;
     }
+  }
+
+  .menu-item {
+    padding: 8px;
   }
 }
 
