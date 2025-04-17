@@ -12,17 +12,20 @@ import { ContactOverlayComponent } from '../contact-overlay/contact-overlay.comp
   styleUrl: './contact-list.component.scss'
 })
 export class ContactListComponent {
-
+  
 
   constructor(public contactService: ContactService){
 
   }
-
   @ViewChild('contactOverlay') contactOverlay!: ContactOverlayComponent;
+  @Output() singleContactTransform = new EventEmitter<string>();
 
   toggleOverlayFromList() {
       this.contactOverlay.toggleOverlay('Cancel', 'Create Contact');
     }
 
+    toggleSingleContact(){
+      this.singleContactTransform.emit('translateX(0%)')
+    }
 
 }

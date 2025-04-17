@@ -29,4 +29,8 @@ export class SingleContactComponent {
     this.contactOverlay.contactData.email = this.contactService.currentContact.email;
     this.contactOverlay.contactData.phone = this.contactService.currentContact.phone;
   }
+  
+  backToContactList(){
+    
+  }
 }
