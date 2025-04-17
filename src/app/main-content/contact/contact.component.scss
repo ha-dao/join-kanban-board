@@ -85,8 +85,8 @@ app-single-contact{
     position: fixed;
     right: 32px;
     bottom: 100px;
-    width: 120px;
-    height: 100px;
+    width: 190px;
+    height: 150px;
     padding: 24px;
     border-radius: 10px 0 10px 10px;
     background-color: $white;
@@ -96,7 +96,7 @@ app-single-contact{
 
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 24px;
     justify-content: center;
     align-items: flex-start;
     transition: all 250ms ease;
@@ -113,6 +113,9 @@ app-single-contact{
       align-items: center;
       justify-content: flex-start;
       gap: 8px;
+      img {
+        padding-left: 4px;
+      }
       &:hover {
         font-weight: 700;
         color: $hover-color;
