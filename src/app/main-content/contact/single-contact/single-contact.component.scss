@@ -2,25 +2,28 @@
 @import './../../../styles/mixins.scss';
 @import './../../../styles/buttons.scss';
 
-.title{
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    gap: 40px;
-    >div{
-        height: 53px;
-        border: solid 3px #29ABE2;
-    }
+.title {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 40px;
+
+  >div {
+    height: 53px;
+    border: solid 3px #29ABE2;
+  }
 }
 
 .single-contact-overlay {
   display: flex;
   flex-direction: column;
   padding: 40px 0;
+
   .name-and-img {
     display: flex;
     align-items: center;
     gap: 40px;
+
     .img {
       width: 120px;
       height: 120px;
@@ -35,12 +38,15 @@
       -webkit-box-shadow: 0px 0px 4px 4px #00000010;
       box-shadow: 0px 0px 4px 4px #00000010;
     }
+
     h3 {
       font-size: 47px;
       font-weight: 500;
     }
+
     .bttns {
       display: flex;
+
       button {
         background-color: transparent;
         border: none;
@@ -50,9 +56,11 @@
         display: flex;
         align-items: center;
         gap: 8px;
+
         &:hover {
           font-weight: 700;
           color: $hover-color;
+
           img {
             filter: invert(55%) sepia(85%) saturate(714%) hue-rotate(165deg) brightness(92%) contrast(91%);
           }
@@ -61,15 +69,41 @@
     }
 
   }
+
+  .back-btn {
+    position: sticky;
+    left: 100%;
+    top: 0;
+    z-index: 100;
+    width: 37px;
+    height: 37px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+  
+    &:hover {
+      transform: scale(1.2);
+    }
+  }
+
   .single-contact-info {
     display: flex;
     flex-direction: column;
     margin-top: 40px;
     gap: 16px;
+
     >p {
       font-size: 20px;
       font-weight: 400;
     }
+
     .single-contact-email {
       color: $blue-link;
     }
@@ -88,9 +122,18 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 8px;
+
     >div {
       height: 3px;
       width: 53px;
+    }
+  }
+
+  .single-contact-overlay {
+    .name-and-img {
+      .bttns {
+        display: none;
+      }
     }
   }
 }
