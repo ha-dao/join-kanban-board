@@ -89,6 +89,9 @@
     visibility: visible;
     transform: translateY(0);
   }
+  a:nth-child(1) {
+    display: none;
+  }
 }
 
 .menu-item {
@@ -141,6 +144,9 @@
     top: 50px;
     right: -10px;
     min-width: 180px;
+    a:nth-child(1) {
+      display: block;
+    }
   }
 }
 
