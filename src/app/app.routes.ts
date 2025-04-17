@@ -3,6 +3,9 @@ import { LegalNoticeComponent } from './shared/components/header/legal-notice/le
 import { PrivacyPolicyComponent } from './shared/components/header/privacy-policy/privacy-policy.component';
 import { ContactComponent } from './main-content/contact/contact.component';
 import { HelpComponent } from './shared/components/header/help/help.component';
+import { SummaryComponent } from './main-content/summary/summary.component';
+import { AddTaskComponent } from './main-content/add-task/add-task.component';
+import { BordComponent } from './main-content/board/board.component';
 
 export const routes: Routes = [
   {
@@ -10,40 +13,22 @@ export const routes: Routes = [
     component: ContactComponent,
   },
   {
-    path: 'legal-notice',
-    component: LegalNoticeComponent,
+    path: 'legal-notice', component: LegalNoticeComponent,
   },
   {
-    path: 'privacy',
-    component: PrivacyPolicyComponent,
+    path: 'privacy', component: PrivacyPolicyComponent,
   },
   {
-    path: 'summary',
-    loadComponent: () =>
-      import('./main-content/summary/summary.component').then(
-        (m) => m.SummaryComponent
-      ),
+    path: 'summary', component: SummaryComponent,
   },
   {
-    path: 'add-task',
-    loadComponent: () =>
-      import('./main-content/add-task/add-task.component').then(
-        (m) => m.AddTaskComponent
-      ),
+    path: 'add-task', component: AddTaskComponent,
   },
   {
-    path: 'board',
-    loadComponent: () =>
-      import('./main-content/board/board.component').then(
-        (m) => m.BordComponent
-      ),
+    path: 'board', component: BordComponent,
   },
   {
-    path: 'contact',
-    loadComponent: () =>
-      import('./main-content/contact/contact.component').then(
-        (m) => m.ContactComponent
-      ),
+    path: 'contact', component: ContactComponent,
   },
   { path: 'help', component: HelpComponent },
 ];
