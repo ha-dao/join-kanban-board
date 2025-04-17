@@ -17,7 +17,6 @@ app-sidebar{
 }
 
 .content-wrapper{
-    // margin-top: 96px;
     padding: 120px 40px 0 40px;
     margin-left: 232px;
     height: calc(100vh - 96px);
@@ -28,6 +27,29 @@ app-sidebar{
     flex-direction: row;
     overflow-y: auto;
 }
+
+.feedback-message {
+  position: fixed;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #2196f3;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+  z-index: 9999;
+
+  &.visible {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}
+
+
 
 
 
@@ -44,11 +66,5 @@ app-sidebar{
         width: 100%;
       }
     }
-  }
-  app-sidebar{
-    bottom: 0;
-    left: 0;
-    height: 10vh;
-    width: 100%;
   }
 }
