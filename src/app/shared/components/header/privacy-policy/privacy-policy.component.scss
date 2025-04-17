@@ -1,0 +1,27 @@
+@import '../../../../../styles.scss';
+h2 {
+    hyphens: auto;
+    overflow-wrap: break-word;
+    word-break: normal;
+}
+
+ul {
+  margin-bottom: 1em;
+}
+
+li {
+  margin-bottom: 1em;
+  font-size: clamp(11px, 2.2vw, 14px);
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+h4 {
+  margin-bottom: 1em;
+}
+
+td {
+  font-size: clamp(11px, 2.2vw, 14px);
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
