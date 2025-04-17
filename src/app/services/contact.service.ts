@@ -78,6 +78,7 @@ export class ContactService implements OnDestroy{
   }
 
   async addContact(item:any){
+    let newContactName = item.name;
     await addDoc(this.getContactsRef(), item).catch(
       (err)=>{console.error(err)}
     ).then(
@@ -85,6 +86,15 @@ export class ContactService implements OnDestroy{
       }
     );
     this.checkContactListLaters();
+    this.showNewContact(newContactName);
+  }
+
+  showNewContact(name: string){
+    this.contactList.forEach((contact) => {
+      if(contact.name === name ){
+        this.selectItem(contact.id);
+      }
+    });
   }
 
   async updateContact(contactData: {}){
