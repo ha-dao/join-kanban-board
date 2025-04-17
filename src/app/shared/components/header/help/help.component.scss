@@ -12,7 +12,7 @@
   position: sticky;
   left: 100%;
   top: 0;
-  z-index: 100;
+  z-index: 1;
   width: 37px;
   height: 37px;
   background: transparent;
@@ -68,4 +68,11 @@ p {
   font-size: clamp(11px, 2.2vw, 14px);
   line-height: 1.6;
   margin-bottom: 14px;
+}
+
+@media (max-width: 1280px) {
+  .help-back-btn {
+    width: 24px;
+    height: 24px;
+  }
 }
