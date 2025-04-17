@@ -52,19 +52,19 @@ h1 {
 h2 {
   font-size: clamp(30px, 8vw, 61px);
   font-weight: 700;
-  margin-bottom: 20px;
+ 
 }
 
 h3 {
   font-size: clamp(18px, 5.5vw, 27px);
   font-weight: 700;
-  margin-bottom: 16px;
+ 
 }
 
 h4 {
   font-size: clamp(16px, 4.5vw, 24px);
   font-weight: 700;
-  margin-top: 1em;
+ 
 }
 
 h5 {
@@ -74,15 +74,10 @@ h5 {
 
 p {
   font-size: clamp(11px, 2.2vw, 14px);
-  line-height: 1.6;
-  margin-bottom: 14px;
 }
 
 li {
   font-size: clamp (12px, 3vw, 16px);
-  margin-left: 20px;
-  padding-left: 20px;
-  margin-top: 0.5em;
 }
 
 body {

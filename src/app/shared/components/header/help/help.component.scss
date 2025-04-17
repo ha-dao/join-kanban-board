@@ -32,13 +32,7 @@
 }
 
 .help-container {
-  max-width: 1014px;
   height: 100vh;
-}
-
-.intro,
-.step-intro {
-  margin-bottom: 24px;
 }
 
 .join-blue {
@@ -48,4 +42,30 @@
 
 .enjoy {
   padding-bottom: 30px;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+h3 {
+
+  margin-bottom: 16px;
+}
+
+h4 {
+
+  margin-top: 1em;
+}
+
+li {
+  margin-left: 20px;
+  padding-left: 20px;
+  margin-top: 0.5em;
+}
+
+p {
+  font-size: clamp(11px, 2.2vw, 14px);
+  line-height: 1.6;
+  margin-bottom: 14px;
 }
