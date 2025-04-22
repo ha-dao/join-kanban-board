@@ -2,7 +2,7 @@ import { Injectable, OnDestroy} from '@angular/core';
 import { inject } from '@angular/core';
 import { Firestore, collectionData, collection, doc, onSnapshot, addDoc, deleteDoc, updateDoc} from '@angular/fire/firestore';
 import { Contact } from '../interfaces/contact';
-import { query, orderBy, limit } from 'firebase/firestore'; 
+import { query, orderBy, limit } from 'firebase/firestore';
 
 
 @Injectable({
@@ -90,8 +90,7 @@ export class ContactService implements OnDestroy{
     await addDoc(this.getContactsRef(), item).catch(
       (err)=>{console.error(err)}
     ).then(
-      (docRef)=>{ console.log("doc", docRef?.id);
-      }
+      (docRef)=>{}
     );
     this.checkContactListLaters();
     this.showNewContact(newContactName);
@@ -144,8 +143,6 @@ export class ContactService implements OnDestroy{
       if(contact.id === id ){
         this.currentContact = contact;
         this.currentIdex = index;
-        console.log(this.currentIdex);
-        
       }
     });
     this.overlayDisplay = 'flex';

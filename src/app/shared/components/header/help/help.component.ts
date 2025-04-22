@@ -14,7 +14,6 @@ export class HelpComponent {
   constructor(private router: Router) {}
 
   onBackClick(): void {
-    this.router.navigate(['/']); //
-    console.log('Back button clicked');
+    this.router.navigate(['/']);
   }
 }
