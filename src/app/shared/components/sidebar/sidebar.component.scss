@@ -96,8 +96,16 @@
           color: $grey;
           font-size: 12px;
         }
-        &:hover {
-          background-color: $primary-hover-color;
+        &.active {
+          background-color: #091931 !important;
+          pointer-events: none;
+          border-radius: 15px;
+
+        }
+    
+        &:not(.active):hover {
+          background-color: #2a3d59;
+          cursor: pointer;
           border-radius: 10px;
         }
       }
