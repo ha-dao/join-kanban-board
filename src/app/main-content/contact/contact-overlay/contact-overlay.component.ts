@@ -44,6 +44,7 @@ export class ContactOverlayComponent {
     if (!clickedInside && this.overlayService.isOpen) {
       this.clearForm();
       this.overlayService.closeOverlay();
+      this.invalidFields = []
     }
   }
   
@@ -90,6 +91,7 @@ export class ContactOverlayComponent {
       this.feedbackService.show('Contact successfully deleted!');
     }
     this.overlayService.closeOverlay();
+    this.invalidFields = []
     this.clearForm();
     
   }
@@ -101,11 +103,13 @@ export class ContactOverlayComponent {
            
       this.overlayService.closeOverlay()
       this.feedbackService.show('Contact added!');
+      this.invalidFields = []
     }else if(this.overlayService.buttonRight == 'Save'){
       this.contactService.updateContact(this.contactData);
       this.feedbackService.show('Contact changed!');
       this.clearForm();
       this.overlayService.closeOverlay()
+      this.invalidFields = []
     }
   }
 
@@ -115,6 +119,7 @@ export class ContactOverlayComponent {
     this.contactData.name= '';
     this.contactData.email = '';
     this.contactData.phone= '';
+    this.invalidFields = []
   }
 
  
