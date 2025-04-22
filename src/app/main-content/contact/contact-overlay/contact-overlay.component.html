@@ -16,7 +16,7 @@
     <div class="profile-image">
       @if(overlayService.buttonLeft == 'Delete'){
         <div class="img" [ngStyle]="{background: contactService.colours[contactService.currentIdex]}">
-          {{contactService.getFirstAndLastNameFirstLatter(contactService.currentContact['name'])}}
+          {{contactService.getFirstAndLastNameFirstLetter(contactService.currentContact['name'])}}
         </div>
       }@else {
         <img

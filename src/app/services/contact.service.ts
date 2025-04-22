@@ -12,8 +12,8 @@ export class ContactService implements OnDestroy{
   unsubContactList: any;
   firestore:Firestore = inject(Firestore);
   contactList: Contact[] = [];
-  contactListLaters: number[] = [];
-  contactListLater: string[] = [];
+  contactListLetters: number[] = [];
+  contactListLetter: string[] = [];
   currentContact: Contact = {name: '', email: '', phone: ''};
   currentIdex: number = 0;
   overlayDisplay: string = 'none';
@@ -31,7 +31,7 @@ export class ContactService implements OnDestroy{
   ];
   constructor() {
     this.snap();
-    this.checkContactListLaters();
+    this.checkContactListLetters();
   }
 
   getFirstAndLastName(name: string): string {
@@ -41,7 +41,7 @@ export class ContactService implements OnDestroy{
     return `${words[0]} ${words[words.length - 1]}`;
   }
 
-  getFirstAndLastNameFirstLatter(name: string): string {
+  getFirstAndLastNameFirstLetter(name: string): string {
     if (!name) return '';
     const words = name.trim().split(/\s+/);
     if (words.length === 1) return words[0].charAt(0);
@@ -55,31 +55,31 @@ export class ContactService implements OnDestroy{
       list.forEach(element => {
           this.contactList.push(this.setContactObj(element.data(), element.id));
       })
-      this.checkContactListLaters();
+      this.checkContactListLetters();
     });
   }
 
-  checkContactListLaters(){
-    let latter = 0;
-    this.contactListLater= [];
+  checkContactListLetters(){
+    let letter = 0;
+    this.contactListLetter= [];
     let condition = true;
     let startValue = 0;
     this.contactList.forEach(contact =>{
       while (condition) {
-        if(contact.name.startsWith(String.fromCharCode(latter + 65))){
-          if(!this.contactListLater.includes(String.fromCharCode(latter + 65)))
-          this.contactListLater.push(String.fromCharCode(latter + 65))
+        if(contact.name.startsWith(String.fromCharCode(letter + 65))){
+          if(!this.contactListLetter.includes(String.fromCharCode(letter + 65)))
+          this.contactListLetter.push(String.fromCharCode(letter + 65))
           condition = false;
         }else{
-          latter++;
+          letter++;
         }
 
-        if(latter == 26){
+        if(letter == 26){
           condition = false;
         }
       }
       condition = true;
-      latter = 0;
+      letter = 0;
     });
 
   }
@@ -105,7 +105,7 @@ export class ContactService implements OnDestroy{
     ).then(
       (docRef)=>{}
     );
-    this.checkContactListLaters();
+    this.checkContactListLetters();
     this.showNewContact(newContactName);
   }
 
