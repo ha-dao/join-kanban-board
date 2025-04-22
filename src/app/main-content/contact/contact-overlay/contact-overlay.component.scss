@@ -106,6 +106,7 @@
       position: relative;
       display: inline-block;
       width: 100%;
+     
       >input {
         padding-right: 36px;
         padding-left: 12px;
@@ -119,9 +120,7 @@
           border: 1px solid $hover-color;
         }
       }
-      input.invalid::placeholder {
-        color: $text-alert-color;
-      }
+      
       >img {
         position: absolute;
         right: 10px;
@@ -141,6 +140,12 @@
       align-items: center;
       gap: 16px;
     }
+  }
+  .invisible{
+    display: none;
+  }
+  .visible{
+    color: red;
   }
 }
 
