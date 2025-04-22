@@ -19,7 +19,8 @@ export class SingleContactComponent {
   ) {}
 
   contactService = inject(ContactService);
-  @ViewChild('editContactOverlay') contactOverlay!: ContactOverlayComponent;  deleteContact() {
+  
+  deleteContact() {
     this.contactService.deleteContact();
     this.feedbackService.show('Contact successfully deleted!');
   }
@@ -36,7 +37,5 @@ export class SingleContactComponent {
     this.overlayService.openOverlay();
   }
   
-  backToContactList(){
-    
-  }
+  
 }
