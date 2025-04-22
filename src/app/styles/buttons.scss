@@ -54,3 +54,27 @@
     }
   }
 }
+
+@media (max-width: 1024px) and (orientation: landscape) {
+  .create-button {
+    @include fontStyle($font-size: 14px, $font-weight: 700, $font-color: $white, $text-transform: none);
+    padding: 10px 19px;
+  }
+
+  .cancel-button {
+    @include fontStyle($font-size: 14px, $font-weight: 400, $font-color: $primary-color, $text-transform: none);
+    padding: 10px 19px;
+  }
+}
+
+@media (max-width: 1024px) and (orientation: portrait) {
+  .create-button {
+    @include fontStyle($font-size: 14px, $font-weight: 700, $font-color: $white, $text-transform: none);
+    padding: 10px 19px;
+  }
+
+  .cancel-button {
+    @include fontStyle($font-size: 14px, $font-weight: 400, $font-color: $primary-color, $text-transform: none);
+    padding: 10px 19px;
+  }
+}
