@@ -1,1 +1,11 @@
-<p>bord works!</p>
+<div class="letter-container">
+    @for (item of (contactService.contactList); track item; let index = $index) {
+            <div class="contact" (click)="contactService.selectItem(item.id)">
+                <div class="contact-img" [ngStyle]="{background: item['color']}">{{contactService.getFirstAndLastNameFirstLetter(item['name'])}}</div>
+                <ul class="name-email">
+                    <p>{{ contactService.getFirstAndLastName(item['name'])}}</p>
+                </ul>
+            </div>
+        
+    }
+</div>

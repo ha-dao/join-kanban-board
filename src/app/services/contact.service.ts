@@ -14,9 +14,10 @@ export class ContactService implements OnDestroy{
   contactList: Contact[] = [];
   contactListLetters: number[] = [];
   contactListLetter: string[] = [];
-  currentContact: Contact = {name: '', email: '', phone: ''};
+  currentContact: Contact = {name: '', email: '', phone: '', color: '', letters: ''};
   currentIdex: number = 0;
   overlayDisplay: string = 'none';
+  colorIndex: number = 0;
   colours: string[] = [
     '#FF5733', '#33FF57', '#3357FF', '#F1C40F', '#8E44AD',
     '#2ECC71', '#E74C3C', '#3498DB', '#9B59B6', '#1ABC9C',
@@ -100,6 +101,9 @@ export class ContactService implements OnDestroy{
   async addContact(item:any){
     item.name = this.capitalizeWords(item.name);
     let newContactName = item.name;
+    item.color = this.colours[this.contactList.length];
+    this.colorIndex++;
+    item.letters = this.getFirstAndLastNameFirstLetter(newContactName);
     await addDoc(this.getContactsRef(), item).catch(
       (err)=>{console.error(err)}
     ).then(
@@ -117,7 +121,11 @@ export class ContactService implements OnDestroy{
     });
   }
 
-  async updateContact(contactData: {}){
+  async updateContact(contactData: {name: string;
+    email: string;
+    phone: string;
+    letters?: string;}){
+    contactData.letters = this.getFirstAndLastNameFirstLetter(contactData.name)
     if(this.currentContact.id){
       await updateDoc(this.getSingleContact('contacts', this.currentContact.id), contactData);
       this.selectItem(this.currentContact.id);
@@ -137,7 +145,9 @@ export class ContactService implements OnDestroy{
       id: id,
       name: obj.name || '',
       email: obj.email || '',
-      phone : obj.phone || ''
+      phone : obj.phone || '',
+      color : obj.color || '',
+      letters : obj.letters || ''
     }
   }
 
