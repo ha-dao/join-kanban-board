@@ -9,7 +9,7 @@ import { ContactOverlayService } from '../../services/overlay.service';
 @Component({
   selector: 'app-contact',
   standalone: true,
-  imports: [CommonModule, ContactListComponent, SingleContactComponent, ContactOverlayComponent],
+  imports: [CommonModule, ContactListComponent, SingleContactComponent],
   templateUrl: './contact.component.html',
   styleUrl: './contact.component.scss'
 })
@@ -22,8 +22,19 @@ export class ContactComponent {
   @ViewChild('singleContact') singleContact!: SingleContactComponent;
  
   menuImageSrc: string = "assets/img/4-contacts/person-add-icon.svg";
-  singleContactTransform: string = 'translateX(200%)';
+  singleContactTransform: string = window.innerWidth < 1280? 'translateX(200%)' : 'translateX(0%)';
   backBtnDisplay: string = 'none';
+  windowWidth = window.addEventListener('resize', () => {
+    console.log(window.innerWidth);
+    if(window.innerWidth < 1280){
+      this.getEvent('translateX(200%)');
+    }else if(window.innerWidth > 1280){
+      this.getEvent('translateX(0%)');
+      this.singleContactTransform = 'translateX(0%)';
+    }
+    
+  });
+
   addOrOpenMenu(){
     if(this.menuImageSrc == 'assets/img/4-contacts/person-add-icon.svg'){
       this.overlayService.setOverlayButtons('Cancel', 'Create Contact');
@@ -37,13 +48,17 @@ export class ContactComponent {
     }
   }
 
+  
+
   openEditOverlay(){
     this.singleContact.editContact();
   }
 
   deleteContact(){
     this.singleContact.deleteContact();
+    if(window.innerWidth < 1280){
     this.getEvent('translateX(200%)');
+    }
   }
 
   openAddOverlay(){
@@ -52,13 +67,15 @@ export class ContactComponent {
   }
 
   getEvent(event: string) {
-    this.singleContactTransform = event;
-    if(event == 'translateX(0%)'){
-      this.menuImageSrc = 'assets/img/4-contacts/more-vert-icon.svg';
-      this.backBtnDisplay = 'flex';
-    }else if(event == 'translateX(200%)'){
-      this.menuImageSrc = 'assets/img/4-contacts/person-add-icon.svg';
-      this.backBtnDisplay = 'none';
+    if(window.innerWidth < 1280){
+      this.singleContactTransform = event;
+      if(event == 'translateX(0%)'){
+        this.menuImageSrc = 'assets/img/4-contacts/more-vert-icon.svg';
+        this.backBtnDisplay = 'flex';
+      }else if(event == 'translateX(200%)'){
+        this.menuImageSrc = 'assets/img/4-contacts/person-add-icon.svg';
+        this.backBtnDisplay = 'none';
+      }
     }
   }
 
