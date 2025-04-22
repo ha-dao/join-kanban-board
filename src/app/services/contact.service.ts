@@ -11,7 +11,6 @@ import { query, orderBy, limit } from 'firebase/firestore';
 export class ContactService implements OnDestroy{
   unsubContactList: any;
   firestore:Firestore = inject(Firestore);
-  /* contacts  = collectionData(this.getContactsRef()); */
   contactList: Contact[] = [];
   contactListLaters: number[] = [];
   contactListLater: string[] = [];
