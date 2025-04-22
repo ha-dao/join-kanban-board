@@ -24,8 +24,7 @@ export class ContactComponent {
   menuImageSrc: string = "assets/img/4-contacts/person-add-icon.svg";
   singleContactTransform: string = window.innerWidth < 1280? 'translateX(200%)' : 'translateX(0%)';
   backBtnDisplay: string = 'none';
-  windowWidth = window.addEventListener('resize', () => {
-    console.log(window.innerWidth);
+  windowWidth = window.addEventListener('resize', () => {    
     if(window.innerWidth < 1280){
       this.getEvent('translateX(200%)');
     }else if(window.innerWidth > 1280){
