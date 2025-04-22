@@ -1,6 +1,7 @@
-import { Component, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, ViewChild, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContactService } from '../../../services/contact.service';
+import { ContactOverlayService } from '../../../services/overlay.service';
 import { ContactOverlayComponent } from '../contact-overlay/contact-overlay.component';
 
 @Component({
@@ -11,20 +12,18 @@ import { ContactOverlayComponent } from '../contact-overlay/contact-overlay.comp
   styleUrl: './contact-list.component.scss'
 })
 export class ContactListComponent {
+  constructor(
+    public contactService: ContactService,
+    private overlayService: ContactOverlayService
+  ) {}
 
-
-  constructor(public contactService: ContactService){
-
+    @Output() singleContactTransform = new EventEmitter<string>()
+  setOverlayButtonsFromList(leftButton:string, rightButton: string) {
+    this.overlayService.setOverlayButtons(leftButton, rightButton)
+    this.overlayService.openOverlay();
   }
-  @ViewChild('contactOverlay') contactOverlay!: ContactOverlayComponent;
-  @Output() singleContactTransform = new EventEmitter<string>();
 
-  toggleOverlayFromList() {
-      this.contactOverlay.toggleOverlay('Cancel', 'Create Contact');
-    }
-
-    toggleSingleContact(){
-      this.singleContactTransform.emit('translateX(0%)')
-    }
-
+  toggleSingleContact(){
+    this.singleContactTransform.emit('translateX(0%)')
+  }
 }
