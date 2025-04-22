@@ -35,6 +35,20 @@ export class ContactService implements OnDestroy{
     this.checkContactListLaters();
   }
 
+  getFirstAndLastName(name: string): string {
+    if (!name) return '';
+    const words = name.trim().split(/\s+/);
+    if (words.length === 1) return words[0];
+    return `${words[0]} ${words[words.length - 1]}`;
+  }
+
+  getFirstAndLastNameFirstLatter(name: string): string {
+    if (!name) return '';
+    const words = name.trim().split(/\s+/);
+    if (words.length === 1) return words[0].charAt(0);
+    return `${words[0].charAt(0)} ${words[words.length - 1].charAt(0)}`;
+  }
+
   snap(){
     let q = query(this.getContactsRef(), orderBy('name'));
     this.unsubContactList = onSnapshot(q, (list)=>{

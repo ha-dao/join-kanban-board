@@ -12,9 +12,9 @@
                     @for (item of (contactService.contactList); track item; let index = $index) {
                         @if(item['name'].startsWith(latter)){
                             <div class="contact" (click)="contactService.selectItem(item.id); toggleSingleContact()"  [ngClass]="{ 'selected': contactService.selectedIndex === item.id}">
-                                <div class="contact-img" [ngStyle]="{background: contactService.colours[index]}">{{latter}} {{item['name'].split(' ')[1] ? item['name'].split(' ')[1].charAt(0) : ''}}</div>
+                                <div class="contact-img" [ngStyle]="{background: contactService.colours[index]}">{{contactService.getFirstAndLastNameFirstLatter(item['name'])}}</div>
                                 <ul class="name-email">
-                                    <p>{{ item['name'].split(' ').slice(0, 2).join(' ') }}</p>
+                                    <p>{{ contactService.getFirstAndLastName(item['name'])}}</p>
                                     <a>{{ item['email'] }}</a>
                                 </ul>
                             </div>
