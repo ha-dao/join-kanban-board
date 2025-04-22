@@ -89,6 +89,21 @@
   }
 }
 
+.img {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background-color: $primary-color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  border: 3px solid $white;
+  color: $white;
+  -webkit-box-shadow: 0px 0px 4px 4px #00000010;
+  box-shadow: 0px 0px 4px 4px #00000010;
+}
+
 .form-div {
   flex:1;
   display:flex;
