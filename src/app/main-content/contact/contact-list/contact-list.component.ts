@@ -1,7 +1,6 @@
-import { Component, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, Output, EventEmitter, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContactService } from '../../../services/contact.service';
-import { Contact } from '../../../interfaces/contact';
 import { ContactOverlayComponent } from '../contact-overlay/contact-overlay.component';
 
 @Component({
@@ -12,7 +11,7 @@ import { ContactOverlayComponent } from '../contact-overlay/contact-overlay.comp
   styleUrl: './contact-list.component.scss'
 })
 export class ContactListComponent {
-  
+
 
   constructor(public contactService: ContactService){
 

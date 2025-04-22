@@ -54,7 +54,7 @@ app-single-contact{
     right: 0;
     width: 100%;
     transition: all 250ms ease;
-    transform: translateX(200%); // hier kannst du denn app single contact ein und ausblenden
+    transform: translateX(200%);
     z-index: 200;
   }
 
@@ -173,10 +173,6 @@ app-single-contact{
   section{
   top: 70px;
   }
-
-  .back-btn {
-
-   }
 }
 
 @media (max-width: 320px) {
