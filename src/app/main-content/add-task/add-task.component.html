@@ -1,1 +1,54 @@
-<p>add-task works!</p>
+<h2>Add Task</h2>
+
+<div class="formDiv">
+  <form action="submit">
+    <div class="taskData">
+      <div class="input-div">
+        <label for="Title"></label>
+        <input type="text"
+        name="Title"
+        required />
+      </div>
+      <div class="input-div">
+        <label for="Description">Description</label>
+        <textarea name="Description" id=""> </textarea>
+      </div>
+      <div class="input-div">
+        <label for="Due Date">Due Date</label>
+        <input
+        type="date"
+        name="Due Date"
+        id=""
+        required
+         />
+      </div>
+    </div>
+    <div class="task-User">
+      <div class="priority-div">
+        <button>Urgent</button>
+        <button>Medium</button>
+        <button>Low</button>
+      </div>
+      <div class="input-div">
+        <label for="Assigned to">Assigned to</label>
+        <input type="text" name="Assigned to" />
+      </div>
+      <div class="input-div">
+        <label for="Category">Category</label>
+        <input
+        type="text"
+        name="Category"
+        required
+        />
+      </div>
+      <div class="input-div">
+        <label for="Subtasks">Subtasks</label>
+        <input type="text" name="Subtasks" />
+      </div>
+    </div>
+  </form>
+</div>
+<div class="btn-div">
+    <button class="cancel-button">Clear</button>
+    <button class="create-button">Create Task</button>
+</div>
