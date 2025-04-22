@@ -35,31 +35,31 @@ export class HeaderComponent implements OnDestroy {
     this.showMenu = false;
   }
 
-  handleMenuItemClick(action: string) {
-    switch (action) {
-      case 'legal-notice':
-        this.router.navigate(['/legal-notice']);
-        break;
-      case 'privacy-policy':
-        this.router.navigate(['/privacy-policy']);
-        break;
-      case 'logout':
-        this.logout();
-        break;
-    }
-    this.closeMenu();
-  }
+  // handleMenuItemClick(action: string) {
+  //   switch (action) {
+  //     case 'legal-notice':
+  //       this.router.navigate(['/legal-notice']);
+  //       break;
+  //     case 'privacy-policy':
+  //       this.router.navigate(['/privacy-policy']);
+  //       break;
+  //     case 'logout':
+  //       this.logout();
+  //       break;
+  //   }
+  //   this.closeMenu();
+  // }
 
-  logout() {
-    console.log('Logout erfolgreich');
-    this.router.navigate(['/login']); // zu anpassen an Logout-Route
-  }
+  // logout() {
+  //   console.log('Logout erfolgreich');
+  //   this.router.navigate(['/login']); // zu anpassen an Logout-Route
+  // }
 
-  navigateToHelp(event: MouseEvent) {
-    event.stopPropagation();
-    console.log('Help-Icon geklickt');
-    this.router.navigate(['/help']);
-    console.log('Help-Icon geklickt');
-    this.router.navigate(['/help']);
-  }
+  // navigateToHelp(event: MouseEvent) {
+  //   event.stopPropagation();
+  //   console.log('Help-Icon geklickt');
+  //   this.router.navigate(['/help']);
+  //   console.log('Help-Icon geklickt');
+  //   this.router.navigate(['/help']);
+  // }
 }

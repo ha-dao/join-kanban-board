@@ -40,20 +40,20 @@
 
     &.active {
       background-color: #091931 !important;
-      pointer-events: none; 
+      pointer-events: none;
     }
-  
+
     &:not(.active):hover {
       background-color: #2a3d59;
       cursor: pointer;
     }
-  
+
     img {
       width: 30px;
       height: 30px;
     }
   }
-  
+
 }
 
 .mobile-navbar-wrapper {
@@ -130,9 +130,6 @@
         background-color: $primary-hover-color;
         border-radius: 10px;
         color: $white;
-        img {
-          filter: invert(100%) sepia(0%) saturate(857%) hue-rotate(302deg) brightness(115%) contrast(100%);
-        }
       }
     }
   }

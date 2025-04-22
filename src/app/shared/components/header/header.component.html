@@ -3,7 +3,7 @@
     <a href="">
     <img
       class="mobile-logo"
-      src="./../../../../assets/img/header/join-logo-mobile.svg"
+      src="assets/img/header/join-logo-mobile.svg"
       alt="JOIN Logo"
     />
   </a>
@@ -14,7 +14,7 @@
     <a [routerLink]="'/help'">
       <img
         class="help-icon"
-        src="./../../../../assets/img/header/help.svg"
+        src="assets/img/header/help.svg"
         alt="Help Icon"
       />
     </a>
@@ -23,31 +23,29 @@
 
     <div class="dropdown-menu" [class.active]="showMenu">
       <a
-      href="/help"
+      routerLink="/help"
         class="menu-item"
-        (click)="handleMenuItemClick('legal-notice'); $event.stopPropagation()"
+        (click)="closeMenu()"
       >
         Help
       </a>
       <a
-        href="/legal-notice"
+        routerLink="/legal-notice"
         class="menu-item"
-        (click)="handleMenuItemClick('legal-notice'); $event.stopPropagation()"
+        (click)="closeMenu()"
       >
         Legal Notice
       </a>
       <a
-        href="/privacy"    
+        routerLink="/privacy"
         class="menu-item"
-        (click)="
-          handleMenuItemClick('privacy-policy'); $event.stopPropagation()
-        "
+        (click)="closeMenu()"
       >
         Privacy Policy
       </a>
       <a
         class="menu-item"
-        (click)="handleMenuItemClick('logout'); $event.stopPropagation()"
+        (click)="closeMenu()"
       >
         Log out
       </a>

@@ -1,16 +1,14 @@
-@import './app/styles/fonts.scss';
-@import './app/styles/variables.scss';
-@import './app/styles/mixins.scss';
-@import './app/styles/buttons.scss';
-
-
+@import "./app/styles/fonts.scss";
+@import "./app/styles/variables.scss";
+@import "./app/styles/mixins.scss";
+@import "./app/styles/buttons.scss";
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
-  font-family: 'Inter', "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
   scrollbar-width: thin;
   scrollbar-color: $grey rgba(0, 0, 0, 0.1);
 }
@@ -47,43 +45,57 @@ a {
 }
 
 h1 {
-  font-size: clamp(48px, 56px, 64px);
+  font-size: clamp(30px, 8vw, 61px);
   font-weight: 700;
 }
 
 h2 {
-  font-size: clamp(48px, 56px, 64px);
+  font-size: clamp(30px, 8vw, 61px);
   font-weight: 700;
+
 }
 
 h3 {
-  font-size: clamp(36px, 54px, 60px);
+  font-size: clamp(18px, 5.5vw, 27px);
   font-weight: 700;
+
 }
 
 h4 {
-  font-size: clamp(32px, 48px, 56px);
+  font-size: clamp(16px, 4.5vw, 24px);
   font-weight: 700;
+
 }
 
 h5 {
-  font-size: clamp(28px, 44px, 52px);
+  font-size: clamp(14px, 3.8vw, 20px);
   font-weight: 700;
 }
 
 p {
-  font-size: clamp(14px, 16px, 18px);
+  font-size: clamp(11px, 2.2vw, 14px);
+}
+
+li {
+  font-size: clamp (12px, 3vw, 16px);
 }
 
 body {
   background-color: $background-color;
 }
 
-a, button {
+a,
+button {
   cursor: pointer;
 }
 
 p.subtitle {
   font-size: 27px;
   color: $primary-color;
+}
+
+@media (max-width: 768px) {
+  p.subtitle {
+    font-size: 20px;
+  }
 }

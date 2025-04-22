@@ -35,4 +35,8 @@ export class SingleContactComponent {
   
     this.overlayService.openOverlay();
   }
+  
+  backToContactList(){
+    
+  }
 }
