@@ -33,7 +33,6 @@ export class SingleContactComponent {
       email: this.contactService.currentContact.email,
       phone: this.contactService.currentContact.phone
     });
-  
     this.overlayService.openOverlay();
   }
   
