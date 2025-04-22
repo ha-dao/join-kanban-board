@@ -109,13 +109,7 @@ export class ContactOverlayComponent {
     }
   }
 
-  // toggleBodyScroll(disable: boolean) {
-  //   if (disable) {
-  //     document.body.classList.add('no-scroll');
-  //   } else {
-  //     document.body.classList.remove('no-scroll');
-  //   }
-  // }
+
 
   clearForm(){
     this.contactData.name= '';
