@@ -23,6 +23,7 @@ export class ContactOverlayComponent {
     name: string;
     email: string;
     phone: string;
+    letters?: string;
   } = {
     name: '',
     email: '',

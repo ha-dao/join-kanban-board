@@ -12,7 +12,7 @@
                     @for (item of (contactService.contactList); track item; let index = $index) {
                         @if(item['name'].startsWith(letter)){
                             <div class="contact" (click)="contactService.selectItem(item.id); toggleSingleContact()"  [ngClass]="{ 'selected': contactService.selectedIndex === item.id}">
-                                <div class="contact-img" [ngStyle]="{background: contactService.colours[index]}">{{contactService.getFirstAndLastNameFirstLetter(item['name'])}}</div>
+                                <div class="contact-img" [ngStyle]="{background: item['color']}">{{contactService.getFirstAndLastNameFirstLetter(item['name'])}}</div>
                                 <ul class="name-email">
                                     <p>{{ contactService.getFirstAndLastName(item['name'])}}</p>
                                     <a>{{ item['email'] }}</a>
