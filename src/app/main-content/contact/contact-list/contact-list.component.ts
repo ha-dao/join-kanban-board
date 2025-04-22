@@ -2,12 +2,11 @@ import { Component, ViewChild, EventEmitter, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContactService } from '../../../services/contact.service';
 import { ContactOverlayService } from '../../../services/overlay.service';
-import { ContactOverlayComponent } from '../contact-overlay/contact-overlay.component';
 
 @Component({
   selector: 'app-contact-list',
   standalone: true,
-  imports: [CommonModule, ContactOverlayComponent],
+  imports: [CommonModule],
   templateUrl: './contact-list.component.html',
   styleUrl: './contact-list.component.scss'
 })
