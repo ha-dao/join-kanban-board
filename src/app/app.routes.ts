@@ -3,39 +3,32 @@ import { LegalNoticeComponent } from './shared/components/header/legal-notice/le
 import { PrivacyPolicyComponent } from './shared/components/header/privacy-policy/privacy-policy.component';
 import { ContactComponent } from './main-content/contact/contact.component';
 import { HelpComponent } from './shared/components/header/help/help.component';
+import { SummaryComponent } from './main-content/summary/summary.component';
+import { AddTaskComponent } from './main-content/add-task/add-task.component';
+import { BordComponent } from './main-content/board/board.component';
 
 export const routes: Routes = [
-    {
-        path: '', component: ContactComponent
-    },
-    {
-        path: 'legal-notice', component: LegalNoticeComponent
-    },
-    {
-        path: 'privacy', component: PrivacyPolicyComponent
-    },
   {
-    path: '', redirectTo: 'summary', pathMatch: 'full',
+    path: '',
+    component: ContactComponent,
   },
   {
-    path: 'summary', loadComponent: () => import('./main-content/summary/summary.component').then((m) => m.SummaryComponent),
+    path: 'legal-notice', component: LegalNoticeComponent,
   },
   {
-    path: 'add-task',loadComponent: () => import('./main-content/add-task/add-task.component').then( (m) => m.AddTaskComponent),
+    path: 'privacy', component: PrivacyPolicyComponent,
   },
   {
-    path: 'board', loadComponent: () => import('./main-content/board/board.component').then((m) => m.BordComponent),
+    path: 'summary', component: SummaryComponent,
   },
   {
-    path: 'contact',loadComponent: () => import('./main-content/contact/contact.component').then((m) => m.ContactComponent),
+    path: 'add-task', component: AddTaskComponent,
   },
-//   {
-//     path: 'privacy-policy', loadComponent: () => import('./pages/privacy-policy/privacy-policy.component').then((m) => m.PrivacyPolicyComponent),
-//   },
-//   {
-//     path: 'legal-notice',loadComponent: () => import('./pages/legal-notice/legal-notice.component').then((m) => m.LegalNoticeComponent),
-//   },
-
-{ path: 'help', component: HelpComponent }, 
+  {
+    path: 'board', component: BordComponent,
+  },
+  {
+    path: 'contact', component: ContactComponent,
+  },
+  { path: 'help', component: HelpComponent },
 ];
-

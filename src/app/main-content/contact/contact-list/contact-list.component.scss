@@ -38,10 +38,11 @@ section {
       }
     }
     .list-content {
-      padding: 40px;
+      padding: 40px 16px;
       z-index: 9;
       >div {
         >p {
+          font-size: clamp(14px, 20px, 22px);
           padding: 0 40px;
         }
         margin-bottom: 24px;
@@ -66,6 +67,7 @@ section {
   > ul {
     > p {
       color: black;
+      font-size: 18px;
     }
     > a {
       color: $blue-link;
@@ -136,7 +138,40 @@ p {
 }
 
 @media (max-width: 768px) {
+  section {
+    div {
+      .list-content {
+        padding: 0 16px 80px 16px;
+        div {
+          >p {
+            padding: 0 24px;
+          }
+        }
+      }
+    }
+  }
 
+  .contact {
+    justify-content: flex-start;
+    padding: 12px;
+    gap: 8px;
+    flex: 1 2;
+    .contact-img {
+      font-size: 14px;
+      width: 50px;
+      height: 50px;
+    }
+    > ul {
+      width: 70%;
+      > a {
+        font-size: 16px;
+      }
+    }
+  }
+
+  .name-email {
+    width: 90%;
+  }
 }
 
 @media (max-width: 480px) {
