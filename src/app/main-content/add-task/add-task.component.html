@@ -4,51 +4,71 @@
   <form action="submit">
     <div class="taskData">
       <div class="input-div">
-        <label for="Title"></label>
+        <label for="Title">Title</label>
         <input type="text"
         name="Title"
-        required />
+        required 
+        [(ngModel)]="taskService.singleTask.title"/>
       </div>
       <div class="input-div">
         <label for="Description">Description</label>
-        <textarea name="Description" id=""> </textarea>
+        <textarea name="Description" id="" [(ngModel)]="taskService.singleTask.description"> </textarea>
       </div>
       <div class="input-div">
-        <label for="Due Date">Due Date</label>
+        <label for="Due Date">Due Date
         <input
+        [(ngModel)]="taskService.singleTask.date"
         type="date"
         name="Due Date"
         id=""
         required
-         />
+         /></label>
       </div>
     </div>
     <div class="task-User">
       <div class="priority-div">
-        <button>Urgent</button>
-        <button>Medium</button>
-        <button>Low</button>
+        <button [(ngModel)]="taskService.singleTask.priority">Urgent</button>
+        <button [(ngModel)]="taskService.singleTask.priority">Medium</button>
+        <button [(ngModel)]="taskService.singleTask.priority">Low</button>
       </div>
       <div class="input-div">
-        <label for="Assigned to">Assigned to</label>
-        <input type="text" name="Assigned to" />
+       <input type="select" class="dropdown" (click)="toggleDropdown()">       
+        <div class="dropdown-menu" [ngClass]="{visible: dropdownOpen, invisible:!dropdownOpen}">
+          @if(this.dropdownOpen){
+          @for (item of (contactService.contactList); track item; let index = $index) {
+                  <div class="contact" (click)="contactService.selectItem(item.id)">
+                      <div class="contact-img" [ngStyle]="{background: item['color']}">{{contactService.getFirstAndLastNameFirstLetter(item['name'])}}</div>
+                      <ul class="name-email">
+                          <p>{{ contactService.getFirstAndLastName(item['name'])}} <input type="checkbox"[checked]="item.selected"  name="checkBox" id="{{item.id}}" (change)="contactService.setSelection(item)"></p>
+                      </ul>
+                  </div>              
+          }}
+          <div>           
+          </div>          
+      </div>
+      @for (contact of (contactService.contactList); track $index) {
+        @if(contact.selected == true){
+        <div class="contact" [ngStyle]="{background: contact['color']}" (click)="contactService.setSelection(contact)" >{{contact.letters}}</div>
+       }
+      }
       </div>
       <div class="input-div">
-        <label for="Category">Category</label>
-        <input
-        type="text"
-        name="Category"
-        required
-        />
+        <label for="category">Category</label>
+        <select name="Category" id="category" placeholder="Select a Category">
+          <option value="">User story</option>
+          <option value="">Technical Task</option>
+          <option value="">Design</option>
+        </select>
       </div>
       <div class="input-div">
         <label for="Subtasks">Subtasks</label>
         <input type="text" name="Subtasks" />
       </div>
     </div>
+    <div class="btn-div">
+      <button class="cancel-button">Clear</button>
+      <button class="create-button" type="submit">Create Task</button>
+  </div>
   </form>
 </div>
-<div class="btn-div">
-    <button class="cancel-button">Clear</button>
-    <button class="create-button">Create Task</button>
-</div>
+
