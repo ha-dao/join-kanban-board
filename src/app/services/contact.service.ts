@@ -98,7 +98,11 @@ export class ContactService implements OnDestroy{
       .join(' ');
   }
 
-  async addContact(item:any){
+  async addContact(item:{name: string,
+    email: string,
+    phone: string,
+    letters?: string,
+    color?: string,}){
     item.name = this.capitalizeWords(item.name);
     let newContactName = item.name;
     item.color = this.colours[this.contactList.length];

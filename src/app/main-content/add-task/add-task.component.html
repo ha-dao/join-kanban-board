@@ -8,16 +8,16 @@
         <input type="text"
         name="Title"
         required 
-        [(ngModel)]="taskService.singleTask.title"/>
+        [(ngModel)]="taskService.tasksList[0].title"/>
       </div>
       <div class="input-div">
         <label for="Description">Description</label>
-        <textarea name="Description" id="" [(ngModel)]="taskService.singleTask.description"> </textarea>
+        <textarea name="Description" id="" [(ngModel)]="taskData.description"> </textarea>
       </div>
       <div class="input-div">
         <label for="Due Date">Due Date
         <input
-        [(ngModel)]="taskService.singleTask.date"
+        [(ngModel)]="taskData.date"
         type="date"
         name="Due Date"
         id=""
@@ -27,9 +27,9 @@
     </div>
     <div class="task-User">
       <div class="priority-div">
-        <button [(ngModel)]="taskService.singleTask.priority">Urgent</button>
-        <button [(ngModel)]="taskService.singleTask.priority">Medium</button>
-        <button [(ngModel)]="taskService.singleTask.priority">Low</button>
+        <button [(ngModel)]="taskData.priority">Urgent</button>
+        <button [(ngModel)]="taskData.priority">Medium</button>
+        <button [(ngModel)]="taskData.priority">Low</button>
       </div>
       <div class="input-div">
        <input type="select" class="dropdown" (click)="toggleDropdown()">       
