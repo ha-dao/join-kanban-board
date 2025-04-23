@@ -24,10 +24,12 @@ export class ContactOverlayComponent {
     email: string;
     phone: string;
     letters?: string;
+    color?: string;
   } = {
     name: '',
     email: '',
     phone: '',
+    color: ''
   };
   invalidFields: string[] = [];
   showSuccessMessage:boolean = false;
