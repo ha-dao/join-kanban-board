@@ -14,7 +14,7 @@ export class ContactService implements OnDestroy{
   contactList: Contact[] = [];
   contactListLetters: number[] = [];
   contactListLetter: string[] = [];
-  currentContact: Contact = {name: '', email: '', phone: '', color: '', letters: ''};
+  currentContact: Contact = {name: '', email: '', phone: '', color: '', letters: '', selected: false};
   currentIdex: number = 0;
   overlayDisplay: string = 'none';
   colorIndex: number = 0;
@@ -147,7 +147,8 @@ export class ContactService implements OnDestroy{
       email: obj.email || '',
       phone : obj.phone || '',
       color : obj.color || '',
-      letters : obj.letters || ''
+      letters : obj.letters || '',
+      selected : false
     }
   }
 
@@ -169,6 +170,10 @@ export class ContactService implements OnDestroy{
       }
     });
     this.overlayDisplay = 'flex';
+  }
+
+  setSelection(contact: Contact){
+    contact.selected= !contact.selected
   }
 }
 
