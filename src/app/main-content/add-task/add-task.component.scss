@@ -233,3 +233,22 @@ section {
     padding-top: 8px;
     margin-top: 25px;
   }
+
+  .input-icon-wrapper{
+    position: relative;
+    display: inline-block;
+  }
+
+  .input-icon-wrapper input{
+    padding-right: 30px;
+  }
+
+  .input-icon{
+    position:absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    pointer-events: none;
+  }
