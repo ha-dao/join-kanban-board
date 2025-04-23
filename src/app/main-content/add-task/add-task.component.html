@@ -1,6 +1,7 @@
+<section>
 <h2>Add Task</h2>
 
-<div class="formDiv">
+
   <form action="submit">
     <div class="taskData">
       <div class="input-div">
@@ -8,7 +9,7 @@
         <input type="text"
         name="Title"
         required 
-        [(ngModel)]="taskService.tasksList[0].title"/>
+        [(ngModel)]="taskData.title"/>
       </div>
       <div class="input-div">
         <label for="Description">Description</label>
@@ -27,9 +28,9 @@
     </div>
     <div class="task-User">
       <div class="priority-div">
-        <button [(ngModel)]="taskData.priority">Urgent</button>
-        <button [(ngModel)]="taskData.priority">Medium</button>
-        <button [(ngModel)]="taskData.priority">Low</button>
+         <button [ngClass]="{ 'active': clickedButton === 'Urgent', 'inactive': clickedButton !== 'Urgent' }"(click)="setPrority('Urgent')">Urgent</button>
+        <button [ngClass]="{ 'active': clickedButton === 'Medium', 'inactive': clickedButton !== 'Medium' }" (click)="setPrority('Medium')">Medium</button>
+        <button [ngClass]="{ 'active': clickedButton === 'Low', 'inactive': clickedButton !== 'Low' }" (click)="setPrority('Low')">Low</button>
       </div>
       <div class="input-div">
        <input type="select" class="dropdown" (click)="toggleDropdown()">       
@@ -39,7 +40,7 @@
                   <div class="contact" (click)="contactService.selectItem(item.id)">
                       <div class="contact-img" [ngStyle]="{background: item['color']}">{{contactService.getFirstAndLastNameFirstLetter(item['name'])}}</div>
                       <ul class="name-email">
-                          <p>{{ contactService.getFirstAndLastName(item['name'])}} <input type="checkbox"[checked]="item.selected"  name="checkBox" id="{{item.id}}" (change)="contactService.setSelection(item)"></p>
+                          <p>{{ contactService.getFirstAndLastName(item['name'])}} <input type="checkbox"[checked]="item.selected"  name="checkBox" id="{{item.id}}" (change)="contactService.setSelection(item) ; setAssignedTo(item)"></p>
                       </ul>
                   </div>              
           }}
@@ -54,21 +55,31 @@
       </div>
       <div class="input-div">
         <label for="category">Category</label>
-        <select name="Category" id="category" placeholder="Select a Category">
+        <select name="Category" id="category" [(ngModel)]="taskData.category" >
           <option value="">User story</option>
           <option value="">Technical Task</option>
           <option value="">Design</option>
         </select>
       </div>
-      <div class="input-div">
+      <div class="input-div-subtasks">
         <label for="Subtasks">Subtasks</label>
-        <input type="text" name="Subtasks" />
+        <input type="text"  name="Subtasks" placeholder="Add a Subtask" [(ngModel)]="newSubtask"/>
+        <button type="button" class="icon-button" (click)="addSubtask()">
+        <img src="/assets/icon/+Symbol.svg" alt="Plus" class="input-icon">
+        </button>
       </div>
+       @for (subtask of currentSubtasks; track $index) {
+        <li>{{subtask}} <img src="" alt="Edit"><img src="" alt="delete"></li>
+
+        
+       }
     </div>
     <div class="btn-div">
       <button class="cancel-button">Clear</button>
       <button class="create-button" type="submit">Create Task</button>
   </div>
   </form>
-</div>
+
+</section>
+
 
