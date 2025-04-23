@@ -5,6 +5,7 @@ import { ContactService } from '../../services/contact.service';
 import { FeedbackServiceService } from '../../services/feedback.service';
 import { Contact } from '../../interfaces/contact';
 import { TaskService } from '../../services/task.service';
+import { Task } from '../../interfaces/task';
 
 @Component({
   selector: 'app-add-task',
@@ -19,7 +20,23 @@ feedbackService = inject(FeedbackServiceService)
 taskService= inject(TaskService)
 
 dropdownOpen:boolean = false;
-
+taskData: {
+  title: string;
+  description: string;
+  date: string;
+  priority: string;
+  assignedTo?:Contact[];
+  category:string;
+  subtasks:string[];
+} = {
+  title: '',
+  description: '',
+  date: '',
+  priority: '',
+  assignedTo:[],
+  category:'',
+  subtasks:[]
+};
 
 toggleDropdown(){
   this.dropdownOpen = !this.dropdownOpen;
