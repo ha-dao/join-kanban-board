@@ -1,0 +1,76 @@
+@import './../../styles/variables.scss';
+@import './../../styles/mixins.scss';
+@import './../../styles/buttons.scss';
+@import './../../styles/fonts.scss';
+
+.dropdown{
+    height: 20px;
+    background-color: white;
+    
+}
+
+.dropdown-menu{
+    border-radius: 10px;
+    padding: 15px 24px;
+    background-color: rgb(224, 210, 191);
+    max-height: 200px;
+    overflow-y: scroll;
+}
+.visible{
+    display: block;
+}
+
+.invisible{
+    display:none
+}
+.contact {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    padding: 15px 24px;
+    &:hover {
+        background: -webkit-linear-gradient(0deg, rgba(249, 249, 249, 1) 0%, rgba(240, 240, 240, 1) 100%);
+        background: -moz-linear-gradient(0deg, rgba(249, 249, 249, 1) 0%, rgba(240, 240, 240, 1) 100%);
+        background: linear-gradient(0deg, rgba(249, 249, 249, 1) 0%, rgba(240, 240, 240, 1) 100%);
+        color: inherit;
+        cursor: pointer;
+    }
+
+    >ul {
+        >p {
+            color: black;
+            font-size: 18px;
+        }
+    }
+}
+
+.contact-img {
+    background-color: #9327FF;
+    width: 42px;
+    height: 42px;
+    border-radius: 100%;
+    border: 2px solid white;
+    color: white;
+    letter-spacing: -1px;
+  }
+
+  p {
+    text-align: start;
+  }
+  
+  .name-email {
+    width: 70%;
+  }
+  
+  .contact-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .letter-container {
+    border-top: solid 1px #D1D1D1;
+    padding-top: 8px;
+    margin-top: 25px;
+  }
