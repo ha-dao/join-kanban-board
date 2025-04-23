@@ -29,7 +29,6 @@
     box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
   }
 
-
 .cancel-button {
   background-color: transparent;
   @include fontStyle($font-size: clamp(16px, 18px, 20px), $font-weight: 400, $font-color: $primary-color, $text-transform: none);
@@ -53,6 +52,18 @@
       filter: invert(66%) sepia(56%) saturate(3609%) hue-rotate(164deg) brightness(97%) contrast(83%);
     }
   }
+}
+
+.urgent-btn {
+  background-color: #FF3D00;
+}
+
+.medium-btn {
+  background-color: #FFA800;
+}
+
+.low-btn {
+  background-color: #7AE229;
 }
 
 @media (max-width: 1024px) and (orientation: landscape) {
