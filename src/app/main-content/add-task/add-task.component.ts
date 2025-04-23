@@ -57,6 +57,8 @@ this.clickedButton = button
 
 onSubmit(){
   this.taskService.tasksList.push(this.taskData)
+  
+  
 }
 
 setAssignedTo(item: Contact) {
