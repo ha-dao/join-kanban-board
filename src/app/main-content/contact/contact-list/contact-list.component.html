@@ -4,15 +4,15 @@
     <button (click)="setOverlayButtonsFromList('Cancel', 'Create Contact')">Add new contact<img src="assets/img/4-contacts/person-add-icon.svg" alt="Edit Icon"></button>
   </div>
   <div class="list-content">
-    @for (latter of (contactService.contactListLater); track latter; let index = $index) {
-        @if(latter){
+    @for (letter of (contactService.contactListLetter); track letter; let index = $index) {
+        @if(letter){
             <div>
-                <p>{{latter}}</p>
-                <div class="latter-container">
+                <p>{{letter}}</p>
+                <div class="letter-container">
                     @for (item of (contactService.contactList); track item; let index = $index) {
-                        @if(item['name'].startsWith(latter)){
+                        @if(item['name'].startsWith(letter)){
                             <div class="contact" (click)="contactService.selectItem(item.id); toggleSingleContact()"  [ngClass]="{ 'selected': contactService.selectedIndex === item.id}">
-                                <div class="contact-img" [ngStyle]="{background: contactService.colours[index]}">{{contactService.getFirstAndLastNameFirstLatter(item['name'])}}</div>
+                                <div class="contact-img" [ngStyle]="{background: item['color']}">{{contactService.getFirstAndLastNameFirstLetter(item['name'])}}</div>
                                 <ul class="name-email">
                                     <p>{{ contactService.getFirstAndLastName(item['name'])}}</p>
                                     <a>{{ item['email'] }}</a>

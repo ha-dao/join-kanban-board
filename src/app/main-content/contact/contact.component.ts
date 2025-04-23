@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ContactListComponent } from './contact-list/contact-list.component';
 import { SingleContactComponent } from './single-contact/single-contact.component';
 import { ContactOverlayComponent } from './contact-overlay/contact-overlay.component';
-import { ContactOverlayService } from '../../services/overlay.service'; 
+import { ContactOverlayService } from '../../services/overlay.service';
 
 
 @Component({
@@ -15,24 +15,23 @@ import { ContactOverlayService } from '../../services/overlay.service';
 })
 export class ContactComponent {
   constructor(public overlayService: ContactOverlayService){
-    
+
   }
   menuDisplay: string = 'none';
   addOverlayDisplay: string = 'none';
   @ViewChild('singleContact') singleContact!: SingleContactComponent;
- 
+
   menuImageSrc: string = "assets/img/4-contacts/person-add-icon.svg";
   singleContactTransform: string = window.innerWidth < 1280? 'translateX(200%)' : 'translateX(0%)';
   backBtnDisplay: string = 'none';
   windowWidth = window.addEventListener('resize', () => {
-    console.log(window.innerWidth);
     if(window.innerWidth < 1280){
       this.getEvent('translateX(200%)');
     }else if(window.innerWidth > 1280){
       this.getEvent('translateX(0%)');
       this.singleContactTransform = 'translateX(0%)';
     }
-    
+
   });
 
   addOrOpenMenu(){
@@ -48,7 +47,7 @@ export class ContactComponent {
     }
   }
 
-  
+
 
   openEditOverlay(){
     this.singleContact.editContact();

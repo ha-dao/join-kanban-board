@@ -11,13 +11,13 @@ import { query, orderBy, limit } from 'firebase/firestore';
 export class ContactService implements OnDestroy{
   unsubContactList: any;
   firestore:Firestore = inject(Firestore);
-  /* contacts  = collectionData(this.getContactsRef()); */
   contactList: Contact[] = [];
-  contactListLaters: number[] = [];
-  contactListLater: string[] = [];
-  currentContact: Contact = {name: '', email: '', phone: ''};
+  contactListLetters: number[] = [];
+  contactListLetter: string[] = [];
+  currentContact: Contact = {name: '', email: '', phone: '', color: '', letters: '', selected: false};
   currentIdex: number = 0;
   overlayDisplay: string = 'none';
+  colorIndex: number = 0;
   colours: string[] = [
     '#FF5733', '#33FF57', '#3357FF', '#F1C40F', '#8E44AD',
     '#2ECC71', '#E74C3C', '#3498DB', '#9B59B6', '#1ABC9C',
@@ -32,7 +32,7 @@ export class ContactService implements OnDestroy{
   ];
   constructor() {
     this.snap();
-    this.checkContactListLaters();
+    this.checkContactListLetters();
   }
 
   getFirstAndLastName(name: string): string {
@@ -42,7 +42,7 @@ export class ContactService implements OnDestroy{
     return `${words[0]} ${words[words.length - 1]}`;
   }
 
-  getFirstAndLastNameFirstLatter(name: string): string {
+  getFirstAndLastNameFirstLetter(name: string): string {
     if (!name) return '';
     const words = name.trim().split(/\s+/);
     if (words.length === 1) return words[0].charAt(0);
@@ -56,31 +56,31 @@ export class ContactService implements OnDestroy{
       list.forEach(element => {
           this.contactList.push(this.setContactObj(element.data(), element.id));
       })
-      this.checkContactListLaters();
+      this.checkContactListLetters();
     });
   }
 
-  checkContactListLaters(){
-    let latter = 0;
-    this.contactListLater= [];
+  checkContactListLetters(){
+    let letter = 0;
+    this.contactListLetter= [];
     let condition = true;
     let startValue = 0;
     this.contactList.forEach(contact =>{
       while (condition) {
-        if(contact.name.startsWith(String.fromCharCode(latter + 65))){
-          if(!this.contactListLater.includes(String.fromCharCode(latter + 65)))
-          this.contactListLater.push(String.fromCharCode(latter + 65))
+        if(contact.name.startsWith(String.fromCharCode(letter + 65))){
+          if(!this.contactListLetter.includes(String.fromCharCode(letter + 65)))
+          this.contactListLetter.push(String.fromCharCode(letter + 65))
           condition = false;
         }else{
-          latter++;
+          letter++;
         }
 
-        if(latter == 26){
+        if(letter == 26){
           condition = false;
         }
       }
       condition = true;
-      latter = 0;
+      letter = 0;
     });
 
   }
@@ -98,15 +98,22 @@ export class ContactService implements OnDestroy{
       .join(' ');
   }
 
-  async addContact(item:any){
+  async addContact(item:{name: string,
+    email: string,
+    phone: string,
+    letters?: string,
+    color?: string,}){
     item.name = this.capitalizeWords(item.name);
     let newContactName = item.name;
+    item.color = this.colours[this.contactList.length];
+    this.colorIndex++;
+    item.letters = this.getFirstAndLastNameFirstLetter(newContactName);
     await addDoc(this.getContactsRef(), item).catch(
       (err)=>{console.error(err)}
     ).then(
       (docRef)=>{}
     );
-    this.checkContactListLaters();
+    this.checkContactListLetters();
     this.showNewContact(newContactName);
   }
 
@@ -118,7 +125,11 @@ export class ContactService implements OnDestroy{
     });
   }
 
-  async updateContact(contactData: {}){
+  async updateContact(contactData: {name: string;
+    email: string;
+    phone: string;
+    letters?: string;}){
+    contactData.letters = this.getFirstAndLastNameFirstLetter(contactData.name)
     if(this.currentContact.id){
       await updateDoc(this.getSingleContact('contacts', this.currentContact.id), contactData);
       this.selectItem(this.currentContact.id);
@@ -138,7 +149,10 @@ export class ContactService implements OnDestroy{
       id: id,
       name: obj.name || '',
       email: obj.email || '',
-      phone : obj.phone || ''
+      phone : obj.phone || '',
+      color : obj.color || '',
+      letters : obj.letters || '',
+      selected : false
     }
   }
 
@@ -160,6 +174,10 @@ export class ContactService implements OnDestroy{
       }
     });
     this.overlayDisplay = 'flex';
+  }
+
+  setSelection(contact: Contact){
+    contact.selected= !contact.selected
   }
 }
 

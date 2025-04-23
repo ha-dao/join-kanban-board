@@ -4,11 +4,11 @@
       ><img
         src="assets/img/addContactOverlay/X.svg"
         alt="x-icon close button"
-        (click)="clearForm(); this.overlayService.closeOverlay()" 
+        (click)="clearForm(); this.overlayService.closeOverlay()"
     /></a>
 
     <div class="logo-div">
-      <img src="assets/img/addContactOverlay/joinLogo.svg" alt="" />
+      <img src="assets/img/addContactOverlay/joinLogo.svg" alt="join Logo" />
       <h2>Add contact</h2>
       <span class="subtitle">Tasks are better with a team!</span>
       <div class="line-div"></div>
@@ -16,7 +16,7 @@
     <div class="profile-image">
       @if(overlayService.buttonLeft == 'Delete'){
         <div class="img" [ngStyle]="{background: contactService.colours[contactService.currentIdex]}">
-          {{contactService.getFirstAndLastNameFirstLatter(contactService.currentContact['name'])}}
+          {{contactService.getFirstAndLastNameFirstLetter(contactService.currentContact['name'])}}
         </div>
       }@else {
         <img
@@ -42,7 +42,7 @@
             minlength="3"
             (blur)="validateForm('name')"
             [class.invalid]="invalidFields.includes('name')"
-            placeholder ="Name"    
+            placeholder ="Name"
           />
           <span [ngClass]="{visible: invalidFields.includes('name'), invisible: !invalidFields.includes('name')}">Please enter a name (at least 2 characters)</span>
         </div>
@@ -81,14 +81,14 @@
             (blur)="validateForm('phone')"
             [class.invalid]="invalidFields.includes('phone')"
             placeholder=" Phone"
-            
+
           />
           <span [ngClass]="{visible: invalidFields.includes('phone'), invisible: !invalidFields.includes('phone')}">Your phone number looks wrong</span>
         </div>
         <div class="button-div">
           <button class="cancel-button" (click)="cancelOrDelete()">
             {{this.overlayService.buttonLeft}}
-            <img src="../../../../assets/img/addContactOverlay/X.svg" alt="" />
+            <img src="assets/img/addContactOverlay/X.svg" alt="Close Icon" />
           </button>
           <button
             class="create-button"
