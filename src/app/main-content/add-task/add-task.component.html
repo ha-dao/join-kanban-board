@@ -62,38 +62,7 @@
         </select>
       </div>
       <div class="sep-line"></div>
-      <div class="task-user">
-        <label>Priority</label>
-        <div class="priority-btn">
-          <button class="urgent-btn">
-            Urgent
-            <img
-              src="assets/img/2-add-task/urgent-icon.svg"
-              alt="urgent pictogram"
-            />
-          </button>
-          <button class="medium-btn">
-            Medium
-            <img
-              src="assets/img/2-add-task/medium-icon.svg"
-              alt="medium pictogram"
-            />
-          </button>
-          <button class="low-btn">
-            Low
-            <img src="assets/img/2-add-task/low-icon.svg" alt="low pictogram" />
-          </button>
-        </div>
-
-        <label for="assigned-to">Assigned to</label>
-        <input type="dropdown" name="assigned to" id="assigned-to" />
-
-        <label for="category">Category<span class="req-marker">*</span></label>
-        <input type="text" name="category" required />
-
-        <label for="subtasks">Subtasks</label>
-        <input type="text" name="subtasks" />
-      </div>
+      
        @for (subtask of currentSubtasks; track $index) {
         <li>{{subtask}} <img src="" alt="Edit"><img src="" alt="delete"></li>
 
@@ -105,8 +74,8 @@
   <div class="bottom-form-wrapper">
     <p class="req-desktop"><span class="req-marker">*</span>This field is required</p>
     <div class="btn-div">
-      <button class="cancel-button">Clear</button>
-      <button class="create-button">Create Task</button>
+      <button class="cancel-button" type="reset">Clear</button>
+      <button class="create-button" type="submit">Create Task</button>
     </div>
   </div>
   </form>
