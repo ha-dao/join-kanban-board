@@ -1,85 +1,138 @@
 <section>
-<h2>Add Task</h2>
-
+  <h2>Add Task</h2>
 
   <form action="submit">
     <div class="taskData">
       <div class="input-div">
         <label for="Title">Title</label>
-        <input type="text"
-        name="Title"
-        required 
-        [(ngModel)]="taskData.title"/>
+        <input type="text" name="Title" required [(ngModel)]="taskData.title" />
       </div>
       <div class="input-div">
         <label for="Description">Description</label>
-        <textarea name="Description" id="" [(ngModel)]="taskData.description"> </textarea>
+        <textarea name="Description" id="" [(ngModel)]="taskData.description">
+        </textarea>
       </div>
       <div class="input-div">
-        <label for="Due Date">Due Date
-        <input
-        [(ngModel)]="taskData.date"
-        type="date"
-        name="Due Date"
-        id=""
-        required
-         /></label>
+        <label for="Due Date"
+          >Due Date
+          <input
+            [(ngModel)]="taskData.date"
+            type="date"
+            name="Due Date"
+            id=""
+            required
+        /></label>
       </div>
     </div>
     <div class="task-User">
       <div class="priority-div">
-         <button [ngClass]="{ 'active': clickedButton === 'Urgent', 'inactive': clickedButton !== 'Urgent' }"(click)="setPrority('Urgent')">Urgent</button>
-        <button [ngClass]="{ 'active': clickedButton === 'Medium', 'inactive': clickedButton !== 'Medium' }" (click)="setPrority('Medium')">Medium</button>
-        <button [ngClass]="{ 'active': clickedButton === 'Low', 'inactive': clickedButton !== 'Low' }" (click)="setPrority('Low')">Low</button>
+        <button
+          [ngClass]="{
+            active: clickedButton === 'Urgent',
+            inactive: clickedButton !== 'Urgent'
+          }"
+          (click)="setPrority('Urgent')"
+        >
+          Urgent
+        </button>
+        <button
+          [ngClass]="{
+            active: clickedButton === 'Medium',
+            inactive: clickedButton !== 'Medium'
+          }"
+          (click)="setPrority('Medium')"
+        >
+          Medium
+        </button>
+        <button
+          [ngClass]="{
+            active: clickedButton === 'Low',
+            inactive: clickedButton !== 'Low'
+          }"
+          (click)="setPrority('Low')"
+        >
+          Low
+        </button>
       </div>
       <div class="input-div">
-       <input type="select" class="dropdown" (click)="toggleDropdown()">
-        <div class="dropdown-menu" [ngClass]="{visible: dropdownOpen, invisible:!dropdownOpen}">
-          @if(this.dropdownOpen){
-          @for (item of (contactService.contactList); track item; let index = $index) {
-                  <div class="contact" (click)="contactService.selectItem(item.id)">
-                      <div class="contact-img" [ngStyle]="{background: item['color']}">{{contactService.getFirstAndLastNameFirstLetter(item['name'])}}</div>
-                      <ul class="name-email">
-                          <p>{{ contactService.getFirstAndLastName(item['name'])}} <input type="checkbox"[checked]="item.selected"  name="checkBox" id="{{item.id}}" (change)="contactService.setSelection(item) ; setAssignedTo(item)"></p>
-                      </ul>
-                  </div>
-          }}
-          <div>
+        <input type="select" class="dropdown" (click)="toggleDropdown()" />
+        <div
+          class="dropdown-menu"
+          [ngClass]="{ visible: dropdownOpen, invisible: !dropdownOpen }"
+        >
+          @if(this.dropdownOpen){ @for (item of (contactService.contactList);
+          track item; let index = $index) {
+          <div class="contact" (click)="contactService.selectItem(item.id)">
+            <div class="contact-img" [ngStyle]="{ background: item['color'] }">
+              {{ contactService.getFirstAndLastNameFirstLetter(item["name"]) }}
+            </div>
+            <ul class="name-email">
+              <p>
+                {{ contactService.getFirstAndLastName(item["name"]) }}
+                <input
+                  type="checkbox"
+                  [checked]="item.selected"
+                  name="checkBox"
+                  id="{{ item.id }}"
+                  (change)="
+                    contactService.setSelection(item); setAssignedTo(item)
+                  "
+                />
+              </p>
+            </ul>
           </div>
-      </div>
-      @for (contact of (contactService.contactList); track $index) {
+          }}
+          <div></div>
+        </div>
+        @for (contact of (contactService.contactList); track $index) {
         @if(contact.selected == true){
-        <div class="contact" [ngStyle]="{background: contact['color']}" (click)="contactService.setSelection(contact)" >{{contact.letters}}</div>
-       }
-      }
+        <div
+          class="contact"
+          [ngStyle]="{ background: contact['color'] }"
+          (click)="contactService.setSelection(contact)"
+        >
+          {{ contact.letters }}
+        </div>
+        } }
       </div>
       <div class="input-div">
         <label for="category">Category</label>
-        <select name="Category" id="category" [(ngModel)]="taskData.category" >
+        <select name="Category" id="category" [(ngModel)]="taskData.category">
           <option value="">User story</option>
           <option value="">Technical Task</option>
           <option value="">Design</option>
         </select>
       </div>
       <div class="sep-line"></div>
-      
-       @for (subtask of currentSubtasks; track $index) {
-        <li>{{subtask}} <img src="" alt="Edit"><img src="" alt="delete"></li>
+      <div>
+        <div class="input-icon-wrapper">
+          <input type="text" name="Subtasks" placeholder="Subtask hinzufügen" />
+          <button>
+          <img src="/assets/icon/+Symbol.svg" class="input-icon" alt="Plus" />
+        </button>
+        </div>
+        @for (subtask of currentSubtasks; track $index) {
+        <li>
+          {{ subtask }} <img src="/assets/icon/edit.svg" alt="Edit" /><img
+            src="/assets/icon/trash.svg"
+            alt="delete"
+          />
+        </li>
+        }
+      </div>
+    </div>
+    <p class="req-mobile">
+      <span class="req-marker">*</span>This field is required
+    </p>
 
-        
-       }
+    <div class="bottom-form-wrapper">
+      <p class="req-desktop">
+        <span class="req-marker">*</span>This field is required
+      </p>
+      <div class="btn-div">
+        <button class="cancel-button" type="reset">Clear</button>
+        <button class="create-button" type="submit">Create Task</button>
+      </div>
     </div>
-    <p class="req-mobile"><span class="req-marker">*</span>This field is required</p>
- 
-  <div class="bottom-form-wrapper">
-    <p class="req-desktop"><span class="req-marker">*</span>This field is required</p>
-    <div class="btn-div">
-      <button class="cancel-button" type="reset">Clear</button>
-      <button class="create-button" type="submit">Create Task</button>
-    </div>
-  </div>
   </form>
-
 </section>
-
-
