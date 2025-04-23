@@ -14,7 +14,7 @@ export class ContactService implements OnDestroy{
   contactList: Contact[] = [];
   contactListLetters: number[] = [];
   contactListLetter: string[] = [];
-  currentContact: Contact = {name: '', email: '', phone: '', color: '', letters: ''};
+  currentContact: Contact = {name: '', email: '', phone: '', color: '', letters: '', selected: false};
   currentIdex: number = 0;
   overlayDisplay: string = 'none';
   colorIndex: number = 0;
@@ -98,7 +98,11 @@ export class ContactService implements OnDestroy{
       .join(' ');
   }
 
-  async addContact(item:any){
+  async addContact(item:{name: string,
+    email: string,
+    phone: string,
+    letters?: string,
+    color?: string,}){
     item.name = this.capitalizeWords(item.name);
     let newContactName = item.name;
     item.color = this.colours[this.contactList.length];
@@ -147,7 +151,8 @@ export class ContactService implements OnDestroy{
       email: obj.email || '',
       phone : obj.phone || '',
       color : obj.color || '',
-      letters : obj.letters || ''
+      letters : obj.letters || '',
+      selected : false
     }
   }
 
@@ -169,6 +174,10 @@ export class ContactService implements OnDestroy{
       }
     });
     this.overlayDisplay = 'flex';
+  }
+
+  setSelection(contact: Contact){
+    contact.selected= !contact.selected
   }
 }
 
