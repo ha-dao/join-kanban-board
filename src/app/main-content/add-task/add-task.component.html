@@ -1,54 +1,69 @@
-<h2>Add Task</h2>
-
-<div class="formDiv">
+<section>
+  <h2>Add Task</h2>
   <form action="submit">
-    <div class="taskData">
-      <div class="input-div">
-        <label for="Title"></label>
-        <input type="text"
-        name="Title"
-        required />
-      </div>
-      <div class="input-div">
-        <label for="Description">Description</label>
-        <textarea name="Description" id=""> </textarea>
-      </div>
-      <div class="input-div">
-        <label for="Due Date">Due Date</label>
+    <div class="input-wrapper">
+      <div class="task-data">
+        <label for="title">Title<span class="req-marker">*</span></label>
         <input
-        type="date"
-        name="Due Date"
-        id=""
-        required
-         />
-      </div>
-    </div>
-    <div class="task-User">
-      <div class="priority-div">
-        <button>Urgent</button>
-        <button>Medium</button>
-        <button>Low</button>
-      </div>
-      <div class="input-div">
-        <label for="Assigned to">Assigned to</label>
-        <input type="text" name="Assigned to" />
-      </div>
-      <div class="input-div">
-        <label for="Category">Category</label>
-        <input
-        type="text"
-        name="Category"
-        required
+          type="text"
+          name="title"
+          id="title"
+          placeholder="Enter a title"
+          required
         />
+
+        <label for="description">Description</label>
+        <textarea
+          name="description"
+          id="description"
+          placeholder="Enter a Description"
+          rows="4"
+        ></textarea>
+
+        <label for="due-date">Due Date<span class="req-marker">*</span></label>
+        <input type="date" name="due date" id="due-date" required />
       </div>
-      <div class="input-div">
-        <label for="Subtasks">Subtasks</label>
-        <input type="text" name="Subtasks" />
+      <div class="sep-line"></div>
+      <div class="task-user">
+        <label>Priority</label>
+        <div class="priority-btn">
+          <button class="urgent-btn">
+            Urgent
+            <img
+              src="assets/img/2-add-task/urgent-icon.svg"
+              alt="urgent pictogram"
+            />
+          </button>
+          <button class="medium-btn">
+            Medium
+            <img
+              src="assets/img/2-add-task/medium-icon.svg"
+              alt="medium pictogram"
+            />
+          </button>
+          <button class="low-btn">
+            Low
+            <img src="assets/img/2-add-task/low-icon.svg" alt="low pictogram" />
+          </button>
+        </div>
+
+        <label for="assigned-to">Assigned to</label>
+        <input type="dropdown" name="assigned to" id="assigned-to" />
+
+        <label for="category">Category<span class="req-marker">*</span></label>
+        <input type="text" name="category" required />
+
+        <label for="subtasks">Subtasks</label>
+        <input type="text" name="subtasks" />
       </div>
     </div>
+    <p class="req-mobile"><span class="req-marker">*</span>This field is required</p>
   </form>
-</div>
-<div class="btn-div">
-    <button class="cancel-button">Clear</button>
-    <button class="create-button">Create Task</button>
-</div>
+  <div class="bottom-form-wrapper">
+    <p class="req-desktop"><span class="req-marker">*</span>This field is required</p>
+    <div class="btn-div">
+      <button class="cancel-button">Clear</button>
+      <button class="create-button">Create Task</button>
+    </div>
+  </div>
+</section>
