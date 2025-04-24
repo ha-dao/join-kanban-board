@@ -57,8 +57,8 @@ this.clickedButton = button
 
 onSubmit(){
   this.taskService.tasksList.push(this.taskData)
-  
-  
+
+
 }
 
 setAssignedTo(item: Contact) {
@@ -79,7 +79,7 @@ console.log(this.taskData);
 addSubtask() {
   if (this.newSubtask.trim()) {
     this.currentSubtasks.push(this.newSubtask.trim());
-    this.newSubtask = ''; 
+    this.newSubtask = '';
   }
 }
 
