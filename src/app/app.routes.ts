@@ -5,7 +5,7 @@ import { ContactComponent } from './main-content/contact/contact.component';
 import { HelpComponent } from './shared/components/header/help/help.component';
 import { SummaryComponent } from './main-content/summary/summary.component';
 import { AddTaskComponent } from './main-content/add-task/add-task.component';
-import { BordComponent } from './main-content/board/board.component';
+import { BoardComponent } from './main-content/board/board.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/summary', pathMatch: 'full' },
@@ -19,7 +19,7 @@ export const routes: Routes = [
     path: 'add-task', component: AddTaskComponent,
   },
   {
-    path: 'board', component: BordComponent,
+    path: 'board', component: BoardComponent,
   },
   {
     path: 'contact', component: ContactComponent,
