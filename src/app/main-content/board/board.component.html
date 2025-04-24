@@ -13,7 +13,7 @@
           placeholder="Find Task"
           class="search-input"
           [(ngModel)]="searchQuery"
-          (input)="onInputChange($event)"
+          (input)="onInputChange($event, searchQuery)"
         />
         <span class="separator">|</span>
         <button class="search-button" (click)="toggleActive()">

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { ContactService } from '../../services/contact.service';
 import { CommonModule } from '@angular/common';
 import { TaskService } from '../../services/task.service';
@@ -15,6 +15,7 @@ export class BordComponent {
   columns = ['To Do', 'In Progress', 'Await Feedback', 'Done'];
   isActive = false; 
   searchQuery = ''; 
+  taskService= inject(TaskService);
 
 
   isAddTaskHovered = false;
@@ -24,10 +25,7 @@ export class BordComponent {
     this.searchQuery = '';
   }
 
-  onInputChange(event: Event) {
-    const input = event.target as HTMLInputElement;
-    this.searchQuery = input.value; 
-
-    this.isActive = this.searchQuery.length > 0;
+  onInputChange(event: Event, value: string) {
+    this.taskService.searchAndFilter(event, value);
   }
 }
