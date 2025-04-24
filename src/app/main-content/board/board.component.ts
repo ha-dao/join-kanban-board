@@ -2,19 +2,32 @@ import { Component } from '@angular/core';
 import { ContactService } from '../../services/contact.service';
 import { CommonModule } from '@angular/common';
 import { TaskService } from '../../services/task.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-bord',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './board.component.html',
-  styleUrl: './board.component.scss'
+  styleUrl: './board.component.scss',
 })
 export class BordComponent {
-  constructor(
-      public contactService: ContactService,
-      private taskService: TaskService
-    ) {
-      /* taskService.snap(); */
-    }
+  columns = ['To Do', 'In Progress', 'Await Feedback', 'Done'];
+  isActive = false; 
+  searchQuery = ''; 
+
+
+  isAddTaskHovered = false;
+  isPlusButtonHovered: boolean[] = Array(this.columns.length).fill(false); 
+  toggleActive() {
+    this.isActive = false; 
+    this.searchQuery = '';
+  }
+
+  onInputChange(event: Event) {
+    const input = event.target as HTMLInputElement;
+    this.searchQuery = input.value; 
+
+    this.isActive = this.searchQuery.length > 0;
+  }
 }
