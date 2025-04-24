@@ -21,6 +21,8 @@ taskService= inject(TaskService)
 clickedButton= '';
 currentSubtasks:string[]=[];
 newSubtask: string = '';
+editableSubtask:string= '';
+editedIndex:number | null = null;
 
 dropdownOpen:boolean = false;
 taskData: {
@@ -73,7 +75,6 @@ setAssignedTo(item: Contact) {
       this.taskData.assignedTo!.splice(index, 1);
     }
   }
-console.log(this.taskData);
 }
 
 addSubtask() {
@@ -81,6 +82,32 @@ addSubtask() {
     this.currentSubtasks.push(this.newSubtask.trim());
     this.newSubtask = ''; 
   }
+}
+editSubtask(index: number) {
+  this.editedIndex = index;
+  this.editableSubtask = this.currentSubtasks[index];
+  console.log(this.editableSubtask);
+  
+}
+
+saveEditedSubtask(index: number) {
+  if (this.editableSubtask.trim()) {
+    this.currentSubtasks[index] = this.editableSubtask.trim();
+  }
+  this.editedIndex = null;
+  this.editableSubtask = '';
+}
+
+deleteSubtask(index: number) {
+  this.currentSubtasks.splice(index, 1);
+  if (this.editedIndex === index) {
+    this.editedIndex = null;
+    this.editableSubtask = '';
+  }
+}
+
+resetSubtasks(){
+  this.currentSubtasks= []
 }
 
 
