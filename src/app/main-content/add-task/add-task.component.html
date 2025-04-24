@@ -12,8 +12,13 @@
             name="title"
             placeholder="Enter a title"
             required
+            #taskTitle = "ngModel"
+            minlength="2"
             [(ngModel)]="taskData.title"
           />
+          @if(taskTitle.invalid && taskTitle.touched){
+            <span class="error-message">Please enter a Title</span>
+           }
         </div>
         <div class="input-div">
           <label for="description">Description</label>
@@ -35,8 +40,13 @@
             type="date"
             name="Due Date"
             id="due-date"
-            required
+            required   
+            #taskDate ="ngModel"
+                     
           />
+          @if(taskDate.invalid && taskDate.touched){
+            <span class="error-message">Please enter a Date</span>
+           }
         </div>
       </div>
       <div class="sep-line"></div>
@@ -136,11 +146,18 @@
         </div>
         <div class="input-div">
           <label for="category">Category<span class="req-marker">*</span></label>
-          <select name="Category" id="category" [(ngModel)]="taskData.category">
-            <option value="">User story</option>
-            <option value="">Technical Task</option>
-            <option value="">Design</option>
+          <select name="Category" #categoryField = "ngModel"  id="category" required [(ngModel)]="taskData.category">
+            <option value="" selected>Select Category</option>
+            <option value="User story">User story</option>
+            <option value="Technical Task">Technical Task</option>
+            <option value="Design">Design</option>
           </select>
+           @if(categoryField.invalid && categoryField.touched){
+            <span class="error-message">Please select a category</span>
+           }
+         
+
+          
         </div>
 
         <div>
@@ -194,7 +211,7 @@
       </p>
       <div class="btn-div">
         <button class="cancel-button" type="reset" (click)="resetSubtasks()">Clear</button>
-        <button class="create-button" type="submit" (click)="submitTask()">Create Task</button>
+        <button class="create-button" type="submit"  [disabled]="!isFormValid()" (click)="submitTask()">Create Task</button>
       </div>
     </div>
   </form>
@@ -202,6 +219,3 @@
 
 
 
-<!-- input field für editTask, task IN inputfield einbinden zum editieren -> aus array löschen
- 
-bilder nicht vergessen-->
