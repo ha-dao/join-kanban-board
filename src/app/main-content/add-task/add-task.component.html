@@ -41,7 +41,7 @@
       </div>
       <div class="sep-line"></div>
       <div class="task-user">
-        <label for="priority">Priority</label>
+        <label>Priority</label>
         <div class="priority-div">
           <button
             [ngClass]="{
@@ -146,11 +146,12 @@
         <div>
           <div class="input-icon-wrapper">
             <input
+            [(ngModel)]="newSubtask"
               type="text"
               name="Subtasks"
               placeholder="Add new subtask"
             />
-            <button>
+            <button  class="test" (click)="addSubtask()">
               <img
                 src="/assets/icon/+Symbol.svg"
                 class="input-icon"
@@ -158,13 +159,27 @@
               />
             </button>
           </div>
-          @for (subtask of currentSubtasks; track $index) {
-          <li>
-            {{ subtask }} <img src="/assets/icon/edit.svg" alt="Edit" /><img
-              src="/assets/icon/trash.svg"
-              alt="delete"
-            />
-          </li>
+          @for (subtask of (currentSubtasks); let i = $index; track i){
+            <li>
+              @if (editedIndex === i) {
+                <input
+                  name="editField"
+                  [(ngModel)]="editableSubtask"
+                  type="text"
+                  class="edit-input"
+                />
+                <button (click)="saveEditedSubtask(i)">💾</button>
+                <button (click)="deleteSubtask(i)">🗑️</button>
+              } @else {
+                {{ subtask }}
+                <a (click)="editSubtask(i)">
+                  <img src="/assets/icon/edit.svg" alt="Edit" />
+                </a>
+                <a (click)="deleteSubtask(i)">
+                  <img src="/assets/icon/trash.svg" alt="Delete" />
+                </a>
+              }
+            </li>
           }
         </div>
       </div>
@@ -179,7 +194,7 @@
       </p>
       <div class="btn-div">
         <button class="cancel-button" type="reset" (click)="resetSubtasks()">Clear</button>
-        <button class="create-button" type="submit">Create Task</button>
+        <button class="create-button" type="submit" (click)="submitTask()">Create Task</button>
       </div>
     </div>
   </form>

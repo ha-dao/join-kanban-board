@@ -110,5 +110,9 @@ resetSubtasks(){
   this.currentSubtasks= []
 }
 
+submitTask(){
+  console.log(this.taskData, this.currentSubtasks);
+  
+}
 
 }
