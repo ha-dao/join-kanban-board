@@ -21,7 +21,7 @@ export class TaskService implements OnDestroy{
       this.tasksList= [];
       list.forEach(element => {
           this.tasksList.push(this.setTaskObj(element.data(), element.id));
-          console.log(this.tasksList);
+          // console.log(this.tasksList);
           
       })
     });

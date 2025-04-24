@@ -28,6 +28,9 @@ app-sidebar{
     display: flex;
     flex-direction: row;
     overflow-y: auto;
+    .content-scroll {
+      width: 100%;
+    }
 }
 
 .feedback-message {
