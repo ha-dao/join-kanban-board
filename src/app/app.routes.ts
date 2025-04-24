@@ -8,15 +8,9 @@ import { AddTaskComponent } from './main-content/add-task/add-task.component';
 import { BordComponent } from './main-content/board/board.component';
 
 export const routes: Routes = [
+  { path: '', redirectTo: '/summary', pathMatch: 'full' },
   {
-    path: '',
-    component: ContactComponent,
-  },
-  {
-    path: 'legal-notice', component: LegalNoticeComponent,
-  },
-  {
-    path: 'privacy', component: PrivacyPolicyComponent,
+    path: '', component: SummaryComponent,
   },
   {
     path: 'summary', component: SummaryComponent,
@@ -31,4 +25,10 @@ export const routes: Routes = [
     path: 'contact', component: ContactComponent,
   },
   { path: 'help', component: HelpComponent },
+  {
+    path: 'privacy', component: PrivacyPolicyComponent,
+  },
+  {
+    path: 'legal-notice', component: LegalNoticeComponent,
+  },
 ];
