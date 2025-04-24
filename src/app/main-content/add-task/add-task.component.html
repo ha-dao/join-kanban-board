@@ -106,18 +106,43 @@
       <div class="sep-line"></div>
       <div>
         <div class="input-icon-wrapper">
-          <input type="text" name="Subtasks" placeholder="Subtask hinzufügen" />
-          <button>
-          <img src="/assets/icon/+Symbol.svg" class="input-icon" alt="Plus" />
-        </button>
+          <input type="text" name="Subtasks" [(ngModel)]="newSubtask" placeholder="Subtask hinzufügen" />
+          <button type="button" class="icon-button" (click)="addSubtask()">
+            <img src="/assets/icon/+Symbol.svg" alt="Hinzufügen" />          
+          </button>
+          
         </div>
-        @for (subtask of currentSubtasks; track $index) {
+        <!-- @for (subtask of currentSubtasks; track $index) {
         <li>
-          {{ subtask }} <img src="/assets/icon/edit.svg" alt="Edit" /><img
-            src="/assets/icon/trash.svg"
-            alt="delete"
-          />
+          {{ subtask }} <a (click)="editSubtask($index)"><img src="/assets/icon/edit.svg" alt="Edit" /></a>
+          <a (click)="deleteSubtask($index)"><img src="/assets/icon/trash.svg" alt="delete"
+          /></a>
+          <input [ngClass]="{ visible: editableSubtask!== '', invisible: editableSubtask == '' }"
+          type="text" [(ngModel)]="editableSubtask">
         </li>
+        } -->
+
+        @for (subtask of (currentSubtasks); let i = $index; track i){
+          <li>
+            @if (editedIndex === i) {
+              <input
+                name="editField"
+                [(ngModel)]="editableSubtask"
+                type="text"
+                class="edit-input"
+              />
+              <button (click)="saveEditedSubtask(i)">💾</button>
+              <button (click)="deleteSubtask(i)">🗑️</button>
+            } @else {
+              {{ subtask }}
+              <a (click)="editSubtask(i)">
+                <img src="/assets/icon/edit.svg" alt="Edit" />
+              </a>
+              <a (click)="deleteSubtask(i)">
+                <img src="/assets/icon/trash.svg" alt="Delete" />
+              </a>
+            }
+          </li>
         }
       </div>
     </div>
@@ -130,9 +155,15 @@
         <span class="req-marker">*</span>This field is required
       </p>
       <div class="btn-div">
-        <button class="cancel-button" type="reset">Clear</button>
+        <button class="cancel-button" type="reset" (click)="resetSubtasks()">Clear</button>
         <button class="create-button" type="submit">Create Task</button>
       </div>
     </div>
   </form>
 </section>
+
+
+
+<!-- input field für editTask, task IN inputfield einbinden zum editieren -> aus array löschen
+ 
+bilder nicht vergessen-->

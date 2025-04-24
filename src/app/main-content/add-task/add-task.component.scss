@@ -237,18 +237,20 @@ section {
   .input-icon-wrapper{
     position: relative;
     display: inline-block;
+   
   }
 
   .input-icon-wrapper input{
-    padding-right: 30px;
+    padding-right: 50px;
   }
 
-  .input-icon{
+  .icon-button{
+    
     position:absolute;
-    right: 10px;
+    right: -20px;
     top: 50%;
     transform: translateY(-50%);
     width: 16px;
-    height: 16px;
-    pointer-events: none;
+    height: 16px;    
+    cursor:pointer;
   }
