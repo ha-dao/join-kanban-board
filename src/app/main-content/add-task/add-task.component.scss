@@ -3,34 +3,33 @@
 @import './../../styles/buttons.scss';
 
 section {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  gap: 80px;
+  @include displayFlex(flex, column, flex-start, flex-start, 24px);
   width: 100%;
   max-width: 1920px;
   form {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    @include displayFlex(flex, column, flex-start, auto);
     width: 100%;
     label {
-      display: flex;
+      @include displayFlex(flex, row, flex-start, center);
       margin-bottom: 8px;
     }
-    input, textarea {
-      width: 100%;
+    input, textarea, select {
+      cursor: pointer;
       padding: 8px;
       border-radius: 10px;
       border: 1px solid #ccc;
       outline: none;
       margin-bottom: 16px;
+      &:focus {
+        border: 1px solid $hover-color;
+      }
+      &:hover {
+        border: 1px solid $hover-color;
+      }
     }
     .input-wrapper {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 40px;
+      @include displayFlex(flex, row, space-between, flex-start, 40px);
+      width: 100%;
       .task-data {
         flex: 2;
       }
@@ -41,27 +40,47 @@ section {
       }
       .task-user {
         flex: 2;
-        .priority-btn {
-          display: flex;
-          justify-content: flex-start;
-          gap: 8px;
+        .priority-div {
+          @include displayFlex(flex, row, flex-start, auto, 8px);
           margin-bottom: 16px;
           button {
+            @include displayFlex(flex, row, auto, center, 8px, nowrap);
             background-color: $white;
             padding: 8px 16px;
             border: none;
             border-radius: 10px;
             font-size: 16px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
             -webkit-box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.20);
             box-shadow: 0px 0px 2px 0px rgba(0,0,0,0.20);
             transition: all 250ms ease;
+            &.inactive {
+              opacity: 0.7;
+            }
+
+            &.active {
+              color: white;
+              img {
+                filter: brightness(0) saturate(100%) invert(95%) sepia(95%) saturate(21%) hue-rotate(357deg) brightness(104%) contrast(107%);
+              }
+            }
+
+            &:nth-child(1).active {
+              background-color: #FF3D00;
+            }
+
+            &:nth-child(2).active {
+              background-color: #FFA800;
+            }
+
+            &:nth-child(3).active {
+              background-color: #7AE229;
+            }
+
             img {
               width: 16px;
               height: 16px;
             }
+
             &:hover {
               -webkit-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
               box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
@@ -75,17 +94,25 @@ section {
     }
   }
 
+  .input-div {
+    @include displayFlex(flex, column, auto, auto);
+    width: 100%;
+  }
+
   .bottom-form-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
+    @include displayFlex(flex, row, space-between, flex-end);
+    margin-top: 24px;
     .btn-div {
       display: flex;
       justify-content: flex-end;
       gap: 16px;
+
     }
     p.req-desktop {
-      color: $text-alert-color;
+      .req-marker {
+        letter-spacing: 0.2em;
+        font-size: 18px;
+      }
     }
   }
 }
@@ -94,13 +121,138 @@ section {
   color: $text-alert-color;
 }
 
+// "assigned to" custom dropdown input field
+#assigned-to {
+  margin-bottom: 0;
+}
+
+.dropdown{
+  background-color: white;
+}
+
+.dropdown-menu{
+  border-radius: 0 0 10px 10px;
+  background-color: $white;
+  max-height: 200px;
+  overflow-y: scroll;
+}
+.visible{
+  display: block;
+}
+
+.invisible{
+  display:none
+}
+.contact {
+  display: flex;
+  justify-content: flex-start;
+  gap: 16px;
+  align-items: center;
+  border-radius: 10px;
+  padding: 8px 16px;
+  &:hover {
+      background: -webkit-linear-gradient(0deg, rgba(249, 249, 249, 1) 0%, rgba(240, 240, 240, 1) 100%);
+      background: -moz-linear-gradient(0deg, rgba(249, 249, 249, 1) 0%, rgba(240, 240, 240, 1) 100%);
+      background: linear-gradient(0deg, rgba(249, 249, 249, 1) 0%, rgba(240, 240, 240, 1) 100%);
+      color: inherit;
+      cursor: pointer;
+  }
+
+  >ul {
+    display: inline-block;
+      >li {
+          color: black;
+          font-size: 16px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+      }
+  }
+}
+
+.selected-contact-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+  margin-top: 8px;
+}
+
+.selected-contact {
+  display: inline-flex;
+  width: clamp(32px, 36px, 40px);
+  height: clamp(32px, 36px, 40px);
+  font-size: clamp(12px, 13px, 14px);
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  border: 2px solid $white;
+  color: $white;
+  cursor: pointer;
+}
+
+.contact-img {
+  font-size: 16px;
+  background-color: #9327FF;
+  min-width: 42px;
+  min-height: 42px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 2px solid white;
+  color: white;
+  letter-spacing: -1px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+p {
+  text-align: start;
+}
+
+.name-email {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.letter-container {
+  border-top: solid 1px #D1D1D1;
+  padding-top: 8px;
+  margin-top: 25px;
+}
+
+.input-icon-wrapper{
+  position: relative;
+  display: inline-block;
+}
+
+.input-icon-wrapper input{
+  padding-right: 30px;
+}
+
+.input-icon{
+  position:absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+}
+
 @media (max-width: 1280px) {
   section {
     form {
       p.req-mobile {
         display: block;
-        color: $text-alert-color;
         font-size: 14px;
+        .req-marker {
+          letter-spacing: 0.2em;
+          font-size: 18px;
+        }
       }
       .input-wrapper {
         .task-user {
@@ -120,19 +272,19 @@ section {
           }
         }
       }
+      .bottom-form-wrapper {
+        @include displayFlex(flex, column, flex-end, flex-end);
+        position: sticky;
+        bottom: 0;
+        background-color: $background-color;
+        padding: 16px 0 0 0;
+        z-index: 9;
+        p.req-desktop {
+          display: none;
+        }
+      }
     }
   }
-
-  .bottom-form-wrapper {
-    position: sticky;
-    bottom: 0;
-    background-color: $background-color;
-    z-index: 9;
-    p.req-desktop {
-      display: none;
-    }
-  }
-
 }
 
 @media (max-width: 1280px) and (orientation: portrait) {
@@ -145,7 +297,7 @@ section {
         .sep-line {
           display: none;
         }
-        div {
+        >div {
           width: 100%;
         }
       }
@@ -161,96 +313,113 @@ section {
   }
 }
 
-
-.dropdown{
-    height: 20px;
-    background-color: white;
-
-}
-
-.dropdown-menu{
-    border-radius: 10px;
-    padding: 15px 24px;
-    background-color: rgb(224, 210, 191);
-    max-height: 200px;
-    overflow-y: scroll;
-}
-.visible{
-    display: block;
-}
-
-.invisible{
-    display:none
-}
-.contact {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-radius: 10px;
-    padding: 15px 24px;
-    &:hover {
-        background: -webkit-linear-gradient(0deg, rgba(249, 249, 249, 1) 0%, rgba(240, 240, 240, 1) 100%);
-        background: -moz-linear-gradient(0deg, rgba(249, 249, 249, 1) 0%, rgba(240, 240, 240, 1) 100%);
-        background: linear-gradient(0deg, rgba(249, 249, 249, 1) 0%, rgba(240, 240, 240, 1) 100%);
-        color: inherit;
-        cursor: pointer;
-    }
-
-    >ul {
-        >p {
-            color: black;
-            font-size: 18px;
+@media (max-width: 480px) {
+  section {
+    form {
+      .input-wrapper {
+        .task-user {
+          .priority-div {
+            flex-wrap: wrap;
+            button {
+              flex: 1;
+              justify-content: center;
+            }
+          }
         }
+      }
     }
+  }
 }
 
-.contact-img {
-    background-color: #9327FF;
-    width: 42px;
-    height: 42px;
-    border-radius: 100%;
-    border: 2px solid white;
-    color: white;
-    letter-spacing: -1px;
+// custom checkbox style
+$checkbox-height: 18px;
+
+.checkbox-wrapper {
+  box-sizing: border-box;
+
+  input[type=checkbox] {
+    display: none;
   }
 
-  p {
-    text-align: start;
-  }
-
-  .name-email {
-    width: 70%;
-  }
-
-  .contact-img {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .letter-container {
-    border-top: solid 1px #D1D1D1;
-    padding-top: 8px;
-    margin-top: 25px;
-  }
-
-  .input-icon-wrapper{
+  .check-box {
+    height: $checkbox-height;
+    width: $checkbox-height;
+    background-color: transparent;
+    border: calc($checkbox-height * 0.1) solid $primary-color;
+    border-radius: 5px;
     position: relative;
     display: inline-block;
-   
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -moz-transition: border-color ease 0.2s;
+    -o-transition: border-color ease 0.2s;
+    -webkit-transition: border-color ease 0.2s;
+    transition: border-color ease 0.2s;
+    cursor: pointer;
+
+    &::before,
+    &::after {
+      -moz-box-sizing: border-box;
+      -webkit-box-sizing: border-box;
+      box-sizing: border-box;
+      position: absolute;
+      height: 0;
+      width: calc($checkbox-height * 0.1);
+      background-color: $primary-color;
+      display: inline-block;
+      -moz-transform-origin: left top;
+      -ms-transform-origin: left top;
+      -o-transform-origin: left top;
+      -webkit-transform-origin: left top;
+      transform-origin: left top;
+      border-radius: 15px;
+      content: " ";
+      -webkit-transition: opacity ease 0.5;
+      -moz-transition: opacity ease 0.5;
+      transition: opacity ease 0.5;
+    }
+
+    &::before {
+      top: calc($checkbox-height * 0.72);
+      left: calc($checkbox-height * 0.41);
+      box-shadow: 0 0 0 calc($checkbox-height * 0.05) $white;
+      -moz-transform: rotate(-135deg);
+      -ms-transform: rotate(-135deg);
+      -o-transform: rotate(-135deg);
+      -webkit-transform: rotate(-135deg);
+      transform: rotate(-135deg);
+    }
+
+    &::after {
+      top: calc($checkbox-height * 0.37);
+      left: calc($checkbox-height * 0.05);
+      -moz-transform: rotate(-45deg);
+      -ms-transform: rotate(-45deg);
+      -o-transform: rotate(-45deg);
+      -webkit-transform: rotate(-45deg);
+      transform: rotate(-45deg);
+    }
   }
 
-  .input-icon-wrapper input{
-    padding-right: 50px;
-  }
+  input[type=checkbox]:checked + .check-box,
+  .check-box.checked {
+    border-color: $primary-color;
 
-  .icon-button{
-    
-    position:absolute;
-    right: -20px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 16px;
-    height: 16px;    
-    cursor:pointer;
+    &::after {
+      height: calc($checkbox-height / 2);
+      -moz-animation: dothabottomcheck-19 0.2s ease 0s forwards;
+      -o-animation: dothabottomcheck-19 0.2s ease 0s forwards;
+      -webkit-animation: dothabottomcheck-19 0.2s ease 0s forwards;
+      animation: dothabottomcheck-19 0.2s ease 0s forwards;
+    }
+
+    &::before {
+      height: calc($checkbox-height * 1);
+      -moz-animation: dothatopcheck-19 0.4s ease 0s forwards;
+      -o-animation: dothatopcheck-19 0.4s ease 0s forwards;
+      -webkit-animation: dothatopcheck-19 0.4s ease 0s forwards;
+      animation: dothatopcheck-19 0.4s ease 0s forwards;
+    }
   }
+}

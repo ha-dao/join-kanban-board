@@ -94,6 +94,18 @@ p.subtitle {
   color: $primary-color;
 }
 
+input {
+  border: 1px solid #D1D1D1;
+  &:focus {
+    outline: none;
+    border: 1px solid $hover-color;
+  }
+}
+
+ul {
+  list-style-type: none;
+}
+
 @media (max-width: 768px) {
   p.subtitle {
     font-size: 20px;
