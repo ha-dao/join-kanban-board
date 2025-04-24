@@ -1,5 +1,5 @@
 import { NgClass, CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import { NgForm, NgModel, FormsModule } from '@angular/forms';
 import { ContactService } from '../../services/contact.service';
 import { FeedbackServiceService } from '../../services/feedback.service';
@@ -15,25 +15,20 @@ import { Task } from '../../interfaces/task';
   styleUrl: './add-task.component.scss'
 })
 export class AddTaskComponent {
-contactService = inject(ContactService)
-feedbackService = inject(FeedbackServiceService)
-taskService= inject(TaskService)
-clickedButton= '';
+contactService = inject(ContactService);
+feedbackService = inject(FeedbackServiceService);
+taskService= inject(TaskService);
+@ViewChild('taskTitle') taskTitle: NgModel | undefined;
+@ViewChild('taskDate') taskDate: NgModel | undefined;
+@ViewChild('categoryField') categoryField: NgModel | undefined;
+
+clickedButton= 'Medium';
 currentSubtasks:string[]=[];
 newSubtask: string = '';
 editableSubtask:string= '';
 editedIndex:number | null = null;
-
 dropdownOpen:boolean = false;
-taskData: {
-  title: string;
-  description: string;
-  date: string;
-  priority: string;
-  assignedTo?:Contact[];
-  category:string;
-  subtasks:string[];
-} = {
+taskData: Task= {
   title: '',
   description: '',
   date: '',
@@ -108,11 +103,53 @@ deleteSubtask(index: number) {
 
 resetSubtasks(){
   this.currentSubtasks= []
+  this.resetForm()
 }
 
 submitTask(){
-  console.log(this.taskData, this.currentSubtasks);
+  this.taskData.subtasks = (this.currentSubtasks)
+  console.log(this.taskData);
+  this.taskService.addTask(this.taskData)
+  this.resetSubtasks()
+  this.setInputsUntouched()
   
+  
+}
+
+setInputsUntouched(){
+  if(this.taskTitle)
+  this.taskTitle.control.markAsUntouched()
+if(this.taskDate)
+  this.taskDate.control.markAsUntouched()
+if(this.categoryField)
+  this.categoryField.control.markAsUntouched()
+}
+resetForm(){
+  this.resetContacts()
+  this.clickedButton = 'Medium'
+  this.taskData = {
+    title: '',
+    description: '',
+    date: '',
+    priority: '',
+    assignedTo:[],
+    category:'',
+    subtasks:[]
+  };
+
+
+}
+
+resetContacts(){
+  this.contactService.contactList.forEach( contact =>{
+    contact.selected = false
+  })
+}
+
+isFormValid(){  
+  return this.taskData.title !== '' &&
+  this.taskData.date !== '' &&
+  this.taskData.category !== '';  
 }
 
 }

@@ -8,5 +8,5 @@ export interface Task {
     priority:string,
     assignedTo?:Contact[],
     category:string,
-    subtasks:string [];
+    subtasks: string[];
 }
