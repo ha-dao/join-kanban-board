@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { ContactService } from '../../services/contact.service';
 import { CommonModule } from '@angular/common';
 import { TaskService } from '../../services/task.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-bord',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
 })
