@@ -1,13 +1,9 @@
-<div class="main-container">
-  <!-- Header Section -->
-  <div class="header">
+<main class="main-container">
+  <header class="header">
     <h1 class="title">Board</h1>
 
     <div class="right-section">
-      <div
-        class="search-input-wrapper"
-        [ngClass]="{ 'active-wrapper': isActive }"
-      >
+      <div class="search-input-wrapper" [class.active-wrapper]="isActive">
         <input
           type="text"
           placeholder="Find Task"
@@ -21,39 +17,69 @@
         </button>
       </div>
 
-      <button
-        class="add-task-button create-button"
-      >Add task<img
-          src="assets/img/board/plus.svg"
-          alt="Add Task"
-        />
+      <button class="add-task-button create-button">
+        Add task<img src="assets/img/board/plus.svg" alt="Add Task" />
       </button>
     </div>
-  </div>
+  </header>
 
-  <!-- Columns Container -->
   <div class="columns-container">
-    <div class="column-header">
-      <div class="header-row">
-        <div class="column-title" *ngFor="let column of columns; let i = index">
-          <span>{{ column }}</span>
-          <button
-            class="add-button"
-            (mouseenter)="isPlusButtonHovered[i] = true"
-            (mouseleave)="isPlusButtonHovered[i] = false"
-          >
-            <img [src]="isPlusButtonHovered[i] ? 'assets/img/board/plus-button-blue.svg' : 'assets/img/board/plus-button.svg'" alt="Add" />
-          </button>
+    <div class="columns-content">
+      
+      <div class="column">
+        <div class="column-header">
+          <div class="column-title">
+            <span>To Do</span>
+            <button class="add-button">
+              <img src="assets/img/board/plus.svg" alt="Add" />
+            </button>
+          </div>
+        </div>
+        <div class="tasks-container">
+         
+          <div class="dashed-container">
+            <span>No tasks To do</span>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="columns-content">
-      <div class="column" *ngFor="let column of columns">
+
+      <div class="column">
+        <div class="column-header">
+          <div class="column-title">
+            <span>In Progress</span>
+            <button class="add-button">
+              <img src="assets/img/board/plus.svg" alt="Add" />
+            </button>
+          </div>
+        </div>
         <div class="tasks-container">
-          <!-- Tasks würden hier eingefügt werden -->
+        </div>
+      </div>
+
+    
+      <div class="column">
+        <div class="column-header">
+          <div class="column-title">
+            <span>Await Feedback</span>
+            <button class="add-button">
+              <img src="assets/img/board/plus.svg" alt="Add" />
+            </button>
+          </div>
+        </div>
+        <div class="tasks-container">
+        </div>
+      </div>
+
+      <div class="column">
+        <div class="column-header">
+          <div class="column-title">
+            <span>Done</span>
+          </div>
+        </div>
+        <div class="tasks-container">
         </div>
       </div>
     </div>
   </div>
-</div>
+</main>
