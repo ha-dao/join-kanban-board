@@ -89,3 +89,9 @@
     padding: 10px 19px;
   }
 }
+
+@media (max-width: 480px) and (orientation: portrait) {
+  .create-button {
+    padding: 8px;
+  }
+}

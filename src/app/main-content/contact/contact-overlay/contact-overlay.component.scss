@@ -124,6 +124,7 @@
       width: 100%;
 
       >input {
+        display: block;
         padding-right: 36px;
         padding-left: 12px;
         width: 100%;
@@ -161,11 +162,11 @@
     display: none;
   }
   .visible{
+    margin: 24px 8px -24px 8px;
     color: red;
+    font-size: 14px;
   }
 }
-
-
 
 .confirmed-div{
     @include fontStyle(clamp(18px, 1vw, 20px), 400, white);
