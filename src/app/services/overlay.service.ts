@@ -1,11 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OverlayService {
-  isOpen = false;
+  isOpen = signal(false)
   setTemplate:string = ''
 
   private contactDataSource = new BehaviorSubject<{ name: string; email: string; phone: string } | null>(null);
@@ -16,16 +16,17 @@ export class OverlayService {
 
   openOverlay(target:string) {
     this.getTemplate(target)
-    this.isOpen = true;
-    console.log(target);
+    this.isOpen.set(true);
     
   }
 
   getTemplate(target:string){
     this.setTemplate = target
   }
+  
   closeOverlay() {
-    this.isOpen = false;
+    this.isOpen.set(false);  
+    
   }
 
   setOverlayButtons(left: string, right: string) {
