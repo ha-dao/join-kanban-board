@@ -47,9 +47,9 @@
             type="date"
             name="Due Date"
             id="due-date"
-            required   
+            required
             #taskDate ="ngModel"
-                     
+
           />
           @if(taskDate.invalid && taskDate.touched){
             <span class="error-message">Please enter a Date</span>
@@ -156,7 +156,7 @@
         <div class="input-div">
           <label for="category">Category<span class="req-marker">*</span></label>
           <select name="Category" #categoryField = "ngModel"  id="category" required [(ngModel)]="taskData.category">
-            <option value="" selected>Select Category</option>
+            <option value="" selected>Select task category</option>
             <option value="User story">User story</option>
             <option value="Technical Task">Technical Task</option>
             <option value="Design">Design</option>
@@ -164,9 +164,9 @@
            @if(categoryField.invalid && categoryField.touched){
             <span class="error-message">Please select a category</span>
            }
-         
 
-          
+
+
         </div>
 
         <div>
