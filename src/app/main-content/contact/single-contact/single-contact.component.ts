@@ -1,9 +1,9 @@
 import { Component, inject, ViewChild } from '@angular/core';
 import { ContactService } from '../../../services/contact.service';
 import { CommonModule } from '@angular/common';
-import { ContactOverlayComponent } from '../contact-overlay/contact-overlay.component';
+import { OverlayComponent } from '../overlay/overlay.component';
 import { FeedbackServiceService } from '../../../services/feedback.service';
-import { ContactOverlayService } from '../../../services/overlay.service'; 
+import { OverlayService } from '../../../services/overlay.service'; 
 
 @Component({
   selector: 'app-single-contact',
@@ -15,7 +15,7 @@ import { ContactOverlayService } from '../../../services/overlay.service';
 export class SingleContactComponent {
   constructor(
     public feedbackService: FeedbackServiceService,
-    private overlayService: ContactOverlayService
+    private overlayService: OverlayService
   ) {}
 
   contactService = inject(ContactService);
@@ -33,7 +33,7 @@ export class SingleContactComponent {
       email: this.contactService.currentContact.email,
       phone: this.contactService.currentContact.phone
     });
-    this.overlayService.openOverlay();
+    this.overlayService.openOverlay('add-contact');
   }
   
   

@@ -3,18 +3,18 @@ import { CommonModule } from '@angular/common';
 import { FormControl, FormsModule, NgForm, NgModel } from '@angular/forms';
 import { ContactService } from '../../../services/contact.service';
 import { FeedbackServiceService } from '../../../services/feedback.service';
-import { ContactOverlayService } from '../../../services/overlay.service';
+import { OverlayService } from '../../../services/overlay.service';
 
 @Component({
-  selector: 'app-contact-overlay',
+  selector: 'app-add-contact',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './contact-overlay.component.html',
-  styleUrl: './contact-overlay.component.scss',
+  templateUrl: './add-contact.component.html',
+  styleUrl: './add-contact.component.scss',
 })
-export class ContactOverlayComponent {
+export class addContactComponent {
  
-  constructor(public contactService: ContactService, public feedbackService: FeedbackServiceService, public overlayService: ContactOverlayService){
+  constructor(public contactService: ContactService, public feedbackService: FeedbackServiceService, public overlayService: OverlayService){
 
 
   }

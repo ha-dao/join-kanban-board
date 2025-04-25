@@ -6,6 +6,8 @@ import { FeedbackServiceService } from '../../services/feedback.service';
 import { Contact } from '../../interfaces/contact';
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../interfaces/task';
+import { OverlayService } from '../../services/overlay.service';
+import { OverlayComponent } from '../contact/overlay/overlay.component';
 
 @Component({
   selector: 'app-add-task',
@@ -17,6 +19,7 @@ import { Task } from '../../interfaces/task';
 export class AddTaskComponent {
 contactService = inject(ContactService);
 feedbackService = inject(FeedbackServiceService);
+overlayService = inject(OverlayService)
 taskService= inject(TaskService);
 @ViewChild('taskTitle') taskTitle: NgModel | undefined;
 @ViewChild('taskDate') taskDate: NgModel | undefined;
@@ -112,6 +115,7 @@ submitTask(){
   this.taskService.addTask(this.taskData)
   this.resetSubtasks()
   this.setInputsUntouched()
+  this.overlayService.closeOverlay()
   
   
 }
