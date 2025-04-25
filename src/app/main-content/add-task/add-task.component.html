@@ -40,9 +40,9 @@
             type="date"
             name="Due Date"
             id="due-date"
-            required   
+            required
             #taskDate ="ngModel"
-                     
+
           />
           @if(taskDate.invalid && taskDate.touched){
             <span class="error-message">Please enter a Date</span>
@@ -97,39 +97,39 @@
             class="dropdown-menu"
             [ngClass]="{ visible: dropdownOpen, invisible: !dropdownOpen }"
           >
-            @if(this.dropdownOpen){ @for (item of (contactService.contactList);
-            track item; let index = $index) {
-            <div class="contact" (click)="contactService.selectItem(item.id)">
-              <div
-                class="contact-img"
-                [ngStyle]="{ background: item['color'] }"
-              >
-                {{
-                  contactService.getFirstAndLastNameFirstLetter(item["name"])
-                }}
-              </div>
-
-
-              <ul class="name-email">
-                <li>
-                  {{ contactService.getFirstAndLastName(item["name"]) }}
-                  <div class="checkbox-wrapper">
-                    <input
-                      type="checkbox"
-                      [checked]="item.selected"
-                      name="checkBox"
-                      id="{{ item.id }}"
-                      (change)="
-                        contactService.setSelection(item); setAssignedTo(item)
-                      "
-                    />
-                    <label class="check-box" [attr.for]="item.id"></label>
+            @if (this.dropdownOpen) {
+              @for (item of (contactService.contactList); track item; let index = $index) {
+                <div class="contact" (click)="contactService.selectItem(item.id)">
+                  <div
+                    class="contact-img"
+                    [ngStyle]="{ background: item['color'] }"
+                  >
+                    {{
+                      contactService.getFirstAndLastNameFirstLetter(item["name"])
+                    }}
                   </div>
-                </li>
-              </ul>
 
-              </div>
-            }}
+
+                  <ul class="name-email">
+                    <li>
+                      {{ contactService.getFirstAndLastName(item["name"]) }}
+                      <div class="checkbox-wrapper">
+                        <input
+                          type="checkbox"
+                          [checked]="item.selected"
+                          name="checkBox"
+                          id="{{ item.id }}"
+                          (change)="
+                            contactService.setSelection(item); setAssignedTo(item)
+                          "
+                        />
+                        <label class="check-box" [attr.for]="item.id"></label>
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              }
+            }
           </div>
           <div class="selected-contact-wrapper">
             @for (contact of (contactService.contactList); track $index) {
@@ -147,7 +147,7 @@
         <div class="input-div">
           <label for="category">Category<span class="req-marker">*</span></label>
           <select name="Category" #categoryField = "ngModel"  id="category" required [(ngModel)]="taskData.category">
-            <option value="" selected>Select Category</option>
+            <option value="" selected>Select task category</option>
             <option value="User story">User story</option>
             <option value="Technical Task">Technical Task</option>
             <option value="Design">Design</option>
@@ -155,9 +155,9 @@
            @if(categoryField.invalid && categoryField.touched){
             <span class="error-message">Please select a category</span>
            }
-         
 
-          
+
+
         </div>
 
         <div>
