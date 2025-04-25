@@ -15,3 +15,18 @@
   color: $font-color;
   text-transform: $text-transform;
 }
+
+@mixin svg-filter-primary {
+  filter: brightness(0) saturate(100%) invert(17%) sepia(4%)
+    saturate(5657%) hue-rotate(177deg) brightness(92%) contrast(86%);
+}
+
+@mixin svg-filter-accent {
+  filter: brightness(0) saturate(100%) invert(68%) sepia(35%)
+    saturate(5570%) hue-rotate(165deg) brightness(97%) contrast(83%);
+}
+
+@mixin svg-filter-white {
+  filter: brightness(0) saturate(100%) invert(100%) sepia(3%)
+    saturate(12%) hue-rotate(358deg) brightness(102%) contrast(106%);
+}

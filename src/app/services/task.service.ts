@@ -75,4 +75,8 @@ export class TaskService implements OnDestroy {
   getSingleTask(collectionRef: string, docId: string) {
     return doc(collection(this.firestore, collectionRef), docId);
   }
+
+  searchAndFilter(event:Event, value: string){
+    console.log(value);
+  }
 }
