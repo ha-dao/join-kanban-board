@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ContactOverlayComponent } from './contact-overlay.component';
+import { AddContactComponent } from './add-contact.component';
 
-describe('ContactOverlayComponent', () => {
-  let component: ContactOverlayComponent;
-  let fixture: ComponentFixture<ContactOverlayComponent>;
+describe('AddContactComponent', () => {
+  let component: AddContactComponent;
+  let fixture: ComponentFixture<AddContactComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ContactOverlayComponent]
+      imports: [AddContactComponent]
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(ContactOverlayComponent);
+    fixture = TestBed.createComponent(AddContactComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

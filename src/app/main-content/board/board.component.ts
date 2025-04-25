@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild } from '@angular/core';
 import { ContactService } from '../../services/contact.service';
 import { CommonModule } from '@angular/common';
 import { TaskService } from '../../services/task.service';
 import { FormsModule } from '@angular/forms';
+import { OverlayService } from '../../services/overlay.service';
 
 @Component({
   selector: 'app-bord',
@@ -15,7 +16,8 @@ export class BordComponent {
   columns = ['To Do', 'In Progress', 'Await Feedback', 'Done'];
   isActive = false; 
   searchQuery = ''; 
-
+  overlayService = inject(OverlayService)
+  @ViewChild('overlayRef') overlayRef!: ElementRef;
 
   isAddTaskHovered = false;
   isPlusButtonHovered: boolean[] = Array(this.columns.length).fill(false); 
@@ -29,5 +31,12 @@ export class BordComponent {
     this.searchQuery = input.value; 
 
     this.isActive = this.searchQuery.length > 0;
+  }
+  handleBackdropClick(event: MouseEvent) {
+    const clickedInside = this.overlayRef.nativeElement.contains(event.target);
+    if (!clickedInside && this.overlayService.isOpen) {     
+      this.overlayService.closeOverlay();
+      
+    }
   }
 }
