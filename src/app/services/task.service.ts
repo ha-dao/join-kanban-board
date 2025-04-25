@@ -20,6 +20,7 @@ export class TaskService implements OnDestroy {
   firestore: Firestore = inject(Firestore);
   unsubTasksList: any;
   tasksList: Task[] = [];
+  searchInputFieldValue: string= '';
   constructor() {
     this.snap();
   }
@@ -65,6 +66,7 @@ export class TaskService implements OnDestroy {
       assignedTo: obj.assignedTo || [],
       category: obj.category || '',
       subtasks: obj.subtasks || [],
+      status: obj.status || '',
     };
   }
 
@@ -78,5 +80,6 @@ export class TaskService implements OnDestroy {
 
   searchAndFilter(event:Event, value: string){
     console.log(value);
+    this.searchInputFieldValue = value;
   }
 }

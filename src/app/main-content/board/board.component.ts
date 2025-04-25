@@ -18,19 +18,18 @@ export class BoardComponent implements OnInit {
   searchQuery = '';
   overlayService = inject(OverlayService)
   taskService = inject(TaskService);
-  tasks: Task[] = [];
+  
   
   @ViewChild('overlayRef') overlayRef!: ElementRef;  
 
   ngOnInit(): void {
-    // Recupera le task al caricamento del componente
-    this.tasks = this.taskService.tasksList;
+    
   }
   
-  todoTasks: string[] = [];
-  inProgressTasks: string[] = [];
-  awaitFeedbackTasks: string[] = [];
-  doneTasks: string[] = [];
+  todoTasks: Task[] = [];
+  inProgressTasks: Task[] = [];
+  awaitFeedbackTasks: Task[] = [];
+  doneTasks: Task[] = [];
 
   toggleActive() {
     this.isActive = !this.isActive;
@@ -39,11 +38,9 @@ export class BoardComponent implements OnInit {
     }
   }
 
-  onInputChange(event: Event) {
-    const input = event.target as HTMLInputElement;
-    this.searchQuery = input.value;
-
-    this.isActive = this.searchQuery.length > 0;
+  onInputChange(event: Event, inputField: string) {
+    this.taskService.searchAndFilter(event, inputField);
+    
   }
   handleBackdropClick(event: MouseEvent) {
     const clickedInside = this.overlayRef.nativeElement.contains(event.target);
@@ -53,19 +50,19 @@ export class BoardComponent implements OnInit {
     }
   }
   
-  addTodoTask(task: string) {
+  addTodoTask(task: Task) {
     this.todoTasks.push(task);
   }
   
-  addInProgressTask(task: string) {
+  addInProgressTask(task: Task) {
     this.inProgressTasks.push(task);
   }
   
-  addAwaitFeedbackTask(task: string) {
+  addAwaitFeedbackTask(task: Task) {
     this.awaitFeedbackTasks.push(task);
   }
   
-  addDoneTask(task: string) {
+  addDoneTask(task: Task) {
     this.doneTasks.push(task);
   }
 }
