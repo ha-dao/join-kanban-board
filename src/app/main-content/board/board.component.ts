@@ -1,8 +1,10 @@
-import { Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild, OnInit } from '@angular/core';
 import { ContactService } from '../../services/contact.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { OverlayService } from '../../services/overlay.service';
+import { TaskService } from '../../services/task.service';
+import { Task } from '../../interfaces/task';
 
 @Component({
   selector: 'app-board',
@@ -11,11 +13,20 @@ import { OverlayService } from '../../services/overlay.service';
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
 })
-export class BoardComponent {
+export class BoardComponent implements OnInit {
   isActive = false;
   searchQuery = '';
   overlayService = inject(OverlayService)
+  taskService = inject(TaskService);
+  tasks: Task[] = [];
+  
   @ViewChild('overlayRef') overlayRef!: ElementRef;  
+
+  ngOnInit(): void {
+    // Recupera le task al caricamento del componente
+    this.tasks = this.taskService.tasksList;
+  }
+  
   todoTasks: string[] = [];
   inProgressTasks: string[] = [];
   awaitFeedbackTasks: string[] = [];

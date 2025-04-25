@@ -41,8 +41,35 @@
           </div>
         </div>
         <div class="tasks-container">
-         
-          <div class="dashed-container">
+
+          <div *ngIf="tasks.length > 0">
+            <div *ngFor="let task of tasks" class="task-card">
+              <div class="task-category">{{ task.category }}</div>
+              <div class="task-title">{{ task.title }}</div>
+              <div class="task-description">{{ task.description ? (task.description.length > 50 ? task.description.substring(0, 50) + '...' : task.description) : '' }}</div>
+              
+              <div class="task-progress" *ngIf="task.subtasks && task.subtasks.length > 0">
+                {{ task.subtasks.length }} Subtasks
+              </div>
+              
+              <div class="task-footer">
+                <div class="task-assigned">
+                  <div *ngFor="let assignee of task.assignedTo" 
+                      class="assigned-contact"
+                      [ngStyle]="{ background: assignee.color }">
+                    {{ assignee.letters }}
+                  </div>
+                </div>
+                <div class="task-priority">
+                  <img *ngIf="task.priority === 'Urgent'" src="assets/img/2-add-task/urgent-icon.svg" alt="urgent" />
+                  <img *ngIf="task.priority === 'Medium'" src="assets/img/2-add-task/medium-icon.svg" alt="medium" />
+                  <img *ngIf="task.priority === 'Low'" src="assets/img/2-add-task/low-icon.svg" alt="low" />
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="dashed-container" *ngIf="tasks.length === 0">
             <span>No tasks To do</span>
           </div>
         </div>
