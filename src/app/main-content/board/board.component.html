@@ -9,7 +9,7 @@
           placeholder="Find Task"
           class="search-input"
           [(ngModel)]="searchQuery"
-          (input)="onInputChange($event)"
+          (input)="onInputChange($event, searchQuery)"
         />
         <span class="separator">|</span>
         <button class="search-button" (click)="toggleActive()">
@@ -18,19 +18,18 @@
       </div>
 
       <button
-      (click)="overlayService.openOverlay('add-task')"
+        (click)="overlayService.openOverlay('add-task')"
         class="add-task-button create-button"
-      >Add task<img
-          src="assets/img/board/plus.svg"
-          alt="Add Task"
-        />
+      >
+        Add task
+        <img src="assets/img/board/plus.svg" alt="Add Task" />
       </button>
     </div>
   </header>
 
   <div class="columns-container">
     <div class="columns-content">
-      
+
       <div class="column">
         <div class="column-header">
           <div class="column-title">
@@ -42,39 +41,68 @@
         </div>
         <div class="tasks-container">
 
-          <div *ngIf="tasks.length > 0">
-            <div *ngFor="let task of tasks" class="task-card">
-              <div class="task-category">{{ task.category }}</div>
-              <div class="task-title">{{ task.title }}</div>
-              <div class="task-description">{{ task.description ? (task.description.length > 50 ? task.description.substring(0, 50) + '...' : task.description) : '' }}</div>
-              
-              <div class="task-progress" *ngIf="task.subtasks && task.subtasks.length > 0">
-                {{ task.subtasks.length }} Subtasks
-              </div>
-              
-              <div class="task-footer">
-                <div class="task-assigned">
-                  <div *ngFor="let assignee of task.assignedTo" 
-                      class="assigned-contact"
-                      [ngStyle]="{ background: assignee.color }">
-                    {{ assignee.letters }}
+          @if (taskService.tasksList) {
+            @for (task of taskService.tasksList; track task) {
+              @if(task.status == 'ToDo' && task.title.startsWith(taskService.searchInputFieldValue)){
+                <div class="task-card">
+                  <div class="task-category">{{ task.category }}</div>
+                  <div class="task-title">{{ task.title }}</div>
+                  <div class="task-description">
+                    {{
+                      task.description
+                        ? (task.description.length > 50
+                            ? task.description.substring(0, 50) + '...'
+                            : task.description)
+                        : ''
+                    }}
+                  </div>
+  
+                  @if (task.subtasks && task.subtasks.length > 0) {
+                    <div class="task-progress">
+                      {{ task.subtasks.length }} Subtasks
+                    </div>
+                  }
+  
+                  <div class="task-footer">
+                    <div class="task-assigned">
+                      @for (assignee of task.assignedTo; track assignee.id) {
+                        <div
+                          class="assigned-contact"
+                          [ngStyle]="{ background: assignee.color }"
+                        >
+                          {{ assignee.letters }}
+                        </div>
+                      }
+                    </div>
+                    <div class="task-priority">
+                      @if (task.priority === 'Urgent') {
+                        <img
+                          src="assets/img/2-add-task/urgent-icon.svg"
+                          alt="urgent"
+                        />
+                      } @else if (task.priority === 'Medium') {
+                        <img
+                          src="assets/img/2-add-task/medium-icon.svg"
+                          alt="medium"
+                        />
+                      } @else if (task.priority === 'Low') {
+                        <img
+                          src="assets/img/2-add-task/low-icon.svg"
+                          alt="low"
+                        />
+                      }
+                    </div>
                   </div>
                 </div>
-                <div class="task-priority">
-                  <img *ngIf="task.priority === 'Urgent'" src="assets/img/2-add-task/urgent-icon.svg" alt="urgent" />
-                  <img *ngIf="task.priority === 'Medium'" src="assets/img/2-add-task/medium-icon.svg" alt="medium" />
-                  <img *ngIf="task.priority === 'Low'" src="assets/img/2-add-task/low-icon.svg" alt="low" />
-                </div>
-              </div>
+              }
+            }
+          } @else {
+            <div class="dashed-container">
+              <span>No tasks To do</span>
             </div>
-          </div>
-          
-          <div class="dashed-container" *ngIf="tasks.length === 0">
-            <span>No tasks To do</span>
-          </div>
+          }
         </div>
       </div>
-
 
       <div class="column">
         <div class="column-header">
@@ -85,11 +113,9 @@
             </button>
           </div>
         </div>
-        <div class="tasks-container">
-        </div>
+        <div class="tasks-container"></div>
       </div>
 
-    
       <div class="column">
         <div class="column-header">
           <div class="column-title">
@@ -99,8 +125,7 @@
             </button>
           </div>
         </div>
-        <div class="tasks-container">
-        </div>
+        <div class="tasks-container"></div>
       </div>
 
       <div class="column">
@@ -109,9 +134,9 @@
             <span>Done</span>
           </div>
         </div>
-        <div class="tasks-container">
-        </div>
+        <div class="tasks-container"></div>
       </div>
+
     </div>
   </div>
 </main>

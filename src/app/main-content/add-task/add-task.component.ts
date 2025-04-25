@@ -53,7 +53,8 @@ taskData: Task= {
   priority: '',
   assignedTo:[],
   category:'',
-  subtasks:[]
+  subtasks:[],
+  status: ''
 };
 
 
@@ -164,7 +165,8 @@ resetForm(){
     priority: '',
     assignedTo:[],
     category:'',
-    subtasks:[]
+    subtasks:[],
+    status: ''
   };
 
 
