@@ -1,4 +1,4 @@
-<div class="main-container">
+  <div class="main-container" >
   <!-- Header Section -->
   <div class="header">
     <h1 class="title">Board</h1>
@@ -22,6 +22,7 @@
       </div>
 
       <button
+      (click)="overlayService.openOverlay('add-task')"
         class="add-task-button create-button"
       >Add task<img
           src="assets/img/board/plus.svg"
@@ -57,3 +58,4 @@
     </div>
   </div>
 </div>
+

@@ -4,8 +4,9 @@ import { BehaviorSubject } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
-export class ContactOverlayService {
+export class OverlayService {
   isOpen = false;
+  setTemplate:string = ''
 
   private contactDataSource = new BehaviorSubject<{ name: string; email: string; phone: string } | null>(null);
   contactData$ = this.contactDataSource.asObservable();
@@ -13,10 +14,16 @@ export class ContactOverlayService {
   buttonLeft = 'Cancel';
   buttonRight = 'Create';
 
-  openOverlay() {
+  openOverlay(target:string) {
+    this.getTemplate(target)
     this.isOpen = true;
+    console.log(target);
+    
   }
 
+  getTemplate(target:string){
+    this.setTemplate = target
+  }
   closeOverlay() {
     this.isOpen = false;
   }

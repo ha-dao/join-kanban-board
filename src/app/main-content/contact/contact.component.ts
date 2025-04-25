@@ -2,8 +2,8 @@ import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContactListComponent } from './contact-list/contact-list.component';
 import { SingleContactComponent } from './single-contact/single-contact.component';
-import { ContactOverlayComponent } from './contact-overlay/contact-overlay.component';
-import { ContactOverlayService } from '../../services/overlay.service';
+import { OverlayComponent } from './overlay/overlay.component';
+import { OverlayService } from '../../services/overlay.service';
 
 
 @Component({
@@ -14,7 +14,7 @@ import { ContactOverlayService } from '../../services/overlay.service';
   styleUrl: './contact.component.scss'
 })
 export class ContactComponent {
-  constructor(public overlayService: ContactOverlayService){
+  constructor(public overlayService: OverlayService){
 
   }
   menuDisplay: string = 'none';
@@ -37,7 +37,7 @@ export class ContactComponent {
   addOrOpenMenu(){
     if(this.menuImageSrc == 'assets/img/4-contacts/person-add-icon.svg'){
       this.overlayService.setOverlayButtons('Cancel', 'Create Contact');
-      this.overlayService.openOverlay()
+      this.overlayService.openOverlay('add-contact')
     }else{
       if(this.menuDisplay == 'none'){
         this.menuDisplay = 'flex';
@@ -62,7 +62,7 @@ export class ContactComponent {
 
   openAddOverlay(){
     this.overlayService.setOverlayButtons('Cancel', 'Create Contact');
-    this.overlayService.openOverlay()
+    this.overlayService.openOverlay('add-contact')
   }
 
   getEvent(event: string) {
