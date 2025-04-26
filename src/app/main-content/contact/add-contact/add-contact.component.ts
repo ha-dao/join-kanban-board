@@ -44,7 +44,7 @@ export class addContactComponent {
 
   handleBackdropClick(event: MouseEvent) {
     const clickedInside = this.overlayRef.nativeElement.contains(event.target);
-    if (!clickedInside && this.overlayService.isOpen) {
+    if (!clickedInside && this.overlayService.isOpen()) {
       this.clearForm();
       this.overlayService.closeOverlay();
       this.invalidFields = []
