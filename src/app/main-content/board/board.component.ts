@@ -1,8 +1,10 @@
-import { Component, ElementRef, inject, ViewChild } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild, OnInit } from '@angular/core';
 import { ContactService } from '../../services/contact.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { OverlayService } from '../../services/overlay.service';
+import { TaskService } from '../../services/task.service';
+import { Task } from '../../interfaces/task';
 
 @Component({
   selector: 'app-board',
@@ -11,15 +13,23 @@ import { OverlayService } from '../../services/overlay.service';
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
 })
-export class BoardComponent {
+export class BoardComponent implements OnInit {
   isActive = false;
   searchQuery = '';
   overlayService = inject(OverlayService)
+  taskService = inject(TaskService);
+  
+  
   @ViewChild('overlayRef') overlayRef!: ElementRef;  
-  todoTasks: string[] = [];
-  inProgressTasks: string[] = [];
-  awaitFeedbackTasks: string[] = [];
-  doneTasks: string[] = [];
+
+  ngOnInit(): void {
+    
+  }
+  
+  todoTasks: Task[] = [];
+  inProgressTasks: Task[] = [];
+  awaitFeedbackTasks: Task[] = [];
+  doneTasks: Task[] = [];
 
   toggleActive() {
     this.isActive = !this.isActive;
@@ -28,33 +38,31 @@ export class BoardComponent {
     }
   }
 
-  onInputChange(event: Event) {
-    const input = event.target as HTMLInputElement;
-    this.searchQuery = input.value;
-
-    this.isActive = this.searchQuery.length > 0;
+  onInputChange(event: Event, inputField: string) {
+    this.taskService.searchAndFilter(event, inputField);
+    
   }
   handleBackdropClick(event: MouseEvent) {
     const clickedInside = this.overlayRef.nativeElement.contains(event.target);
-    if (!clickedInside && this.overlayService.isOpen) {     
+    if (!clickedInside && this.overlayService.isOpen()) {     
       this.overlayService.closeOverlay();
       
     }
   }
   
-  addTodoTask(task: string) {
+  addTodoTask(task: Task) {
     this.todoTasks.push(task);
   }
   
-  addInProgressTask(task: string) {
+  addInProgressTask(task: Task) {
     this.inProgressTasks.push(task);
   }
   
-  addAwaitFeedbackTask(task: string) {
+  addAwaitFeedbackTask(task: Task) {
     this.awaitFeedbackTasks.push(task);
   }
   
-  addDoneTask(task: string) {
+  addDoneTask(task: Task) {
     this.doneTasks.push(task);
   }
 }

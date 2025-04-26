@@ -1,5 +1,5 @@
 import { NgClass, CommonModule } from '@angular/common';
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, ElementRef, HostListener, inject, ViewChild, effect, signal } from '@angular/core';
 import { NgForm, NgModel, FormsModule } from '@angular/forms';
 import { ContactService } from '../../services/contact.service';
 import { FeedbackServiceService } from '../../services/feedback.service';
@@ -17,14 +17,29 @@ import { OverlayComponent } from '../contact/overlay/overlay.component';
   styleUrl: './add-task.component.scss'
 })
 export class AddTaskComponent {
+constructor(){
+  let initialized = false;
+  effect(() =>{
+    const isOpen= this.overlayService.isOpen();
+    if(!initialized){
+      initialized = true;
+      return;
+    }
+    if(!isOpen){
+      this.resetForm();
+    }
+  })
+}
 contactService = inject(ContactService);
 feedbackService = inject(FeedbackServiceService);
 overlayService = inject(OverlayService)
 taskService= inject(TaskService);
+
 @ViewChild('taskTitle') taskTitle: NgModel | undefined;
 @ViewChild('taskDate') taskDate: NgModel | undefined;
 @ViewChild('categoryField') categoryField: NgModel | undefined;
-
+@ViewChild('overlayRef', {static: false}) overlayRef!: ElementRef;
+searchTerm: string=''
 clickedButton= 'Medium';
 currentSubtasks:string[]=[];
 newSubtask: string = '';
@@ -38,29 +53,43 @@ taskData: Task= {
   priority: '',
   assignedTo:[],
   category:'',
-  subtasks:[]
+  subtasks:[],
+  status: ''
 };
+
+
 
 toggleDropdown(){
   this.dropdownOpen = !this.dropdownOpen;
 }
 
+@HostListener('document:click', ['$event'])
+handleBackdropClick(event: MouseEvent){
+  if(!this.overlayRef?.nativeElement)return;
 
+  const clickedInside= this.overlayRef.nativeElement.contains(event.target);
+  if(!clickedInside && this.dropdownOpen){
+    this.toggleDropdown()
+  }
+}
 
 setPrority(priority:string){
 this.taskData.priority = priority
 this.setClickedButton(priority)
 }
+
 setClickedButton(button:string){
 this.clickedButton = button
 }
 
 onSubmit(){
   this.taskService.tasksList.push(this.taskData)
-
-
 }
 
+toggleContactSelection(item:Contact){
+  this.contactService.setSelection(item);
+  this.setAssignedTo(item)
+}
 setAssignedTo(item: Contact) {
   const index = this.taskData.assignedTo!.findIndex(c => c.id === item.id);
 
@@ -83,9 +112,7 @@ addSubtask() {
 }
 editSubtask(index: number) {
   this.editedIndex = index;
-  this.editableSubtask = this.currentSubtasks[index];
-  console.log(this.editableSubtask);
-  
+  this.editableSubtask = this.currentSubtasks[index];  
 }
 
 saveEditedSubtask(index: number) {
@@ -111,7 +138,6 @@ resetSubtasks(){
 
 submitTask(){
   this.taskData.subtasks = (this.currentSubtasks)
-  console.log(this.taskData);
   this.taskService.addTask(this.taskData)
   this.resetSubtasks()
   this.setInputsUntouched()
@@ -130,6 +156,7 @@ if(this.categoryField)
 }
 resetForm(){
   this.resetContacts()
+  this.setInputsUntouched()
   this.clickedButton = 'Medium'
   this.taskData = {
     title: '',
@@ -138,7 +165,8 @@ resetForm(){
     priority: '',
     assignedTo:[],
     category:'',
-    subtasks:[]
+    subtasks:[],
+    status: ''
   };
 
 
@@ -155,5 +183,14 @@ isFormValid(){
   this.taskData.date !== '' &&
   this.taskData.category !== '';  
 }
+
+filterContacts(){
+  if(!this.searchTerm)return this.contactService.contactList;
+  return this.contactService.contactList.filter( c => 
+  c.name.toLowerCase().includes(this.searchTerm.toLocaleLowerCase())
+  );
+}
+
+
 
 }

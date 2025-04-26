@@ -6,6 +6,25 @@ section {
   @include displayFlex(flex, column, flex-start, flex-start, 24px);
   width: 100%;
   max-width: 1920px;
+
+  .close-button{    
+      position:absolute;
+      top: 50px;
+      right: 120px;
+      padding: 8px;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      z-index: 999;
+      img {
+        width: 16px;
+        height: 16px;
+      }
+  &:hover {
+    background-color: darken($grey, 0.5);
+  }
+  }
+  
   form {
     input.ng-invalid.ng-touched {
       border: 1px solid $border-alert-color;

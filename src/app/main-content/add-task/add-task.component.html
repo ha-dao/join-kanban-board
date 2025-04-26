@@ -1,5 +1,12 @@
 <section>
   <h2>Add Task</h2>
+  <a class="close-button" [ngClass]="{ visible: overlayService.isOpen(), invisible: !overlayService.isOpen() }"
+        ><img
+          src="assets/img/addContactOverlay/X.svg"
+          alt="x-icon close button"
+          (click)="this.overlayService.closeOverlay(); $event.stopPropagation(); resetForm()"
+
+      /></a>
 
   <form action="submit">
     <div class="input-wrapper">
@@ -60,29 +67,50 @@
         </div>
         <div class="input-div">
           <label for="assigned-to">Assigned to</label>
-          <input type="text" class="dropdown" (click)="toggleDropdown()" id="assigned-to" placeholder="Select contacts to assign" />
-          <div class="dropdown-menu" [ngClass]="{ visible: dropdownOpen, invisible: !dropdownOpen }">
-            @if (this.dropdownOpen) { @for (item of contactService.contactList; track item; let index = $index) {
-            <div class="contact" (click)="contactService.selectItem(item.id)">
-              <div class="contact-img" [ngStyle]="{ background: item['color'] }">
-                {{ contactService.getFirstAndLastNameFirstLetter(item['name']) }}
+          <input type="text" [(ngModel)]="searchTerm" name="SearchContact" class="dropdown" (click)="toggleDropdown(); $event.stopPropagation() "  id="assigned-to" placeholder="Select contacts to assign" />
+          <div
+            class="dropdown-menu"
+            #overlayRef
+            [ngClass]="{ visible: dropdownOpen, invisible: !dropdownOpen }"
+          >
+            @if(this.dropdownOpen){ @for (item of (filterContacts());
+            track item; let index = $index) {
+            <div class="contact" (click)="toggleContactSelection(item);">
+              <div
+                class="contact-img"
+                [ngStyle]="{ background: item['color'] }"
+              >
+                {{
+                  contactService.getFirstAndLastNameFirstLetter(item["name"])
+                }}
               </div>
+
 
               <ul class="name-email">
                 <li>
-                  {{ contactService.getFirstAndLastName(item['name']) }}
+                  {{ contactService.getFirstAndLastName(item["name"]) }}
                   <div class="checkbox-wrapper">
-                    <input type="checkbox" [checked]="item.selected" name="checkBox" id="{{ item.id }}" (change)="contactService.setSelection(item); setAssignedTo(item)" />
+                    <input
+                      type="checkbox"
+                      [checked]="item.selected"
+                      name="checkBox"
+                      id="{{ item.id }}"
+                      (change)="
+                        contactService.setSelection(item); setAssignedTo(item)
+                      "
+                      (click)="$event.stopPropagation()"
+                    />
                     <label class="check-box" [attr.for]="item.id"></label>
                   </div>
                 </li>
               </ul>
-            </div>
-            } }
+
+              </div>
+            }}
           </div>
           <div class="selected-contact-wrapper">
             @for (contact of contactService.contactList; track $index) { @if (contact.selected == true) {
-            <div class="selected-contact" [ngStyle]="{ background: contact['color'] }" (click)="contactService.setSelection(contact)">
+            <div class="selected-contact" [ngStyle]="{ background: contact['color'] }" (click)="contactService.setSelection(contact); $event.stopPropagation()">
               {{ contact.letters }}
             </div>
             } }
@@ -121,11 +149,11 @@
               <li>
                 <a>{{ subtask }}</a>
                 <span class="edit-delete-hover-content">
-                  <span (click)="editSubtask(i)">
+                  <span (click)="editSubtask(i); $event.stopPropagation()">
                     <img src="/assets/icon/edit.svg" alt="Edit" />
                   </span>
                   |
-                  <span (click)="deleteSubtask(i)">
+                  <span (click)="deleteSubtask(i); $event.stopPropagation()">
                     <img src="/assets/icon/trash.svg" alt="Delete" />
                   </span>
                 </span>
@@ -141,7 +169,7 @@
     <div class="bottom-form-wrapper">
       <p class="req-desktop"><span class="req-marker">*</span>This field is required</p>
       <div class="btn-div">
-        <button class="cancel-button" type="reset" (click)="resetSubtasks()">
+        <button class="cancel-button" type="reset" (click)="resetSubtasks(); resetForm(); overlayService.closeOverlay()">
           Clear
           <img src="assets/img/4-contacts/close-icon.svg" alt="close pictogram" />
         </button>

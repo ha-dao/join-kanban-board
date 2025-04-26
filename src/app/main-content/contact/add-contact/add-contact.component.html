@@ -1,11 +1,11 @@
 
-<div class="overlay" [ngClass]="{ open: overlayService.isOpen, closed: !overlayService.isOpen }"  (click)="handleBackdropClick($event)">
+<div class="overlay" [ngClass]="{ open: overlayService.isOpen(), closed: !overlayService.isOpen() }"  (click)="handleBackdropClick($event)">
     <div class="content-wrapper" #overlayRef >
-      <a href="#"
+      <a 
         ><img
           src="assets/img/addContactOverlay/X.svg"
           alt="x-icon close button"
-          (click)="clearForm(); this.overlayService.closeOverlay()"
+          (click)="clearForm(); this.overlayService.closeOverlay(); $event.stopPropagation()"
       /></a>
   
       <div class="logo-div">

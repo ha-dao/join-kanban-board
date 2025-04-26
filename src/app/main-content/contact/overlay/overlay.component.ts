@@ -1,4 +1,4 @@
-import { Component, ViewChild, Input, Output, EventEmitter, HostListener, ElementRef  } from '@angular/core';
+import { Component, ViewChild, Input, Output, EventEmitter, HostListener, ElementRef, signal, effect  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormControl, FormsModule, NgForm, NgModel } from '@angular/forms';
 import { ContactService } from '../../../services/contact.service';
@@ -27,7 +27,7 @@ export class OverlayComponent {
 
   handleBackdropClick(event: MouseEvent) {
     const clickedInside = this.overlayRef.nativeElement.contains(event.target);
-    if (!clickedInside && this.overlayService.isOpen) {      
+    if (!clickedInside && this.overlayService.isOpen()) {      
       this.overlayService.closeOverlay();     
     }
   }
