@@ -6,47 +6,21 @@
       <div class="task-data">
         <div class="input-div">
           <label for="title">Title<span class="req-marker">*</span></label>
-          <input
-            id="title"
-            type="text"
-            name="title"
-            placeholder="Enter a title"
-            required
-            #taskTitle = "ngModel"
-            minlength="2"
-            [(ngModel)]="taskData.title"
-          />
-          @if(taskTitle.invalid && taskTitle.touched){
-            <span class="error-message">Please enter a Title</span>
-           }
+          <input id="title" type="text" name="title" placeholder="Enter a title" required #taskTitle="ngModel" minlength="2" [(ngModel)]="taskData.title" />
+          @if (taskTitle.invalid && taskTitle.touched) {
+          <span class="error-message">Please enter a Title</span>
+          }
         </div>
         <div class="input-div">
           <label for="description">Description</label>
-          <textarea
-            name="description"
-            placeholder="Enter a description"
-            rows="4"
-            id="description"
-            [(ngModel)]="taskData.description"
-          >
-          </textarea>
+          <textarea name="description" placeholder="Enter a description" rows="4" id="description" [(ngModel)]="taskData.description"> </textarea>
         </div>
         <div class="input-div">
-          <label for="due-date"
-            >Due Date<span class="req-marker">*</span></label
-          >
-          <input
-            [(ngModel)]="taskData.date"
-            type="date"
-            name="Due Date"
-            id="due-date"
-            required
-            #taskDate ="ngModel"
-
-          />
-          @if(taskDate.invalid && taskDate.touched){
-            <span class="error-message">Please enter a Date</span>
-           }
+          <label for="due-date">Due Date<span class="req-marker">*</span></label>
+          <input [(ngModel)]="taskData.date" type="date" name="Due Date" id="due-date" required #taskDate="ngModel" />
+          @if (taskDate.invalid && taskDate.touched) {
+          <span class="error-message">Please enter a Date</span>
+          }
         </div>
       </div>
       <div class="sep-line"></div>
@@ -56,33 +30,27 @@
           <button
             [ngClass]="{
               active: clickedButton === 'Urgent',
-              inactive: clickedButton !== 'Urgent'
+              inactive: clickedButton !== 'Urgent',
             }"
             (click)="setPrority('Urgent')"
           >
             Urgent
-            <img
-              src="assets/img/2-add-task/urgent-icon.svg"
-              alt="urgent pictogram"
-            />
+            <img src="assets/img/2-add-task/urgent-icon.svg" alt="urgent pictogram" />
           </button>
           <button
             [ngClass]="{
               active: clickedButton === 'Medium',
-              inactive: clickedButton !== 'Medium'
+              inactive: clickedButton !== 'Medium',
             }"
             (click)="setPrority('Medium')"
           >
             Medium
-            <img
-              src="assets/img/2-add-task/medium-icon.svg"
-              alt="medium pictogram"
-            />
+            <img src="assets/img/2-add-task/medium-icon.svg" alt="medium pictogram" />
           </button>
           <button
             [ngClass]="{
               active: clickedButton === 'Low',
-              inactive: clickedButton !== 'Low'
+              inactive: clickedButton !== 'Low',
             }"
             (click)="setPrority('Low')"
           >
@@ -93,52 +61,28 @@
         <div class="input-div">
           <label for="assigned-to">Assigned to</label>
           <input type="text" class="dropdown" (click)="toggleDropdown()" id="assigned-to" placeholder="Select contacts to assign" />
-          <div
-            class="dropdown-menu"
-            [ngClass]="{ visible: dropdownOpen, invisible: !dropdownOpen }"
-          >
-            @if (this.dropdownOpen) {
-              @for (item of (contactService.contactList); track item; let index = $index) {
-                <div class="contact" (click)="contactService.selectItem(item.id)">
-                  <div
-                    class="contact-img"
-                    [ngStyle]="{ background: item['color'] }"
-                  >
-                    {{
-                      contactService.getFirstAndLastNameFirstLetter(item["name"])
-                    }}
+          <div class="dropdown-menu" [ngClass]="{ visible: dropdownOpen, invisible: !dropdownOpen }">
+            @if (this.dropdownOpen) { @for (item of contactService.contactList; track item; let index = $index) {
+            <div class="contact" (click)="contactService.selectItem(item.id)">
+              <div class="contact-img" [ngStyle]="{ background: item['color'] }">
+                {{ contactService.getFirstAndLastNameFirstLetter(item['name']) }}
+              </div>
+
+              <ul class="name-email">
+                <li>
+                  {{ contactService.getFirstAndLastName(item['name']) }}
+                  <div class="checkbox-wrapper">
+                    <input type="checkbox" [checked]="item.selected" name="checkBox" id="{{ item.id }}" (change)="contactService.setSelection(item); setAssignedTo(item)" />
+                    <label class="check-box" [attr.for]="item.id"></label>
                   </div>
-
-
-                  <ul class="name-email">
-                    <li>
-                      {{ contactService.getFirstAndLastName(item["name"]) }}
-                      <div class="checkbox-wrapper">
-                        <input
-                          type="checkbox"
-                          [checked]="item.selected"
-                          name="checkBox"
-                          id="{{ item.id }}"
-                          (change)="
-                            contactService.setSelection(item); setAssignedTo(item)
-                          "
-                        />
-                        <label class="check-box" [attr.for]="item.id"></label>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-              }
-            }
+                </li>
+              </ul>
+            </div>
+            } }
           </div>
           <div class="selected-contact-wrapper">
-            @for (contact of (contactService.contactList); track $index) {
-            @if(contact.selected == true){
-            <div
-              class="selected-contact"
-              [ngStyle]="{ background: contact['color'] }"
-              (click)="contactService.setSelection(contact)"
-            >
+            @for (contact of contactService.contactList; track $index) { @if (contact.selected == true) {
+            <div class="selected-contact" [ngStyle]="{ background: contact['color'] }" (click)="contactService.setSelection(contact)">
               {{ contact.letters }}
             </div>
             } }
@@ -146,76 +90,66 @@
         </div>
         <div class="input-div">
           <label for="category">Category<span class="req-marker">*</span></label>
-          <select name="Category" #categoryField = "ngModel"  id="category" required [(ngModel)]="taskData.category">
+          <select name="Category" #categoryField="ngModel" id="category" required [(ngModel)]="taskData.category">
             <option value="" selected>Select task category</option>
             <option value="User story">User story</option>
             <option value="Technical Task">Technical Task</option>
             <option value="Design">Design</option>
           </select>
-           @if(categoryField.invalid && categoryField.touched){
-            <span class="error-message">Please select a category</span>
-           }
-
-
-
+          @if (categoryField.invalid && categoryField.touched) {
+          <span class="error-message">Please select a category</span>
+          }
         </div>
 
-        <div>
+        <div class="current-sub-task-list-wrapper">
           <div class="input-icon-wrapper">
-            <input
-            [(ngModel)]="newSubtask"
-              type="text"
-              name="Subtasks"
-              placeholder="Add new subtask"
-            />
-            <button  class="test" (click)="addSubtask()">
-              <img
-                src="/assets/icon/+Symbol.svg"
-                class="input-icon"
-                alt="Plus"
-              />
-            </button>
+            <input [(ngModel)]="newSubtask" type="text" name="Subtasks" placeholder="Add new subtask" />
+            <img src="/assets/icon/+Symbol.svg" class="input-icon" alt="Plus" (click)="addSubtask()" />
           </div>
-          @for (subtask of (currentSubtasks); let i = $index; track i){
-            <li>
-              @if (editedIndex === i) {
-                <input
-                  name="editField"
-                  [(ngModel)]="editableSubtask"
-                  type="text"
-                  class="edit-input"
-                />
-                <button (click)="saveEditedSubtask(i)">💾</button>
-                <button (click)="deleteSubtask(i)">🗑️</button>
-              } @else {
-                {{ subtask }}
-                <a (click)="editSubtask(i)">
-                  <img src="/assets/icon/edit.svg" alt="Edit" />
-                </a>
-                <a (click)="deleteSubtask(i)">
-                  <img src="/assets/icon/trash.svg" alt="Delete" />
-                </a>
-              }
-            </li>
-          }
+          <div class="list-wrapper">
+            @for (subtask of currentSubtasks; let i = $index; track i) { @if (editedIndex === i) {
+            <div class="subtask-edit-input">
+              <input name="editField" [(ngModel)]="editableSubtask" type="text" class="edit-input" />
+              <span>
+                <span (click)="deleteSubtask(i)"><img src="assets/img/4-contacts/delete-icon.svg" alt="delete pictogram" /></span>
+                |
+                <span (click)="saveEditedSubtask(i)"><img src="assets/img/4-contacts/check-icon.svg" alt="check pictogram" /></span>
+              </span>
+            </div>
+            } @else {
+            <ul class="current-sub-task-list">
+              <li>
+                <a>{{ subtask }}</a>
+                <span class="edit-delete-hover-content">
+                  <span (click)="editSubtask(i)">
+                    <img src="/assets/icon/edit.svg" alt="Edit" />
+                  </span>
+                  |
+                  <span (click)="deleteSubtask(i)">
+                    <img src="/assets/icon/trash.svg" alt="Delete" />
+                  </span>
+                </span>
+              </li>
+            </ul>
+            } }
+          </div>
         </div>
       </div>
     </div>
-    <p class="req-mobile">
-      <span class="req-marker">*</span>This field is required
-    </p>
+    <p class="req-mobile"><span class="req-marker">*</span>This field is required</p>
 
     <div class="bottom-form-wrapper">
-      <p class="req-desktop">
-        <span class="req-marker">*</span>This field is required
-      </p>
+      <p class="req-desktop"><span class="req-marker">*</span>This field is required</p>
       <div class="btn-div">
-        <button class="cancel-button" type="reset" (click)="resetSubtasks()">Clear✖</button>
-        <button class="create-button" type="submit"  [disabled]="!isFormValid()" (click)="submitTask()">Create Task ✔</button>
+        <button class="cancel-button" type="reset" (click)="resetSubtasks()">
+          Clear
+          <img src="assets/img/4-contacts/close-icon.svg" alt="close pictogram" />
+        </button>
+        <button class="create-button" type="submit" [disabled]="!isFormValid()" (click)="submitTask()">
+          Create Task
+          <img src="assets/img/4-contacts/check-icon.svg" alt="check pictogram" />
+        </button>
       </div>
     </div>
   </form>
 </section>
-
-
-
