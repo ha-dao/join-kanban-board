@@ -21,6 +21,7 @@ export class TaskService implements OnDestroy {
   unsubTasksList: any;
   tasksList: Task[] = [];
   searchInputFieldValue: string= '';
+  newTaskStatus: string= '';
   constructor() {
     this.snap();
   }
@@ -37,6 +38,7 @@ export class TaskService implements OnDestroy {
   }
 
   async addTask(item: Task) {
+    item.status = this.newTaskStatus;
     await addDoc(this.getTasksRef(), item)
       .catch((err) => {
         console.error(err);
