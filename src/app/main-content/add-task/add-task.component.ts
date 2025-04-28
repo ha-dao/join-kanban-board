@@ -146,6 +146,7 @@ submitTask(){
   this.resetSubtasks()
   this.setInputsUntouched()
   this.overlayService.closeOverlay()
+  this.toggleFeedbackMsg('Task created!')
 
 
 }
@@ -195,6 +196,8 @@ filterContacts(){
   );
 }
 
-
+toggleFeedbackMsg(msg:string){
+this.feedbackService.show(msg)
+}
 
 }
