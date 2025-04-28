@@ -50,6 +50,10 @@ export class BoardComponent implements OnInit {
     }
   }
   
+  setNewTaskStatus(status:string){
+    this.taskService.newTaskStatus = status;
+  }
+
   addTodoTask(task: Task) {
     this.todoTasks.push(task);
   }
