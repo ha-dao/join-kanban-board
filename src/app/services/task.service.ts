@@ -37,13 +37,17 @@ export class TaskService implements OnDestroy {
     });
   }
 
-  async addTask(item: Task) {
-    item.status = this.newTaskStatus;
-    await addDoc(this.getTasksRef(), item)
+  async addTask(task: Task) {
+    task.status = this.newTaskStatus;
+    await addDoc(this.getTasksRef(), task)
       .catch((err) => {
         console.error(err);
       })
       .then((docRef) => {});
+  }
+
+  async updateTask(taskId: string, taskData: {}){
+    await updateDoc(this.getSingleTask('tasks', taskId), taskData);
   }
 
   async deleteTask(id: string) {
