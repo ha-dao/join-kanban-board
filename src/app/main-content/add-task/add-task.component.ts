@@ -30,6 +30,7 @@ constructor(){
     }
   })
 }
+
 contactService = inject(ContactService);
 feedbackService = inject(FeedbackServiceService);
 overlayService = inject(OverlayService)
@@ -46,6 +47,7 @@ newSubtask: string = '';
 editableSubtask:string= '';
 editedIndex:number | null = null;
 dropdownOpen:boolean = false;
+isSelectOpen:boolean = false;
 taskData: Task= {
   title: '',
   description: '',
@@ -57,7 +59,9 @@ taskData: Task= {
   status: ''
 };
 
-
+toggleSelectOpen() {
+  this.isSelectOpen = !this.isSelectOpen;
+}
 
 toggleDropdown(){
   this.dropdownOpen = !this.dropdownOpen;
@@ -112,7 +116,7 @@ addSubtask() {
 }
 editSubtask(index: number) {
   this.editedIndex = index;
-  this.editableSubtask = this.currentSubtasks[index];  
+  this.editableSubtask = this.currentSubtasks[index];
 }
 
 saveEditedSubtask(index: number) {
@@ -142,8 +146,8 @@ submitTask(){
   this.resetSubtasks()
   this.setInputsUntouched()
   this.overlayService.closeOverlay()
-  
-  
+
+
 }
 
 setInputsUntouched(){
@@ -178,15 +182,15 @@ resetContacts(){
   })
 }
 
-isFormValid(){  
+isFormValid(){
   return this.taskData.title !== '' &&
   this.taskData.date !== '' &&
-  this.taskData.category !== '';  
+  this.taskData.category !== '';
 }
 
 filterContacts(){
   if(!this.searchTerm)return this.contactService.contactList;
-  return this.contactService.contactList.filter( c => 
+  return this.contactService.contactList.filter( c =>
   c.name.toLowerCase().includes(this.searchTerm.toLocaleLowerCase())
   );
 }

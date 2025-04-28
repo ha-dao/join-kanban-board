@@ -37,21 +37,49 @@
   gap:72px;
   border-radius: 32px;
   background-color: white;
-  >a {
-      position:absolute;
-      top: 50px;
-      right: 120px;
-      padding: 8px;
-      border-radius: 50%;
-      width: 32px;
-      height: 32px;
-      z-index: 999;
-      img {
-        width: 16px;
-        height: 16px;
-      }
-  &:hover {
-    background-color: darken($grey, 0.5);
+  app-add-task {
+    width: 100%;
+    padding: 0;
+    >a {
+        padding: 8px;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        z-index: 999;
+        img {
+          width: 16px;
+          height: 16px;
+        }
+    &:hover {
+      background-color: darken($grey, 0.5);
+    }
   }
+  }
+}
+
+
+@media (max-width: 1280px) and (orientation: portrait) {
+  .content-wrapper {
+    height: calc(100vh - 24px);
+    width: calc(100% - 24px);
+    overflow-y: auto;
+    scrollbar-width: 0;
+    app-add-task {
+      padding: 16px;
+      margin-top: 180px;
+    }
+  }
+}
+
+@media (max-width: 1280px) and (orientation: landscape) {
+  .content-wrapper {
+    height: calc(100vh - 24px);
+    width: calc(100% - 24px);
+    overflow-y: auto;
+    scrollbar-width: 0;
+    app-add-task {
+      padding: 16px;
+      margin-top: 280px;
+    }
   }
 }
