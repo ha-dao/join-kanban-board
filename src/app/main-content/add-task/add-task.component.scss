@@ -6,25 +6,28 @@ section {
   @include displayFlex(flex, column, flex-start, flex-start, 24px);
   width: 100%;
   max-width: 1920px;
+  padding: 64px;
+  .title-close-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 0;
+    width: 100%;
+    .close-button {
+        padding: 8px;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        z-index: 999;
+        img {
+          width: 16px;
+          height: 16px;
+        }
+        &:hover {
+          background-color: darken($grey, 0.5);
+        }
+    }
+  }
 
-  .close-button{    
-      position:absolute;
-      top: 50px;
-      right: 120px;
-      padding: 8px;
-      border-radius: 50%;
-      width: 32px;
-      height: 32px;
-      z-index: 999;
-      img {
-        width: 16px;
-        height: 16px;
-      }
-  &:hover {
-    background-color: darken($grey, 0.5);
-  }
-  }
-  
   form {
     input.ng-invalid.ng-touched {
       border: 1px solid $border-alert-color;
@@ -47,6 +50,7 @@ section {
       border: 1px solid #ccc;
       outline: none;
       margin-bottom: 16px;
+      width: 100%;
       &:focus {
         border: 1px solid $hover-color;
       }
@@ -58,10 +62,13 @@ section {
       appearance: none;
       -webkit-appearance: none;
       -moz-appearance: none;
-      background-image: url('../../../assets/icon/+Symbol.svg');
+      background-image: url('../../../assets/img/2-add-task/arrow-drop-up-icon.svg');
       background-repeat: no-repeat;
-      background-position: right 10px center;
+      background-position: right 18px center;
       padding-right: 30px;
+      &.open {
+        background-image: url('../../../assets/img/2-add-task/arrow-drop-down-icon.svg');
+      }
     }
     .input-wrapper {
       @include displayFlex(flex, row, space-between, flex-start, 40px);
@@ -133,8 +140,33 @@ section {
   .input-div {
     @include displayFlex(flex, column, auto, auto);
     width: 100%;
-  }
+      .hidden-date-input {
+        position: absolute;
+        opacity: 0;
+        width: 0;
+        height: 0;
+        z-index: -1;
+        margin-top: 45px;
+      }
 
+      .custom-date-input {
+        position: relative;
+        display: flex;
+        align-items: center;
+
+        .calendar-icon {
+          position: absolute;
+          right: 12px;
+          top: 15%;
+          cursor: pointer;
+
+          img {
+            width: 16px;
+            height: 16px;
+          }
+        }
+      }
+  }
   .bottom-form-wrapper {
     @include displayFlex(flex, row, space-between, flex-end);
     margin-top: 24px;
@@ -161,9 +193,45 @@ section {
   margin-bottom: 0;
 }
 
-.dropdown {
-  background-color: white;
+.input-with-arrow {
+  position: relative;
+  width: 100%;
+  .dropdown {
+    width: 100%;
+    background-color: $white;
+    &::placeholder {
+      color: $black;
+    }
+    &:focus {
+      &::placeholder {
+        color: $white;
+      }
+    }
+  }
+
+  .dropdown-arrow {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    pointer-events: none;
+
+    &.down {
+      background-image: url('../../../assets/img/2-add-task/arrow-drop-up-icon.svg');
+    }
+
+    &.up {
+      background-image: url('../../../assets/img/2-add-task/arrow-drop-down-icon.svg');
+    }
+  }
 }
+
+
 
 .dropdown-menu {
   border-radius: 0 0 10px 10px;
@@ -277,10 +345,10 @@ div.current-sub-task-list-wrapper {
     }
     .input-icon {
       position: absolute;
-      right: 10px;
-      top: 10%;
-      width: 24px;
-      height: 24px;
+      right: 15px;
+      top: 12%;
+      width: 18px;
+      height: 18px;
       padding: 4px;
       border-radius: 50%;
       &:hover {
@@ -379,6 +447,7 @@ div.current-sub-task-list-wrapper {
 
 @media (max-width: 1280px) {
   section {
+    padding: 0;
     form {
       p.req-mobile {
         display: block;
@@ -559,9 +628,25 @@ $checkbox-height: 18px;
 }
 
 .error-message {
-  color: red;
+  color: $text-alert-color;
   font-size: 14px;
   padding: 4px;
   margin-top: -16px;
   margin-bottom: 8px;
+}
+
+:host-context(app-overlay) {
+  @media (max-width: 1280px) {
+    section {
+      form {
+        p.req-mobile {
+          margin-top: 24px;
+        }
+        .bottom-form-wrapper {
+          position: unset;
+          background-color: transparent;
+        }
+      }
+    }
+  }
 }
