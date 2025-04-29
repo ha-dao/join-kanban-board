@@ -69,4 +69,13 @@ export class BoardComponent implements OnInit {
   addDoneTask(task: Task) {
     this.doneTasks.push(task);
   }
+
+getCompletedSubtasks(task: Task): number {
+  return task.subtasks?.filter(t => t.completed).length || 0;
+}
+
+getProgressWidth(task: Task): number {
+  if (!task.subtasks?.length) return 0;
+  return (this.getCompletedSubtasks(task) / task.subtasks.length) * 100;
+}
 }

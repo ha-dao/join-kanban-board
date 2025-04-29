@@ -42,7 +42,7 @@ taskService= inject(TaskService);
 @ViewChild('overlayRef', {static: false}) overlayRef!: ElementRef;
 searchTerm: string=''
 clickedButton= 'Medium';
-currentSubtasks:string[]=[];
+currentSubtasks: { title: string, completed: boolean }[] = [];
 newSubtask: string = '';
 editableSubtask:string= '';
 editedIndex:number | null = null;
@@ -110,21 +110,29 @@ setAssignedTo(item: Contact) {
 
 addSubtask() {
   if (this.newSubtask.trim()) {
-    this.currentSubtasks.push(this.newSubtask.trim());
+    this.currentSubtasks.push({ 
+      title: this.newSubtask.trim(), 
+      completed: false 
+    });
     this.newSubtask = '';
   }
 }
 editSubtask(index: number) {
   this.editedIndex = index;
-  this.editableSubtask = this.currentSubtasks[index];
+  this.editableSubtask = this.currentSubtasks[index].title;
 }
 
 saveEditedSubtask(index: number) {
   if (this.editableSubtask.trim()) {
-    this.currentSubtasks[index] = this.editableSubtask.trim();
+    this.currentSubtasks[index].title = this.editableSubtask.trim();
   }
   this.editedIndex = null;
   this.editableSubtask = '';
+}
+
+getCompletedSubtasks(task: Task): number {
+  if (!task.subtasks) return 0;
+  return task.subtasks.filter(t => t.completed).length;
 }
 
 deleteSubtask(index: number) {
