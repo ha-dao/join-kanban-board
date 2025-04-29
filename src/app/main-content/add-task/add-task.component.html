@@ -1,7 +1,9 @@
 <section>
   <div class="title-close-wrapper">
     <h2>Add Task</h2>
-    <a class="close-button" [ngClass]="{ visible: overlayService.isOpen(), invisible: !overlayService.isOpen() }"><img src="assets/img/addContactOverlay/X.svg" alt="x-icon close button" (click)="this.overlayService.closeOverlay(); $event.stopPropagation(); resetForm()" /></a>
+    <a class="close-button" [ngClass]="{ visible: overlayService.isOpen(), invisible: !overlayService.isOpen() }">
+      <img src="assets/img/addContactOverlay/X.svg" alt="x-icon close button" (click)="this.overlayService.closeOverlay(); $event.stopPropagation(); resetForm()" />
+    </a>
   </div>
 
   <form action="submit">
@@ -64,14 +66,12 @@
         <div class="input-div">
           <label for="assigned-to">Assigned to</label>
           <div class="input-with-arrow">
-            <input type="text" [(ngModel)]="searchTerm" name="SearchContact" class="dropdown"
-                   (click)="toggleDropdown(); $event.stopPropagation()"
-                   id="assigned-to" placeholder="Select contacts to assign" />
-            <div class="dropdown-arrow" [ngClass]="{'up': dropdownOpen, 'down': !dropdownOpen}"></div>
-        </div>
+            <input type="text" [(ngModel)]="searchTerm" name="SearchContact" class="dropdown" (click)="toggleDropdown(); $event.stopPropagation()" id="assigned-to" placeholder="Select contacts to assign" />
+            <div class="dropdown-arrow" [ngClass]="{ up: dropdownOpen, down: !dropdownOpen }"></div>
+          </div>
           <div class="dropdown-menu" #overlayRef [ngClass]="{ visible: dropdownOpen, invisible: !dropdownOpen }">
             @if (this.dropdownOpen) { @for (item of (filterContacts()); track item; let index = $index) {
-            <div class="contact" (click)="toggleContactSelection(item)">
+            <div class="contact" [ngClass]="{ 'selected-contact-background': item.selected }" (click)="toggleContactSelection(item)">
               <div class="contact-img" [ngStyle]="{ background: item['color'] }">
                 {{ contactService.getFirstAndLastNameFirstLetter(item['name']) }}
               </div>
@@ -98,7 +98,7 @@
         </div>
         <div class="input-div">
           <label for="category">Category<span class="req-marker">*</span></label>
-          <select name="Category" #categoryField="ngModel" id="category" required [(ngModel)]="taskData.category" [ngClass]="{'open':isSelectOpen}" (click)="toggleSelectOpen()">
+          <select name="Category" #categoryField="ngModel" id="category" required [(ngModel)]="taskData.category" [ngClass]="{ open: isSelectOpen }" (click)="toggleSelectOpen()">
             <option value="" selected>Select task category</option>
             <option value="User story">User story</option>
             <option value="Technical Task">Technical Task</option>
@@ -112,10 +112,11 @@
         <div class="current-sub-task-list-wrapper">
           <div class="input-icon-wrapper">
             <input [(ngModel)]="newSubtask" type="text" name="Subtasks" placeholder="Add new subtask" />
-            <img src="/assets/icon/+Symbol.svg" class="input-icon" alt="Plus" (click)="addSubtask()" />
+            <img src="assets/icon/+Symbol.svg" class="input-icon" alt="Plus" (click)="addSubtask()" />
           </div>
           <div class="list-wrapper">
-            @for (subtask of currentSubtasks; let i = $index; track i) { @if (editedIndex === i) {
+            @for (subtask of currentSubtasks; let i = $index; track i) {
+              @if (editedIndex === i) {
             <div class="subtask-edit-input">
               <input name="editField" [(ngModel)]="editableSubtask" type="text" class="edit-input" />
               <span>
@@ -130,11 +131,11 @@
                 <a>{{ subtask }}</a>
                 <span class="edit-delete-hover-content">
                   <span (click)="editSubtask(i); $event.stopPropagation()">
-                    <img src="/assets/icon/edit.svg" alt="Edit" />
+                    <img src="assets/icon/edit.svg" alt="Edit" />
                   </span>
                   |
                   <span (click)="deleteSubtask(i); $event.stopPropagation()">
-                    <img src="/assets/icon/trash.svg" alt="Delete" />
+                    <img src="assets/icon/trash.svg" alt="Delete" />
                   </span>
                 </span>
               </li>

@@ -231,12 +231,12 @@ section {
   }
 }
 
-
-
 .dropdown-menu {
   border-radius: 0 0 10px 10px;
   background-color: $white;
   max-height: 100px;
+  -webkit-box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 8px 2px rgba(0, 0, 0, 0.1);
   overflow-y: scroll;
 }
 .visible {
@@ -253,23 +253,69 @@ section {
   align-items: center;
   border-radius: 10px;
   padding: 0 16px 0 8px;
+  color: $black;
+
   &:hover {
     background: -webkit-linear-gradient(0deg, rgba(249, 249, 249, 1) 0%, rgba(240, 240, 240, 1) 100%);
     background: -moz-linear-gradient(0deg, rgba(249, 249, 249, 1) 0%, rgba(240, 240, 240, 1) 100%);
     background: linear-gradient(0deg, rgba(249, 249, 249, 1) 0%, rgba(240, 240, 240, 1) 100%);
-    color: inherit;
     cursor: pointer;
   }
 
   > ul {
     display: inline-block;
     > li {
-      color: black;
       font-size: 14px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
+  }
+
+
+}
+
+.selected-contact-background {
+  background: $primary-color;
+  color: $white;
+    >ul {
+      >li {
+        color: $white;
+        .checkbox-wrapper {
+          .check-box {
+            background-color: $primary-color;
+            border: 2.8px solid #fff;
+            &::before {
+              width: 1px;
+              height: 16px;
+              background-color: $white;
+            }
+            &::after {
+              width: 3px;
+              background-color: $white;
+            }
+          }
+        }
+      }
+    }
+
+  &:hover {
+    background: $primary-color;
+    >ul {
+      >li {
+        color: $white;
+        .checkbox-wrapper {
+          .check-box {
+            background-color: $primary-color;
+            border: 2.8px solid #fff;
+            &::before, &::after {
+              background-color: $white;
+            }
+          }
+        }
+      }
+    }
+
   }
 }
 
@@ -359,6 +405,8 @@ div.current-sub-task-list-wrapper {
   }
   .list-wrapper {
     width: 100%;
+    max-height: 120px;
+    overflow-y: auto;
     margin-top: -40px;
     z-index: 2;
     .subtask-edit-input {
@@ -584,7 +632,7 @@ $checkbox-height: 18px;
     }
 
     &::before {
-      top: calc($checkbox-height * 0.72);
+      top: calc($checkbox-height * 0.68);
       left: calc($checkbox-height * 0.41);
       box-shadow: 0 0 0 calc($checkbox-height * 0.05) $white;
       -moz-transform: rotate(-135deg);
@@ -618,7 +666,7 @@ $checkbox-height: 18px;
     }
 
     &::before {
-      height: calc($checkbox-height * 1);
+      height: calc($checkbox-height * 0.5);
       -moz-animation: dothatopcheck-19 0.4s ease 0s forwards;
       -o-animation: dothatopcheck-19 0.4s ease 0s forwards;
       -webkit-animation: dothatopcheck-19 0.4s ease 0s forwards;
