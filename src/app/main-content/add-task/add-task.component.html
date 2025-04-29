@@ -6,12 +6,12 @@
     </a>
   </div>
 
-  <form action="submit">
+  <form (keydown.enter)="$event.preventDefault()" action="submit">
     <div class="input-wrapper">
       <div class="task-data">
         <div class="input-div">
           <label for="title">Title<span class="req-marker">*</span></label>
-          <input id="title" type="text" name="title" placeholder="Enter a title" required #taskTitle="ngModel" minlength="2" [(ngModel)]="taskData.title" />
+          <input id="title" type="text" name="title" placeholder="Enter a title"   required #taskTitle="ngModel" minlength="2" [(ngModel)]="taskData.title" />
           @if (taskTitle.invalid && taskTitle.touched) {
           <span class="error-message">Please enter a Title</span>
           }
@@ -33,6 +33,7 @@
         <label>Priority</label>
         <div class="priority-div">
           <button
+          type="button"
             [ngClass]="{
               active: clickedButton === 'Urgent',
               inactive: clickedButton !== 'Urgent',
@@ -43,6 +44,7 @@
             <img src="assets/img/2-add-task/urgent-icon.svg" alt="urgent pictogram" />
           </button>
           <button
+          type="button"
             [ngClass]="{
               active: clickedButton === 'Medium',
               inactive: clickedButton !== 'Medium',
@@ -53,6 +55,7 @@
             <img src="assets/img/2-add-task/medium-icon.svg" alt="medium pictogram" />
           </button>
           <button
+          type="button"
             [ngClass]="{
               active: clickedButton === 'Low',
               inactive: clickedButton !== 'Low',
@@ -111,24 +114,25 @@
 
         <div class="current-sub-task-list-wrapper">
           <div class="input-icon-wrapper">
-            <input [(ngModel)]="newSubtask" type="text" name="Subtasks" placeholder="Add new subtask" />
-            <img src="assets/icon/+Symbol.svg" class="input-icon" alt="Plus" (click)="addSubtask()" />
+            <input [(ngModel)]="newSubtask.title" type="text" name="Subtasks" placeholder="Add new subtask" (keyup.enter)="addSubtask()" />
+            <img src="assets/icon/+Symbol.svg" class="input-icon" alt="Plus" (click)="addSubtask()"   />
           </div>
           <div class="list-wrapper">
             @for (subtask of currentSubtasks; let i = $index; track i) {
               @if (editedIndex === i) {
             <div class="subtask-edit-input">
-              <input name="editField" [(ngModel)]="editableSubtask" type="text" class="edit-input" />
+              <input name="editField" [(ngModel)]="editableSubtask.title" type="text" class="edit-input" />
               <span>
-                <span (click)="deleteSubtask(i)"><img src="assets/img/4-contacts/delete-icon.svg" alt="delete pictogram" /></span>
+                <span (click)="deleteSubtask(i);$event.stopPropagation() "><img src="assets/img/4-contacts/delete-icon.svg" alt="delete pictogram" /></span>
                 |
-                <span (click)="saveEditedSubtask(i)"><img src="assets/img/4-contacts/check-icon.svg" alt="check pictogram" /></span>
+                <span (click)="saveEditedSubtask(i); $event.stopPropagation()"><img src="assets/img/4-contacts/check-icon.svg" alt="check pictogram" /></span>
               </span>
             </div>
             } @else {
             <ul class="current-sub-task-list">
+              @if(subtask.title){
               <li (click)="editSubtask(i); $event.stopPropagation()">
-                <a>{{ subtask }}</a>
+                <a>{{ subtask.title }}</a>
                 <span class="edit-delete-hover-content">
                   <span (click)="editSubtask(i); $event.stopPropagation()">
                     <img src="assets/icon/edit.svg" alt="Edit" />
@@ -139,6 +143,7 @@
                   </span>
                 </span>
               </li>
+            }
             </ul>
             } }
           </div>
@@ -150,7 +155,7 @@
     <div class="bottom-form-wrapper">
       <p class="req-desktop"><span class="req-marker">*</span>This field is required</p>
       <div class="btn-div">
-        <button class="cancel-button" type="reset" (click)="resetSubtasks(); resetForm(); overlayService.closeOverlay()">
+        <button class="cancel-button" (click)="resetSubtasks(); overlayService.closeOverlay()">
           Clear
           <img src="assets/img/4-contacts/close-icon.svg" alt="close pictogram" />
         </button>

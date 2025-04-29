@@ -6,12 +6,13 @@ import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
 import { FeedbackServiceService } from './services/feedback.service';
 import { OverlayService } from './services/overlay.service';
 import { OverlayComponent } from './main-content/contact/overlay/overlay.component';
+import { TaskComponent } from './main-content/task/task.component';
 
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet, HeaderComponent, SidebarComponent, OverlayComponent ],
+  imports: [CommonModule, RouterOutlet, HeaderComponent, SidebarComponent, OverlayComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
