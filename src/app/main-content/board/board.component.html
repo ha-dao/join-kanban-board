@@ -42,9 +42,9 @@
         <div class="tasks-container">
 
           @if (taskService.tasksList) {
-            @for (task of taskService.tasksList; track task) {
+            @for (task of taskService.tasksList; track task.id) {
               @if(task.status == 'ToDo' && (task.title.startsWith(taskService.searchInputFieldValue) || task.description.startsWith(taskService.searchInputFieldValue))){
-                <div class="task-card">
+                <div class="task-card" (click)="openTaskDetail(task)">
                   <div class="task-category">{{ task.category }}</div>
                   <div class="task-title">{{ task.title }}</div>
                   <div class="task-description">
@@ -58,9 +58,12 @@
                   </div>
   
                   @if (task.subtasks && task.subtasks.length > 0) {
-                    <div class="task-progress">
-                      {{ task.subtasks.length }} Subtasks
-                    </div>
+                    <div class="progress-container">
+                      <div class="progress-track">
+                        <div class="progress-bar" [style.width.%]="getProgressWidth(task)"></div>
+                      </div>
+                      <span class="progress-text"> {{ getCompletedSubtasks(task) }}/{{ task.subtasks.length || 0 }} Subtasks</span>
+                      </div>
                   }
   
                   <div class="task-footer">
@@ -118,7 +121,7 @@
           @if (taskService.tasksList) {
             @for (task of taskService.tasksList; track task) {
               @if(task.status == 'In Progress' && (task.title.startsWith(taskService.searchInputFieldValue) || task.description.startsWith(taskService.searchInputFieldValue))){
-                <div class="task-card">
+                <div class="task-card" (click)="openTaskDetail(task)">
                   <div class="task-category">{{ task.category }}</div>
                   <div class="task-title">{{ task.title }}</div>
                   <div class="task-description">
@@ -192,7 +195,7 @@
           @if (taskService.tasksList) {
             @for (task of taskService.tasksList; track task) {
               @if(task.status == 'Await Feedback' && (task.title.startsWith(taskService.searchInputFieldValue) || task.description.startsWith(taskService.searchInputFieldValue))){
-                <div class="task-card">
+                <div class="task-card" (click)="openTaskDetail(task)">
                   <div class="task-category">{{ task.category }}</div>
                   <div class="task-title">{{ task.title }}</div>
                   <div class="task-description">
@@ -263,7 +266,7 @@
           @if (taskService.tasksList) {
             @for (task of taskService.tasksList; track task) {
               @if(task.status == 'Done' && (task.title.startsWith(taskService.searchInputFieldValue) || task.description.startsWith(taskService.searchInputFieldValue))){
-                <div class="task-card">
+                <div class="task-card" (click)="openTaskDetail(task)">
                   <div class="task-category">{{ task.category }}</div>
                   <div class="task-title">{{ task.title }}</div>
                   <div class="task-description">

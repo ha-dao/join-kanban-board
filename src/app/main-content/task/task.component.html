@@ -1,0 +1,42 @@
+<section>
+    <div class="title-close-wrapper">
+        <h2>{{task!.category}}</h2>
+        <a class="close-button" ><img src="assets/img/addContactOverlay/X.svg" alt="x-icon close button" (click)="this.overlayService.closeOverlay(); $event.stopPropagation(); " /></a>
+    </div>
+    <h2>{{task!.title}}</h2>
+    <div class="task-details">
+        <p>{{task!.description}}</p>
+        <div class="due-date">
+            <p>Due Date:</p> <p>{{task!.date}}</p>
+        </div>
+        <div class="priority">
+            <p>Priority:</p><p>{{task!.priority}}</p>
+        </div>
+        <div class="assigned-to">
+            
+                @for (item of task?.assignedTo; track item; let index = $index) {
+                    <div class="contact">
+                      <div class="contact-img" [ngStyle]="{ background: item['color'] }">
+                        {{ contactService.getFirstAndLastNameFirstLetter(item['name']) }}
+                      </div>
+        
+                      <ul class="name-email">
+                        <li>
+                          {{ contactService.getFirstAndLastName(item['name']) }}                          
+                        </li>
+                      </ul>
+                    </div>
+                    }            
+        </div>
+
+        <div class="subtasks">
+            
+        </div>
+    </div>
+
+
+
+
+
+
+</section>
