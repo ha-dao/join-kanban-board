@@ -42,9 +42,21 @@ taskService= inject(TaskService);
 @ViewChild('overlayRef', {static: false}) overlayRef!: ElementRef;
 searchTerm: string=''
 clickedButton= 'Medium';
-currentSubtasks:string[]=[];
-newSubtask: string = '';
-editableSubtask:string= '';
+currentSubtasks:{
+  title:string;
+  status:string
+}[]=[];
+newSubtask:{title:string;
+  status:string
+}= {
+  title:'',
+  status: 'unfinished'
+};
+editableSubtask= 
+  {title: '',
+    status: 'unfinished'
+  }
+;
 editedIndex:number | null = null;
 dropdownOpen:boolean = false;
 isSelectOpen:boolean = false;
@@ -86,9 +98,7 @@ setClickedButton(button:string){
 this.clickedButton = button
 }
 
-onSubmit(){
-  this.taskService.tasksList.push(this.taskData)
-}
+
 
 toggleContactSelection(item:Contact){
   this.contactService.setSelection(item);
@@ -109,29 +119,31 @@ setAssignedTo(item: Contact) {
 }
 
 addSubtask() {
-  if (this.newSubtask.trim()) {
-    this.currentSubtasks.push(this.newSubtask.trim());
-    this.newSubtask = '';
-  }
+  if (this.newSubtask.title){
+    let subTask ={title:this.newSubtask.title, status:'unfinished'}
+    this.currentSubtasks.push(subTask);
+    this.newSubtask.title = '';
+    
+  
 }
-editSubtask(index: number) {
+}
+editSubtask(index: number) {   
   this.editedIndex = index;
   this.editableSubtask = this.currentSubtasks[index];
+
 }
 
-saveEditedSubtask(index: number) {
-  if (this.editableSubtask.trim()) {
-    this.currentSubtasks[index] = this.editableSubtask.trim();
-  }
+saveEditedSubtask(index: number) { 
+  this.currentSubtasks[index] ={title:this.editableSubtask.title, status:'unfinished'}   
   this.editedIndex = null;
-  this.editableSubtask = '';
+  this.editableSubtask.title = '';
 }
 
 deleteSubtask(index: number) {
   this.currentSubtasks.splice(index, 1);
   if (this.editedIndex === index) {
     this.editedIndex = null;
-    this.editableSubtask = '';
+    this.editableSubtask.title = '';
   }
 }
 
@@ -140,13 +152,15 @@ resetSubtasks(){
   this.resetForm()
 }
 
-submitTask(){
+submitTask(){  
+  this.taskService.tasksList.push(this.taskData)
   this.taskData.subtasks = (this.currentSubtasks)
   this.taskService.addTask(this.taskData)
   this.resetSubtasks()
   this.setInputsUntouched()
   this.overlayService.closeOverlay()
   this.toggleFeedbackMsg('Task created!')
+  
 
 
 }

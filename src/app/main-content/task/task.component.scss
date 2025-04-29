@@ -1,0 +1,30 @@
+@import './../../styles/variables.scss';
+@import './../../styles/mixins.scss';
+@import './../../styles/buttons.scss';
+
+section {
+    @include displayFlex(flex, column, flex-start, flex-start, 24px);
+    width: 100%;
+    max-width: 1920px;
+    padding: 64px;
+    .title-close-wrapper {
+      display: flex;
+      justify-content: space-between;
+      padding: 0;
+      width: 100%;
+      .close-button {
+          padding: 8px;
+          border-radius: 50%;
+          width: 32px;
+          height: 32px;
+          z-index: 999;
+          img {
+            width: 16px;
+            height: 16px;
+          }
+          &:hover {
+            background-color: darken($grey, 0.5);
+          }
+      }
+    }
+}

@@ -8,6 +8,8 @@ export interface Task {
     priority:string,
     assignedTo?:Contact[],
     category:string,
-    subtasks: string[];
+    subtasks:{title:string,
+                status:string
+            }[];
     status: string;
 }

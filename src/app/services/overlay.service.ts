@@ -6,7 +6,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class OverlayService {
   isOpen = signal(false)
-  setTemplate:string = ''
+  setTemplate = signal<string>('');
 
   private contactDataSource = new BehaviorSubject<{ name: string; email: string; phone: string } | null>(null);
   contactData$ = this.contactDataSource.asObservable();
@@ -15,17 +15,15 @@ export class OverlayService {
   buttonRight = 'Create';
 
   openOverlay(target:string) {
-    this.getTemplate(target)
+    this.setTemplate.set(target)    
     this.isOpen.set(true);
     
   }
-
-  getTemplate(target:string){
-    this.setTemplate = target
-  }
+  
   
   closeOverlay() {
     this.isOpen.set(false);  
+    this.setTemplate.set('');
     
   }
 
