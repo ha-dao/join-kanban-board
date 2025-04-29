@@ -1,4 +1,4 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { Injectable, OnDestroy, signal } from '@angular/core';
 import { inject } from '@angular/core';
 import {
   Firestore,
@@ -22,6 +22,7 @@ export class TaskService implements OnDestroy {
   tasksList: Task[] = [];
   searchInputFieldValue: string= '';
   newTaskStatus: string= '';
+  selectedTask = signal<Task | null>(null);
   constructor() {
     this.snap();
   }
@@ -32,7 +33,6 @@ export class TaskService implements OnDestroy {
       this.tasksList = [];
       list.forEach((element) => {
         this.tasksList.push(this.setTaskObj(element.data(), element.id));
-        // console.log(this.tasksList);
       });
     });
   }
@@ -84,4 +84,9 @@ export class TaskService implements OnDestroy {
     console.log(value);
     this.searchInputFieldValue = value;
   }
+
+  setSelectedTask(task: Task) {
+    this.selectedTask.set(task);
+  }  
+  
 }

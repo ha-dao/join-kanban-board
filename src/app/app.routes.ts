@@ -6,6 +6,7 @@ import { HelpComponent } from './shared/components/header/help/help.component';
 import { SummaryComponent } from './main-content/summary/summary.component';
 import { AddTaskComponent } from './main-content/add-task/add-task.component';
 import { BoardComponent } from './main-content/board/board.component';
+import { TaskComponent } from './main-content/task/task.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/summary', pathMatch: 'full' },

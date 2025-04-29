@@ -5,11 +5,12 @@ import { FormsModule } from '@angular/forms';
 import { OverlayService } from '../../services/overlay.service';
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../interfaces/task';
+import { TaskComponent } from '../task/task.component';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
 })
@@ -69,4 +70,10 @@ export class BoardComponent implements OnInit {
   addDoneTask(task: Task) {
     this.doneTasks.push(task);
   }
+
+  openTaskDetail(task: Task) {
+    this.taskService.setSelectedTask(task);
+    this.overlayService.openOverlay('show-task');
+  }
+  
 }
