@@ -52,7 +52,7 @@ export class TaskService implements OnDestroy {
 
   async deleteTask(id: string) {
     if (id) {
-      await deleteDoc(this.getSingleTask('contacts', id));
+      await deleteDoc(this.getSingleTask('tasks', id));
     }
   }
 

@@ -61,6 +61,7 @@ editedIndex:number | null = null;
 dropdownOpen:boolean = false;
 isSelectOpen:boolean = false;
 taskData: Task= {
+  id:'',
   title: '',
   description: '',
   date: '',
@@ -183,6 +184,7 @@ resetForm(){
   this.setInputsUntouched()
   this.clickedButton = 'Medium'
   this.taskData = {
+    id:'',
     title: '',
     description: '',
     date: '',

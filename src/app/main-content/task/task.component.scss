@@ -7,11 +7,17 @@ section {
     width: 100%;
     max-width: 1920px;
     padding: 64px;
+    height:100%;
+    
     .title-close-wrapper {
       display: flex;
       justify-content: space-between;
       padding: 0;
       width: 100%;
+      >h2{
+        @include fontStyle( clamp(16px, 18px, 20px), 700, $primary-color)
+
+      }
       .close-button {
           padding: 8px;
           border-radius: 50%;
@@ -28,3 +34,80 @@ section {
       }
     }
 }
+
+h3{
+  @include fontStyle(clamp(16px, 18px, 20px), 400, $primary-color, none)
+}
+
+.task-details{
+  @include displayFlex(flex, column, flex-start, flex-start, 24px);
+  
+ 
+   
+  }
+
+.contact-img {
+  @include displayFlex(flex, row, center, center, 5px);
+  background-color: #9327FF;
+  width: 42px;
+  height: 42px;
+  border-radius: 100%;
+  border: 2px solid $white;
+  color: $white;
+  letter-spacing: -1px;
+}
+
+.subtasks{
+  @include displayFlex(flex, column, flex-start, flex-start, 24px);  
+  max-height: 200px;
+  width: 100%;
+  overflow: auto;
+  .single-subtask{
+    @include displayFlex(flex, row, center, center, 24px);
+    >p{
+      @include fontStyle(clamp(14px, 16px, 18px), 400,black, none)
+    }
+  }
+}
+.button-div{
+  @include displayFlex(flex, row, flex-end, center, 24px);
+  width: 90%;
+  >button{
+    display:flex;
+    gap: 15px;
+  }
+}
+
+.contact{
+  @include displayFlex(flex, row, center, center, 12px);
+  text-align: center;
+  >p{
+    @include fontStyle(clamp(16px, 18px, 20px), 400,black, none);
+  }
+    }
+.due-date{
+  @include displayFlex(flex, row, flex-start, flex-start, 24px);
+  :first-child{
+    @include fontStyle(clamp(16px, 18px, 20px), 400, $primary-color, none)
+  }
+  >p{
+    @include fontStyle(clamp(16px, 18px, 20px), 400, black, none)
+  }
+}
+.priority{
+  @include displayFlex(flex, row, flex-start, center, 24px);
+  
+  
+  >p{
+    @include fontStyle(clamp(16px, 20px, 22px), 400, black, none);
+    gap:10px;
+  }
+}
+.assigned-to{
+  @include displayFlex(flex, column, flex-start, flex-start, 24px);
+  
+    >p{
+      @include fontStyle(clamp(16px, 18px, 20px), 400,white, none);
+          }
+          
+  }

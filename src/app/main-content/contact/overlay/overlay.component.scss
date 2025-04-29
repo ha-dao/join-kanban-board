@@ -37,7 +37,7 @@
   gap:72px;
   border-radius: 32px;
   background-color: white;
-  app-add-task, app-task {
+  app-add-task {
     width: 100%;
     padding: 0;
     >a {
@@ -54,6 +54,36 @@
       background-color: darken($grey, 0.5);
     }
   }
+  }
+}
+.content-wrapper-task{
+  display:flex;
+  align-items: center;
+  justify-content: space-around;
+  position: relative;
+  height:auto;
+  width: 40%;
+  gap:72px;
+  max-height: 90%;
+  overflow: auto;
+  border-radius: 32px;
+  background-color: white;
+app-task {
+  width:100%;
+  padding: 0;
+  height:100%;
+ 
+  >a {
+      padding: 8px;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      z-index: 999;
+      img {
+        width: 16px;
+        height: 16px;
+      }
+    }
   }
 }
 
