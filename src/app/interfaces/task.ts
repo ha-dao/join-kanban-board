@@ -1,7 +1,7 @@
 import { Contact } from "./contact";
 
 export interface Task {
-    id?: string,
+    id: string,
     title:string,
     description:string,
     date: string,
