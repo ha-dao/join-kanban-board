@@ -139,6 +139,11 @@ saveEditedSubtask(index: number) {
   this.editableSubtask.title = '';
 }
 
+getCompletedSubtasks(task: Task): number {
+  if (!task.subtasks) return 0;
+  return task.subtasks.filter(t => t.status).length;
+}
+
 deleteSubtask(index: number) {
   this.currentSubtasks.splice(index, 1);
   if (this.editedIndex === index) {
@@ -154,7 +159,7 @@ resetSubtasks(){
 
 submitTask(){  
   this.taskService.tasksList.push(this.taskData)
-  this.taskData.subtasks = (this.currentSubtasks)
+  this.taskData.subtasks =(this.currentSubtasks)
   this.taskService.addTask(this.taskData)
   this.resetSubtasks()
   this.setInputsUntouched()

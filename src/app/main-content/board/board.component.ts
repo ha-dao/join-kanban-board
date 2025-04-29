@@ -71,6 +71,15 @@ export class BoardComponent implements OnInit {
     this.doneTasks.push(task);
   }
 
+getCompletedSubtasks(task: Task): number {
+  return task.subtasks?.filter(t => t.status).length || 0;
+}
+
+getProgressWidth(task: Task): number {
+  if (!task.subtasks?.length) return 0;
+  return (this.getCompletedSubtasks(task) / task.subtasks.length) * 100;
+}
+
   openTaskDetail(task: Task) {
     this.taskService.setSelectedTask(task);
     this.overlayService.openOverlay('show-task');
