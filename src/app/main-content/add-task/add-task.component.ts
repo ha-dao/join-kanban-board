@@ -1,6 +1,6 @@
 import { NgClass, CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener, inject, ViewChild, effect, signal } from '@angular/core';
-import { NgForm, NgModel, FormsModule } from '@angular/forms';
+import { NgForm, NgModel, FormsModule, FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ContactService } from '../../services/contact.service';
 import { FeedbackServiceService } from '../../services/feedback.service';
 import { Contact } from '../../interfaces/contact';
@@ -12,24 +12,27 @@ import { OverlayComponent } from '../contact/overlay/overlay.component';
 @Component({
   selector: 'app-add-task',
   standalone: true,
-  imports: [NgClass, CommonModule, FormsModule],
+  imports: [NgClass, CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss'
 })
 export class AddTaskComponent {
-constructor(){
-  let initialized = false;
-  effect(() =>{
-    const isOpen= this.overlayService.isOpen();
-    if(!initialized){
-      initialized = true;
-      return;
-    }
-    if(!isOpen){
-      this.resetForm();
-    }
-  })
-}
+  constructor() {
+    let initialized = false;
+    effect(() => {
+      const isOpen = this.overlayService.isOpen();
+      if (!initialized) {
+        initialized = true;
+        return;
+      }
+      if (!isOpen) {
+        this.resetForm();
+      }
+    });
+
+  
+  }
+
 
 contactService = inject(ContactService);
 feedbackService = inject(FeedbackServiceService);
@@ -41,11 +44,8 @@ taskService= inject(TaskService);
 @ViewChild('categoryField') categoryField: NgModel | undefined;
 @ViewChild('overlayRef', {static: false}) overlayRef!: ElementRef;
 searchTerm: string=''
-clickedButton= 'Medium';
-currentSubtasks:{
-  title:string;
-  status:string
-}[]=[];
+
+
 newSubtask:{title:string;
   status:string
 }= {
@@ -60,17 +60,17 @@ editableSubtask=
 editedIndex:number | null = null;
 dropdownOpen:boolean = false;
 isSelectOpen:boolean = false;
-taskData: Task= {
-  id:'',
-  title: '',
-  description: '',
-  date: '',
-  priority: '',
-  assignedTo:[],
-  category:'',
-  subtasks:[],
-  status: ''
-};
+
+
+
+
+editableTask:any
+ngOnInit() {
+  const taskToEdit = this.taskService.currentEditedTask();
+  if (taskToEdit) {
+    this.taskService.taskData = structuredClone(taskToEdit);
+  }
+}
 
 toggleSelectOpen() {
   this.isSelectOpen = !this.isSelectOpen;
@@ -91,12 +91,12 @@ handleBackdropClick(event: MouseEvent){
 }
 
 setPrority(priority:string){
-this.taskData.priority = priority
+this.taskService.taskData.priority = priority
 this.setClickedButton(priority)
 }
 
 setClickedButton(button:string){
-this.clickedButton = button
+this.taskService.clickedButton.set(button)  
 }
 
 
@@ -106,15 +106,15 @@ toggleContactSelection(item:Contact){
   this.setAssignedTo(item)
 }
 setAssignedTo(item: Contact) {
-  const index = this.taskData.assignedTo!.findIndex(c => c.id === item.id);
+  const index = this.taskService.taskData.assignedTo!.findIndex(c => c.id === item.id);
 
   if (item.selected) {
     if (index === -1) {
-      this.taskData.assignedTo!.push(item);
+      this.taskService.taskData.assignedTo!.push(item);
     }
   } else {
     if (index !== -1) {
-      this.taskData.assignedTo!.splice(index, 1);
+      this.taskService.taskData.assignedTo!.splice(index, 1);
     }
   }
 }
@@ -122,7 +122,7 @@ setAssignedTo(item: Contact) {
 addSubtask() {
   if (this.newSubtask.title){
     let subTask ={title:this.newSubtask.title, status:'unfinished'}
-    this.currentSubtasks.push(subTask);
+    this.taskService.currentSubtasks.push(subTask);
     this.newSubtask.title = '';
     
   
@@ -130,12 +130,12 @@ addSubtask() {
 }
 editSubtask(index: number) {   
   this.editedIndex = index;
-  this.editableSubtask = this.currentSubtasks[index];
+  this.editableSubtask = this.taskService.currentSubtasks[index];
 
 }
 
 saveEditedSubtask(index: number) { 
-  this.currentSubtasks[index] ={title:this.editableSubtask.title, status:'unfinished'}   
+  this.taskService.currentSubtasks[index] ={title:this.editableSubtask.title, status:'unfinished'}   
   this.editedIndex = null;
   this.editableSubtask.title = '';
 }
@@ -146,7 +146,7 @@ getCompletedSubtasks(task: Task): number {
 }
 
 deleteSubtask(index: number) {
-  this.currentSubtasks.splice(index, 1);
+  this.taskService.currentSubtasks.splice(index, 1);
   if (this.editedIndex === index) {
     this.editedIndex = null;
     this.editableSubtask.title = '';
@@ -154,14 +154,14 @@ deleteSubtask(index: number) {
 }
 
 resetSubtasks(){
-  this.currentSubtasks= []
+  this.taskService.currentSubtasks= []
   this.resetForm()
 }
 
 submitTask(){  
-  this.taskService.tasksList.push(this.taskData)
-  this.taskData.subtasks =(this.currentSubtasks)
-  this.taskService.addTask(this.taskData)
+  this.taskService.tasksList.push(this.taskService.taskData)
+  this.taskService.taskData.subtasks =(this.taskService.currentSubtasks)
+  this.taskService.addTask(this.taskService.taskData)
   this.resetSubtasks()
   this.setInputsUntouched()
   this.overlayService.closeOverlay()
@@ -182,8 +182,8 @@ if(this.categoryField)
 resetForm(){
   this.resetContacts()
   this.setInputsUntouched()
-  this.clickedButton = 'Medium'
-  this.taskData = {
+  this.taskService.clickedButton.set('Medium')
+  this.taskService.taskData = {
     id:'',
     title: '',
     description: '',
@@ -205,9 +205,9 @@ resetContacts(){
 }
 
 isFormValid(){
-  return this.taskData.title !== '' &&
-  this.taskData.date !== '' &&
-  this.taskData.category !== '';
+  return this.taskService.taskData.title !== '' &&
+  this.taskService.taskData.date !== '' &&
+  this.taskService.taskData.category !== '';
 }
 
 filterContacts(){

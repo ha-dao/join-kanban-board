@@ -1,28 +1,28 @@
 <section>
   <div class="title-close-wrapper">
-    <h2>Add Task</h2>
+    <h2 [ngClass]="{ visible: overlayService.setTemplate() !=='edit-task', invisible: overlayService.setTemplate() =='edit-task' }">Add Task</h2>
     <a class="close-button" [ngClass]="{ visible: overlayService.isOpen(), invisible: !overlayService.isOpen() }">
       <img src="assets/img/addContactOverlay/X.svg" alt="x-icon close button" (click)="this.overlayService.closeOverlay(); $event.stopPropagation(); resetForm()" />
     </a>
   </div>
 
-  <form (keydown.enter)="$event.preventDefault()" action="submit">
+  <form   (keydown.enter)="$event.preventDefault()" action="submit">
     <div class="input-wrapper">
       <div class="task-data">
         <div class="input-div">
           <label for="title">Title<span class="req-marker">*</span></label>
-          <input id="title" type="text" name="title" placeholder="Enter a title"   required #taskTitle="ngModel" minlength="2" [(ngModel)]="taskData.title" />
+          <input id="title" type="text" name="title" placeholder="Enter a title"    required #taskTitle="ngModel" minlength="2" [(ngModel)]="taskService.taskData.title" />
           @if (taskTitle.invalid && taskTitle.touched) {
           <span class="error-message">Please enter a Title</span>
           }
         </div>
         <div class="input-div">
           <label for="description">Description</label>
-          <textarea name="description" placeholder="Enter a description" rows="4" id="description" [(ngModel)]="taskData.description"> </textarea>
+          <textarea name="description" placeholder="Enter a description" rows="4" id="description" [(ngModel)]="taskService.taskData.description"> </textarea>
         </div>
         <div class="input-div">
           <label for="due-date">Due Date<span class="req-marker">*</span></label>
-          <input [(ngModel)]="taskData.date" type="date" name="Due Date" id="due-date" required #taskDate="ngModel" />
+          <input [(ngModel)]="taskService.taskData.date" type="date" name="Due Date" id="due-date"  required #taskDate="ngModel" />
           @if (taskDate.touched && taskDate.invalid) {
           <span class="error-message">Please enter a Date</span>
           }
@@ -35,8 +35,8 @@
           <button
           type="button"
             [ngClass]="{
-              active: clickedButton === 'Urgent',
-              inactive: clickedButton !== 'Urgent',
+              active: taskService.clickedButton()==='Urgent',
+              inactive: taskService.clickedButton() !== 'Urgent',
             }"
             (click)="setPrority('Urgent')"
           >
@@ -46,8 +46,8 @@
           <button
           type="button"
             [ngClass]="{
-              active: clickedButton === 'Medium',
-              inactive: clickedButton !== 'Medium',
+              active: taskService.clickedButton() == 'Medium',
+              inactive: taskService.clickedButton() !== 'Medium',
             }"
             (click)="setPrority('Medium')"
           >
@@ -57,8 +57,8 @@
           <button
           type="button"
             [ngClass]="{
-              active: clickedButton === 'Low',
-              inactive: clickedButton !== 'Low',
+              active: taskService.clickedButton() === 'Low',
+              inactive: taskService.clickedButton() !== 'Low',
             }"
             (click)="setPrority('Low')"
           >
@@ -73,7 +73,9 @@
             <div class="dropdown-arrow" [ngClass]="{ up: dropdownOpen, down: !dropdownOpen }"></div>
           </div>
           <div class="dropdown-menu" #overlayRef [ngClass]="{ visible: dropdownOpen, invisible: !dropdownOpen }">
-            @if (this.dropdownOpen) { @for (item of (filterContacts()); track item; let index = $index) {
+            @if (this.dropdownOpen){
+              @if(overlayService.setTemplate()!== 'edit-task'){
+              @for (item of (filterContacts()); track item; let index = $index) {
             <div class="contact" [ngClass]="{ 'selected-contact-background': item.selected }" (click)="toggleContactSelection(item)">
               <div class="contact-img" [ngStyle]="{ background: item['color'] }">
                 {{ contactService.getFirstAndLastNameFirstLetter(item['name']) }}
@@ -89,19 +91,27 @@
                 </li>
               </ul>
             </div>
-            }}
+            }}}
           </div>
           <div class="selected-contact-wrapper">
+            @if(overlayService.setTemplate()!== 'edit-task'){
             @for (contact of contactService.contactList; track $index) { @if (contact.selected == true) {
             <div class="selected-contact" [ngStyle]="{ background: contact['color'] }" (click)="contactService.setSelection(contact); $event.stopPropagation()">
               {{ contact.letters }}
             </div>
             } }
+          }@else{
+            @for (contact of taskService.taskData.assignedTo; track $index) { 
+              <div class="selected-contact" [ngStyle]="{ background: contact['color'] }" (click)="contactService.setSelection(contact); $event.stopPropagation()">
+                {{ contact.letters }}
+              </div>
+            }
+          }
           </div>
         </div>
         <div class="input-div">
           <label for="category">Category<span class="req-marker">*</span></label>
-          <select name="Category" #categoryField="ngModel" id="category" required [(ngModel)]="taskData.category" [ngClass]="{ open: isSelectOpen }" (click)="toggleSelectOpen()">
+          <select name="Category" #categoryField="ngModel" id="category" required [(ngModel)]="taskService.taskData.category" [ngClass]="{ open: isSelectOpen }" (click)="toggleSelectOpen()">
             <option value="" selected>Select task category</option>
             <option value="User story">User story</option>
             <option value="Technical Task">Technical Task</option>
@@ -118,7 +128,7 @@
             <img src="assets/icon/+Symbol.svg" class="input-icon" alt="Plus" (click)="addSubtask()"   />
           </div>
           <div class="list-wrapper">
-            @for (subtask of currentSubtasks; let i = $index; track i) {
+            @for (subtask of taskService.currentSubtasks; let i = $index; track i) {
               @if (editedIndex === i) {
             <div class="subtask-edit-input">
               <input name="editField" [(ngModel)]="editableSubtask.title" type="text" class="edit-input" />
@@ -155,7 +165,7 @@
     <div class="bottom-form-wrapper">
       <p class="req-desktop"><span class="req-marker">*</span>This field is required</p>
       <div class="btn-div">
-        <button class="cancel-button" (click)="resetSubtasks(); overlayService.closeOverlay()">
+        <button [ngClass]="{ visible: overlayService.setTemplate()!== 'edit-task', invisible: overlayService.setTemplate() == 'edit-task' }" class="cancel-button" (click)="resetSubtasks(); overlayService.closeOverlay()">
           Clear
           <img src="assets/img/4-contacts/close-icon.svg" alt="close pictogram" />
         </button>
