@@ -144,10 +144,14 @@
                     }}
                   </div>
 
+                 
                   @if (task.subtasks && task.subtasks.length > 0) {
-                    <div class="task-progress">
-                      {{ task.subtasks.length }} Subtasks
-                    </div>
+                    <div class="progress-container">
+                      <div class="progress-track">
+                        <div class="progress-bar" [style.width.%]="getProgressWidth(task)"></div>
+                      </div>
+                      <span class="progress-text"> {{ getCompletedSubtasks(task) }}/{{ task.subtasks.length || 0 }} Subtasks</span>
+                      </div>
                   }
 
                   <div class="task-footer">
@@ -223,10 +227,14 @@
                     }}
                   </div>
 
+                 
                   @if (task.subtasks && task.subtasks.length > 0) {
-                    <div class="task-progress">
-                      {{ task.subtasks.length }} Subtasks
-                    </div>
+                    <div class="progress-container">
+                      <div class="progress-track">
+                        <div class="progress-bar" [style.width.%]="getProgressWidth(task)"></div>
+                      </div>
+                      <span class="progress-text"> {{ getCompletedSubtasks(task) }}/{{ task.subtasks.length || 0 }} Subtasks</span>
+                      </div>
                   }
 
                   <div class="task-footer">
@@ -299,10 +307,14 @@
                     }}
                   </div>
 
+                  
                   @if (task.subtasks && task.subtasks.length > 0) {
-                    <div class="task-progress">
-                      {{ task.subtasks.length }} Subtasks
-                    </div>
+                    <div class="progress-container">
+                      <div class="progress-track">
+                        <div class="progress-bar" [style.width.%]="getProgressWidth(task)"></div>
+                      </div>
+                      <span class="progress-text"> {{ getCompletedSubtasks(task) }}/{{ task.subtasks.length || 0 }} Subtasks</span>
+                      </div>
                   }
 
                   <div class="task-footer">
