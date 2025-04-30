@@ -309,7 +309,7 @@ $breakpoint-tablet: 768px;
   .progress-track {
     width: 128px;
     height: 8px;
-    background: $grey;
+    background: $blue-link;
     border-radius: 8px;
     position: relative;
     overflow: hidden;
@@ -317,7 +317,7 @@ $breakpoint-tablet: 768px;
   
   .progress-bar {
     height: 100%;
-    background: $blue-link;
+    background: $grey;
     border-radius: 8px;
     transition: width 0.3s ease;
   }
