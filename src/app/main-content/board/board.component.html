@@ -42,12 +42,12 @@
         <div class="tasks-container"
         cdkDropList
         id="todoList"
-        [cdkDropListData]="taskService.tasksList"
+        [cdkDropListData]="taskService.boardTasksListToDo"
         [cdkDropListConnectedTo]="connectedDropLists"
         (cdkDropListDropped)="drop($event, 'ToDo')">
 
-          @if (taskService.tasksList) {
-            @for (task of taskService.tasksList; track task.id) {
+          @if (taskService.boardTasksListToDo) {
+            @for (task of taskService.boardTasksListToDo; track task.id) {
               @if(task.status == 'ToDo' && (task.title.startsWith(taskService.searchInputFieldValue) || task.description.startsWith(taskService.searchInputFieldValue))){
                 <div class="task-card" cdkDrag (click)="openTaskDetail(task)">
                   <div class="task-category">{{ task.category }}</div>
@@ -124,12 +124,12 @@
         <div class="tasks-container"
         cdkDropList
         id="inProgressList"
-        [cdkDropListData]="taskService.tasksList"
+        [cdkDropListData]="taskService.boardTasksListProgress"
         [cdkDropListConnectedTo]="connectedDropLists"
         (cdkDropListDropped)="drop($event, 'In Progress')">
 
-          @if (taskService.tasksList) {
-            @for (task of taskService.tasksList; track task) {
+          @if (taskService.boardTasksListProgress) {
+            @for (task of taskService.boardTasksListProgress; track task) {
               @if(task.status == 'In Progress' && (task.title.startsWith(taskService.searchInputFieldValue) || task.description.startsWith(taskService.searchInputFieldValue))){
                 <div class="task-card" cdkDrag (click)="openTaskDetail(task)">
                   <div class="task-category">{{ task.category }}</div>
@@ -203,12 +203,12 @@
         <div class="tasks-container"
         cdkDropList
         id="awaitFeedbackList"
-        [cdkDropListData]="taskService.tasksList"
+        [cdkDropListData]="taskService.boardTasksListFeedback"
         [cdkDropListConnectedTo]="connectedDropLists"
         (cdkDropListDropped)="drop($event, 'Await Feedback')">
 
-          @if (taskService.tasksList) {
-            @for (task of taskService.tasksList; track task) {
+          @if (taskService.boardTasksListFeedback) {
+            @for (task of taskService.boardTasksListFeedback; track task) {
               @if(task.status == 'Await Feedback' && (task.title.startsWith(taskService.searchInputFieldValue) || task.description.startsWith(taskService.searchInputFieldValue))){
                 <div class="task-card" cdkDrag (click)="openTaskDetail(task)">
                   <div class="task-category">{{ task.category }}</div>
@@ -279,12 +279,12 @@
         <div class="tasks-container"
         cdkDropList
         id="doneList"
-        [cdkDropListData]="taskService.tasksList"
+        [cdkDropListData]="taskService.boardTasksListDone"
         [cdkDropListConnectedTo]="connectedDropLists"
         (cdkDropListDropped)="drop($event, 'Done')">
 
-          @if (taskService.tasksList) {
-            @for (task of taskService.tasksList; track task) {
+          @if (taskService.boardTasksListDone) {
+            @for (task of taskService.boardTasksListDone; track task) {
               @if(task.status == 'Done' && (task.title.startsWith(taskService.searchInputFieldValue) || task.description.startsWith(taskService.searchInputFieldValue))){
                 <div class="task-card" cdkDrag (click)="openTaskDetail(task)">
                   <div class="task-category">{{ task.category }}</div>
