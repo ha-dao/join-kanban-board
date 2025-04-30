@@ -12,6 +12,7 @@ import {
 } from '@angular/fire/firestore';
 import { Task } from '../interfaces/task';
 import { query, orderBy, limit } from 'firebase/firestore';
+import { ContactService } from './contact.service';
 
 @Injectable({
   providedIn: 'root',
@@ -23,8 +24,38 @@ export class TaskService implements OnDestroy {
   searchInputFieldValue: string= '';
   newTaskStatus: string= '';
   selectedTask = signal<Task | null>(null);
+  currentEditedTask = signal<Task | null>(null);
+  clickedButton= signal<string>('Medium') ;
+  currentSubtasks:{
+    title:string;
+    status:string
+  }[]=[];
+  taskData: Task= {
+    id:'',
+    title: '',
+    description: '',
+    date: '',
+    priority: '',
+    assignedTo:[],
+    category:'',
+    subtasks:[],
+    status: ''
+  };
+
   constructor() {
     this.snap();
+  }
+
+  setEditedTask(task: Task) {   
+    this.taskData.title = task.title;
+    this.taskData.description = task.description;
+    this.taskData.date = task.date;
+    this.clickedButton.set(task.priority);
+    this.taskData.category = task.category;
+    this.currentSubtasks = task.subtasks;
+    this.taskData.assignedTo = task.assignedTo;
+
+    
   }
 
   snap() {
@@ -91,5 +122,8 @@ export class TaskService implements OnDestroy {
   setSelectedTask(task: Task) {
     this.selectedTask.set(task);
   }  
+  clearSelectedTask() {
+    this.selectedTask.set(null);
+  }
   
 }

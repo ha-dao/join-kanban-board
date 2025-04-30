@@ -4,6 +4,7 @@ import { TaskService } from '../../services/task.service';
 import { ContactService } from '../../services/contact.service';
 import { NgClass, NgStyle } from '@angular/common';
 import { FeedbackServiceService } from '../../services/feedback.service';
+import { Task } from '../../interfaces/task';
 
 @Component({
   selector: 'app-task',
@@ -29,11 +30,10 @@ deleteTask(id : string){
 }
 
 
-
-
-
-
-
+editTask(task:Task) {
+  this.taskService.setEditedTask(task); 
+  this.overlayService.openOverlay('edit-task'); 
+}
 
 
 
@@ -42,3 +42,17 @@ deleteTask(id : string){
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
