@@ -25,7 +25,7 @@ task = this.taskService.selectedTask();
 deleteTask(id : string){    
   this.taskService.deleteTask(id)
   this.overlayService.closeOverlay()
-  this.feedbackService.show('Task deleted')
+  
   
 }
 
@@ -33,6 +33,7 @@ deleteTask(id : string){
 editTask(task:Task) {
   this.taskService.setEditedTask(task); 
   this.overlayService.openOverlay('edit-task'); 
+  this.taskService.setTempAssignedTo(task.assignedTo!);
 }
 
 

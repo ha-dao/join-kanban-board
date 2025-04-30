@@ -13,12 +13,15 @@ import {
 import { Task } from '../interfaces/task';
 import { query, orderBy, limit } from 'firebase/firestore';
 import { ContactService } from './contact.service';
+import { Contact } from '../interfaces/contact';
+import { FeedbackServiceService } from './feedback.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TaskService implements OnDestroy {
   firestore: Firestore = inject(Firestore);
+  feedbackService = inject(FeedbackServiceService)
   unsubTasksList: any;
   tasksList: Task[] = [];
   searchInputFieldValue: string= '';
@@ -41,9 +44,14 @@ export class TaskService implements OnDestroy {
     subtasks:[],
     status: ''
   };
+  tempAssignedTo:Contact[]=[]
 
   constructor() {
     this.snap();
+  }
+
+  setTempAssignedTo(contacts:Contact[]){
+    this.tempAssignedTo = contacts;
   }
 
   setEditedTask(task: Task) {   
@@ -54,6 +62,8 @@ export class TaskService implements OnDestroy {
     this.taskData.category = task.category;
     this.currentSubtasks = task.subtasks;
     this.taskData.assignedTo = task.assignedTo;
+    this.taskData.id = task.id
+    this.taskData.status = task.status
 
     
   }
@@ -75,16 +85,19 @@ export class TaskService implements OnDestroy {
         console.error(err);
       })
       .then((docRef) => {});
+      this.feedbackService.show('Task Created')
   }
 
   async updateTask(taskId: string, taskData: {}){
     await updateDoc(this.getSingleTask('tasks', taskId), taskData);
+    this.feedbackService.show('Task Updated')
   }
 
   async deleteTask(id: string) {
     if (id) {
       await deleteDoc(this.getSingleTask('tasks', id));
     }
+    this.feedbackService.show('Task Deleted')
   }
 
   ngOnDestroy() {

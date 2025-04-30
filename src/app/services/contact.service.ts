@@ -1,8 +1,10 @@
-import { Injectable, OnDestroy} from '@angular/core';
+import { Injectable, OnDestroy, effect} from '@angular/core';
 import { inject } from '@angular/core';
 import { Firestore, collectionData, collection, doc, onSnapshot, addDoc, deleteDoc, updateDoc} from '@angular/fire/firestore';
 import { Contact } from '../interfaces/contact';
 import { query, orderBy, limit } from 'firebase/firestore';
+import { TaskService } from './task.service';
+import { OverlayService } from './overlay.service';
 
 
 @Injectable({
@@ -11,6 +13,8 @@ import { query, orderBy, limit } from 'firebase/firestore';
 export class ContactService implements OnDestroy{
   unsubContactList: any;
   firestore:Firestore = inject(Firestore);
+  taskService = inject(TaskService)
+  overlayService= inject(OverlayService)
   contactList: Contact[] = [];
   contactListLetters: number[] = [];
   contactListLetter: string[] = [];
@@ -33,6 +37,11 @@ export class ContactService implements OnDestroy{
   constructor() {
     this.snap();
     this.checkContactListLetters();
+    effect(() => {
+      if (this.overlayService.setTemplate() === 'edit-task') {
+        this.syncSelectedContacts();
+      }
+    });
   }
 
   getFirstAndLastName(name: string): string {
@@ -179,5 +188,21 @@ export class ContactService implements OnDestroy{
   setSelection(contact: Contact){
     contact.selected= !contact.selected
   }
+
+  syncSelectedContacts() {
+    const assigned = this.taskService.taskData.assignedTo;
+    const allContacts = this.contactList;  
+    allContacts.forEach(contact => {
+      contact.selected = assigned!.some(a => a.id === contact.id);
+    });      
+  }
+  
+  onDropdownOpen() {
+    if (this.overlayService.setTemplate() === 'edit-task') {
+      this.syncSelectedContacts();
+    }
+    
+  }
+  
 }
 

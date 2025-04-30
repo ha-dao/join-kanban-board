@@ -1,5 +1,6 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { TaskService } from './task.service';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 export class OverlayService {
   isOpen = signal(false)
   setTemplate = signal<string>('');
-
+  taskService= inject(TaskService)
   private contactDataSource = new BehaviorSubject<{ name: string; email: string; phone: string } | null>(null);
   contactData$ = this.contactDataSource.asObservable();
 
@@ -24,6 +25,18 @@ export class OverlayService {
   closeOverlay() {
     this.isOpen.set(false);  
     this.setTemplate.set('');
+    this.taskService.clickedButton.set('Medium')
+    this.taskService.taskData = {
+      id:'',
+      title: '',
+      description: '',
+      date: '',
+      priority: '',
+      assignedTo:[],
+      category:'',
+      subtasks:[],
+      status: ''
+    };
     
   }
 
