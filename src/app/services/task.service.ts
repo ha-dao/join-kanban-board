@@ -24,6 +24,11 @@ export class TaskService implements OnDestroy {
   feedbackService = inject(FeedbackServiceService)
   unsubTasksList: any;
   tasksList: Task[] = [];
+  boardTasksListToDo: Task[] = [];
+  boardTasksListDone: Task[] = [];
+  boardTasksListProgress: Task[] = [];
+  boardTasksListFeedback: Task[] = [];
+  isBoardListFull: boolean = false;
   searchInputFieldValue: string= '';
   newTaskStatus: string= '';
   selectedTask = signal<Task | null>(null);
@@ -48,6 +53,25 @@ export class TaskService implements OnDestroy {
 
   constructor() {
     this.snap();
+    
+  }
+
+  fillBoardTaskLists(){
+  this.boardTasksListToDo = [];
+  this.boardTasksListDone = [];
+  this.boardTasksListProgress = [];
+  this.boardTasksListFeedback = [];
+    this.tasksList.forEach((task)=>{
+      if(task.status == 'ToDo'){
+        this.boardTasksListToDo.push(task);
+      }else if(task.status == 'In Progress'){
+        this.boardTasksListProgress.push(task);
+      }else if(task.status == 'Await Feedback'){
+        this.boardTasksListFeedback.push(task);
+      }else if(task.status == 'Done'){
+        this.boardTasksListDone.push(task);
+      }
+    })
   }
 
   setTempAssignedTo(contacts:Contact[]){
@@ -75,7 +99,12 @@ export class TaskService implements OnDestroy {
       list.forEach((element) => {
         this.tasksList.push(this.setTaskObj(element.data(), element.id));
       });
+      if(!this.isBoardListFull){
+        this.fillBoardTaskLists();
+        this.isBoardListFull = true;
+      }
     });
+    
   }
 
   async addTask(task: Task) {
@@ -85,11 +114,13 @@ export class TaskService implements OnDestroy {
         console.error(err);
       })
       .then((docRef) => {});
+      this.fillBoardTaskLists();
       this.feedbackService.show('Task Created')
   }
 
   async updateTask(taskId: string, taskData: {}){
     await updateDoc(this.getSingleTask('tasks', taskId), taskData);
+    this.fillBoardTaskLists();
     this.feedbackService.show('Task Updated')
   }
 
