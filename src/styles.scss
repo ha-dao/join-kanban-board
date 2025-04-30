@@ -1,3 +1,40 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@use '@angular/material' as mat;
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat.core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$project-primary: mat.define-palette(mat.$indigo-palette);
+$project-accent: mat.define-palette(mat.$pink-palette, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$project-warn: mat.define-palette(mat.$red-palette);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$project-theme: mat.define-light-theme((
+  color: (
+    primary: $project-primary,
+    accent: $project-accent,
+    warn: $project-warn,
+  ),
+  typography: mat.define-typography-config(),
+  density: 0
+));
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include mat.all-component-themes($project-theme);
+
 @import "./app/styles/fonts.scss";
 @import "./app/styles/variables.scss";
 @import "./app/styles/mixins.scss";
@@ -9,28 +46,41 @@
   box-sizing: border-box;
   scroll-behavior: smooth;
   font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif;
+
   scrollbar-width: thin;
-  scrollbar-color: $grey rgba(0, 0, 0, 0.1);
+  scrollbar-gutter: 24px;
+  scrollbar-color: #397524 #DFE9EB;
 }
 
-/* Global Scrollbar Styles */
-::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+  height: 10px;
+  width: 5px;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 25px;
+  background-color: #DFE9EB;
 }
 
-::-webkit-scrollbar-track {
-  background: rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+*::-webkit-scrollbar-track:hover {
+  background-color: #B8C0C2;
 }
 
-::-webkit-scrollbar-thumb {
-  background: $grey;
-  border-radius: 10px;
-  transition: all 0.2s ease;
-  &:hover {
-    background: darken($grey, 10%);
-  }
+*::-webkit-scrollbar-track:active {
+  background-color: #B8C0C2;
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 25px;
+  background-color: #397524;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #62A34B;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: #62A34B;
 }
 
 .no-scroll {
@@ -107,3 +157,6 @@ input {
     font-size: 20px;
   }
 }
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
