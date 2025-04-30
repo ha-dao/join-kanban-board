@@ -6,11 +6,12 @@ import { OverlayService } from '../../services/overlay.service';
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../interfaces/task';
 import { TaskComponent } from '../task/task.component';
+import { DragDropModule, CdkDragDrop, transferArrayItem, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, FormsModule, ],
+  imports: [CommonModule, FormsModule, DragDropModule],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
 })
@@ -19,14 +20,15 @@ export class BoardComponent implements OnInit {
   searchQuery = '';
   overlayService = inject(OverlayService)
   taskService = inject(TaskService);
-  
-  
-  @ViewChild('overlayRef') overlayRef!: ElementRef;  
+
+  @ViewChild('overlayRef') overlayRef!: ElementRef;
 
   ngOnInit(): void {
-    
+
   }
-  
+
+
+
   todoTasks: Task[] = [];
   inProgressTasks: Task[] = [];
   awaitFeedbackTasks: Task[] = [];
@@ -41,16 +43,16 @@ export class BoardComponent implements OnInit {
 
   onInputChange(event: Event, inputField: string) {
     this.taskService.searchAndFilter(event, inputField);
-    
+
   }
   handleBackdropClick(event: MouseEvent) {
     const clickedInside = this.overlayRef.nativeElement.contains(event.target);
-    if (!clickedInside && this.overlayService.isOpen()) {     
+    if (!clickedInside && this.overlayService.isOpen()) {
       this.overlayService.closeOverlay();
-      
+
     }
   }
-  
+
   setNewTaskStatus(status:string){
     this.taskService.newTaskStatus = status;
   }
@@ -58,15 +60,15 @@ export class BoardComponent implements OnInit {
   addTodoTask(task: Task) {
     this.todoTasks.push(task);
   }
-  
+
   addInProgressTask(task: Task) {
     this.inProgressTasks.push(task);
   }
-  
+
   addAwaitFeedbackTask(task: Task) {
     this.awaitFeedbackTasks.push(task);
   }
-  
+
   addDoneTask(task: Task) {
     this.doneTasks.push(task);
   }
@@ -84,5 +86,31 @@ getProgressWidth(task: Task): number {
     this.taskService.setSelectedTask(task);
     this.overlayService.openOverlay('show-task');
   }
-  
+
+  connectedDropLists = ['todoList', 'inProgressList', 'awaitFeedbackList', 'doneList'];
+
+  drop(event: CdkDragDrop<any[]>, newStatus: string) {
+    const task = event.previousContainer.data[event.previousIndex];
+
+    if (event.previousContainer !== event.container) {
+      // Statuswechsel
+      task.status = newStatus;
+      this.taskService.updateTask(task.id, task);
+      // Element von einer Liste in die andere verschieben
+      transferArrayItem(
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
+      );
+    } else {
+      // Sortieren in derselben Liste
+      moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
+    }
+
+    // Optional: im Service oder Backend speichern
+
+  }
+
+
 }

@@ -39,12 +39,17 @@
             </button>
           </div>
         </div>
-        <div class="tasks-container">
+        <div class="tasks-container"
+        cdkDropList
+        id="todoList"
+        [cdkDropListData]="taskService.tasksList"
+        [cdkDropListConnectedTo]="connectedDropLists"
+        (cdkDropListDropped)="drop($event, 'ToDo')">
 
           @if (taskService.tasksList) {
             @for (task of taskService.tasksList; track task.id) {
               @if(task.status == 'ToDo' && (task.title.startsWith(taskService.searchInputFieldValue) || task.description.startsWith(taskService.searchInputFieldValue))){
-                <div class="task-card" (click)="openTaskDetail(task)">
+                <div class="task-card" cdkDrag (click)="openTaskDetail(task)">
                   <div class="task-category">{{ task.category }}</div>
                   <div class="task-title">{{ task.title }}</div>
                   <div class="task-description">
@@ -56,7 +61,7 @@
                         : ''
                     }}
                   </div>
-  
+
                   @if (task.subtasks && task.subtasks.length > 0) {
                     <div class="progress-container">
                       <div class="progress-track">
@@ -65,7 +70,7 @@
                       <span class="progress-text"> {{ getCompletedSubtasks(task) }}/{{ task.subtasks.length || 0 }} Subtasks</span>
                       </div>
                   }
-  
+
                   <div class="task-footer">
                     <div class="task-assigned">
                       @for (assignee of task.assignedTo; track assignee.id) {
@@ -116,12 +121,17 @@
             </button>
           </div>
         </div>
-        <div class="tasks-container">
+        <div class="tasks-container"
+        cdkDropList
+        id="inProgressList"
+        [cdkDropListData]="taskService.tasksList"
+        [cdkDropListConnectedTo]="connectedDropLists"
+        (cdkDropListDropped)="drop($event, 'In Progress')">
 
           @if (taskService.tasksList) {
             @for (task of taskService.tasksList; track task) {
               @if(task.status == 'In Progress' && (task.title.startsWith(taskService.searchInputFieldValue) || task.description.startsWith(taskService.searchInputFieldValue))){
-                <div class="task-card" (click)="openTaskDetail(task)">
+                <div class="task-card" cdkDrag (click)="openTaskDetail(task)">
                   <div class="task-category">{{ task.category }}</div>
                   <div class="task-title">{{ task.title }}</div>
                   <div class="task-description">
@@ -133,13 +143,13 @@
                         : ''
                     }}
                   </div>
-  
+
                   @if (task.subtasks && task.subtasks.length > 0) {
                     <div class="task-progress">
                       {{ task.subtasks.length }} Subtasks
                     </div>
                   }
-  
+
                   <div class="task-footer">
                     <div class="task-assigned">
                       @for (assignee of task.assignedTo; track assignee.id) {
@@ -190,12 +200,17 @@
             </button>
           </div>
         </div>
-        <div class="tasks-container">
+        <div class="tasks-container"
+        cdkDropList
+        id="awaitFeedbackList"
+        [cdkDropListData]="taskService.tasksList"
+        [cdkDropListConnectedTo]="connectedDropLists"
+        (cdkDropListDropped)="drop($event, 'Await Feedback')">
 
           @if (taskService.tasksList) {
             @for (task of taskService.tasksList; track task) {
               @if(task.status == 'Await Feedback' && (task.title.startsWith(taskService.searchInputFieldValue) || task.description.startsWith(taskService.searchInputFieldValue))){
-                <div class="task-card" (click)="openTaskDetail(task)">
+                <div class="task-card" cdkDrag (click)="openTaskDetail(task)">
                   <div class="task-category">{{ task.category }}</div>
                   <div class="task-title">{{ task.title }}</div>
                   <div class="task-description">
@@ -207,13 +222,13 @@
                         : ''
                     }}
                   </div>
-  
+
                   @if (task.subtasks && task.subtasks.length > 0) {
                     <div class="task-progress">
                       {{ task.subtasks.length }} Subtasks
                     </div>
                   }
-  
+
                   <div class="task-footer">
                     <div class="task-assigned">
                       @for (assignee of task.assignedTo; track assignee.id) {
@@ -261,12 +276,17 @@
             <span>Done</span>
           </div>
         </div>
-        <div class="tasks-container">
+        <div class="tasks-container"
+        cdkDropList
+        id="doneList"
+        [cdkDropListData]="taskService.tasksList"
+        [cdkDropListConnectedTo]="connectedDropLists"
+        (cdkDropListDropped)="drop($event, 'Done')">
 
           @if (taskService.tasksList) {
             @for (task of taskService.tasksList; track task) {
               @if(task.status == 'Done' && (task.title.startsWith(taskService.searchInputFieldValue) || task.description.startsWith(taskService.searchInputFieldValue))){
-                <div class="task-card" (click)="openTaskDetail(task)">
+                <div class="task-card" cdkDrag (click)="openTaskDetail(task)">
                   <div class="task-category">{{ task.category }}</div>
                   <div class="task-title">{{ task.title }}</div>
                   <div class="task-description">
@@ -278,13 +298,13 @@
                         : ''
                     }}
                   </div>
-  
+
                   @if (task.subtasks && task.subtasks.length > 0) {
                     <div class="task-progress">
                       {{ task.subtasks.length }} Subtasks
                     </div>
                   }
-  
+
                   <div class="task-footer">
                     <div class="task-assigned">
                       @for (assignee of task.assignedTo; track assignee.id) {
