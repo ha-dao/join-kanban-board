@@ -106,15 +106,15 @@ toggleContactSelection(item:Contact){
   this.setAssignedTo(item)
 }
 setAssignedTo(item: Contact) {
-  const index = this.taskService.taskData.assignedTo!.findIndex(c => c.id === item.id);
+  const index = this.taskService.tempAssignedTo.findIndex(c => c.id === item.id);
 
   if (item.selected) {
     if (index === -1) {
-      this.taskService.taskData.assignedTo!.push(item);
+      this.taskService.tempAssignedTo.push(item);
     }
   } else {
     if (index !== -1) {
-      this.taskService.taskData.assignedTo!.splice(index, 1);
+      this.taskService.tempAssignedTo.splice(index, 1);
     }
   }
 }
@@ -158,18 +158,23 @@ resetSubtasks(){
   this.resetForm()
 }
 
-submitTask(){  
-  this.taskService.tasksList.push(this.taskService.taskData)
+submitTask(){    
+  this.taskService.taskData.assignedTo = []
+  this.taskService.tempAssignedTo.forEach((c => this.taskService.taskData.assignedTo!.push(c)))
+  
   this.taskService.taskData.subtasks =(this.taskService.currentSubtasks)
+  if(this.overlayService.setTemplate() == 'add-task'){
   this.taskService.addTask(this.taskService.taskData)
+  }else if(this.overlayService.setTemplate()== 'edit-task'){
+    this.taskService.updateTask(this.taskService.taskData.id, this.taskService.taskData)
+  }
   this.resetSubtasks()
   this.setInputsUntouched()
   this.overlayService.closeOverlay()
-  this.toggleFeedbackMsg('Task created!')
   
-
-
 }
+
+
 
 setInputsUntouched(){
   if(this.taskTitle)
@@ -217,8 +222,6 @@ filterContacts(){
   );
 }
 
-toggleFeedbackMsg(msg:string){
-this.feedbackService.show(msg)
-}
+
 
 }

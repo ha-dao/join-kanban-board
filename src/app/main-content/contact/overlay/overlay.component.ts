@@ -28,7 +28,8 @@ export class OverlayComponent {
 
   handleBackdropClick(event: MouseEvent) {
     const clickedInside = this.overlayRef.nativeElement.contains(event.target);
-    if (!clickedInside && this.overlayService.isOpen()) {      
+    if (!clickedInside && this.overlayService.isOpen()) {   
+      event.stopPropagation();   
       this.overlayService.closeOverlay();     
     }
   }
