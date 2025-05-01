@@ -4,6 +4,208 @@
 $breakpoint-desktop: 1200px;
 $breakpoint-tablet: 768px;
 
+.task-card.drag-preview {
+  // Grundlegendes Reset + Box-Sizing
+  all: unset;
+  box-sizing: border-box;
+
+  // Layout & Größe
+  width: 252px;
+  padding: 16px;
+  border-radius: 24px;
+  background: #ffffff;
+  box-shadow: 0px 0px 10px 3px #00000014;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  // Typografie
+  font-family: inherit;
+  font-size: 14px;
+  color: #000000;
+
+  // Optional: Icons oder Bilder skalieren wie im Original
+  img {
+    width: 16px;
+    height: 16px;
+  }
+
+  .task-title {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+
+  .task-description {
+    color: #7a7a7a;
+    font-size: 14px;
+    margin-bottom: 8px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .task-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .task-assigned {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+
+      .assigned-contact {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        font-size: 12px;
+      }
+    }
+
+    .task-priority img {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  .progress-container {
+    width: 220px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 8px 0;
+
+    .progress-track {
+      width: 128px;
+      height: 8px;
+      background: $blue-link;
+      border-radius: 8px;
+      overflow: hidden;
+
+      .progress-bar {
+        height: 100%;
+        background: $grey;
+        border-radius: 8px;
+      }
+    }
+
+    .progress-text {
+      font-size: 12px;
+      color: $black;
+      white-space: nowrap;
+    }
+  }
+}
+
+
+.task-card {
+  width: 252px;
+  height: auto;
+  gap: 10px;
+  border-radius: 24px;
+  padding: 16px;
+  background: #FFFFFF;
+  box-shadow: 0px 0px 10px 3px #00000014;
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: column;
+  cursor: pointer;
+}
+
+.task-category {
+  font-size: 14px;
+  color: #000000;
+  margin-bottom: 8px;
+}
+
+.task-title {
+  font-weight: bold;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.task-description {
+  color: #7a7a7a;
+  font-size: 14px;
+  margin-bottom: 8px;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.task-progress {
+  border-top: 1px solid #eeeeee;
+  padding-top: 8px;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #7a7a7a;
+}
+
+.task-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .task-assigned {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+
+    .assigned-contact {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 12px;
+    }
+  }
+
+  .task-priority img {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.progress-container {
+  width: 220px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0;
+}
+
+.progress-track {
+  width: 128px;
+  height: 8px;
+  background: $blue-link;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar {
+  height: 100%;
+  background: $grey;
+  border-radius: 8px;
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 12px;
+  color: $black;
+  white-space: nowrap;
+}
+
 .overlay {
   position: fixed;
   display: flex;
@@ -19,6 +221,7 @@ $breakpoint-tablet: 768px;
   transition: all 250ms ease-in-out;
   z-index: 9999;
 }
+
 .overlay.open {
   transform: translateX(0);
   background-color: rgba(0, 0, 0, 0.274);
@@ -28,6 +231,7 @@ $breakpoint-tablet: 768px;
 .overlay.closed {
   transform: translateX(200%);
 }
+
 .main-container {
   background: $white;
   min-height: 100vh;
@@ -227,106 +431,7 @@ $breakpoint-tablet: 768px;
     }
   }
 
-  .task-card {
-    width: 252px;
-    height: auto;
-    gap: 10px;
-    border-radius: 24px;
-    padding: 16px;
-    background: #FFFFFF;
-    box-shadow: 0px 0px 10px 3px #00000014;
-    margin-bottom: 16px;
-    display: flex;
-    flex-direction: column;
-    cursor: pointer;
-    
-    .task-category {
-      font-size: 14px;
-      color: #000000;
-      margin-bottom: 8px;
-    }
-    
-    .task-title {
-      font-weight: bold;
-      font-size: 16px;
-      margin-bottom: 8px;
-    }
-    
-    .task-description {
-      color: #7a7a7a;
-      font-size: 14px;
-      margin-bottom: 8px;
-      display: -webkit-box;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    
-    .task-progress {
-      border-top: 1px solid #eeeeee;
-      padding-top: 8px;
-      margin-bottom: 8px;
-      font-size: 14px;
-      color: #7a7a7a;
-    }
-    
-    .task-footer {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      
-      .task-assigned {
-        display: flex;
-        gap: 4px;
-        
-        .assigned-contact {
-          width: 32px;
-          height: 32px;
-          border-radius: 50%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          color: white;
-          font-size: 12px;
-        }
-      }
-      
-      .task-priority img {
-        width: 16px;
-        height: 16px;
-      }
-    }
-  }
 
-  .progress-container {
-    width: 220px;
-    height: 16px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin: 8px 0;
-  }
-  
-  .progress-track {
-    width: 128px;
-    height: 8px;
-    background: $blue-link;
-    border-radius: 8px;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .progress-bar {
-    height: 100%;
-    background: $grey;
-    border-radius: 8px;
-    transition: width 0.3s ease;
-  }
-  
-  .progress-text {
-    font-size: 12px;
-    color: $black;
-    white-space: nowrap;
-  }
 
   @media (min-width: $breakpoint-desktop) {
     .columns-content {
