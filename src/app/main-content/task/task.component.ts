@@ -5,11 +5,12 @@ import { ContactService } from '../../services/contact.service';
 import { NgClass, NgStyle } from '@angular/common';
 import { FeedbackServiceService } from '../../services/feedback.service';
 import { Task } from '../../interfaces/task';
+import { NgModel, FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [NgStyle],
+  imports: [NgStyle, FormsModule],
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss'
 })
@@ -33,9 +34,16 @@ deleteTask(id : string){
 editTask(task:Task) {
   this.taskService.setEditedTask(task); 
   this.overlayService.openOverlay('edit-task'); 
-  this.taskService.setTempAssignedTo(task.assignedTo!);
+  this.taskService.setTempAssignedTo(task.assignedTo!);  
 }
 
+updateSubtasks(task:Task, subtask:{title:string, isDone:boolean}){
+  console.log(task);
+  subtask['isDone'] = !subtask['isDone']
+  this.taskService.updateTask(task.id, task)
+  
+  
+}
 
 
 
