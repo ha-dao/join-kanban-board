@@ -11,6 +11,7 @@ export class OverlayService {
   taskService= inject(TaskService)
   private contactDataSource = new BehaviorSubject<{ name: string; email: string; phone: string } | null>(null);
   contactData$ = this.contactDataSource.asObservable();
+  ContactOverlayH2Text: string = 'Add Contact';
 
   buttonLeft = 'Cancel';
   buttonRight = 'Create';
@@ -18,7 +19,12 @@ export class OverlayService {
   openOverlay(target:string) {
     this.setTemplate.set(target)    
     this.isOpen.set(true);
-    
+    if(this.buttonRight == 'Save'){
+      this.ContactOverlayH2Text = 'Edit Contact';
+    }else{
+      this.ContactOverlayH2Text = 'Add Contact';
+
+    }
   }
   
   
