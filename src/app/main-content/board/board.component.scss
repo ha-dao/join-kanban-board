@@ -8,7 +8,7 @@ $breakpoint-tablet: 768px;
   // Grundlegendes Reset + Box-Sizing
   all: unset;
   box-sizing: border-box;
-
+  transform:rotate(10deg);
   // Layout & Größe
   width: 252px;
   padding: 16px;
@@ -84,13 +84,13 @@ $breakpoint-tablet: 768px;
     .progress-track {
       width: 128px;
       height: 8px;
-      background: $blue-link;
+      background:$grey ;
       border-radius: 8px;
       overflow: hidden;
 
       .progress-bar {
         height: 100%;
-        background: $grey;
+        background: $blue-link;
         border-radius: 8px;
       }
     }
@@ -187,7 +187,7 @@ $breakpoint-tablet: 768px;
 .progress-track {
   width: 128px;
   height: 8px;
-  background: $blue-link;
+  background: $grey;
   border-radius: 8px;
   position: relative;
   overflow: hidden;
@@ -195,7 +195,7 @@ $breakpoint-tablet: 768px;
 
 .progress-bar {
   height: 100%;
-  background: $grey;
+  background: $blue-link;
   border-radius: 8px;
   transition: width 0.3s ease;
 }

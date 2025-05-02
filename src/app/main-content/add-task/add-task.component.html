@@ -147,7 +147,7 @@
               <li (click)="editSubtask(i); $event.stopPropagation()">
                 <a>{{ subtask.title }}</a>
                 <span class="edit-delete-hover-content">
-                  <span (click)="editSubtask(i); $event.stopPropagation()">
+                  <span (click)="editSubtask(i); checkngmodel(); $event.stopPropagation()">
                     <img src="assets/icon/edit.svg" alt="Edit" />
                   </span>
                   |
@@ -172,10 +172,18 @@
           Clear
           <img src="assets/img/4-contacts/close-icon.svg" alt="close pictogram" />
         </button>
+        @if(overlayService.setTemplate() == 'add-task'){
         <button class="create-button" type="submit" [disabled]="!isFormValid()" >
           Create Task
           <img src="assets/img/4-contacts/check-icon.svg" alt="check pictogram" />
         </button>
+      }
+      @if(overlayService.setTemplate() == 'edit-task'){
+        <button class="create-button" type="button" [disabled]="!isFormValid()" (click)="submitTask();overlayService.closeOverlay(); resetSubtasks(); " >
+          Edit Task
+          <img src="assets/img/4-contacts/check-icon.svg" alt="check pictogram" />
+        </button>
+      }
       </div>
     </div>
   </form>
