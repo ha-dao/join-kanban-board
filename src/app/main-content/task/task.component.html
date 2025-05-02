@@ -47,10 +47,9 @@
         <h3>Subtasks</h3>
         <div class="subtasks">
             @for (subtask of task!.subtasks; track $index) {
-              <div class="single-subtask" (click)="toggleSubtask($index)">
+              <div class="single-subtask">
                 <input type="checkbox" [(ngModel)]="subtask.isDone"
-                (click)="updateSubtasks(task!, subtask)" [checked]="subtask.status === 'done'"
-                       [ngClass]="subtask.status === 'done' ? 'checkbox-checked' : 'checkbox-unchecked'">
+                (click)="updateSubtasks(task!, subtask)">
                 <p>{{subtask.title}}</p>
               </div>
             }
@@ -60,10 +59,6 @@
             <button (click)="deleteTask(task!.id)"><img src="assets/img/4-contacts/delete-icon.svg" alt="Delete Icon">Delete</button><span>|</span>
             <button (click)="editTask(task!)" ><img src="assets/img/4-contacts/edit-icon.svg" alt="Edit Icon">Edit</button>
           </div>
-
-
-
-
 
 
 

@@ -35,7 +35,7 @@
         <div class="tasks-container" cdkDropList id="todoList" [cdkDropListData]="taskService.boardTasksListToDo"
           [cdkDropListConnectedTo]="connectedDropLists" (cdkDropListDropped)="drop($event, 'ToDo')">
 
-          @if (taskService.boardTasksListToDo) {
+          @if (taskService.boardTasksListToDo.length) {
           @for (task of taskService.boardTasksListToDo; track task.id) {
           @if(task.status == 'ToDo' && (task.title.startsWith(taskService.searchInputFieldValue) ||
           task.description.startsWith(taskService.searchInputFieldValue))){
@@ -135,6 +135,7 @@
           </div>
           }
         </div>
+      </div>
 
 
       <div class="column">
@@ -151,7 +152,7 @@
           [cdkDropListData]="taskService.boardTasksListProgress" [cdkDropListConnectedTo]="connectedDropLists"
           (cdkDropListDropped)="drop($event, 'In Progress')">
 
-          @if (taskService.boardTasksListProgress) {
+          @if (taskService.boardTasksListProgress.length) {
           @for (task of taskService.boardTasksListProgress; track task) {
           @if(task.status == 'In Progress' && (task.title.startsWith(taskService.searchInputFieldValue) ||
           task.description.startsWith(taskService.searchInputFieldValue))){
@@ -252,6 +253,7 @@
           </div>
           }
         </div>
+      </div>
 
 
       <div class="column">
@@ -268,7 +270,7 @@
           [cdkDropListData]="taskService.boardTasksListFeedback" [cdkDropListConnectedTo]="connectedDropLists"
           (cdkDropListDropped)="drop($event, 'Await Feedback')">
 
-          @if (taskService.boardTasksListFeedback) {
+          @if (taskService.boardTasksListFeedback.length) {
           @for (task of taskService.boardTasksListFeedback; track task) {
           @if(task.status == 'Await Feedback' && (task.title.startsWith(taskService.searchInputFieldValue) ||
           task.description.startsWith(taskService.searchInputFieldValue))){
@@ -285,15 +287,6 @@
               }}
             </div>
 
-
-                  @if (task.subtasks && task.subtasks.length > 0) {
-                    <div class="progress-container">
-                      <div class="progress-track">
-                        <div class="progress-bar" [style.width.%]="getProgressWidth(task)"></div>
-                      </div>
-                      <span class="progress-text"> {{ getCompletedSubtasks(task) }}/{{ task.subtasks.length || 0 }} Subtasks</span>
-                      </div>
-                  }
             @if (task.subtasks && task.subtasks.length > 0) {
             <div class="progress-container">
               <div class="progress-track">
@@ -388,7 +381,7 @@
         <div class="tasks-container" cdkDropList id="doneList" [cdkDropListData]="taskService.boardTasksListDone"
           [cdkDropListConnectedTo]="connectedDropLists" (cdkDropListDropped)="drop($event, 'Done')">
 
-          @if (taskService.boardTasksListDone) {
+          @if (taskService.boardTasksListDone.length) {
           @for (task of taskService.boardTasksListDone; track task) {
           @if(task.status == 'Done' && (task.title.startsWith(taskService.searchInputFieldValue) ||
           task.description.startsWith(taskService.searchInputFieldValue))){
@@ -493,4 +486,4 @@
 
     </div>
   </div>
-</main>
+</section>

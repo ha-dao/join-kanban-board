@@ -10,7 +10,7 @@ import { NgModel, FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [NgStyle,NgClass, FormsModule],
+  imports: [NgStyle, NgClass, FormsModule],
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss'
 })
@@ -37,11 +37,12 @@ editTask(task:Task) {
   this.taskService.setTempAssignedTo(task.assignedTo!);
 }
 
-toggleSubtask(index: number) {
-  if (this.task && this.task.subtasks[index]) {
-    this.task.subtasks[index].status = this.task.subtasks[index].status === 'done' ? 'open' : 'done';
-  }
+updateSubtasks(task:Task, subtask:{title:string, isDone:boolean}){
+  subtask['isDone'] = !subtask['isDone']
+  this.taskService.updateTask(task.id, task)
+
 }
+
 
 
 
