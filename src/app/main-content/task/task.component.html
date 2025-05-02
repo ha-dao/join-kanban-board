@@ -10,7 +10,7 @@
             <p>Due Date:</p>
              <p>{{task!.date}}</p>
         </div>
-        
+
         <div class="priority">
           <h3>Priority:</h3>
             <p>{{task!.priority}} @if (task!.priority === 'Urgent') {
@@ -31,35 +31,36 @@
             }</p>
         </div>
         <h3>Assigned To:</h3>
-        <div class="assigned-to">          
+        <div class="assigned-to">
                 @for (item of task?.assignedTo; track item; let index = $index) {
                     <div class="contact">
                       <div class="contact-img" [ngStyle]="{ background: item['color'] }">
                         <p>{{ contactService.getFirstAndLastNameFirstLetter(item['name']) }}</p>
-                      </div>                     
+                      </div>
                         <p>
-                          {{ contactService.getFirstAndLastName(item['name']) }}                          
+                          {{ contactService.getFirstAndLastName(item['name']) }}
                         </p>
-                      
+
                     </div>
-                    }            
+                    }
         </div>
         <h3>Subtasks</h3>
-        <div class="subtasks">            
+        <div class="subtasks">
             @for (subtask of task!.subtasks; track $index) {
-              <div class="single-subtask">
-                <input type="checkbox">
+              <div class="single-subtask" (click)="toggleSubtask($index)">
+                <input type="checkbox" [checked]="subtask.status === 'done'"
+                       [ngClass]="subtask.status === 'done' ? 'checkbox-checked' : 'checkbox-unchecked'">
                 <p>{{subtask.title}}</p>
-              </div>                            
+              </div>
             }
           </div>
         </div>
            <div class="button-div">
-            <button (click)="deleteTask(task!.id)"><img src="/assets/icon/trash.svg" alt="">Delete</button>
-            <button (click)="editTask(task!)" ><img src="/assets/icon/edit.svg" alt="">Edit</button>
+            <button (click)="deleteTask(task!.id)"><img src="assets/img/4-contacts/delete-icon.svg" alt="Delete Icon">Delete</button><span>|</span>
+            <button (click)="editTask(task!)" ><img src="assets/img/4-contacts/edit-icon.svg" alt="Edit Icon">Edit</button>
           </div>
-        
-     
+
+
 
 
 
