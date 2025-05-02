@@ -74,7 +74,7 @@ export class BoardComponent implements OnInit {
   }
 
 getCompletedSubtasks(task: Task): number {
-  return task.subtasks?.filter(t => t.status).length || 0;
+  return task.subtasks?.filter(t => t.isDone).length || 0;
 }
 
 getProgressWidth(task: Task): number {

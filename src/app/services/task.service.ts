@@ -36,7 +36,7 @@ export class TaskService implements OnDestroy {
   clickedButton= signal<string>('Medium') ;
   currentSubtasks:{
     title:string;
-    status:string
+    isDone:boolean
   }[]=[];
   taskData: Task= {
     id:'',
@@ -124,11 +124,13 @@ export class TaskService implements OnDestroy {
     this.feedbackService.show('Task Updated')
   }
 
+ 
   async deleteTask(id: string) {
     if (id) {
       await deleteDoc(this.getSingleTask('tasks', id));
     }
-    this.feedbackService.show('Task Deleted')
+    this.fillBoardTaskLists();
+    this.feedbackService.show('Task Deleted')    
   }
 
   ngOnDestroy() {
@@ -158,7 +160,6 @@ export class TaskService implements OnDestroy {
   getSingleTask(collectionRef: string, docId: string) {
     return doc(collection(this.firestore, collectionRef), docId);
   }
-
   searchAndFilter(event:Event, value: string){
     this.searchInputFieldValue = value;
   }

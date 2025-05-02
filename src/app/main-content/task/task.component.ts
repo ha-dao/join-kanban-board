@@ -5,11 +5,12 @@ import { ContactService } from '../../services/contact.service';
 import { NgClass, NgStyle } from '@angular/common';
 import { FeedbackServiceService } from '../../services/feedback.service';
 import { Task } from '../../interfaces/task';
+import { NgModel, FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [NgStyle,NgClass],
+  imports: [NgStyle,NgClass, FormsModule],
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss'
 })
@@ -35,8 +36,6 @@ editTask(task:Task) {
   this.overlayService.openOverlay('edit-task');
   this.taskService.setTempAssignedTo(task.assignedTo!);
 }
-
-
 
 toggleSubtask(index: number) {
   if (this.task && this.task.subtasks[index]) {

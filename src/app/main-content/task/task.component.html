@@ -48,7 +48,8 @@
         <div class="subtasks">
             @for (subtask of task!.subtasks; track $index) {
               <div class="single-subtask" (click)="toggleSubtask($index)">
-                <input type="checkbox" [checked]="subtask.status === 'done'"
+                <input type="checkbox" [(ngModel)]="subtask.isDone"
+                (click)="updateSubtasks(task!, subtask)" [checked]="subtask.status === 'done'"
                        [ngClass]="subtask.status === 'done' ? 'checkbox-checked' : 'checkbox-unchecked'">
                 <p>{{subtask.title}}</p>
               </div>
