@@ -6,7 +6,7 @@
 </div>
 <div class="single-contact-overlay" [ngStyle]="{display: contactService.overlayDisplay}">
     <div class="name-and-img">
-        <div class="img" [ngStyle]="{background: contactService.colours[contactService.currentIdex]}">{{contactService.getFirstAndLastNameFirstLetter(contactService.currentContact['name'])}} </div>
+        <div class="img" [ngStyle]="{background: contactService.currentContact['color']}">{{contactService.getFirstAndLastNameFirstLetter(contactService.currentContact['name'])}} </div>
         <div class="name-and-bttns">
             <h3>{{contactService.currentContact.name}}</h3>
             <div class="bttns">

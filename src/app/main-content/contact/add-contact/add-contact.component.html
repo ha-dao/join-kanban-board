@@ -10,13 +10,13 @@
   
       <div class="logo-div">
         <img src="assets/img/addContactOverlay/joinLogo.svg" alt="join Logo" />
-        <h2>Add contact</h2>
+        <h2>{{overlayService.ContactOverlayH2Text}}</h2>
         <span class="subtitle">Tasks are better with a team!</span>
         <div class="line-div"></div>
       </div>
       <div class="profile-image">
         @if(overlayService.buttonLeft == 'Delete'){
-          <div class="img" [ngStyle]="{background: contactService.colours[contactService.currentIdex]}">
+          <div class="img" [ngStyle]="{background: contactService.currentContact['color']}">
             {{contactService.getFirstAndLastNameFirstLetter(contactService.currentContact['name'])}}
           </div>
         }@else {

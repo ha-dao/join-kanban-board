@@ -18,6 +18,7 @@ export class addContactComponent {
 
 
   }
+  h2Text: string = 'Add Contact'
   @ViewChild('overlayRef') overlayRef!: ElementRef;
   contactData: {
     name: string;

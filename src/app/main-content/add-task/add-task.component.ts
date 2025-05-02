@@ -28,7 +28,7 @@ export class AddTaskComponent {
       if (!isOpen) {
         this.resetForm();
       }
-    });
+    }, { allowSignalWrites: true });
 
   
   }
@@ -47,16 +47,19 @@ searchTerm: string=''
 
 
 newSubtask:{title:string;
-  status:string
+  isDone:boolean
 }= {
   title:'',
-  status: 'unfinished'
+  isDone: false
 };
-editableSubtask= 
-  {title: '',
-    status: 'unfinished'
-  }
-;
+
+editableSubtask:{title:string;
+  isDone:boolean
+}= {
+  title:'',
+  isDone: false
+};
+
 editedIndex:number | null = null;
 dropdownOpen:boolean = false;
 isSelectOpen:boolean = false;
@@ -121,7 +124,7 @@ setAssignedTo(item: Contact) {
 
 addSubtask() {
   if (this.newSubtask.title){
-    let subTask ={title:this.newSubtask.title, status:'unfinished'}
+    let subTask ={title:this.newSubtask.title, isDone: false}
     this.taskService.currentSubtasks.push(subTask);
     this.newSubtask.title = '';
     
@@ -135,14 +138,14 @@ editSubtask(index: number) {
 }
 
 saveEditedSubtask(index: number) { 
-  this.taskService.currentSubtasks[index] ={title:this.editableSubtask.title, status:'unfinished'}   
+  this.taskService.currentSubtasks[index] ={title:this.editableSubtask.title, isDone:false}   
   this.editedIndex = null;
   this.editableSubtask.title = '';
 }
 
 getCompletedSubtasks(task: Task): number {
   if (!task.subtasks) return 0;
-  return task.subtasks.filter(t => t.status).length;
+  return task.subtasks.filter(t => t.isDone).length;
 }
 
 deleteSubtask(index: number) {
@@ -199,6 +202,7 @@ resetForm(){
     subtasks:[],
     status: ''
   };
+  this.taskService.tempAssignedTo = [];
 
 
 }
@@ -220,6 +224,10 @@ filterContacts(){
   return this.contactService.contactList.filter( c =>
   c.name.toLowerCase().includes(this.searchTerm.toLocaleLowerCase())
   );
+}
+
+checkngmodel(){
+  this.taskService.taskData.title = 'Test'
 }
 
 
