@@ -6,7 +6,7 @@
     </a>
   </div>
 
-  <form   (keydown.enter)="$event.preventDefault()" action="submit" (ngSubmit)="submitTask()">
+  <form (keydown.enter)="$event.preventDefault()" action="submit" (ngSubmit)="submitTask()">
     <div class="input-wrapper">
       <div class="task-data">
         <div class="input-div">
@@ -74,7 +74,7 @@
           </div>
           <div class="dropdown-menu" #overlayRef [ngClass]="{ visible: dropdownOpen, invisible: !dropdownOpen }">
             @if (this.dropdownOpen){
-              
+
               @for (item of (filterContacts()); track item; let index = $index) {
             <div class="contact"  [ngClass]="{ 'selected-contact-background': item.selected || (taskService.taskData.assignedTo!.includes(item)&& overlayService.setTemplate()=='edit-task')}" (click)="toggleContactSelection(item)">
               <div class="contact-img" [ngStyle]="{ background: item['color'] }">
@@ -95,19 +95,19 @@
           </div>
           <div class="selected-contact-wrapper">
             @if(overlayService.setTemplate()!== 'edit-task'){
-              
+
             @for (contact of contactService.contactList; track $index) { @if (contact.selected == true) {
             <div class="selected-contact" [ngStyle]="{ background: contact['color'] }" (click)="toggleContactSelection(contact); setAssignedTo(contact); $event.stopPropagation()">
-              {{ contact.letters }} 
+              {{ contact.letters }}
             </div>
             } }
           }@else{
-            @for (contact of contactService.contactList; track $index) { 
+            @for (contact of contactService.contactList; track $index) {
               @if(contact.selected== true){
               <div class="selected-contact" [ngStyle]="{ background: contact['color'] }" (click)="toggleContactSelection(contact); setAssignedTo(contact); $event.stopPropagation()">
                 {{ contact.letters }}
               </div>
-              
+
             }}
           }
           </div>
@@ -168,7 +168,7 @@
     <div class="bottom-form-wrapper">
       <p class="req-desktop"><span class="req-marker">*</span>This field is required</p>
       <div class="btn-div">
-        <button type="button" [ngClass]="{ visible: overlayService.setTemplate()!== 'edit-task', invisible: overlayService.setTemplate() == 'edit-task' }" class="cancel-button" (click)="resetSubtasks(); overlayService.closeOverlay()">
+        <button type="button" [ngClass]="{ flexvisible: overlayService.setTemplate()!== 'edit-task', invisible: overlayService.setTemplate() == 'edit-task' }" class="cancel-button" (click)="resetSubtasks(); overlayService.closeOverlay()">
           Clear
           <img src="assets/img/4-contacts/close-icon.svg" alt="close pictogram" />
         </button>

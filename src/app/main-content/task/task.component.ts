@@ -9,7 +9,7 @@ import { Task } from '../../interfaces/task';
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [NgStyle],
+  imports: [NgStyle,NgClass],
   templateUrl: './task.component.html',
   styleUrl: './task.component.scss'
 })
@@ -22,21 +22,27 @@ feedbackService = inject(FeedbackServiceService)
 task = this.taskService.selectedTask();
 
 
-deleteTask(id : string){    
+deleteTask(id : string){
   this.taskService.deleteTask(id)
   this.overlayService.closeOverlay()
-  
-  
+
+
 }
 
 
 editTask(task:Task) {
-  this.taskService.setEditedTask(task); 
-  this.overlayService.openOverlay('edit-task'); 
+  this.taskService.setEditedTask(task);
+  this.overlayService.openOverlay('edit-task');
   this.taskService.setTempAssignedTo(task.assignedTo!);
 }
 
 
+
+toggleSubtask(index: number) {
+  if (this.task && this.task.subtasks[index]) {
+    this.task.subtasks[index].status = this.task.subtasks[index].status === 'done' ? 'open' : 'done';
+  }
+}
 
 
 

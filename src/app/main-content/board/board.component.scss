@@ -1,7 +1,7 @@
 @import "./../../styles/variables.scss";
 @import "./../../styles/mixins.scss";
 
-$breakpoint-desktop: 1200px;
+$breakpoint-desktop: 1280px;
 $breakpoint-tablet: 768px;
 
 .overlay {
@@ -29,10 +29,12 @@ $breakpoint-tablet: 768px;
   transform: translateX(200%);
 }
 .main-container {
-  background: $white;
-  min-height: 100vh;
   width: 100%;
-  box-sizing: border-box;
+  padding: 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  justify-content: flex-start;
 }
 
 .header {
@@ -40,17 +42,9 @@ $breakpoint-tablet: 768px;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: auto;
-  min-height: 150px;
-  margin-bottom: 40px;
-  padding: 20px 10px;
-  box-sizing: border-box;
-
-  .title {
-    flex-shrink: 0;
-    font-size: 24px;
+  h1 {
+    font-size: clamp(2em, 5vw, 3em);
   }
-
   .right-section {
     display: flex;
     align-items: center;
@@ -146,24 +140,23 @@ $breakpoint-tablet: 768px;
 
 .columns-container {
   width: 100%;
-  padding: 0 10px;
-  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
   .columns-content {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    gap: 30px;
     padding: 0;
 
     .column {
-      min-height: 300px;
+      min-width: 300px;
       width: 100%;
       display: flex;
       flex-direction: column;
-
-      .column-header {
-        margin-bottom: 16px;
-      }
+      justify-content: flex-start;
+      gap: 0;
 
       .column-title {
         width: 100%;
@@ -174,22 +167,20 @@ $breakpoint-tablet: 768px;
         font-weight: 700;
         font-size: 18px;
         position: relative;
-        padding: 8px 16px;
 
         .add-button {
           background: none;
-          border: 3px solid $primary-color;
+          border: 2px solid $primary-color;
           cursor: pointer;
-          padding: 4px;
-          border-radius: 30%;
+          padding: 5px;
+          border-radius: 10px;
           transition: background-color 0.2s ease, border-color 0.2s ease;
 
           &:hover {
             border-color: $hover-color;
-          }
-
-          &:hover img {
-            @include svg-filter-accent;
+            img {
+              @include svg-filter-accent;
+            }
           }
 
           img {
@@ -202,11 +193,13 @@ $breakpoint-tablet: 768px;
       }
 
       .tasks-container {
-        flex-grow: 1;
         min-height: 100%;
-        padding: 16px;
         background-color: $background-color;
         border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 8px;
 
         .dashed-container {
           width: calc(100% - 20px);
@@ -228,30 +221,33 @@ $breakpoint-tablet: 768px;
   }
 
   .task-card {
-    width: 252px;
-    height: auto;
+    width: 100%;
+    min-height: auto;
     gap: 10px;
     border-radius: 24px;
     padding: 16px;
-    background: #FFFFFF;
+    background-color: #FFFFFF;
     box-shadow: 0px 0px 10px 3px #00000014;
     margin-bottom: 16px;
     display: flex;
     flex-direction: column;
     cursor: pointer;
-    
+    &:active {
+      transform: rotate(10deg);
+    }
+
     .task-category {
       font-size: 14px;
       color: #000000;
       margin-bottom: 8px;
     }
-    
+
     .task-title {
       font-weight: bold;
       font-size: 16px;
       margin-bottom: 8px;
     }
-    
+
     .task-description {
       color: #7a7a7a;
       font-size: 14px;
@@ -260,7 +256,7 @@ $breakpoint-tablet: 768px;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
-    
+
     .task-progress {
       border-top: 1px solid #eeeeee;
       padding-top: 8px;
@@ -268,16 +264,14 @@ $breakpoint-tablet: 768px;
       font-size: 14px;
       color: #7a7a7a;
     }
-    
+
     .task-footer {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      
+
       .task-assigned {
         display: flex;
-        gap: 4px;
-        
         .assigned-contact {
           width: 32px;
           height: 32px;
@@ -285,11 +279,14 @@ $breakpoint-tablet: 768px;
           display: flex;
           justify-content: center;
           align-items: center;
-          color: white;
+          color: $white;
           font-size: 12px;
+          &:not(:first-child) {
+            margin-left: -8px;
+          }
         }
       }
-      
+
       .task-priority img {
         width: 16px;
         height: 16px;
@@ -298,34 +295,50 @@ $breakpoint-tablet: 768px;
   }
 
   .progress-container {
-    width: 220px;
+    width: 100%;
     height: 16px;
     display: flex;
     align-items: center;
     gap: 10px;
     margin: 8px 0;
   }
-  
+
   .progress-track {
-    width: 128px;
+    width: 100%;
     height: 8px;
     background: $blue-link;
     border-radius: 8px;
     position: relative;
     overflow: hidden;
   }
-  
+
   .progress-bar {
     height: 100%;
     background: $grey;
     border-radius: 8px;
     transition: width 0.3s ease;
   }
-  
+
   .progress-text {
     font-size: 12px;
     color: $black;
     white-space: nowrap;
+  }
+
+  @media (max-width: 1750px) {
+    .columns-content {
+      flex-direction: row;
+      gap: 24px;
+    }
+
+    .column {
+      min-height: 600px;
+      width: 244px;
+    }
+
+    .main-container {
+      padding: 0;
+    }
   }
 
   @media (min-width: $breakpoint-desktop) {
@@ -366,7 +379,7 @@ $breakpoint-tablet: 768px;
     }
 
     .columns-container {
-      padding: 0 64px;
+      padding: 0;
     }
 
     .column-header {

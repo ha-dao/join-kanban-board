@@ -53,7 +53,7 @@ export class TaskService implements OnDestroy {
 
   constructor() {
     this.snap();
-    
+
   }
 
   fillBoardTaskLists(){
@@ -78,7 +78,7 @@ export class TaskService implements OnDestroy {
     this.tempAssignedTo = contacts;
   }
 
-  setEditedTask(task: Task) {   
+  setEditedTask(task: Task) {
     this.taskData.title = task.title;
     this.taskData.description = task.description;
     this.taskData.date = task.date;
@@ -89,7 +89,7 @@ export class TaskService implements OnDestroy {
     this.taskData.id = task.id
     this.taskData.status = task.status
 
-    
+
   }
 
   snap() {
@@ -104,7 +104,7 @@ export class TaskService implements OnDestroy {
         this.isBoardListFull = true;
       }
     });
-    
+
   }
 
   async addTask(task: Task) {
@@ -165,9 +165,9 @@ export class TaskService implements OnDestroy {
 
   setSelectedTask(task: Task) {
     this.selectedTask.set(task);
-  }  
+  }
   clearSelectedTask() {
     this.selectedTask.set(null);
   }
-  
+
 }
