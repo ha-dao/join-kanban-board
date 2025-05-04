@@ -706,6 +706,7 @@ $checkbox-height: 18px;
 :host-context(.edit-task) {
   section {
     width: 100%;
+    padding: 0;
     .title-close-wrapper {
       display: flex;
       justify-content: flex-end;
@@ -880,5 +881,30 @@ $checkbox-height: 18px;
       }
     }
   }
-
+  @media (max-width: 1280px) {
+    section {
+      padding-bottom: 32px;
+      gap: 0;
+      .title-close-wrapper {
+        position: sticky;
+        top: 8px;
+        >a {
+          background-color: $white;
+        }
+      }
+      form {
+        p.req-mobile {
+          display: block;
+        }
+        .bottom-form-wrapper {
+          position: sticky;
+          bottom: 16px;
+          background-color: $white;
+          .btn-div {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
 }

@@ -1,6 +1,10 @@
 <section>
     <div class="title-close-wrapper">
-        <h2>{{task!.category}}</h2>
+        <h2 [ngClass]="{
+          'user-story': task!.category === 'User Story',
+          'technical-task': task!.category === 'Technical Task',
+          'design': task!.category === 'Design'
+      }">{{task!.category}}</h2>
         <a class="close-button" ><img src="assets/img/addContactOverlay/X.svg" alt="x-icon close button" (click)="this.overlayService.closeOverlay(); $event.stopPropagation(); " /></a>
     </div>
     <h2>{{task!.title}}</h2>
@@ -47,9 +51,9 @@
         <h3>Subtasks</h3>
         <div class="subtasks">
             @for (subtask of task!.subtasks; track $index) {
-              <div class="single-subtask">
+              <div class="single-subtask" (click)="updateSubtasks(task!, subtask)">
                 <input type="checkbox" [(ngModel)]="subtask.isDone"
-                (click)="updateSubtasks(task!, subtask)">
+                 [ngClass]="subtask.isDone ? 'checkbox-checked' : 'checkbox-unchecked'">
                 <p>{{subtask.title}}</p>
               </div>
             }
@@ -59,8 +63,4 @@
             <button (click)="deleteTask(task!.id)"><img src="assets/img/4-contacts/delete-icon.svg" alt="Delete Icon">Delete</button><span>|</span>
             <button (click)="editTask(task!)" ><img src="assets/img/4-contacts/edit-icon.svg" alt="Edit Icon">Edit</button>
           </div>
-
-
-
-
 </section>

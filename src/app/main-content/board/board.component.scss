@@ -1,14 +1,11 @@
 @import "./../../styles/variables.scss";
 @import "./../../styles/mixins.scss";
 
-$breakpoint-desktop: 1280px;
-$breakpoint-tablet: 768px;
-
 .task-card.drag-preview {
   // Grundlegendes Reset + Box-Sizing
   all: unset;
   box-sizing: border-box;
-  transform:rotate(10deg);
+  transform: rotate(10deg);
   // Layout & Größe
   width: 252px;
   padding: 16px;
@@ -166,6 +163,9 @@ $breakpoint-tablet: 768px;
       align-items: center;
       color: white;
       font-size: 12px;
+      &:not(:first-child) {
+        margin-left: -12px;
+      }
     }
   }
 
@@ -176,7 +176,7 @@ $breakpoint-tablet: 768px;
 }
 
 .progress-container {
-  width: 220px;
+  width: 100%;
   height: 16px;
   display: flex;
   align-items: center;
@@ -234,11 +234,11 @@ $breakpoint-tablet: 768px;
 
 .main-container {
   width: 100%;
-  padding: 64px;
   display: flex;
   flex-direction: column;
   gap: 40px;
   justify-content: flex-start;
+  padding: 64px;
 }
 
 .header {
@@ -246,16 +246,14 @@ $breakpoint-tablet: 768px;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  h1 {
-    font-size: clamp(2em, 5vw, 3em);
-  }
+
   .right-section {
     display: flex;
     align-items: center;
     gap: 16px;
     flex-wrap: wrap;
     justify-content: flex-end;
-
+    width: 100%;
     .search-input-wrapper {
       position: relative;
       display: flex;
@@ -266,16 +264,9 @@ $breakpoint-tablet: 768px;
       border-radius: 10px;
       background: $background-color;
       transition: border-color 0.3s;
-
-      &:hover {
-        transform: scale(1.02);
-        border: 2px solid $grey;
+      &:active {
+        border: 1px solid $hover-color;
       }
-
-      &.active-wrapper {
-        border: 2px solid $hover-color;
-      }
-
       .search-input {
         flex-grow: 1;
         border: none;
@@ -283,10 +274,6 @@ $breakpoint-tablet: 768px;
         font-size: 16px;
         background: transparent;
         width: 65%;
-
-        &:focus {
-          outline: none;
-        }
       }
 
       .separator {
@@ -299,19 +286,18 @@ $breakpoint-tablet: 768px;
         background: none;
         border: none;
         cursor: pointer;
-        padding: 6px 10px;
         margin-right: 4px;
-
+        min-width: 24px;
+        min-height: 24px;
+        padding: 0;
         img {
-          width: 20px;
-          height: 20px;
           display: block;
+          min-width: 24px;
+          min-height: 24px;
         }
-
         &:hover {
           background-color: $grey;
-          border-radius: 90%;
-          transform: scale(1.2);
+          border-radius: 50%;
         }
       }
     }
@@ -347,20 +333,20 @@ $breakpoint-tablet: 768px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  width: 100%;
 
   .columns-content {
     width: 100%;
     display: flex;
-    flex-direction: column;
     padding: 0;
+    gap: 24px;
 
     .column {
-      min-width: 300px;
       width: 100%;
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
-      gap: 0;
+      gap: 24px;
 
       .column-title {
         width: 100%;
@@ -371,12 +357,14 @@ $breakpoint-tablet: 768px;
         font-weight: 700;
         font-size: 18px;
         position: relative;
-
+        min-height: 32px;
         .add-button {
           background: none;
           border: 2px solid $primary-color;
           cursor: pointer;
           padding: 5px;
+          width: 30px;
+          height: 30px;
           border-radius: 10px;
           transition: background-color 0.2s ease, border-color 0.2s ease;
 
@@ -397,7 +385,6 @@ $breakpoint-tablet: 768px;
       }
 
       .tasks-container {
-        min-height: 100%;
         background-color: $background-color;
         border-radius: 8px;
         display: flex;
@@ -423,63 +410,77 @@ $breakpoint-tablet: 768px;
       }
     }
   }
+}
 
-
-
-  @media (min-width: $breakpoint-desktop) {
-    .columns-content {
-      flex-direction: row;
-      justify-content: space-between;
-      gap: 26px;
-    }
-
-    .column {
-      min-height: 600px;
-      width: 244px;
-    }
-
-    .main-container {
-      padding: 0;
-    }
-  }
-
-  @media (min-width: $breakpoint-tablet) {
-    .header {
-      height: 232px;
-      padding: 0 64px 0 23px;
-    }
-
-    .title {
-      font-size: 32px;
-    }
-
-    .right-section {
-      gap: 32px;
-      flex-wrap: nowrap;
-    }
-
-    .add-task-button {
-      width: 28px;
-      height: 28px;
-    }
-
-    .columns-container {
-      padding: 0;
-    }
-
-    .column-header {
-      margin-bottom: 24px;
-    }
-
-    .column-title {
-      font-size: 20px;
-      justify-content: center;
-      margin-right: 30px;
-    }
-
-    .add-button {
-      position: absolute;
-      right: 0;
-    }
+.plus-button {
+  display: none;
+  background-color: $primary-color;
+  padding: 8px;
+  border-radius: 10px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transition: 250ms all ease;
+  &:hover {
+    background-color: $hover-color;
+    -webkit-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
+    box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
   }
 }
+
+  @media (max-width: 1440px) {
+    .columns-container {
+      .columns-content {
+        flex-direction: column;
+        .column {
+          .tasks-container {
+            flex-direction: row;
+            overflow-x: auto;
+            gap: 16px;
+            .task-card {
+              min-width: 200px;
+            }
+          }
+        }
+      }
+    }
+
+
+  }
+
+  @media (max-width: 1280px) {
+    .main-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      justify-content: flex-start;
+      padding: 0;
+    }
+  }
+
+  @media (max-width: 960px) {
+    .header {
+      flex-wrap: wrap;
+      gap: 16px;
+      >h1 {
+        width: 50%;
+      }
+      .right-section {
+        .search-input-wrapper {
+          max-width: 100%;
+        }
+        order: 3;
+        width: 100%;
+        .add-task-button {
+          display: none;
+        }
+      }
+    }
+
+    .plus-button {
+      display: block;
+      width: auto;
+    }
+  }
+

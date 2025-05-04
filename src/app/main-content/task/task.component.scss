@@ -2,31 +2,23 @@
 @import './../../styles/mixins.scss';
 @import './../../styles/buttons.scss';
 
-.cdk-drag-placeholder {
-  transform: rotate(10deg);
-
-}
-.cdk-drag-preview {
-  transform: rotate(10deg);
-  /* You can also add other styles like background color, padding, etc. */
-}
-
-
 section {
     @include displayFlex(flex, column, flex-start, flex-start, 24px, nowrap);
     width: 100%;
     max-width: 1920px;
     padding: 64px;
     height:100%;
-
+    >h2 {
+      @include fontStyle(clamp(1em, 8vw, 3em), 700, $primary-color, capitalize);
+    }
     .title-close-wrapper {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       padding: 0;
       width: 100%;
-      >h2{
-        @include fontStyle( clamp(16px, 18px, 20px), 700, $primary-color)
-
+      >h2 {
+        @include fontStyle(clamp(1em, 1.2em, 1.4em), 700, $primary-color);
       }
       .close-button {
           padding: 8px;
@@ -49,11 +41,9 @@ h3{
   @include fontStyle(clamp(16px, 18px, 20px), 400, $primary-color, none)
 }
 
-.task-details{
+.task-details {
   @include displayFlex(flex, column, flex-start, flex-start, 24px);
-
-
-
+  width: 100%;
   }
 
 .contact-img {
@@ -72,35 +62,27 @@ h3{
   max-height: 200px;
   width: 100%;
   overflow: auto;
-  .single-subtask{
-    @include displayFlex(flex, row, center, center, 8px);
+  .single-subtask {
+    @include displayFlex(flex, row, flex-start, center, 8px, nowrap);
     padding: 6px 10px;
     border-radius: 10px;
-    >input[type="checkbox"] {
-      border-radius: 0;
-      width: 16px;
-      height: 16px;
-    }
-
-    input {
+    width: 100%;
+    input[type="checkbox"] {
       appearance: none;
       -webkit-appearance: none;
       width: 24px;
       height: 24px;
-      padding: 8px;
       cursor: pointer;
       background-size: contain;
       background-repeat: no-repeat;
       border: none;
-      overflow: visible;
+
       &.checkbox-unchecked {
-        background-image: url('../../../assets/img/3-board/checkbox-unchecked-icon.svg');
-        width: 16px;
-        height: 16px;
-        padding: 8px;
+        background-image: url('/assets/img/3-board/checkbox-unchecked-icon.svg');
       }
+
       &.checkbox-checked {
-        background-image: url('../../../assets/img/3-board/checkbox-checked-icon.svg');
+        background-image: url('/assets/img/3-board/checkbox-checked-icon.svg');
       }
     }
     >p{
@@ -143,8 +125,8 @@ h3{
 }
 
 .contact{
-  @include displayFlex(flex, row, center, center, 12px);
-  text-align: center;
+  @include displayFlex(flex, row, flex-start, center, 12px, nowrap);
+  text-align: left;
   >p{
     @include fontStyle(clamp(16px, 18px, 20px), 400,black, none);
   }
