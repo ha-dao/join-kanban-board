@@ -22,7 +22,38 @@
         </div>
         <div class="input-div">
           <label for="due-date">Due Date<span class="req-marker">*</span></label>
-          <input [(ngModel)]="taskService.taskData.date" type="date" name="Due Date" id="due-date"  required #taskDate="ngModel" />
+          <!-- <input [(ngModel)]="taskService.taskData.date" type="date" name="Due Date" id="due-date"  required #taskDate="ngModel" /> -->
+
+        <div class="custom-date-input">
+          <input
+            [(ngModel)]="displayDate"
+            name="Display Date"
+            id="display-date"
+            placeholder="dd/mm/yyyy"
+            (input)="onInputChange($event)"
+            (blur)="formatDate()"
+            (keydown)="onKeydown($event)"
+            maxlength="10"
+            autocomplete="off"
+          />
+          <div class="calendar-icon" (click)="openDatePicker()">
+            <img src="assets/img/2-add-task/calendar-icon.svg" alt="Calendar">
+          </div>
+        </div>
+
+        <!-- hidden input date picker  -->
+        <input
+          #hiddenDateInput
+          [(ngModel)]="taskService.taskData.date"
+          type="date"
+          name="Due Date"
+          [min]="getTodayISOString()"
+          required
+          #taskDate="ngModel"
+          (change)="onDatePickerChange()"
+          class="hidden-date-input"
+        />
+
           @if (taskDate.touched && taskDate.invalid) {
           <span class="error-message">Please enter a Date</span>
           }
