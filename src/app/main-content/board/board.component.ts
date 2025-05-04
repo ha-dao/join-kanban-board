@@ -20,6 +20,7 @@ export class BoardComponent implements OnInit {
   searchQuery = '';
   overlayService = inject(OverlayService)
   taskService = inject(TaskService);
+  
 
   @ViewChild('overlayRef') overlayRef!: ElementRef;
 

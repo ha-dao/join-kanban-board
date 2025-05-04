@@ -28,6 +28,12 @@ export class TaskService implements OnDestroy {
   boardTasksListDone: Task[] = [];
   boardTasksListProgress: Task[] = [];
   boardTasksListFeedback: Task[] = [];
+  boardColumns = [
+      { title: 'To Do', status: 'ToDo', list: this.boardTasksListToDo, dropListName:'todoList', epmtyText: 'No tasks To do' },
+      { title: 'In Progress', status: 'In Progress', list: this.boardTasksListProgress, dropListName:'inProgressList', epmtyText: 'No tasks in progress' },
+      { title: 'Await Feedback', status: 'Await Feedback', list: this.boardTasksListFeedback, dropListName:'awaitFeedbackList', epmtyText: 'No tasks awaiting feedback' },
+      { title: 'Done', status: 'Done', list: this.boardTasksListDone, dropListName:'doneList', epmtyText: 'No completed tasks' }
+    ];
   isBoardListFull: boolean = false;
   searchInputFieldValue: string= '';
   newTaskStatus: string= '';
@@ -57,19 +63,18 @@ export class TaskService implements OnDestroy {
   }
 
   fillBoardTaskLists(){
-  this.boardTasksListToDo = [];
-  this.boardTasksListDone = [];
-  this.boardTasksListProgress = [];
-  this.boardTasksListFeedback = [];
+  this.boardColumns.forEach(column =>{
+    column.list = [];
+  })
     this.tasksList.forEach((task)=>{
       if(task.status == 'ToDo'){
-        this.boardTasksListToDo.push(task);
+        this.boardColumns[0].list.push(task);
       }else if(task.status == 'In Progress'){
-        this.boardTasksListProgress.push(task);
+        this.boardColumns[1].list.push(task);
       }else if(task.status == 'Await Feedback'){
-        this.boardTasksListFeedback.push(task);
+        this.boardColumns[2].list.push(task);
       }else if(task.status == 'Done'){
-        this.boardTasksListDone.push(task);
+        this.boardColumns[3].list.push(task);
       }
     })
   }
