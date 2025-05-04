@@ -170,4 +170,13 @@ export class TaskService implements OnDestroy {
   clearSelectedTask() {
     this.selectedTask.set(null);
   }
+
+  getCategoryClass(category: string): string {
+    const categoryMap: { [key: string]: string } = {
+      'User Story': 'user-story',
+      'Technical Task': 'technical-task',
+      'Design': 'design'
+    };
+    return categoryMap[category] || '';
+  }
 }

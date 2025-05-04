@@ -43,7 +43,7 @@
           @if(task.status == 'ToDo' && (task.title.startsWith(taskService.searchInputFieldValue) ||
           task.description.startsWith(taskService.searchInputFieldValue))){
           <div class="task-card" cdkDrag (click)="openTaskDetail(task)">
-            <div class="task-category">{{ task.category }}</div>
+            <div class="task-category" [ngClass]="taskService.getCategoryClass(task.category)">{{ task.category }}</div>
             <div class="task-title">{{ task.title }}</div>
             <div class="task-description">
               {{
@@ -160,7 +160,7 @@
           @if(task.status == 'In Progress' && (task.title.startsWith(taskService.searchInputFieldValue) ||
           task.description.startsWith(taskService.searchInputFieldValue))){
           <div class="task-card" cdkDrag (click)="openTaskDetail(task)">
-            <div class="task-category">{{ task.category }}</div>
+            <div class="task-category" [ngClass]="taskService.getCategoryClass(task.category)">{{ task.category }}</div>
             <div class="task-title">{{ task.title }}</div>
             <div class="task-description">
               {{
@@ -278,7 +278,7 @@
           @if(task.status == 'Await Feedback' && (task.title.startsWith(taskService.searchInputFieldValue) ||
           task.description.startsWith(taskService.searchInputFieldValue))){
           <div class="task-card" cdkDrag (click)="openTaskDetail(task)">
-            <div class="task-category">{{ task.category }}</div>
+            <div class="task-category" [ngClass]="taskService.getCategoryClass(task.category)">{{ task.category }}</div>
             <div class="task-title">{{ task.title }}</div>
             <div class="task-description">
               {{
@@ -389,7 +389,7 @@
           @if(task.status == 'Done' && (task.title.startsWith(taskService.searchInputFieldValue) ||
           task.description.startsWith(taskService.searchInputFieldValue))){
           <div class="task-card" cdkDrag (click)="openTaskDetail(task)">
-            <div class="task-category">{{ task.category }}</div>
+            <div class="task-category" [ngClass]="taskService.getCategoryClass(task.category)">{{ task.category }}</div>
             <div class="task-title">{{ task.title }}</div>
             <div class="task-description">
               {{
