@@ -173,19 +173,19 @@
           <img src="assets/img/4-contacts/close-icon.svg" alt="close pictogram" />
         </button>
         @if(overlayService.setTemplate() == 'add-task'){
-        <button class="create-button" type="submit" [disabled]="!isFormValid()" >
+        <button class="create-button" type="submit" [disabled]="!isFormValid()" [ngClass]="{ flexvisible: overlayService.setTemplate() == 'add-task', invisible: overlayService.setTemplate() !== 'add-task' }">
+          Create Task
+          <img src="assets/img/4-contacts/check-icon.svg" alt="check pictogram" />
+        </button>
+      } @else if (overlayService.setTemplate() == '') {
+        <button class="create-button" type="submit" [disabled]="!isFormValid()">
           Create Task
           <img src="assets/img/4-contacts/check-icon.svg" alt="check pictogram" />
         </button>
       }
       @if(overlayService.setTemplate() == 'edit-task'){
-        <button class="create-button" type="button" [disabled]="!isFormValid()" (click)="submitTask();overlayService.closeOverlay(); resetSubtasks(); " >
+        <button class="create-button" type="button" [disabled]="!isFormValid()" (click)="submitTask();overlayService.closeOverlay(); resetSubtasks();" [ngClass]="{ flexvisible: overlayService.setTemplate()== 'edit-task', invisible: overlayService.setTemplate() !== 'edit-task' }" >
           Ok
-          <img src="assets/img/4-contacts/check-icon.svg" alt="check pictogram" />
-        </button>
-      } @else {
-        <button class="create-button" type="button" [disabled]="!isFormValid()" (click)="submitTask();overlayService.closeOverlay(); resetSubtasks(); " >
-          Edit Task
           <img src="assets/img/4-contacts/check-icon.svg" alt="check pictogram" />
         </button>
       }
