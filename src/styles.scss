@@ -56,7 +56,7 @@ $project-theme: mat.define-light-theme((
 
 /* Chrome, Edge and Safari */
 *::-webkit-scrollbar {
-  height: 10px;
+  height: 5px;
   width: 5px;
 }
 *::-webkit-scrollbar-track {
@@ -151,6 +151,3 @@ input {
     font-size: 20px;
   }
 }
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
