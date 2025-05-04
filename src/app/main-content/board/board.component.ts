@@ -6,12 +6,12 @@ import { OverlayService } from '../../services/overlay.service';
 import { TaskService } from '../../services/task.service';
 import { Task } from '../../interfaces/task';
 import { TaskComponent } from '../task/task.component';
-import { DragDropModule, CdkDragDrop, transferArrayItem, moveItemInArray, CdkDragPreview } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem, CdkDrag, CdkDropList, CdkDragPreview } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, FormsModule, DragDropModule, CdkDragPreview],
+  imports: [CommonModule, FormsModule, CdkDrag, CdkDropList, CdkDragPreview ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
 })
