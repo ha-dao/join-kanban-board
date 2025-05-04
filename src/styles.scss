@@ -146,6 +146,30 @@ input {
   }
 }
 
+.user-story {
+  background-color: #0038FF;
+  color: white !important;
+  padding: 8px 16px;
+  border-radius: 8px;
+  display: inline-flex;
+}
+
+.technical-task {
+  background-color: #1FD7C1;
+  color: white !important;
+  padding: 8px 16px;
+  border-radius: 8px;
+  display: inline-flex;
+}
+
+.design {
+  background-color: #9327FF;
+  color: white !important;
+  padding: 8px 16px;
+  border-radius: 8px;
+  display: inline-flex;
+}
+
 @media (max-width: 768px) {
   p.subtitle {
     font-size: 20px;
