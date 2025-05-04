@@ -124,13 +124,13 @@ export class TaskService implements OnDestroy {
     this.feedbackService.show('Task Updated')
   }
 
- 
+
   async deleteTask(id: string) {
     if (id) {
       await deleteDoc(this.getSingleTask('tasks', id));
     }
     this.fillBoardTaskLists();
-    this.feedbackService.show('Task Deleted')    
+    this.feedbackService.show('Task Deleted')
   }
 
   ngOnDestroy() {
@@ -170,5 +170,4 @@ export class TaskService implements OnDestroy {
   clearSelectedTask() {
     this.selectedTask.set(null);
   }
-
 }

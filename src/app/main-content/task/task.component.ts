@@ -22,14 +22,10 @@ feedbackService = inject(FeedbackServiceService)
 
 task = this.taskService.selectedTask();
 
-
 deleteTask(id : string){
   this.taskService.deleteTask(id)
   this.overlayService.closeOverlay()
-
-
 }
-
 
 editTask(task:Task) {
   this.taskService.setEditedTask(task);
@@ -40,26 +36,6 @@ editTask(task:Task) {
 updateSubtasks(task:Task, subtask:{title:string, isDone:boolean}){
   subtask['isDone'] = !subtask['isDone']
   this.taskService.updateTask(task.id, task)
-
 }
 
-
-
-
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

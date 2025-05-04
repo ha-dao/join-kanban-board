@@ -116,7 +116,7 @@
           <label for="category">Category<span class="req-marker">*</span></label>
           <select name="Category" #categoryField="ngModel" id="category" required [(ngModel)]="taskService.taskData.category" [ngClass]="{ open: isSelectOpen }" (click)="toggleSelectOpen()">
             <option value="" selected>Select task category</option>
-            <option value="User story">User story</option>
+            <option value="User Story">User Story</option>
             <option value="Technical Task">Technical Task</option>
             <option value="Design">Design</option>
           </select>

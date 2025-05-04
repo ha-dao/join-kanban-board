@@ -103,8 +103,10 @@
   width:100%;
   padding: 24px;
   height:100%;
-  padding: 0;
   margin: 0;
+  section {
+    padding: 0;
+  }
   >a {
       padding: 8px;
       border-radius: 50%;
@@ -159,6 +161,36 @@
       }
     }
   }
+
+  .content-wrapper-edit-task {
+    display:flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    position: relative;
+    gap:72px;
+    width: calc(100% - 16px);
+    height: calc(100vh - 16px);
+    border-radius: 32px;
+    background-color: $white;
+    overflow-y: auto;
+    app-add-task {
+    width:100%;
+    padding: 24px;
+    height:100%;
+    margin: 0;
+    >a {
+        padding: 8px;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        z-index: 999;
+        img {
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+  }
 }
 
 @media (max-width: 1280px) and (orientation: landscape) {
@@ -187,6 +219,36 @@
     width:100%;
     padding: 40px 0 40px 40px;
     height:100%;
+    >a {
+        padding: 8px;
+        border-radius: 50%;
+        width: 32px;
+        height: 32px;
+        z-index: 999;
+        img {
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+  }
+
+  .content-wrapper-edit-task {
+    display:flex;
+    align-items: flex-start;
+    justify-content: space-around;
+    position: relative;
+    gap:72px;
+    width: calc(100% - 16px);
+    height: calc(100vh - 16px);
+    border-radius: 32px;
+    background-color: $white;
+    overflow-y: auto;
+    app-add-task {
+    width:100%;
+    padding: 24px;
+    height:100%;
+    margin: 0;
     >a {
         padding: 8px;
         border-radius: 50%;
