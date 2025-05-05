@@ -21,7 +21,7 @@
 
     <div class="profile" (click)="toggleMenu($event)">G</div>
 
-    <div class="dropdown-menu" [class.active]="showMenu">
+    <div class="dropdown-menu" [class.active]="showMenu" #menuRef>
       <a
       routerLink="/help"
         class="menu-item"
