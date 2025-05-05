@@ -64,7 +64,7 @@ export class BoardComponent implements OnInit {
     })
   }
 
-  handleBackdropClick(event: MouseEvent) {
+  handleBackdropClick(event: MouseEvent, task:Task) {
     const clickedInside = this.overlayRef.nativeElement.contains(event.target);    
     if (!clickedInside && this.overlayService.isOpen()) {
       this.overlayService.closeOverlay();
