@@ -105,10 +105,10 @@ export class TaskService implements OnDestroy {
       list.forEach((element) => {
         this.tasksList.push(this.setTaskObj(element.data(), element.id));
       });
-      if(!this.isBoardListFull){
+      
         this.fillBoardTaskLists();
         this.isBoardListFull = true;
-      }
+      
     });
 
   }
