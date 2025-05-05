@@ -22,7 +22,7 @@
         </div>
         <div class="input-div">
           <label for="due-date">Due Date<span class="req-marker">*</span></label>
-          <input [(ngModel)]="taskService.taskData.date" type="date" name="Due Date" id="due-date"  required #taskDate="ngModel" />
+          <input [(ngModel)]="taskService.taskData.date" type="date" [min]="today" name="Due Date" id="due-date"  required #taskDate="ngModel" />
           @if (taskDate.touched && taskDate.invalid) {
           <span class="error-message">Please enter a Date</span>
           }

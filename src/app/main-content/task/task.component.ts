@@ -38,11 +38,8 @@ editTask(task:Task) {
 }
 
 updateSubtasks(task:Task, subtask:{title:string, isDone:boolean}){
-  console.log(task);
   subtask['isDone'] = !subtask['isDone']
-  this.taskService.updateTask(task.id, task)
-  
-  
+  this.taskService.updateTask(task.id, task)  
 }
 
 

@@ -162,6 +162,8 @@ export class TaskService implements OnDestroy {
   }
   searchAndFilter(event:Event, value: string){
     this.searchInputFieldValue = value;
+    console.log(this.searchInputFieldValue);
+    
   }
 
   setSelectedTask(task: Task) {

@@ -8,11 +8,17 @@ import { TaskService } from '../../services/task.service';
 import { Task } from '../../interfaces/task';
 import { OverlayService } from '../../services/overlay.service';
 import { OverlayComponent } from '../contact/overlay/overlay.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerInputEvent } from '@angular/material/datepicker';
+
 
 @Component({
   selector: 'app-add-task',
   standalone: true,
-  imports: [NgClass, CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [NgClass, CommonModule, FormsModule, ReactiveFormsModule, MatDatepickerModule, MatFormFieldModule, MatInputModule, MatNativeDateModule],
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss'
 })
@@ -59,11 +65,12 @@ editableSubtask:{title:string;
   title:'',
   isDone: false
 };
-
+selectedDate!: Date;
+formattedDate = '';
 editedIndex:number | null = null;
 dropdownOpen:boolean = false;
 isSelectOpen:boolean = false;
-
+today = new Date().toISOString().split('T')[0];
 
 
 
@@ -74,6 +81,9 @@ ngOnInit() {
     this.taskService.taskData = structuredClone(taskToEdit);
   }
 }
+
+
+
 
 toggleSelectOpen() {
   this.isSelectOpen = !this.isSelectOpen;
