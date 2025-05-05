@@ -1,14 +1,10 @@
 @import "./../../styles/variables.scss";
 @import "./../../styles/mixins.scss";
 
-$breakpoint-desktop: 1200px;
-$breakpoint-tablet: 768px;
-
 .task-card.drag-preview {
   // Grundlegendes Reset + Box-Sizing
   all: unset;
   box-sizing: border-box;
-  transform:rotate(10deg);
   // Layout & Größe
   width: 252px;
   padding: 16px;
@@ -105,7 +101,7 @@ $breakpoint-tablet: 768px;
 
 
 .task-card {
-  width: 252px;
+  width: 100%;
   height: auto;
   gap: 10px;
   border-radius: 24px;
@@ -115,13 +111,18 @@ $breakpoint-tablet: 768px;
   margin-bottom: 16px;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   cursor: pointer;
+  &:active {
+    transform: rotate(5deg);
+  }
 }
 
 .task-category {
   font-size: 14px;
   color: #000000;
   margin-bottom: 8px;
+  width: auto;
 }
 
 .task-title {
@@ -151,7 +152,7 @@ $breakpoint-tablet: 768px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+  width: 100%;
   .task-assigned {
     display: flex;
     flex-wrap: wrap;
@@ -166,6 +167,9 @@ $breakpoint-tablet: 768px;
       align-items: center;
       color: white;
       font-size: 12px;
+      &:not(:first-child) {
+        margin-left: -12px;
+      }
     }
   }
 
@@ -176,7 +180,7 @@ $breakpoint-tablet: 768px;
 }
 
 .progress-container {
-  width: 220px;
+  width: 100%;
   height: 16px;
   display: flex;
   align-items: center;
@@ -185,7 +189,7 @@ $breakpoint-tablet: 768px;
 }
 
 .progress-track {
-  width: 128px;
+  width: 100%;
   height: 8px;
   background: $grey;
   border-radius: 8px;
@@ -205,6 +209,16 @@ $breakpoint-tablet: 768px;
   color: $black;
   white-space: nowrap;
 }
+
+  .cdk-drag-animating {
+    transform: none;
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .cdk-drag-placeholder {
+    opacity: 0.3;
+    border: 2px dashed #ccc;
+  }
 
 .overlay {
   position: fixed;
@@ -233,10 +247,12 @@ $breakpoint-tablet: 768px;
 }
 
 .main-container {
-  background: $white;
-  min-height: 100vh;
   width: 100%;
-  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  justify-content: flex-start;
+  padding: 64px;
 }
 
 .header {
@@ -244,16 +260,6 @@ $breakpoint-tablet: 768px;
   justify-content: space-between;
   align-items: center;
   width: 100%;
-  height: auto;
-  min-height: 150px;
-  margin-bottom: 40px;
-  padding: 20px 10px;
-  box-sizing: border-box;
-
-  .title {
-    flex-shrink: 0;
-    font-size: 24px;
-  }
 
   .right-section {
     display: flex;
@@ -261,7 +267,7 @@ $breakpoint-tablet: 768px;
     gap: 16px;
     flex-wrap: wrap;
     justify-content: flex-end;
-
+    width: 100%;
     .search-input-wrapper {
       position: relative;
       display: flex;
@@ -270,18 +276,14 @@ $breakpoint-tablet: 768px;
       max-width: 250px;
       border: 1px solid $grey;
       border-radius: 10px;
-      background: $background-color;
+      background-color: $white;
       transition: border-color 0.3s;
-
-      &:hover {
-        transform: scale(1.02);
-        border: 2px solid $grey;
+      &:has(input:active) {
+        border: 1px solid $hover-color;
       }
-
-      &.active-wrapper {
-        border: 2px solid $hover-color;
+      &:has(input:focus) {
+        border: 1px solid $hover-color;
       }
-
       .search-input {
         flex-grow: 1;
         border: none;
@@ -289,10 +291,6 @@ $breakpoint-tablet: 768px;
         font-size: 16px;
         background: transparent;
         width: 65%;
-
-        &:focus {
-          outline: none;
-        }
       }
 
       .separator {
@@ -305,19 +303,18 @@ $breakpoint-tablet: 768px;
         background: none;
         border: none;
         cursor: pointer;
-        padding: 6px 10px;
         margin-right: 4px;
-
+        min-width: 24px;
+        min-height: 24px;
+        padding: 0;
         img {
-          width: 20px;
-          height: 20px;
           display: block;
+          min-width: 24px;
+          min-height: 24px;
         }
-
         &:hover {
           background-color: $grey;
-          border-radius: 90%;
-          transform: scale(1.2);
+          border-radius: 50%;
         }
       }
     }
@@ -350,24 +347,23 @@ $breakpoint-tablet: 768px;
 
 .columns-container {
   width: 100%;
-  padding: 0 10px;
-  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
 
   .columns-content {
+    width: 100%;
     display: flex;
-    flex-direction: column;
-    gap: 30px;
     padding: 0;
+    gap: 24px;
 
     .column {
-      min-height: 300px;
       width: 100%;
       display: flex;
       flex-direction: column;
-
-      .column-header {
-        margin-bottom: 16px;
-      }
+      justify-content: flex-start;
+      gap: 24px;
 
       .column-title {
         width: 100%;
@@ -378,22 +374,22 @@ $breakpoint-tablet: 768px;
         font-weight: 700;
         font-size: 18px;
         position: relative;
-        padding: 8px 16px;
-
+        min-height: 32px;
         .add-button {
           background: none;
-          border: 3px solid $primary-color;
+          border: 2px solid $primary-color;
           cursor: pointer;
-          padding: 4px;
-          border-radius: 30%;
+          padding: 5px;
+          width: 30px;
+          height: 30px;
+          border-radius: 10px;
           transition: background-color 0.2s ease, border-color 0.2s ease;
 
           &:hover {
             border-color: $hover-color;
-          }
-
-          &:hover img {
-            @include svg-filter-accent;
+            img {
+              @include svg-filter-accent;
+            }
           }
 
           img {
@@ -406,11 +402,12 @@ $breakpoint-tablet: 768px;
       }
 
       .tasks-container {
-        flex-grow: 1;
-        min-height: 100%;
-        padding: 16px;
         background-color: $background-color;
         border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        gap: 8px;
 
         .dashed-container {
           width: calc(100% - 20px);
@@ -430,63 +427,78 @@ $breakpoint-tablet: 768px;
       }
     }
   }
+}
 
+.plus-button {
+  display: none;
+  background-color: $primary-color;
+  padding: 8px;
+  border-radius: 10px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  transition: 250ms all ease;
+  &:hover {
+    background-color: $hover-color;
+    -webkit-box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
+    box-shadow: 0px 4px 4px 0px rgba(0,0,0,0.25);
+  }
+}
 
-
-  @media (min-width: $breakpoint-desktop) {
-    .columns-content {
-      flex-direction: row;
-      justify-content: space-between;
-      gap: 26px;
+  @media (max-width: 1440px) {
+    .columns-container {
+      .columns-content {
+        flex-direction: column;
+        .column {
+          .tasks-container {
+            flex-direction: row;
+            overflow-x: auto;
+            gap: 16px;
+            padding: 8px;
+            .task-card {
+              min-width: 200px;
+            }
+          }
+        }
+      }
     }
 
-    .column {
-      min-height: 600px;
-      width: 244px;
-    }
 
+  }
+
+  @media (max-width: 1280px) {
     .main-container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      justify-content: flex-start;
       padding: 0;
     }
   }
 
-  @media (min-width: $breakpoint-tablet) {
+  @media (max-width: 960px) {
     .header {
-      height: 232px;
-      padding: 0 64px 0 23px;
+      flex-wrap: wrap;
+      gap: 16px;
+      >h1 {
+        width: 50%;
+      }
+      .right-section {
+        .search-input-wrapper {
+          max-width: 100%;
+        }
+        order: 3;
+        width: 100%;
+        .add-task-button {
+          display: none;
+        }
+      }
     }
 
-    .title {
-      font-size: 32px;
-    }
-
-    .right-section {
-      gap: 32px;
-      flex-wrap: nowrap;
-    }
-
-    .add-task-button {
-      width: 28px;
-      height: 28px;
-    }
-
-    .columns-container {
-      padding: 0 64px;
-    }
-
-    .column-header {
-      margin-bottom: 24px;
-    }
-
-    .column-title {
-      font-size: 20px;
-      justify-content: center;
-      margin-right: 30px;
-    }
-
-    .add-button {
-      position: absolute;
-      right: 0;
+    .plus-button {
+      display: block;
+      width: auto;
     }
   }
-}
+

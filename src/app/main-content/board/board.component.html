@@ -1,5 +1,5 @@
-<main class="main-container">
-  <header class="header">
+<section class="main-container">
+  <div class="header">
     <h1 class="title">Board</h1>
 
     <div class="right-section">
@@ -12,476 +12,134 @@
         </button>
       </div>
 
+      <!-- add new task button for desktop >1280px -->
       <button (click)="setNewTaskStatus('ToDo'); overlayService.openOverlay('add-task')"
         class="add-task-button create-button">
         Add task
         <img src="assets/img/board/plus.svg" alt="Add Task" />
       </button>
     </div>
-  </header>
+    <!-- add new task button for tablets/mobile <1280px -->
+      <img src="assets/img/board/plus.svg" alt="Add Task" class="plus-button" (click)="setNewTaskStatus('ToDo'); overlayService.openOverlay('add-task')"/>
+  </div>
 
   <div class="columns-container">
     <div class="columns-content">
-
-      <div class="column">
-        <div class="column-header">
-          <div class="column-title">
-            <span>To Do</span>
-            <button (click)="setNewTaskStatus('ToDo'); overlayService.openOverlay('add-task')" class="add-button">
-              <img src="assets/img/board/plus.svg" alt="Add" />
-            </button>
-          </div>
-        </div>
-        <div class="tasks-container" cdkDropList id="todoList" [cdkDropListData]="taskService.boardTasksListToDo"
-          [cdkDropListConnectedTo]="connectedDropLists" (cdkDropListDropped)="drop($event, 'ToDo')">
-
-          @if (taskService.boardTasksListToDo) {
-          @for (task of taskService.boardTasksListToDo; track task.id) {
-          @if(task.status == 'ToDo' && (task.title.startsWith(taskService.searchInputFieldValue) ||
-          task.description.startsWith(taskService.searchInputFieldValue))){
-          <div class="task-card" cdkDrag (click)="openTaskDetail(task)">
-            <div class="task-category">{{ task.category }}</div>
-            <div class="task-title">{{ task.title }}</div>
-            <div class="task-description">
-              {{
-              task.description
-              ? (task.description.length > 50
-              ? task.description.substring(0, 50) + '...'
-              : task.description)
-              : ''
-              }}
+      @for(column of taskService.boardColumns; track column.status){
+        <div class="column">
+          <div class="column-header">
+            <div class="column-title">
+              <span>{{column.title}}</span>
+              <button (click)="setNewTaskStatus(column.status); overlayService.openOverlay('add-task')" class="add-button">
+                <img src="assets/img/board/plus.svg" alt="Add" />
+              </button>
             </div>
-
-            @if (task.subtasks && task.subtasks.length > 0) {
-            <div class="progress-container">
-              <div class="progress-track">
-                <div class="progress-bar" [style.width.%]="getProgressWidth(task)"></div>
+          </div>
+          <div class="tasks-container" cdkDropList id={{column.dropListName}} [cdkDropListData]="column.list"
+            [cdkDropListConnectedTo]="connectedDropLists" (cdkDropListDropped)="drop($event, column.status)">
+  
+            @if (column.list.length) {
+            @for (task of column.list; track task.id) {
+            @if(task.status == column.status && (task.title.startsWith(taskService.searchInputFieldValue) ||
+            task.description.startsWith(taskService.searchInputFieldValue))){
+            <div class="task-card" cdkDrag (click)="openTaskDetail(task)">
+              <div class="task-category" [ngClass]="taskService.getCategoryClass(task.category)">{{ task.category }}</div>
+              <div class="task-title">{{ task.title }}</div>
+              <div class="task-description">
+                {{
+                task.description
+                ? (task.description.length > 50
+                ? task.description.substring(0, 50) + '...'
+                : task.description)
+                : ''
+                }}
               </div>
-              <span class="progress-text"> {{ getCompletedSubtasks(task) }}/{{ task.subtasks.length || 0 }}
-                Subtasks</span>
+  
+              @if (task.subtasks && task.subtasks.length > 0) {
+              <div class="progress-container">
+                <div class="progress-track">
+                  <div class="progress-bar" [style.width.%]="getProgressWidth(task)"></div>
+                </div>
+                <span class="progress-text"> {{ getCompletedSubtasks(task) }}/{{ task.subtasks.length || 0 }}
+                  Subtasks</span>
+              </div>
+              }
+  
+              <div class="task-footer">
+                <div class="task-assigned">
+                  @for (assignee of task.assignedTo; track assignee.id) {
+                  <div class="assigned-contact" [ngStyle]="{ background: assignee.color }">
+                    {{ assignee.letters }}
+                  </div>
+                  }
+                </div>
+                <div class="task-priority">
+                  @if (task.priority === 'Urgent') {
+                  <img src="assets/img/2-add-task/urgent-icon.svg" alt="urgent" />
+                  } @else if (task.priority === 'Medium') {
+                  <img src="assets/img/2-add-task/medium-icon.svg" alt="medium" />
+                  } @else if (task.priority === 'Low') {
+                  <img src="assets/img/2-add-task/low-icon.svg" alt="low" />
+                  }
+                </div>
+              </div>
+  
+              <!-- ✅ Drag-Vorschau -->
+              <ng-template cdkDragPreview>
+                <div class="task-card drag-preview">
+                  <div class="task-category">{{ task.category }}</div>
+                  <div class="task-title">{{ task.title }}</div>
+                  <div class="task-description">
+                    {{
+                    task.description
+                    ? (task.description.length > 50
+                    ? task.description.substring(0, 50) + '...'
+                    : task.description)
+                    : ''
+                    }}
+                  </div>
+  
+                  @if (task.subtasks && task.subtasks.length > 0) {
+                  <div class="progress-container">
+                    <div class="progress-track">
+                      <div class="progress-bar" [style.width.%]="getProgressWidth(task)"></div>
+                    </div>
+                    <span class="progress-text"> {{ getCompletedSubtasks(task) }}/{{ task.subtasks.length || 0 }}
+                      Subtasks</span>
+                  </div>
+                  }
+  
+                  <div class="task-footer">
+                    <div class="task-assigned">
+                      @for (assignee of task.assignedTo; track assignee.id) {
+                      <div class="assigned-contact" [ngStyle]="{ background: assignee.color }">
+                        {{ assignee.letters }}
+                      </div>
+                      }
+                    </div>
+                    <div class="task-priority">
+                      @if (task.priority === 'Urgent') {
+                      <img src="assets/img/2-add-task/urgent-icon.svg" alt="urgent" />
+                      } @else if (task.priority === 'Medium') {
+                      <img src="assets/img/2-add-task/medium-icon.svg" alt="medium" />
+                      } @else if (task.priority === 'Low') {
+                      <img src="assets/img/2-add-task/low-icon.svg" alt="low" />
+                      }
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
             </div>
             }
-
-            <div class="task-footer">
-              <div class="task-assigned">
-                @for (assignee of task.assignedTo; track assignee.id) {
-                <div class="assigned-contact" [ngStyle]="{ background: assignee.color }">
-                  {{ assignee.letters }}
-                </div>
-                }
-              </div>
-              <div class="task-priority">
-                @if (task.priority === 'Urgent') {
-                <img src="assets/img/2-add-task/urgent-icon.svg" alt="urgent" />
-                } @else if (task.priority === 'Medium') {
-                <img src="assets/img/2-add-task/medium-icon.svg" alt="medium" />
-                } @else if (task.priority === 'Low') {
-                <img src="assets/img/2-add-task/low-icon.svg" alt="low" />
-                }
-              </div>
-            </div>
-
-            <!-- ✅ Drag-Vorschau -->
-            <ng-template cdkDragPreview>
-              <div class="task-card drag-preview">
-                <div class="task-category">{{ task.category }}</div>
-                <div class="task-title">{{ task.title }}</div>
-                <div class="task-description">
-                  {{
-                  task.description
-                  ? (task.description.length > 50
-                  ? task.description.substring(0, 50) + '...'
-                  : task.description)
-                  : ''
-                  }}
-                </div>
-
-                @if (task.subtasks && task.subtasks.length > 0) {
-                <div class="progress-container">
-                  <div class="progress-track">
-                    <div class="progress-bar" [style.width.%]="getProgressWidth(task)"></div>
-                  </div>
-                  <span class="progress-text"> {{ getCompletedSubtasks(task) }}/{{ task.subtasks.length || 0 }}
-                    Subtasks</span>
-                </div>
-                }
-
-                <div class="task-footer">
-                  <div class="task-assigned">
-                    @for (assignee of task.assignedTo; track assignee.id) {
-                    <div class="assigned-contact" [ngStyle]="{ background: assignee.color }">
-                      {{ assignee.letters }}
-                    </div>
-                    }
-                  </div>
-                  <div class="task-priority">
-                    @if (task.priority === 'Urgent') {
-                    <img src="assets/img/2-add-task/urgent-icon.svg" alt="urgent" />
-                    } @else if (task.priority === 'Medium') {
-                    <img src="assets/img/2-add-task/medium-icon.svg" alt="medium" />
-                    } @else if (task.priority === 'Low') {
-                    <img src="assets/img/2-add-task/low-icon.svg" alt="low" />
-                    }
-                  </div>
-                </div>
-              </div>
-            </ng-template>
-          </div>
-          }
-          }
-          } @else {
-          <div class="dashed-container">
-            <span>No tasks To do</span>
-          </div>
-          }
-        </div>
-      </div>
-
-      <div class="column">
-        <div class="column-header">
-          <div class="column-title">
-            <span>In Progress</span>
-            <button class="add-button"
-              (click)="setNewTaskStatus('In Progress'); overlayService.openOverlay('add-task')">
-              <img src="assets/img/board/plus.svg" alt="Add" />
-            </button>
-          </div>
-        </div>
-        <div class="tasks-container" cdkDropList id="inProgressList"
-          [cdkDropListData]="taskService.boardTasksListProgress" [cdkDropListConnectedTo]="connectedDropLists"
-          (cdkDropListDropped)="drop($event, 'In Progress')">
-
-          @if (taskService.boardTasksListProgress) {
-          @for (task of taskService.boardTasksListProgress; track task) {
-          @if(task.status == 'In Progress' && (task.title.startsWith(taskService.searchInputFieldValue) ||
-          task.description.startsWith(taskService.searchInputFieldValue))){
-          <div class="task-card" cdkDrag (click)="openTaskDetail(task)">
-            <div class="task-category">{{ task.category }}</div>
-            <div class="task-title">{{ task.title }}</div>
-            <div class="task-description">
-              {{
-              task.description
-              ? (task.description.length > 50
-              ? task.description.substring(0, 50) + '...'
-              : task.description)
-              : ''
-              }}
-            </div>
-
-
-            @if (task.subtasks && task.subtasks.length > 0) {
-            <div class="progress-container">
-              <div class="progress-track">
-                <div class="progress-bar" [style.width.%]="getProgressWidth(task)"></div>
-              </div>
-              <span class="progress-text"> {{ getCompletedSubtasks(task) }}/{{ task.subtasks.length || 0 }}
-                Subtasks</span>
+            }
+            } @else {
+            <div class="dashed-container">
+              <span>{{column.epmtyText}}</span>
             </div>
             }
-
-            <div class="task-footer">
-              <div class="task-assigned">
-                @for (assignee of task.assignedTo; track assignee.id) {
-                <div class="assigned-contact" [ngStyle]="{ background: assignee.color }">
-                  {{ assignee.letters }}
-                </div>
-                }
-              </div>
-              <div class="task-priority">
-                @if (task.priority === 'Urgent') {
-                <img src="assets/img/2-add-task/urgent-icon.svg" alt="urgent" />
-                } @else if (task.priority === 'Medium') {
-                <img src="assets/img/2-add-task/medium-icon.svg" alt="medium" />
-                } @else if (task.priority === 'Low') {
-                <img src="assets/img/2-add-task/low-icon.svg" alt="low" />
-                }
-              </div>
-            </div>
-
-            <!-- ✅ Drag-Vorschau -->
-            <ng-template cdkDragPreview>
-              <div class="task-card drag-preview">
-                <div class="task-category">{{ task.category }}</div>
-                <div class="task-title">{{ task.title }}</div>
-                <div class="task-description">
-                  {{
-                  task.description
-                  ? (task.description.length > 50
-                  ? task.description.substring(0, 50) + '...'
-                  : task.description)
-                  : ''
-                  }}
-                </div>
-
-                @if (task.subtasks && task.subtasks.length > 0) {
-                <div class="progress-container">
-                  <div class="progress-track">
-                    <div class="progress-bar" [style.width.%]="getProgressWidth(task)"></div>
-                  </div>
-                  <span class="progress-text"> {{ getCompletedSubtasks(task) }}/{{ task.subtasks.length || 0 }}
-                    Subtasks</span>
-                </div>
-                }
-
-                <div class="task-footer">
-                  <div class="task-assigned">
-                    @for (assignee of task.assignedTo; track assignee.id) {
-                    <div class="assigned-contact" [ngStyle]="{ background: assignee.color }">
-                      {{ assignee.letters }}
-                    </div>
-                    }
-                  </div>
-                  <div class="task-priority">
-                    @if (task.priority === 'Urgent') {
-                    <img src="assets/img/2-add-task/urgent-icon.svg" alt="urgent" />
-                    } @else if (task.priority === 'Medium') {
-                    <img src="assets/img/2-add-task/medium-icon.svg" alt="medium" />
-                    } @else if (task.priority === 'Low') {
-                    <img src="assets/img/2-add-task/low-icon.svg" alt="low" />
-                    }
-                  </div>
-                </div>
-              </div>
-            </ng-template>
-          </div>
-          }
-          }
-          } @else {
-          <div class="dashed-container">
-            <span>No tasks To do</span>
-          </div>
-          }
-        </div>
-      </div>
-
-      <div class="column">
-        <div class="column-header">
-          <div class="column-title">
-            <span>Await Feedback</span>
-            <button class="add-button"
-              (click)="setNewTaskStatus('Await Feedback'); overlayService.openOverlay('add-task')">
-              <img src="assets/img/board/plus.svg" alt="Add" />
-            </button>
           </div>
         </div>
-        <div class="tasks-container" cdkDropList id="awaitFeedbackList"
-          [cdkDropListData]="taskService.boardTasksListFeedback" [cdkDropListConnectedTo]="connectedDropLists"
-          (cdkDropListDropped)="drop($event, 'Await Feedback')">
-
-          @if (taskService.boardTasksListFeedback) {
-          @for (task of taskService.boardTasksListFeedback; track task) {
-          @if(task.status == 'Await Feedback' && (task.title.startsWith(taskService.searchInputFieldValue) ||
-          task.description.startsWith(taskService.searchInputFieldValue))){
-          <div class="task-card" cdkDrag (click)="openTaskDetail(task)">
-            <div class="task-category">{{ task.category }}</div>
-            <div class="task-title">{{ task.title }}</div>
-            <div class="task-description">
-              {{
-              task.description
-              ? (task.description.length > 50
-              ? task.description.substring(0, 50) + '...'
-              : task.description)
-              : ''
-              }}
-            </div>
-
-            @if (task.subtasks && task.subtasks.length > 0) {
-            <div class="progress-container">
-              <div class="progress-track">
-                <div class="progress-bar" [style.width.%]="getProgressWidth(task)"></div>
-              </div>
-              <span class="progress-text"> {{ getCompletedSubtasks(task) }}/{{ task.subtasks.length || 0 }}
-                Subtasks</span>
-            </div>
-            }
-
-            <div class="task-footer">
-              <div class="task-assigned">
-                @for (assignee of task.assignedTo; track assignee.id) {
-                <div class="assigned-contact" [ngStyle]="{ background: assignee.color }">
-                  {{ assignee.letters }}
-                </div>
-                }
-              </div>
-              <div class="task-priority">
-                @if (task.priority === 'Urgent') {
-                <img src="assets/img/2-add-task/urgent-icon.svg" alt="urgent" />
-                } @else if (task.priority === 'Medium') {
-                <img src="assets/img/2-add-task/medium-icon.svg" alt="medium" />
-                } @else if (task.priority === 'Low') {
-                <img src="assets/img/2-add-task/low-icon.svg" alt="low" />
-                }
-              </div>
-            </div>
-
-            <!-- ✅ Drag-Vorschau -->
-            <ng-template cdkDragPreview>
-              <div class="task-card drag-preview">
-                <div class="task-category">{{ task.category }}</div>
-                <div class="task-title">{{ task.title }}</div>
-                <div class="task-description">
-                  {{
-                  task.description
-                  ? (task.description.length > 50
-                  ? task.description.substring(0, 50) + '...'
-                  : task.description)
-                  : ''
-                  }}
-                </div>
-
-                @if (task.subtasks && task.subtasks.length > 0) {
-                <div class="progress-container">
-                  <div class="progress-track">
-                    <div class="progress-bar" [style.width.%]="getProgressWidth(task)"></div>
-                  </div>
-                  <span class="progress-text"> {{ getCompletedSubtasks(task) }}/{{ task.subtasks.length || 0 }}
-                    Subtasks</span>
-                </div>
-                }
-
-                <div class="task-footer">
-                  <div class="task-assigned">
-                    @for (assignee of task.assignedTo; track assignee.id) {
-                    <div class="assigned-contact" [ngStyle]="{ background: assignee.color }">
-                      {{ assignee.letters }}
-                    </div>
-                    }
-                  </div>
-                  <div class="task-priority">
-                    @if (task.priority === 'Urgent') {
-                    <img src="assets/img/2-add-task/urgent-icon.svg" alt="urgent" />
-                    } @else if (task.priority === 'Medium') {
-                    <img src="assets/img/2-add-task/medium-icon.svg" alt="medium" />
-                    } @else if (task.priority === 'Low') {
-                    <img src="assets/img/2-add-task/low-icon.svg" alt="low" />
-                    }
-                  </div>
-                </div>
-              </div>
-            </ng-template>
-          </div>
-          }
-          }
-          } @else {
-          <div class="dashed-container">
-            <span>No tasks To do</span>
-          </div>
-          }
-        </div>
-      </div>
-
-      <div class="column">
-        <div class="column-header">
-          <div class="column-title">
-            <span>Done</span>
-          </div>
-        </div>
-        <div class="tasks-container" cdkDropList id="doneList" [cdkDropListData]="taskService.boardTasksListDone"
-          [cdkDropListConnectedTo]="connectedDropLists" (cdkDropListDropped)="drop($event, 'Done')">
-
-          @if (taskService.boardTasksListDone) {
-          @for (task of taskService.boardTasksListDone; track task) {
-          @if(task.status == 'Done' && (task.title.startsWith(taskService.searchInputFieldValue) ||
-          task.description.startsWith(taskService.searchInputFieldValue))){
-          <div class="task-card" cdkDrag (click)="openTaskDetail(task)">
-            <div class="task-category">{{ task.category }}</div>
-            <div class="task-title">{{ task.title }}</div>
-            <div class="task-description">
-              {{
-              task.description
-              ? (task.description.length > 50
-              ? task.description.substring(0, 50) + '...'
-              : task.description)
-              : ''
-              }}
-            </div>
-
-
-            @if (task.subtasks && task.subtasks.length > 0) {
-            <div class="progress-container">
-              <div class="progress-track">
-                <div class="progress-bar" [style.width.%]="getProgressWidth(task)"></div>
-              </div>
-              <span class="progress-text"> {{ getCompletedSubtasks(task) }}/{{ task.subtasks.length || 0 }}
-                Subtasks</span>
-            </div>
-            }
-
-            <div class="task-footer">
-              <div class="task-assigned">
-                @for (assignee of task.assignedTo; track assignee.id) {
-                <div class="assigned-contact" [ngStyle]="{ background: assignee.color }">
-                  {{ assignee.letters }}
-                </div>
-                }
-              </div>
-              <div class="task-priority">
-                @if (task.priority === 'Urgent') {
-                <img src="assets/img/2-add-task/urgent-icon.svg" alt="urgent" />
-                } @else if (task.priority === 'Medium') {
-                <img src="assets/img/2-add-task/medium-icon.svg" alt="medium" />
-                } @else if (task.priority === 'Low') {
-                <img src="assets/img/2-add-task/low-icon.svg" alt="low" />
-                }
-              </div>
-            </div>
-
-            <!-- ✅ Drag-Vorschau -->
-            <ng-template cdkDragPreview>
-              <div class="task-card drag-preview">
-                <div class="task-category">{{ task.category }}</div>
-                <div class="task-title">{{ task.title }}</div>
-                <div class="task-description">
-                  {{
-                  task.description
-                  ? (task.description.length > 50
-                  ? task.description.substring(0, 50) + '...'
-                  : task.description)
-                  : ''
-                  }}
-                </div>
-
-                @if (task.subtasks && task.subtasks.length > 0) {
-                <div class="progress-container">
-                  <div class="progress-track">
-                    <div class="progress-bar" [style.width.%]="getProgressWidth(task)"></div>
-                  </div>
-                  <span class="progress-text"> {{ getCompletedSubtasks(task) }}/{{ task.subtasks.length || 0 }}
-                    Subtasks</span>
-                </div>
-                }
-
-                <div class="task-footer">
-                  <div class="task-assigned">
-                    @for (assignee of task.assignedTo; track assignee.id) {
-                    <div class="assigned-contact" [ngStyle]="{ background: assignee.color }">
-                      {{ assignee.letters }}
-                    </div>
-                    }
-                  </div>
-                  <div class="task-priority">
-                    @if (task.priority === 'Urgent') {
-                    <img src="assets/img/2-add-task/urgent-icon.svg" alt="urgent" />
-                    } @else if (task.priority === 'Medium') {
-                    <img src="assets/img/2-add-task/medium-icon.svg" alt="medium" />
-                    } @else if (task.priority === 'Low') {
-                    <img src="assets/img/2-add-task/low-icon.svg" alt="low" />
-                    }
-                  </div>
-                </div>
-              </div>
-            </ng-template>
-          </div>
-          }
-          }
-          } @else {
-          <div class="dashed-container">
-            <span>No tasks To do</span>
-          </div>
-          }
-        </div>
-      </div>
-
+      }
     </div>
   </div>
-</main>
+</section>
