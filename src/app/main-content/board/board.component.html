@@ -37,7 +37,7 @@
             </div>
           </div>
           <div class="tasks-container" cdkDropList id={{column.dropListName}} [cdkDropListData]="column.list"
-            [cdkDropListConnectedTo]="connectedDropLists" (cdkDropListDropped)="drop($event, column.status)">
+            [cdkDropListConnectedTo]="connectedDropLists" (cdkDropListDropped)="drop($event, column.status)" [cdkDropListDisabled]="isMobile">
 
             @if (column.list.length) {
             @for (task of column.list; track task.id) {
@@ -49,7 +49,7 @@
                 )
               )
               {
-            <div class="task-card" cdkDrag (click)="openTaskDetail(task)">
+            <div class="task-card" cdkDrag (click)="openTaskDetail(task)" [cdkDragDisabled]="isMobile">
               <div class="task-category" >
                 <div [ngClass]="taskService.getCategoryClass(task.category)">{{ task.category }}</div>
                 <div class="task-menu" (click)="openDropDown(task); $event.stopPropagation()" #dropDownWrapper>

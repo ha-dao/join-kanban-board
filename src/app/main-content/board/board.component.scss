@@ -524,6 +524,18 @@
   }
 
   @media (max-width: 1280px) {
+    :host {
+      [cdkDrag], [cdkDropList] {
+        cursor: default;
+      }
+    }
+
+    .task-card {
+      &:active {
+        transform: rotate(0);
+      }
+    }
+
     .main-container {
       width: 100%;
       display: flex;
