@@ -157,9 +157,36 @@
         </div>
 
         <div class="current-sub-task-list-wrapper">
-          <div class="input-icon-wrapper">
-            <input [(ngModel)]="newSubtask.title" type="text" name="Subtasks" placeholder="Add new subtask" (keyup.enter)="addSubtask()" />
-            <img src="assets/icon/+Symbol.svg" class="input-icon" alt="Plus" (click)="addSubtask()"   />
+          <div class="input-icon-wrapper">  
+            <input [(ngModel)]="newSubtask.title" type="text" name="Subtasks" placeholder="Add new subtask" (input)="onInputChangeSubtask()" (keyup.enter)="addSubtask()"
+            />          
+            @if(!showActionIcons){
+              <img src="assets/icon/+Symbol.svg" class="input-icon-add" alt="Plus" (click)="addSubtask()"   />
+
+            }
+            @if (showActionIcons) {
+              <div class="action-icons">
+                
+                
+                <span>
+                  <img
+                  src="assets/icon/trash.svg"
+                  class="input-icon"
+                  alt="Trash"
+                  (click)="clearInput(); $event.stopPropagation(); showActionIcons = false"
+                  />
+                </span>
+                <span>|</span>
+                <span>
+                <img
+                  src="assets/icon/check-black.svg"
+                  class="input-icon-black"
+                  alt="Check"
+                  (click)="addSubtask(); $event.stopPropagation(); showActionIcons = false"
+                /></span>
+                
+              </div>
+            }
           </div>
           <div class="list-wrapper">
             @for (subtask of taskService.currentSubtasks; let i = $index; track i) {

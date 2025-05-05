@@ -2,6 +2,7 @@ import { Injectable, signal, inject } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { TaskService } from './task.service';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -43,6 +44,7 @@ export class OverlayService {
       subtasks:[],
       status: ''
     };
+    this.taskService.currentSubtasks = [];
     
   }
 

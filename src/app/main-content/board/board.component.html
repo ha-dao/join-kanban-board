@@ -40,8 +40,8 @@
 
             @if (column.list.length) {
             @for (task of column.list; track task.id) {
-            @if(task.status == column.status && (task.title.startsWith(taskService.searchInputFieldValue) ||
-            task.description.startsWith(taskService.searchInputFieldValue))){
+            @if(task.status == column.status && (task.title.toLowerCase().includes(taskService.searchInputFieldValue.toLowerCase()) ||
+            task.description.toLowerCase().includes(taskService.searchInputFieldValue.toLowerCase()))){
             <div class="task-card" cdkDrag (click)="openTaskDetail(task)">
               <div class="task-category" [ngClass]="taskService.getCategoryClass(task.category)">{{ task.category }}</div>
               <div class="task-title">{{ task.title }}</div>

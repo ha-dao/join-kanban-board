@@ -48,6 +48,8 @@ export class AddTaskComponent {
   @ViewChild('hiddenDateInput') hiddenDateInput!: ElementRef;
   displayDate: string = '';
   searchTerm: string = '';
+  showActionIcons:boolean = false;
+
 
   newSubtask: { title: string; isDone: boolean } = {
     title: '',
@@ -71,6 +73,10 @@ export class AddTaskComponent {
     }
   }
 
+  onInputChangeSubtask(){
+    this.showActionIcons = this.newSubtask.title.trim().length > 0;
+  }
+   
   toggleSelectOpen() {
     this.isSelectOpen = !this.isSelectOpen;
   }
@@ -121,7 +127,12 @@ export class AddTaskComponent {
       let subTask = { title: this.newSubtask.title, isDone: false };
       this.taskService.currentSubtasks.push(subTask);
       this.newSubtask.title = '';
+      this.showActionIcons = false;
     }
+  }
+
+  clearInput(){
+    this.newSubtask.title = ''
   }
   editSubtask(index: number) {
     this.editedIndex = index;
