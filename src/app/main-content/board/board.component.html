@@ -53,7 +53,7 @@
               <div class="task-category" >
                 <div [ngClass]="taskService.getCategoryClass(task.category)">{{ task.category }}</div>
                 <div class="task-menu" (click)="openDropDown(task); $event.stopPropagation()" #dropDownWrapper>
-                  <div class="drop-down"  [ngClass]="{visible: task.dropDownOpen, invisible:!task.dropDownOpen}" (click)="handleBackdropClick($event, task)">
+                  <div class="drop-down"  [ngClass]="{visible: task.dropDownOpen, invisible:!task.dropDownOpen}" >
                     <div class="drop-down-wrapper" [id]="'dropdown' + task.id" >
                       @if(task.status !== 'ToDo'){
                         <span (click)="setNewStatus('ToDo', task); $event.stopPropagation();">To Do</span>
