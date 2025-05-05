@@ -12,14 +12,12 @@
         </button>
       </div>
 
-      <!-- add new task button for desktop >1280px -->
       <button (click)="setNewTaskStatus('ToDo'); overlayService.openOverlay('add-task')"
         class="add-task-button create-button">
         Add task
         <img src="assets/img/board/plus.svg" alt="Add Task" />
       </button>
     </div>
-    <!-- add new task button for tablets/mobile <1280px -->
       <img src="assets/img/board/plus.svg" alt="Add Task" class="plus-button" (click)="setNewTaskStatus('ToDo'); overlayService.openOverlay('add-task')"/>
   </div>
 
@@ -30,9 +28,11 @@
           <div class="column-header">
             <div class="column-title">
               <span>{{column.title}}</span>
-              <button (click)="setNewTaskStatus(column.status); overlayService.openOverlay('add-task')" class="add-button">
-                <img src="assets/img/board/plus.svg" alt="Add" />
-              </button>
+              @if(column.title != 'Done'){
+                <button (click)="setNewTaskStatus(column.status); overlayService.openOverlay('add-task')" class="add-button">
+                  <img src="assets/img/board/plus.svg" alt="Add" />
+                </button>
+              }
             </div>
           </div>
           <div class="tasks-container" cdkDropList id={{column.dropListName}} [cdkDropListData]="column.list"
@@ -40,8 +40,14 @@
 
             @if (column.list.length) {
             @for (task of column.list; track task.id) {
-            @if(task.status == column.status && (task.title.toLowerCase().includes(taskService.searchInputFieldValue.toLowerCase()) ||
-            task.description.toLowerCase().includes(taskService.searchInputFieldValue.toLowerCase()))){
+              @if (
+                task.status == column.status &&
+                (
+                  task.title.toLowerCase().includes(taskService.searchInputFieldValue.toLowerCase()) ||
+                  task.description.toLowerCase().includes(taskService.searchInputFieldValue.toLowerCase())
+                )
+              )
+              {
             <div class="task-card" cdkDrag (click)="openTaskDetail(task)">
               <div class="task-category" [ngClass]="taskService.getCategoryClass(task.category)">{{ task.category }}</div>
               <div class="task-title">{{ task.title }}</div>
