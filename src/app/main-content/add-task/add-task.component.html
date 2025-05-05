@@ -204,12 +204,12 @@
           <img src="assets/img/4-contacts/close-icon.svg" alt="close pictogram" />
         </button>
         @if(overlayService.setTemplate() == 'add-task'){
-        <button class="create-button" type="submit" [disabled]="!isFormValid()" [ngClass]="{ flexvisible: overlayService.setTemplate() == 'add-task', invisible: overlayService.setTemplate() !== 'add-task' }">
+        <button class="create-button" type="submit" [disabled]="!isFormValid()"  [ngClass]="{ flexvisible: overlayService.setTemplate() == 'add-task', invisible: overlayService.setTemplate() !== 'add-task' }">
           Create Task
           <img src="assets/img/4-contacts/check-icon.svg" alt="check pictogram" />
         </button>
       } @else if (overlayService.setTemplate() == '') {
-        <button class="create-button" type="submit" [disabled]="!isFormValid()">
+        <button class="create-button" type="button" [disabled]="!isFormValid()" (click)="submitTask(); resetSubtasks();">
           Create Task
           <img src="assets/img/4-contacts/check-icon.svg" alt="check pictogram" />
         </button>
