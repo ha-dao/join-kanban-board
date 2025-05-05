@@ -53,7 +53,8 @@ export class TaskService implements OnDestroy {
     assignedTo:[],
     category:'',
     subtasks:[],
-    status: ''
+    status: '',
+    dropDownOpen: false
   };
   tempAssignedTo:Contact[]=[]
 
@@ -114,6 +115,7 @@ export class TaskService implements OnDestroy {
 
   async addTask(task: Task) {
     task.status = this.newTaskStatus;
+    task.dropDownOpen = false;
     await addDoc(this.getTasksRef(), task)
       .catch((err) => {
         console.error(err);
@@ -155,6 +157,7 @@ export class TaskService implements OnDestroy {
       category: obj.category || '',
       subtasks: obj.subtasks || [],
       status: obj.status || '',
+      dropDownOpen: obj.dropDownOpen|| false
     };
   }
 

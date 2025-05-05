@@ -10,4 +10,5 @@ export interface Task {
     category:string,
     subtasks: { title: string, isDone: boolean }[];
     status: string;
+    dropDownOpen:boolean;
 }

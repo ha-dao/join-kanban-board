@@ -42,7 +42,8 @@ export class OverlayService {
       assignedTo:[],
       category:'',
       subtasks:[],
-      status: ''
+      status: '',
+      dropDownOpen: false
     };
     this.taskService.currentSubtasks = [];
     

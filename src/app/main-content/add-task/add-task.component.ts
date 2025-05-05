@@ -201,6 +201,7 @@ export class AddTaskComponent {
       category: '',
       subtasks: [],
       status: '',
+      dropDownOpen: false
     };
     this.taskService.tempAssignedTo = [];
   }

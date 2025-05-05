@@ -117,12 +117,43 @@
     transform: rotate(5deg);
   }
 }
+.visible{
+  display:block;
+}
+.invisible{
+  display:none;
+}
 
 .task-category {
+  @include displayFlex(flex, row, space-between, center, 0, nowrap);
+  position: relative;
   font-size: 14px;
   color: #000000;
   margin-bottom: 8px;
-  width: auto;
+  width: 100%;
+  .task-menu{  
+    .drop-down{
+      position: absolute;
+      top: 100%;
+      right: 16px;
+      height: 120px;
+      width:120px;
+      background-color: #0000003b;
+      
+    }  
+    >span{
+      background-color: $primary-color;
+      height:18px;
+      width:18px;
+      >img{
+        height:18px;
+        width: 18px;
+      }
+    }
+  }
+}
+.drop-down-wrapper{
+  @include displayFlex(flex, column, space-around, center, 0, wrap)
 }
 
 .task-title {

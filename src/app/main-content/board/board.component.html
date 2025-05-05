@@ -29,7 +29,8 @@
             <div class="column-title">
               <span>{{column.title}}</span>
               @if(column.title != 'Done'){
-                <button (click)="setNewTaskStatus(column.status); overlayService.openOverlay('add-task')" class="add-button">
+                <button (click)="setNewTaskStatus(column.status); overlayService.openOverlay('add-task')"
+                 class="add-button">
                   <img src="assets/img/board/plus.svg" alt="Add" />
                 </button>
               }
@@ -49,7 +50,30 @@
               )
               {
             <div class="task-card" cdkDrag (click)="openTaskDetail(task)">
-              <div class="task-category" [ngClass]="taskService.getCategoryClass(task.category)">{{ task.category }}</div>
+              <div class="task-category" >
+                <div [ngClass]="taskService.getCategoryClass(task.category)">{{ task.category }}</div>
+                <div class="task-menu" (click)="openDropDown(task); $event.stopPropagation()" #dropDownWrapper>
+                  <div class="drop-down"  [ngClass]="{visible: task.dropDownOpen, invisible:!task.dropDownOpen}" (click)="handleBackdropClick($event, task)">
+                    <div class="drop-down-wrapper" [id]="'dropdown' + task.id" >
+                      @if(task.status !== 'ToDo'){
+                        <span (click)="setNewStatus('ToDo', task); $event.stopPropagation();">To Do</span>
+                      }
+                      @if(task.status !== 'In Progress'){
+                        <span (click)="setNewStatus('In Progress', task); $event.stopPropagation()">In Progress</span>
+                      }
+                      @if(task.status !=='Await Feedback'){
+                        <span (click)="setNewStatus('Await Feedback', task); $event.stopPropagation()">Await Feedback</span>
+                      }
+                      @if(task.status !== 'Done'){
+                        <span (click)="setNewStatus('Done', task); $event.stopPropagation()">Done</span>
+                      }
+                    </div>
+                  </div>
+                  <span >
+                    <img src="assets/img/4-contact/more-vert-icon.svg"  alt="">
+                  </span>
+                </div>
+              </div>
               <div class="task-title">{{ task.title }}</div>
               <div class="task-description">
                 {{
