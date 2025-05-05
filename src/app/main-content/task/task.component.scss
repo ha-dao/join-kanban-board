@@ -3,20 +3,22 @@
 @import './../../styles/buttons.scss';
 
 section {
-    @include displayFlex(flex, column, flex-start, flex-start, 24px);
+    @include displayFlex(flex, column, flex-start, flex-start, 24px, nowrap);
     width: 100%;
     max-width: 1920px;
     padding: 64px;
     height:100%;
-    
+    >h2 {
+      @include fontStyle(clamp(1em, 8vw, 3em), 700, $primary-color, capitalize);
+    }
     .title-close-wrapper {
       display: flex;
       justify-content: space-between;
+      align-items: center;
       padding: 0;
       width: 100%;
-      >h2{
-        @include fontStyle( clamp(16px, 18px, 20px), 700, $primary-color)
-
+      >h2 {
+        @include fontStyle(clamp(1em, 1.2em, 1.4em), 700, $primary-color);
       }
       .close-button {
           padding: 8px;
@@ -39,11 +41,9 @@ h3{
   @include fontStyle(clamp(16px, 18px, 20px), 400, $primary-color, none)
 }
 
-.task-details{
+.task-details {
   @include displayFlex(flex, column, flex-start, flex-start, 24px);
-  
- 
-   
+  width: 100%;
   }
 
 .contact-img {
@@ -58,29 +58,75 @@ h3{
 }
 
 .subtasks{
-  @include displayFlex(flex, column, flex-start, flex-start, 24px);  
+  @include displayFlex(flex, column, flex-start, flex-start, 8px);
   max-height: 200px;
   width: 100%;
   overflow: auto;
-  .single-subtask{
-    @include displayFlex(flex, row, center, center, 24px);
+  .single-subtask {
+    @include displayFlex(flex, row, flex-start, center, 8px, nowrap);
+    padding: 6px 10px;
+    border-radius: 10px;
+    width: 100%;
+    input[type="checkbox"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      background-size: contain;
+      background-repeat: no-repeat;
+      border: none;
+
+      &.checkbox-unchecked {
+        background-image: url('/assets/img/3-board/checkbox-unchecked-icon.svg');
+      }
+
+      &.checkbox-checked {
+        background-image: url('/assets/img/3-board/checkbox-checked-icon.svg');
+      }
+    }
     >p{
       @include fontStyle(clamp(14px, 16px, 18px), 400,black, none)
     }
+
+    &:hover {
+      cursor: pointer;
+      background-color: $grey;
+    }
   }
 }
-.button-div{
-  @include displayFlex(flex, row, flex-end, center, 24px);
-  width: 90%;
+.button-div {
+  @include displayFlex(flex, row, flex-end, center, 8px);
+  width: 100%;
+  position: sticky;
+  bottom: 0;
+  background-color: $white;
+  padding: 16px 0;
   >button{
-    display:flex;
-    gap: 15px;
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    font-weight: 400;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    &:hover {
+      font-weight: 700;
+      color: $hover-color;
+
+      img {
+        filter: invert(55%) sepia(85%) saturate(714%) hue-rotate(165deg) brightness(92%) contrast(91%);
+      }
+    }
+  }
+  >span{
+    color: $grey;
   }
 }
 
 .contact{
-  @include displayFlex(flex, row, center, center, 12px);
-  text-align: center;
+  @include displayFlex(flex, row, flex-start, center, 12px, nowrap);
+  text-align: left;
   >p{
     @include fontStyle(clamp(16px, 18px, 20px), 400,black, none);
   }
@@ -96,8 +142,8 @@ h3{
 }
 .priority{
   @include displayFlex(flex, row, flex-start, center, 24px);
-  
-  
+
+
   >p{
     @include fontStyle(clamp(16px, 20px, 22px), 400, black, none);
     gap:10px;
@@ -105,9 +151,15 @@ h3{
 }
 .assigned-to{
   @include displayFlex(flex, column, flex-start, flex-start, 24px);
-  
+
     >p{
       @include fontStyle(clamp(16px, 18px, 20px), 400,white, none);
           }
-          
+
+  }
+
+  :host-context(app-overlay) {
+    section {
+      padding: 0 40px 0 0;
+    }
   }
