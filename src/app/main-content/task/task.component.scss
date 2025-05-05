@@ -78,11 +78,11 @@ h3{
       border: none;
 
       &.checkbox-unchecked {
-        background-image: url('/assets/img/3-board/checkbox-unchecked-icon.svg');
+        background-image: url('../../../assets/img/3-board/checkbox-unchecked-icon.svg');
       }
 
       &.checkbox-checked {
-        background-image: url('/assets/img/3-board/checkbox-checked-icon.svg');
+        background-image: url('../../../assets/img/3-board/checkbox-checked-icon.svg');
       }
     }
     >p{
@@ -145,7 +145,7 @@ h3{
 
 
   >p{
-    @include fontStyle(clamp(16px, 20px, 22px), 400, black, none);
+    @include fontStyle(clamp(16px, 18px, 20px), 400, black, none);
     gap:10px;
   }
 }
