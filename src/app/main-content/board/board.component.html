@@ -37,7 +37,7 @@
             </div>
           </div>
           <div class="tasks-container" cdkDropList id={{column.dropListName}} [cdkDropListData]="column.list"
-            [cdkDropListConnectedTo]="connectedDropLists" (cdkDropListDropped)="drop($event, column.status)">
+            [cdkDropListConnectedTo]="connectedDropLists" (cdkDropListDropped)="drop($event, column.status)" [cdkDropListDisabled]="isMobile">
 
             @if (column.list.length) {
             @for (task of column.list; track task.id) {
@@ -49,12 +49,13 @@
                 )
               )
               {
-            <div class="task-card" cdkDrag (click)="openTaskDetail(task)">
+            <div class="task-card" cdkDrag (click)="openTaskDetail(task)" [cdkDragDisabled]="isMobile">
               <div class="task-category" >
                 <div [ngClass]="taskService.getCategoryClass(task.category)">{{ task.category }}</div>
                 <div class="task-menu" (click)="openDropDown(task); $event.stopPropagation()" #dropDownWrapper>
                   <div class="drop-down"  [ngClass]="{visible: task.dropDownOpen, invisible:!task.dropDownOpen}" >
                     <div class="drop-down-wrapper" [id]="'dropdown' + task.id" >
+                      <p><b>Move to:</b></p>
                       @if(task.status !== 'ToDo'){
                         <span (click)="setNewStatus('ToDo', task); $event.stopPropagation();">To Do</span>
                       }
@@ -70,7 +71,7 @@
                     </div>
                   </div>
                   <span >
-                    <img src="assets/img/4-contact/more-vert-icon.svg"  alt="">
+                    <img src="assets/img/4-contacts/more-vert-icon.svg"  alt="Menu Icon">
                   </span>
                 </div>
               </div>
