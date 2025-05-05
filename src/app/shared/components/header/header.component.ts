@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef, HostListener } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -10,8 +10,22 @@ import { RouterModule } from '@angular/router';
 })
 export class HeaderComponent {
   showMenu = false;
+  @ViewChild('menuRef') menuRef!: ElementRef;
+
+  handleBackdropClick(event: MouseEvent) {
+    if (this.menuRef && !this.menuRef.nativeElement.contains(event.target)) {
+      this.showMenu = false;
+    }
+  }
+  
+
+  @HostListener('document:click', ['$event'])
+onDocumentClick(event: MouseEvent) {
+  this.handleBackdropClick(event);
+}
 
   toggleMenu(event: MouseEvent) {
+    event.stopPropagation();
     this.showMenu = !this.showMenu;
   }
 
