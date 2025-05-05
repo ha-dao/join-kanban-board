@@ -159,6 +159,9 @@ export class AddTaskComponent {
 
     this.taskService.taskData.subtasks = this.taskService.currentSubtasks;
     if (this.overlayService.setTemplate() == 'add-task') {
+      if(this.taskService.taskData.priority == ''){
+        this.taskService.taskData.priority = 'Medium'
+      }
       this.taskService.addTask(this.taskService.taskData);
     } else if (this.overlayService.setTemplate() == 'edit-task') {
       this.taskService.updateTask(this.taskService.taskData.id, this.taskService.taskData);
