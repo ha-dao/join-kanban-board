@@ -236,7 +236,7 @@
           <img src="assets/img/4-contacts/check-icon.svg" alt="check pictogram" />
         </button>
       } @else if (overlayService.setTemplate() == '') {
-        <button class="create-button" type="submit" [disabled]="!isFormValid()" (click)="this.overlayService.setTemplate.set('add-task'); submitTask(); resetSubtasks();">
+        <button class="create-button" type="submit" [disabled]="!isFormValid()" (click)="this.taskService.newTaskStatus = 'ToDo';this.overlayService.setTemplate.set('add-task'); submitTask(); resetSubtasks();">
           Create Task
           <img src="assets/img/4-contacts/check-icon.svg" alt="check pictogram" />
         </button>
