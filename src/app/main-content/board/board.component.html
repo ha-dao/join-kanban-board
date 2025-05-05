@@ -37,7 +37,7 @@
           </div>
           <div class="tasks-container" cdkDropList id={{column.dropListName}} [cdkDropListData]="column.list"
             [cdkDropListConnectedTo]="connectedDropLists" (cdkDropListDropped)="drop($event, column.status)">
-  
+
             @if (column.list.length) {
             @for (task of column.list; track task.id) {
             @if(task.status == column.status && (task.title.startsWith(taskService.searchInputFieldValue) ||
@@ -54,7 +54,7 @@
                 : ''
                 }}
               </div>
-  
+
               @if (task.subtasks && task.subtasks.length > 0) {
               <div class="progress-container">
                 <div class="progress-track">
@@ -64,7 +64,7 @@
                   Subtasks</span>
               </div>
               }
-  
+
               <div class="task-footer">
                 <div class="task-assigned">
                   @for (assignee of task.assignedTo; track assignee.id) {
@@ -83,7 +83,7 @@
                   }
                 </div>
               </div>
-  
+
               <!-- ✅ Drag-Vorschau -->
               <ng-template cdkDragPreview>
                 <div class="task-card drag-preview">
@@ -98,7 +98,7 @@
                     : ''
                     }}
                   </div>
-  
+
                   @if (task.subtasks && task.subtasks.length > 0) {
                   <div class="progress-container">
                     <div class="progress-track">
@@ -108,7 +108,7 @@
                       Subtasks</span>
                   </div>
                   }
-  
+
                   <div class="task-footer">
                     <div class="task-assigned">
                       @for (assignee of task.assignedTo; track assignee.id) {

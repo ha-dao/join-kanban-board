@@ -153,7 +153,7 @@ export class AddTaskComponent {
   }
 
   submitTask() {
-    
+
     this.taskService.taskData.assignedTo = [];
     this.taskService.tempAssignedTo.forEach((c) => this.taskService.taskData.assignedTo!.push(c));
 
