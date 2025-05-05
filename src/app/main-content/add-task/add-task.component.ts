@@ -204,6 +204,7 @@ export class AddTaskComponent {
       dropDownOpen: false
     };
     this.taskService.tempAssignedTo = [];
+    this.clearDate();
   }
 
   resetContacts() {
@@ -257,6 +258,12 @@ export class AddTaskComponent {
     value = this.inputDateService.limitLength(value);
 
     this.displayDate = value;
+  }
+
+
+  clearDate(){
+    this.displayDate = '';
+    this.taskService.taskData.date = '';
   }
 
   formatDate(): void {
