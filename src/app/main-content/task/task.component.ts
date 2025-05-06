@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, effect } from '@angular/core';
 import { OverlayService } from '../../services/overlay.service';
 import { TaskService } from '../../services/task.service';
 import { ContactService } from '../../services/contact.service';
@@ -19,8 +19,13 @@ overlayService = inject(OverlayService)
 taskService = inject(TaskService)
 contactService = inject(ContactService)
 feedbackService = inject(FeedbackServiceService)
-
 task = this.taskService.selectedTask();
+
+constructor(){
+  effect(()=> {
+    this.task = this.taskService.selectedTask();
+  })
+}
 
 deleteTask(id : string){
   this.taskService.deleteTask(id)
