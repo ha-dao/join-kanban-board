@@ -1,5 +1,6 @@
 import { NgClass, CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener, inject, ViewChild, effect, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgForm, NgModel, FormsModule, FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ContactService } from '../../services/contact.service';
 import { FeedbackServiceService } from '../../services/feedback.service';
@@ -40,6 +41,7 @@ export class AddTaskComponent {
   overlayService = inject(OverlayService);
   taskService = inject(TaskService);
   inputDateService = inject(InputdateService);
+  router = inject(Router)
 
   @ViewChild('taskTitle') taskTitle: NgModel | undefined;
   @ViewChild('taskDate') taskDate: NgModel | undefined;
@@ -189,6 +191,7 @@ export class AddTaskComponent {
     this.resetSubtasks();
     this.setInputsUntouched();
     this.overlayService.closeOverlay();
+    this.router.navigate(['/board'])
   }
 
   setInputsUntouched() {
