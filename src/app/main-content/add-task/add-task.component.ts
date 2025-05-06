@@ -71,7 +71,16 @@ export class AddTaskComponent {
     if (taskToEdit) {
       this.taskService.taskData = structuredClone(taskToEdit);
     }
+  
+    
+    const isoDate = this.taskService.taskData.date;
+    if (isoDate) {
+      const { day, month, year } = this.inputDateService.parseISOToParts(isoDate);
+      this.displayDate = this.inputDateService.formatDateDisplay(day, month, year);
+    }
   }
+  
+  
 
   onInputChangeSubtask(){
     this.showActionIcons = this.newSubtask.title.trim().length > 0;
@@ -249,14 +258,23 @@ export class AddTaskComponent {
   }
 
   onInputChange(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    let value = input.value;
+    const input = (event.target as HTMLInputElement).value;
+    const sanitized = this.inputDateService.sanitizeInput(input);
+    const withSlashes = this.inputDateService.addSlashes(sanitized);
+    const limited = this.inputDateService.limitLength(withSlashes);
 
-    value = this.inputDateService.sanitizeInput(value);
-    value = this.inputDateService.addSlashes(value);
-    value = this.inputDateService.limitLength(value);
+    this.displayDate = limited;
 
-    this.displayDate = value;
+    const parsed = this.inputDateService.parseDateFromDisplay(limited);
+    if (parsed) {
+      const isoDate = this.inputDateService.formatDateISO(parsed.day, parsed.month, parsed.year);
+      this.taskService.taskData.date = isoDate;
+
+      // Synchronisiere das versteckte native Input-Feld (falls benötigt)
+      if (this.hiddenDateInput) {
+        this.hiddenDateInput.nativeElement.value = isoDate;
+      }
+    }
   }
 
   formatDate(): void {
