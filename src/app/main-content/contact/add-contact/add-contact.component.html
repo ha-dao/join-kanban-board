@@ -39,7 +39,7 @@
               id="name-input"
               name="name"
               required
-              [(ngModel)]="contactData.name"
+              [(ngModel)]="contactService.contactData.name"
               minlength="3"
               (blur)="validateForm('name')"
               [class.invalid]="invalidFields.includes('name')"
@@ -58,13 +58,13 @@
               id="email-input"
               name="email"
               required
-              [(ngModel)]="contactData.email"
+              [(ngModel)]="contactService.contactData.email"
               minlength="3"
               (blur)="validateForm('email')"
               [class.invalid]="invalidFields.includes('email')"
               placeholder="Email"
             />
-            <span [ngClass]="{visible: invalidFields.includes('email'), invisible: !invalidFields.includes('email')}">Your email seems invalid</span>
+            <span [ngClass]="{visible: invalidFields.includes('email'), invisible: !invalidFields.includes('email')}">Your email seems invalid or is already existing</span>
           </div>
           <div class="input-div">
             <img
@@ -78,7 +78,7 @@
               name="phone"
               required
               minlength="9"
-              [(ngModel)]="contactData.phone"
+              [(ngModel)]="contactService.contactData.phone"
               (blur)="validateForm('phone')"
               [class.invalid]="invalidFields.includes('phone')"
               placeholder=" Phone"

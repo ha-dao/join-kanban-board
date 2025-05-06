@@ -1,21 +1,33 @@
-import { Injectable, signal, inject } from '@angular/core';
+import { Injectable, signal, inject, Injector } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { TaskService } from './task.service';
+import { ContactService } from './contact.service';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class OverlayService {
+  private injector = inject(Injector)
+  private _contactService?:ContactService;
+
   isOpen = signal(false)
   setTemplate = signal<string>('');
   taskService= inject(TaskService)
+  // contactService = inject(ContactService)
   private contactDataSource = new BehaviorSubject<{ name: string; email: string; phone: string } | null>(null);
   contactData$ = this.contactDataSource.asObservable();
   ContactOverlayH2Text: string = 'Add Contact';
 
   buttonLeft = 'Cancel';
   buttonRight = 'Create';
+
+  get contactService(): ContactService {
+    if (!this._contactService) {
+      this._contactService = this.injector.get(ContactService);
+    }
+    return this._contactService;
+  }
 
   openOverlay(target:string) {
     this.setTemplate.set(target)    
@@ -30,7 +42,29 @@ export class OverlayService {
   
   
   closeOverlay() {
-    this.isOpen.set(false);  
+    this.isOpen.set(false); 
+    if(this.setTemplate() == 'add-task'|| this.setTemplate()== 'edit-task'){
+    this.closeOverlayFromAddTask() 
+    }else if(this.setTemplate()== 'add-contact' ){
+      this.closeOverlayFromContact()
+    }
+    
+    
+  }
+
+  closeOverlayFromContact(){
+    this.contactService.contactData =  {
+      name: '',
+      email: '',
+      phone: '',
+      color: ''
+    };
+    this.setTemplate.set('');
+
+
+  }
+
+  closeOverlayFromAddTask(){
     this.setTemplate.set('');
     this.taskService.clickedButton.set('Medium')
     this.taskService.taskData = {
@@ -46,7 +80,6 @@ export class OverlayService {
       dropDownOpen: false
     };
     this.taskService.currentSubtasks = [];
-    
   }
 
   setOverlayButtons(left: string, right: string) {

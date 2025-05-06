@@ -11,6 +11,19 @@ import { OverlayService } from './overlay.service';
   providedIn: 'root'
 })
 export class ContactService implements OnDestroy{
+
+  contactData: {
+    name: string;
+    email: string;
+    phone: string;
+    letters?: string;
+    color?: string;
+  } = {
+    name: '',
+    email: '',
+    phone: '',
+    color: ''
+  };
   unsubContactList: any;
   firestore:Firestore = inject(Firestore);
   taskService = inject(TaskService)
