@@ -98,11 +98,15 @@
 
               <div class="task-footer">
                 <div class="task-assigned">
-                  @for (assignee of task.assignedTo; track assignee.id) {
+                  @for (assignee of task.assignedTo?.slice(0, 3); track assignee.id) {
                   <div class="assigned-contact" [ngStyle]="{ background: assignee.color }">
                     {{ assignee.letters }}
                   </div>
                   }
+                  @if(task.assignedTo!.length > 3)
+                      {
+                        <span>+{{task.assignedTo!.length -3}} more</span>
+                      }
                 </div>
                 <div class="task-priority">
                   @if (task.priority === 'Urgent') {
@@ -142,11 +146,18 @@
 
                   <div class="task-footer">
                     <div class="task-assigned">
-                      @for (assignee of task.assignedTo; track assignee.id) {
+                      @for (assignee of task.assignedTo?.slice(0, 3); track assignee.id)
+                      {
+                        
                       <div class="assigned-contact" [ngStyle]="{ background: assignee.color }">
                         {{ assignee.letters }}
-                      </div>
+                      </div>                    
                       }
+                      @if(task.assignedTo!.length > 3)
+                      {
+                        <span>+{{task.assignedTo!.length -3}} more</span>
+                      }
+                      
                     </div>
                     <div class="task-priority">
                       @if (task.priority === 'Urgent') {
