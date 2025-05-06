@@ -106,7 +106,7 @@ export class AddTaskComponent {
     }
   }
 
-  setPrority(priority: string) {
+  setPrority(priority: 'Urgent' | 'Medium' | 'Low') {
     this.taskService.taskData.priority = priority;
     this.setClickedButton(priority);
   }
@@ -181,7 +181,7 @@ export class AddTaskComponent {
 
     this.taskService.taskData.subtasks = this.taskService.currentSubtasks;
     if (this.overlayService.setTemplate() == 'add-task') {
-      if(this.taskService.taskData.priority == ''){
+      if(this.taskService.taskData.priority !== 'Urgent' || 'Medium' || 'Low'){
         this.taskService.taskData.priority = 'Medium'
       }
       this.taskService.addTask(this.taskService.taskData);
@@ -208,7 +208,7 @@ export class AddTaskComponent {
       title: '',
       description: '',
       date: '',
-      priority: '',
+      priority: 'Medium',
       assignedTo: [],
       category: '',
       subtasks: [],

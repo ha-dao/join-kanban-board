@@ -72,7 +72,7 @@ export class OverlayService {
       title: '',
       description: '',
       date: '',
-      priority: '',
+      priority: 'Medium',
       assignedTo:[],
       category:'',
       subtasks:[],
