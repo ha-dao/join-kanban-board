@@ -213,6 +213,7 @@ export class AddTaskComponent {
       dropDownOpen: false
     };
     this.taskService.tempAssignedTo = [];
+    this.clearDate();
   }
 
   resetContacts() {
@@ -275,6 +276,12 @@ export class AddTaskComponent {
         this.hiddenDateInput.nativeElement.value = isoDate;
       }
     }
+  }
+
+
+  clearDate(){
+    this.displayDate = '';
+    this.taskService.taskData.date = '';
   }
 
   formatDate(): void {

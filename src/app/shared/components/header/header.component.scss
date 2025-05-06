@@ -5,7 +5,18 @@
   height: 96px;
   width: 100%;
   background-color: white;
+  padding: 0;
+}
+
+.content{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  background-color: white;
   padding: 0 40px;
+  max-width: 1920px;
+  width: 100%;
 }
 
 .header-content {

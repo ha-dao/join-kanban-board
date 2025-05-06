@@ -6,7 +6,7 @@
     </a>
   </div>
 
-  <form (keydown.enter)="$event.preventDefault()" action="submit" (ngSubmit)="submitTask()">
+  <form autocomplete="off" (keydown.enter)="$event.preventDefault()" action="submit" (ngSubmit)="submitTask()">
     <div class="input-wrapper">
       <div class="task-data">
         <div class="input-div">
@@ -116,7 +116,7 @@
                 <li>
                   {{ contactService.getFirstAndLastName(item['name']) }}
                   <div class="checkbox-wrapper">
-                    <input type="checkbox" [checked]="item.selected" name="checkBox" id="{{ item.id }}" (change)="contactService.setSelection(item); setAssignedTo(item)" (click)="$event.stopPropagation()" />
+                    <input type="checkbox" (click)="toggleContactSelection(item)" [checked]="item.selected" name="checkBox" id="{{ item.id }}" (change)="contactService.setSelection(item); setAssignedTo(item)" (click)="$event.stopPropagation()" />
                     <label class="check-box" [attr.for]="item.id"></label>
                   </div>
                 </li>
@@ -236,7 +236,7 @@
           <img src="assets/img/4-contacts/check-icon.svg" alt="check pictogram" />
         </button>
       } @else if (overlayService.setTemplate() == '') {
-        <button class="create-button" type="submit" [disabled]="!isFormValid()" (click)="this.overlayService.setTemplate.set('add-task'); submitTask(); resetSubtasks();">
+        <button class="create-button" type="submit" [disabled]="!isFormValid()" (click)="this.taskService.newTaskStatus = 'ToDo';this.overlayService.setTemplate.set('add-task'); submitTask(); resetSubtasks();">
           Create Task
           <img src="assets/img/4-contacts/check-icon.svg" alt="check pictogram" />
         </button>
