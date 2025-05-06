@@ -465,6 +465,7 @@
         flex-direction: column;
         justify-content: flex-start;
         gap: 8px;
+        min-height: 100vh;
 
         .dashed-container {
           width: calc(100% - 20px);
@@ -512,6 +513,7 @@
             overflow-x: auto;
             gap: 16px;
             padding: 8px;
+            min-height: auto;
             .task-card {
               min-width: 200px;
             }
@@ -550,6 +552,7 @@
         display: flex;
       }
     }
+    
   }
 
   @media (max-width: 960px) {

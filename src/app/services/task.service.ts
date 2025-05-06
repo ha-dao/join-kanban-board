@@ -29,10 +29,10 @@ export class TaskService implements OnDestroy {
   boardTasksListProgress: Task[] = [];
   boardTasksListFeedback: Task[] = [];
   boardColumns = [
-      { title: 'To Do', status: 'ToDo', list: this.boardTasksListToDo, dropListName:'todoList', epmtyText: 'No tasks To do' },
-      { title: 'In Progress', status: 'In Progress', list: this.boardTasksListProgress, dropListName:'inProgressList', epmtyText: 'No tasks in progress' },
-      { title: 'Await Feedback', status: 'Await Feedback', list: this.boardTasksListFeedback, dropListName:'awaitFeedbackList', epmtyText: 'No tasks awaiting feedback' },
-      { title: 'Done', status: 'Done', list: this.boardTasksListDone, dropListName:'doneList', epmtyText: 'No completed tasks' }
+      { title: 'To Do', status: 'ToDo', list: this.boardTasksListToDo, dropListName:'todoList', emptyText: 'No tasks To do' },
+      { title: 'In Progress', status: 'In Progress', list: this.boardTasksListProgress, dropListName:'inProgressList', emptyText: 'No tasks in progress' },
+      { title: 'Await Feedback', status: 'Await Feedback', list: this.boardTasksListFeedback, dropListName:'awaitFeedbackList', emptyText: 'No tasks awaiting feedback' },
+      { title: 'Done', status: 'Done', list: this.boardTasksListDone, dropListName:'doneList', emptyText: 'No completed tasks' }
     ];
   isBoardListFull: boolean = false;
   searchInputFieldValue: string= '';
