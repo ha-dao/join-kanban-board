@@ -214,7 +214,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 4px;
-
+    align-items: center;
     .assigned-contact {
       width: 32px;
       height: 32px;
@@ -552,7 +552,7 @@
         display: flex;
       }
     }
-    
+
   }
 
   @media (max-width: 960px) {

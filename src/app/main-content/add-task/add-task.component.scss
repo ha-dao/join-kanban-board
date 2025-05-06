@@ -153,7 +153,7 @@ section {
         position: relative;
         display: flex;
         align-items: center;
-
+        
         .calendar-icon {
           position: absolute;
           right: 12px;
@@ -394,39 +394,39 @@ div.current-sub-task-list-wrapper {
       right: 10px;
       top: 12%;
       display: flex;
-      gap: 8px;      
+      gap: 8px;
       &:nth-child(2){
         color: $grey;
       }
-      .input-icon {     
+      .input-icon {
         width: 18px;
         height: 18px;
         padding: 2px;
-        
+
         &:hover {
           cursor: pointer;
           background-color: #d1d1d1;
         }
       }
-      .input-icon-black{     
+      .input-icon-black{
         width: 18px;
         height: 18px;
         padding: 2px;
-        
+
         &:hover {
           cursor: pointer;
           background-color: #d1d1d1;
         }
   }
-      
+
     }
     input {
       padding: 10px;
       width: 100%;
     }
-    
-    
-    
+
+
+
     .input-icon-add {
       position: absolute;
       right: 16px;
@@ -434,15 +434,15 @@ div.current-sub-task-list-wrapper {
       width: 18px;
       height: 18px;
       padding: 2px;
-      
+
       &:hover {
         cursor: pointer;
         background-color: #d1d1d1;
       }
     }
- 
+
   }
- 
+
   .list-wrapper {
     width: 100%;
     max-height: 120px;
@@ -726,6 +726,13 @@ $checkbox-height: 18px;
 :host-context(app-overlay) {
   @media (max-width: 1280px) {
     section {
+      height: 100%;
+      width: 100%;
+      max-height: 800px;
+      overflow-y: auto;
+      display: flex;
+      flex-wrap: nowrap;
+      padding-right: 24px;
       form {
         p.req-mobile {
           margin-top: 24px;
@@ -742,12 +749,20 @@ $checkbox-height: 18px;
 :host-context(.edit-task) {
   section {
     width: 100%;
-    padding: 0;
+    padding: 0 24px 0 0;
+    height: 100%;
+    max-height: 700px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    overflow-y: auto;
     .title-close-wrapper {
       display: flex;
       justify-content: flex-end;
-      padding: 0;
+      padding: 2px;
       width: 100%;
+      position: sticky;
+      top: 16px;
       .close-button {
           padding: 8px;
           border-radius: 50%;
@@ -904,6 +919,11 @@ $checkbox-height: 18px;
     .bottom-form-wrapper {
       @include displayFlex(flex, row, space-between, flex-end);
       margin-top: 24px;
+      position: sticky;
+      bottom: -2px;
+      background-color: $white;
+      padding: 2px;
+      z-index: 999;
       .btn-div {
         display: flex;
         justify-content: flex-end;
@@ -921,6 +941,7 @@ $checkbox-height: 18px;
     section {
       padding-bottom: 32px;
       gap: 0;
+      padding-right: 24px;
       .title-close-wrapper {
         position: sticky;
         top: 8px;
@@ -934,8 +955,7 @@ $checkbox-height: 18px;
         }
         .bottom-form-wrapper {
           position: sticky;
-          bottom: 16px;
-          background-color: $white;
+          bottom: 0;
           .btn-div {
             width: 100%;
           }

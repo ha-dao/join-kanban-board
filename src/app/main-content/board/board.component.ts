@@ -7,11 +7,12 @@ import { TaskService } from '../../services/task.service';
 import { Task } from '../../interfaces/task';
 import { TaskComponent } from '../task/task.component';
 import { CdkDragDrop, moveItemInArray, transferArrayItem, CdkDrag, CdkDropList, CdkDragPreview } from '@angular/cdk/drag-drop';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CommonModule, FormsModule, CdkDrag, CdkDropList, CdkDragPreview],
+  imports: [CommonModule, FormsModule, CdkDrag, CdkDropList, CdkDragPreview, RouterLink],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
 })

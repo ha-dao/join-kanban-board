@@ -18,7 +18,7 @@
         <img src="assets/img/board/plus.svg" alt="Add Task" />
       </button>
     </div>
-      <img src="assets/img/board/plus.svg" alt="Add Task" class="plus-button" (click)="setNewTaskStatus('ToDo'); overlayService.openOverlay('add-task')"/>
+      <img src="assets/img/board/plus.svg" alt="Add Task" class="plus-button" routerLink="/add-task" />
   </div>
 
   <div class="columns-container">
@@ -148,16 +148,16 @@
                     <div class="task-assigned">
                       @for (assignee of task.assignedTo?.slice(0, 3); track assignee.id)
                       {
-                        
+
                       <div class="assigned-contact" [ngStyle]="{ background: assignee.color }">
                         {{ assignee.letters }}
-                      </div>                    
+                      </div>
                       }
                       @if(task.assignedTo!.length > 3)
                       {
                         <span>+{{task.assignedTo!.length -3}} </span>
                       }
-                      
+
                     </div>
                     <div class="task-priority">
                       @if (task.priority === 'Urgent') {

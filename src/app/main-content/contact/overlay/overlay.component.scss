@@ -68,10 +68,9 @@
   max-height: 800px;
   border-radius: 32px;
   background-color: $white;
-  overflow-y: auto;
   app-task {
   width:100%;
-  padding: 40px 0 40px 40px;
+  padding: 24px;
   height:100%;
   >a {
       padding: 8px;
@@ -98,27 +97,26 @@
   max-height: 800px;
   border-radius: 32px;
   background-color: $white;
-  overflow-y: auto;
-  app-add-task {
-  width:100%;
-  padding: 24px;
-  height:100%;
-  margin: 0;
-  section {
-    padding: 0;
-  }
-  >a {
-      padding: 8px;
-      border-radius: 50%;
-      width: 32px;
-      height: 32px;
-      z-index: 999;
-      img {
-        width: 16px;
-        height: 16px;
+    app-add-task {
+    width:100%;
+    padding: 24px;
+    height:100%;
+    margin: 0;
+      section {
+        padding: 0;
       }
+      >a {
+          padding: 8px;
+          border-radius: 50%;
+          width: 32px;
+          height: 32px;
+          z-index: 999;
+          img {
+            width: 16px;
+            height: 16px;
+          }
+        }
     }
-  }
 }
 
 
@@ -126,7 +124,6 @@
   .content-wrapper {
     height: calc(100vh - 24px);
     width: calc(100% - 24px);
-    overflow-y: auto;
     scrollbar-width: 0;
     app-add-task {
       padding: 16px;
@@ -143,7 +140,6 @@
     height: calc(100vh - 16px);
     border-radius: 32px;
     background-color: $white;
-    overflow-y: auto;
     app-task {
     width:100%;
     padding: 40px 0 40px 40px;
@@ -172,12 +168,11 @@
     height: calc(100vh - 16px);
     border-radius: 32px;
     background-color: $white;
-    overflow-y: auto;
     app-add-task {
     width:100%;
-    padding: 24px;
     height:100%;
     margin: 0;
+    padding: 24px 0 24px 24px;
     >a {
         padding: 8px;
         border-radius: 50%;
@@ -197,7 +192,6 @@
   .content-wrapper {
     height: calc(100vh - 24px);
     width: calc(100% - 24px);
-    overflow-y: auto;
     scrollbar-width: 0;
     app-add-task {
       padding: 16px;
@@ -214,7 +208,6 @@
     height: calc(100vh - 16px);
     border-radius: 32px;
     background-color: $white;
-    overflow-y: auto;
     app-task {
     width:100%;
     padding: 40px 0 40px 40px;
@@ -243,7 +236,6 @@
     height: calc(100vh - 16px);
     border-radius: 32px;
     background-color: $white;
-    overflow-y: auto;
     app-add-task {
     width:100%;
     padding: 24px;
