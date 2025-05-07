@@ -1,5 +1,6 @@
 import { NgClass, CommonModule } from '@angular/common';
 import { Component, ElementRef, HostListener, inject, ViewChild, effect, signal } from '@angular/core';
+import { Router } from '@angular/router';
 import { NgForm, NgModel, FormsModule, FormGroup, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { ContactService } from '../../services/contact.service';
 import { FeedbackServiceService } from '../../services/feedback.service';
@@ -40,6 +41,7 @@ export class AddTaskComponent {
   overlayService = inject(OverlayService);
   taskService = inject(TaskService);
   inputDateService = inject(InputdateService);
+  router = inject(Router)
 
   @ViewChild('taskTitle') taskTitle: NgModel | undefined;
   @ViewChild('taskDate') taskDate: NgModel | undefined;
@@ -71,7 +73,16 @@ export class AddTaskComponent {
     if (taskToEdit) {
       this.taskService.taskData = structuredClone(taskToEdit);
     }
+  
+    
+    const isoDate = this.taskService.taskData.date;
+    if (isoDate) {
+      const { day, month, year } = this.inputDateService.parseISOToParts(isoDate);
+      this.displayDate = this.inputDateService.formatDateDisplay(day, month, year);
+    }
   }
+  
+  
 
   onInputChangeSubtask(){
     this.showActionIcons = this.newSubtask.title.trim().length > 0;
@@ -95,7 +106,7 @@ export class AddTaskComponent {
     }
   }
 
-  setPrority(priority: string) {
+  setPrority(priority: 'Urgent' | 'Medium' | 'Low') {
     this.taskService.taskData.priority = priority;
     this.setClickedButton(priority);
   }
@@ -170,7 +181,7 @@ export class AddTaskComponent {
 
     this.taskService.taskData.subtasks = this.taskService.currentSubtasks;
     if (this.overlayService.setTemplate() == 'add-task') {
-      if(this.taskService.taskData.priority == ''){
+      if(this.taskService.taskData.priority !== 'Urgent' || 'Medium' || 'Low'){
         this.taskService.taskData.priority = 'Medium'
       }
       this.taskService.addTask(this.taskService.taskData);
@@ -180,6 +191,7 @@ export class AddTaskComponent {
     this.resetSubtasks();
     this.setInputsUntouched();
     this.overlayService.closeOverlay();
+    this.router.navigate(['/board'])
   }
 
   setInputsUntouched() {
@@ -196,7 +208,7 @@ export class AddTaskComponent {
       title: '',
       description: '',
       date: '',
-      priority: '',
+      priority: 'Medium',
       assignedTo: [],
       category: '',
       subtasks: [],
@@ -250,14 +262,23 @@ export class AddTaskComponent {
   }
 
   onInputChange(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    let value = input.value;
+    const input = (event.target as HTMLInputElement).value;
+    const sanitized = this.inputDateService.sanitizeInput(input);
+    const withSlashes = this.inputDateService.addSlashes(sanitized);
+    const limited = this.inputDateService.limitLength(withSlashes);
 
-    value = this.inputDateService.sanitizeInput(value);
-    value = this.inputDateService.addSlashes(value);
-    value = this.inputDateService.limitLength(value);
+    this.displayDate = limited;
 
-    this.displayDate = value;
+    const parsed = this.inputDateService.parseDateFromDisplay(limited);
+    if (parsed) {
+      const isoDate = this.inputDateService.formatDateISO(parsed.day, parsed.month, parsed.year);
+      this.taskService.taskData.date = isoDate;
+
+      // Synchronisiere das versteckte native Input-Feld (falls benötigt)
+      if (this.hiddenDateInput) {
+        this.hiddenDateInput.nativeElement.value = isoDate;
+      }
+    }
   }
 
 

@@ -22,7 +22,6 @@
         </div>
         <div class="input-div">
           <label for="due-date">Due Date<span class="req-marker">*</span></label>
-          <!-- <input [(ngModel)]="taskService.taskData.date" type="date" name="Due Date" id="due-date"  required #taskDate="ngModel" /> -->
 
         <div class="custom-date-input">
           <input
@@ -157,17 +156,17 @@
         </div>
 
         <div class="current-sub-task-list-wrapper">
-          <div class="input-icon-wrapper">  
+          <div class="input-icon-wrapper">
             <input [(ngModel)]="newSubtask.title" type="text" name="Subtasks" placeholder="Add new subtask" (input)="onInputChangeSubtask()" (keyup.enter)="addSubtask()"
-            />          
+            />
             @if(!showActionIcons){
               <img src="assets/icon/+Symbol.svg" class="input-icon-add" alt="Plus" (click)="addSubtask()"   />
 
             }
             @if (showActionIcons) {
               <div class="action-icons">
-                
-                
+
+
                 <span>
                   <img
                   src="assets/icon/trash.svg"
@@ -184,7 +183,7 @@
                   alt="Check"
                   (click)="addSubtask(); $event.stopPropagation(); showActionIcons = false"
                 /></span>
-                
+
               </div>
             }
           </div>

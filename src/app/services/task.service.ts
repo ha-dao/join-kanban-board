@@ -29,10 +29,10 @@ export class TaskService implements OnDestroy {
   boardTasksListProgress: Task[] = [];
   boardTasksListFeedback: Task[] = [];
   boardColumns = [
-      { title: 'To Do', status: 'ToDo', list: this.boardTasksListToDo, dropListName:'todoList', epmtyText: 'No tasks To do' },
-      { title: 'In Progress', status: 'In Progress', list: this.boardTasksListProgress, dropListName:'inProgressList', epmtyText: 'No tasks in progress' },
-      { title: 'Await Feedback', status: 'Await Feedback', list: this.boardTasksListFeedback, dropListName:'awaitFeedbackList', epmtyText: 'No tasks awaiting feedback' },
-      { title: 'Done', status: 'Done', list: this.boardTasksListDone, dropListName:'doneList', epmtyText: 'No completed tasks' }
+      { title: 'To Do', status: 'ToDo', list: this.boardTasksListToDo, dropListName:'todoList', emptyText: 'No tasks To do' },
+      { title: 'In Progress', status: 'In Progress', list: this.boardTasksListProgress, dropListName:'inProgressList', emptyText: 'No tasks in progress' },
+      { title: 'Await Feedback', status: 'Await Feedback', list: this.boardTasksListFeedback, dropListName:'awaitFeedbackList', emptyText: 'No tasks awaiting feedback' },
+      { title: 'Done', status: 'Done', list: this.boardTasksListDone, dropListName:'doneList', emptyText: 'No completed tasks' }
     ];
   isBoardListFull: boolean = false;
   searchInputFieldValue: string= '';
@@ -56,13 +56,19 @@ export class TaskService implements OnDestroy {
     status: '',
     dropDownOpen: false
   };
-  tempAssignedTo:Contact[]=[]
-
+  tempAssignedTo:Contact[]=[];
+  
+  priorityOrder = {
+    "Urgent": 1,
+    "Medium": 2,
+    "Low": 3,
+    "": 4
+  };
+  
   constructor() {
     this.snap();
-
   }
-
+  
   fillBoardTaskLists(){
   this.boardColumns.forEach(column =>{
     column.list = [];
@@ -77,7 +83,14 @@ export class TaskService implements OnDestroy {
       }else if(task.status == 'Done'){
         this.boardColumns[3].list.push(task);
       }
+    });
+    this.boardColumns.forEach(column=>{
+      column.list.sort((task1, task2) => this.priorityOrder[task1.priority] - this.priorityOrder[task2.priority]);
     })
+  }
+
+  proirityToString(proirity: string){
+    return
   }
 
   setTempAssignedTo(contacts:Contact[]){
@@ -99,7 +112,7 @@ export class TaskService implements OnDestroy {
   }
 
   snap() {
-    let q = query(this.getTasksRef(), orderBy('title'));
+    let q = query(this.getTasksRef(), orderBy('priority'));
     this.unsubTasksList = onSnapshot(q, (list) => {
       this.tasksList = [];
       list.forEach((element) => {
