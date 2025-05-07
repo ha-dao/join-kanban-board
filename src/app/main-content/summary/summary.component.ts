@@ -1,10 +1,11 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal, computed} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-summary',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule ],
   templateUrl: './summary.component.html',
   styleUrl: './summary.component.scss'
 })
@@ -21,4 +22,9 @@ export class SummaryComponent {
     return 'Good evening,'
 
   });
+
+
+
+
+
 }
