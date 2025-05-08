@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { AuthService } from '../../services/auth.service'; 
 
 @Component({
   selector: 'app-login',
@@ -9,14 +10,25 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  email = '';
+  emailOrUsername = '';
   password = '';
-
+  public error = '';
   login() {
-    alert(`E-Mail: ${this.email}\nPasswort: ${this.password}`);
+    alert(`E-Mail: ${this.emailOrUsername}\nPasswort: ${this.password}`);
   }
 
   guestLogin() {
     alert('Guest login erfolgreich!');
   }
+
+    constructor(private authService: AuthService) {}
+  
+    public async onLogin(emailOrUsername:string, password:string) {
+      try {
+        await this.authService.login(emailOrUsername, password);
+        console.log('Login erfolgreich');
+      } catch (err: any) {
+        this.error = err.message;
+      }
+    }
 }

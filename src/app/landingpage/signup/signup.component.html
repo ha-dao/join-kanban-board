@@ -2,10 +2,10 @@
     <img src="assets/img/header/help-vector.svg" alt="Back arrow">
     <h1>Sign up</h1>
   <form action="">
-    <input type="text" placeholder="Name" required />
-    <input type="email" placeholder="Email" required />
-    <input type="password" placeholder="Password" required />
-    <input type="password" placeholder="Confirm Password" required />
+    <input type="text" placeholder="Name" [(ngModel)]="name" required />
+    <input type="email" placeholder="Email" [(ngModel)]="email" required />
+    <input type="password" placeholder="Password" [(ngModel)]="password" required />
+    <input type="password" placeholder="Confirm Password" [(ngModel)]="passwordConfirm" required />
 
     <div class="check-box">
       <input type="checkbox" id="privacy" required />
@@ -13,7 +13,7 @@
         >I accept the <a href="/.....">Privacy policy</a></label
       >
     </div>
-    <button type="submit">Sign up</button>
+    <button type="submit" (click)="onRegister('nouira@gmail.com', 'soufiane', 'soufiane nouira')">Sign up</button>
     <div class="footer">
       <a href="/.....">Privacy Policy</a>
       <a href="/.....">Legal notice</a>
