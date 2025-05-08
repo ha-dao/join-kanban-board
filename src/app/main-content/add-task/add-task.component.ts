@@ -175,10 +175,8 @@ export class AddTaskComponent {
   }
 
   submitTask() {
-
     this.taskService.taskData.assignedTo = [];
     this.taskService.tempAssignedTo.forEach((c) => this.taskService.taskData.assignedTo!.push(c));
-
     this.taskService.taskData.subtasks = this.taskService.currentSubtasks;
     if (this.overlayService.setTemplate() == 'add-task') {
       if(this.taskService.taskData.priority !== 'Urgent' || 'Medium' || 'Low'){
@@ -274,7 +272,6 @@ export class AddTaskComponent {
       const isoDate = this.inputDateService.formatDateISO(parsed.day, parsed.month, parsed.year);
       this.taskService.taskData.date = isoDate;
 
-      // Synchronisiere das versteckte native Input-Feld (falls benötigt)
       if (this.hiddenDateInput) {
         this.hiddenDateInput.nativeElement.value = isoDate;
       }

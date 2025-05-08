@@ -107,8 +107,6 @@ export class TaskService implements OnDestroy {
     this.taskData.assignedTo = task.assignedTo;
     this.taskData.id = task.id
     this.taskData.status = task.status
-
-
   }
 
   snap() {

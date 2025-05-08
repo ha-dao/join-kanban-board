@@ -101,10 +101,8 @@ getProgressWidth(task: Task): number {
     if (this.isMobile) return;
 
     if (event.previousContainer !== event.container) {
-      // Statuswechsel
       task.status = newStatus;
       this.taskService.updateTask(task.id, task);
-      // Element von einer Liste in die andere verschieben
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
@@ -112,11 +110,9 @@ getProgressWidth(task: Task): number {
         event.currentIndex
       );
     } else {
-      // Sortieren in derselben Liste
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     }
 
-    // Optional: im Service oder Backend speichern
 
   }
 

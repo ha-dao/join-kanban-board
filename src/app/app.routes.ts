@@ -7,6 +7,7 @@ import { SummaryComponent } from './main-content/summary/summary.component';
 import { AddTaskComponent } from './main-content/add-task/add-task.component';
 import { BoardComponent } from './main-content/board/board.component';
 import { TaskComponent } from './main-content/task/task.component';
+import { LoginComponent } from './landingpage/login/login.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: '/summary', pathMatch: 'full' },
@@ -32,4 +33,7 @@ export const routes: Routes = [
   {
     path: 'legal-notice', component: LegalNoticeComponent,
   },
+  {
+    path: 'login', component: LoginComponent,
+  }
 ];
