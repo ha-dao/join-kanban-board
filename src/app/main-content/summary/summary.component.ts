@@ -13,11 +13,6 @@ import { Task } from '../../interfaces/task';
 export class SummaryComponent {
   private taskService = inject(TaskService);
   private tasks = signal<Task[]>([]);
-  constructor() {
-    effect(() => {
-      this.tasks.set(this.taskService.tasksList);
-    });
-  }
 
   todoCount = computed(
     () => this.taskService.tasksList.filter((t) => t.status === 'ToDo').length
