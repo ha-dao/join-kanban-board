@@ -1,4 +1,13 @@
+<div class="header">
+  <a href=""><img src="../../../assets/img/login/joinLogo.png" alt="JOIN Logo"/></a>
+  <div class="signup-section">
+  <p>Not a Join user?</p>
+  <button class="login-btn" (click)="login()">Sign up</button>
+</div>
+</div>
+
 <section class="login-container">
+  <div class="content-wrapper">
   <h1>Log in</h1>
   <div class="divider"></div>
   <form action="">
@@ -16,5 +25,9 @@
       <button class="guest-login-btn" (click)="guestLogin()">Guest Log in</button>
     </div>
   </form>
- 
+  <div class="footer">
+    <a (click)="goToAnotherPage('/privacy')">Privacy Policy</a>
+    <a (click)="goToAnotherPage('/legal-notice')">Legal notice</a>
+  </div>
+</div>
 </section>

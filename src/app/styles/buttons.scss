@@ -54,6 +54,22 @@
   }
 }
 
+.login-btn {
+  @include button-base($primary-color, $white, $primary-color, 700);
+  
+  &:hover {
+    @include button-hover($hover-color, $hover-color);
+  }
+}
+.guest-login-btn {
+  @include button-base(transparent, $primary-color, $primary-color, 400);
+  
+  &:hover {
+    color: $hover-color;
+    @include button-hover(transparent, $hover-color);
+  }
+}
+
 .urgent-btn {
   background-color: #FF3D00;
 }

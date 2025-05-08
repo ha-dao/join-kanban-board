@@ -16,6 +16,28 @@
   text-transform: $text-transform;
 }
 
+@mixin button-base($bg, $color, $border, $weight) {
+  background-color: $bg;
+  @include fontStyle(15px, $weight, $color);
+  padding: 15px 24px;
+  border: 2px solid $border;
+  border-radius: 8px;
+  transition: all 200ms ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+@mixin button-hover($bg, $border, $shadow: true) {
+  background-color: $bg;
+  border: 2px solid $border;
+  @if $shadow {
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.25);
+  }
+}
+
 @mixin svg-filter-primary {
   filter: brightness(0) saturate(100%) invert(17%) sepia(4%)
     saturate(5657%) hue-rotate(177deg) brightness(92%) contrast(86%);
