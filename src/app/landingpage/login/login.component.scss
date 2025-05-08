@@ -1,0 +1,96 @@
+@import './../../styles/variables.scss';
+@import './../../styles/mixins.scss';
+@import './../../styles/buttons.scss';
+
+@mixin fontStyle($size, $weight, $color, $transform: none) {
+  font-size: $size;
+  font-weight: $weight;
+  color: $color;
+  text-transform: $transform;
+}
+
+@mixin button-base($bg, $color, $border, $weight) {
+  background-color: $bg;
+  @include fontStyle(15px, $weight, $color);
+  padding: 15px 24px;
+  border: 2px solid $border;
+  border-radius: 8px;
+  transition: all 200ms ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+@mixin button-hover($bg, $border, $shadow: true) {
+  background-color: $bg;
+  border: 2px solid $border;
+  @if $shadow {
+    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.25);
+  }
+}
+
+.login-container {
+  max-width: 652px;
+  margin: 100px auto;
+  padding: 48px 115px;
+  border-radius: 30px;
+  background: $white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  text-align: center;
+
+  h1 { margin-bottom: 16px; }
+
+  .divider {
+    height: 4px;
+    background: $hover-color;
+    width: 40%;
+    margin: 0 auto 24px;
+  }
+
+  .input-container {
+    position: relative;
+    margin: 10px 0;
+
+    img {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 20px; height: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px 30px 8px 8px;
+      font-size: 14px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+  }
+
+  .buttons {
+    display: flex;
+    gap: 35px;
+    width: 322px;
+    height: 48px;
+    margin: 32px auto 0;
+
+    .login-btn {
+      @include button-base($primary-color, $white, $primary-color, 700);
+      flex: 1;
+      &:hover {
+        @include button-hover($hover-color, $hover-color);
+      }
+    }
+    .guest-login-btn {
+      @include button-base(transparent, $primary-color, $primary-color, 400);
+      flex: 1;
+      &:hover {
+        color: $hover-color;
+        @include button-hover(transparent, $hover-color, false);
+      }
+    }
+  }
+}
