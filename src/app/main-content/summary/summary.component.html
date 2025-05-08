@@ -14,7 +14,7 @@
               <img class="icon-default" src="assets/img/summary/pencil.svg" alt="pencil icon" />
               <img class="icon-hover" src="assets/img/summary/pencil-light.svg" alt="pencil icon" />
               <div>
-                <h3>1</h3>
+                <h3> {{ todoCount() }} </h3>
                 <p>To-do</p>
               </div>
             </button>
@@ -23,8 +23,8 @@
               <img class="icon-default" src="assets\img\summary\checked.svg" alt="checked icon" />
               <img class="icon-hover" src="assets/img/summary/checked-light.svg" alt="checked icon" />
               <div>
-                <h3>1</h3>
-                <p>To-do</p>
+                <h3> {{ doneCount() }} </h3>
+                <p>Done</p>
               </div>
             </button>
             
@@ -49,21 +49,21 @@
           <div class="buttoncard-row" routerLink="/board" routerLinkActive="active">
             <button class="buttoncard">
               <div>
-                <h3>5</h3>
+                <h3> {{ totalCount() }} </h3>
                 <p>Tasks in Board</p>
               </div>
             </button>
   
             <button class="buttoncard">
               <div>
-                <h3>2</h3>
+                <h3> {{ inProgressCount() }} </h3>
                 <p>Tasks In Progress</p>
               </div>
             </button>
   
             <button class="buttoncard">
               <div>
-                <h3>2</h3>
+                <h3> {{ awaitFeedbackCount() }} </h3>
                 <p>Awaiting Feedback</p>
               </div>
             </button>
@@ -73,8 +73,8 @@
   
       <div class="right">
         <div class="greeting">
-          <h4>{{ greeting() }}</h4>
-          <h3>{{ userName() }}</h3>
+          <h4> {{ greeting() }} </h4>
+          <h3> {{ userName() }} </h3>
         </div>
       </div>
     </div>
