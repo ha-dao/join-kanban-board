@@ -1,18 +1,33 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+<<<<<<< HEAD
 import { AuthService } from '../../services/auth.service'; 
+=======
+import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
+>>>>>>> 13fd2b2717f969d6c19fba3158825bc3a2249f09
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule,],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
   emailOrUsername = '';
   password = '';
+<<<<<<< HEAD
   public error = '';
+=======
+
+  constructor(private routerModule: RouterModule, private router: Router) {}
+
+  goToAnotherPage(target:string): void {
+    this.router.navigate([target]);
+  }
+
+>>>>>>> 13fd2b2717f969d6c19fba3158825bc3a2249f09
   login() {
     alert(`E-Mail: ${this.emailOrUsername}\nPasswort: ${this.password}`);
   }
