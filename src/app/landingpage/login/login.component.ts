@@ -1,11 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-<<<<<<< HEAD
 import { AuthService } from '../../services/auth.service'; 
-=======
 import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
->>>>>>> 13fd2b2717f969d6c19fba3158825bc3a2249f09
 
 @Component({
   selector: 'app-login',
@@ -17,17 +14,14 @@ import { Router } from '@angular/router';
 export class LoginComponent {
   emailOrUsername = '';
   password = '';
-<<<<<<< HEAD
-  public error = '';
-=======
+  error = '';
 
-  constructor(private routerModule: RouterModule, private router: Router) {}
+  constructor(private routerModule: RouterModule, private router: Router, private authService: AuthService) {}
 
   goToAnotherPage(target:string): void {
     this.router.navigate([target]);
   }
 
->>>>>>> 13fd2b2717f969d6c19fba3158825bc3a2249f09
   login() {
     alert(`E-Mail: ${this.emailOrUsername}\nPasswort: ${this.password}`);
   }
@@ -36,7 +30,6 @@ export class LoginComponent {
     alert('Guest login erfolgreich!');
   }
 
-    constructor(private authService: AuthService) {}
   
     public async onLogin(emailOrUsername:string, password:string) {
       try {
