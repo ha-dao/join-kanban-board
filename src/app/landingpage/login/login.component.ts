@@ -1,12 +1,22 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+  email = '';
+  password = '';
 
+  login() {
+    alert(`E-Mail: ${this.email}\nPasswort: ${this.password}`);
+  }
+
+  guestLogin() {
+    alert('Guest login erfolgreich!');
+  }
 }

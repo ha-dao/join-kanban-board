@@ -8,12 +8,16 @@ import { AddTaskComponent } from './main-content/add-task/add-task.component';
 import { BoardComponent } from './main-content/board/board.component';
 import { TaskComponent } from './main-content/task/task.component';
 import { LoginComponent } from './landingpage/login/login.component';
+import { SignupComponent } from './landingpage/signup/signup.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/summary', pathMatch: 'full' },
+  // { path: '', redirectTo: '/summary', pathMatch: 'full' },
   {
-    path: '', component: SummaryComponent,
+    path: '', component: LoginComponent,
   },
+  // {
+  //   path: '', component: SignupComponent,
+  // },
   {
     path: 'summary', component: SummaryComponent,
   },
