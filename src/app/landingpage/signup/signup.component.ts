@@ -5,6 +5,7 @@ import { FeedbackServiceService } from '../../services/feedback.service';
 import { Userdata } from '../../interfaces/userdata';
 import { NgClass, CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service'; 
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-signup',
   standalone: true,
@@ -17,6 +18,7 @@ contactService = inject(ContactService)
 feedbackService = inject(FeedbackServiceService)
 invalidFields:string[]=[]
 privacyAccepted:boolean = false;
+showPrivacy = false;
 
 newUserData:Userdata={
   name: '',
@@ -35,7 +37,7 @@ name: string = '';
     console.log('klappt');
     
   }
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   public async onRegister() {    
     if(this.password === this.passwordConfirm){
@@ -56,10 +58,6 @@ name: string = '';
     return this.name.trim().length >= 2 && isEmailValid && isEmailUnique;
   }
   
-
-
-
-
 validateForm(field: string) {
   const addFieldIfInvalid = (condition: boolean, fieldName: string) => {
     if (condition && !this.invalidFields.includes(fieldName)) {
@@ -94,6 +92,18 @@ validateForm(field: string) {
     const isInvalid = this.passwordConfirm !== this.password;
     addFieldIfInvalid(isInvalid, 'confirmPassword');
   }
+}
+
+goToAnotherPage(target:string): void {
+  this.router.navigate([target]);
+}
+
+onBackClick(): void {
+  this.router.navigate(['/']);
+}
+
+closePrivacy() {
+  this.showPrivacy = false;
 }
   
 }
