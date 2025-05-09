@@ -28,7 +28,7 @@ export class SummaryComponent {
     const next = this.urgentTask()[0];
     return next ? next.date : null;
   });
-  
+
   nextUrgentText = computed(() => {
     return this.urgentTask().length > 0
       ? 'Upcoming Deadline'
@@ -43,17 +43,21 @@ export class SummaryComponent {
     if (!this.isLoaded()) return 0;
     return this.taskService.tasksList.filter((t) => t.status === 'Done').length;
   });
-  totalCount = computed(() => this.taskService.tasksList.length);
-  inProgressCount = computed(
-    () =>
-      this.taskService.tasksList.filter((t) => t.status === 'In Progress')
-        .length
-  );
-  awaitFeedbackCount = computed(
-    () =>
-      this.taskService.tasksList.filter((t) => t.status === 'Await Feedback')
-        .length
-  );
+  totalCount = computed(() => {
+    if (!this.isLoaded()) return 0;
+    return this.taskService.tasksList.length;
+  });
+  inProgressCount = computed(() => {
+    if (!this.isLoaded()) return 0;
+    return this.taskService.tasksList.filter((t) => t.status === 'In Progress')
+      .length;
+  });
+  awaitFeedbackCount = computed(() => {
+    if (!this.isLoaded()) return 0;
+    return this.taskService.tasksList.filter(
+      (t) => t.status === 'Await Feedback'
+    ).length;
+  });
 
   userName = signal('Sofia Müller');
   greeting = computed(() => {
