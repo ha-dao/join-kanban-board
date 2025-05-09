@@ -68,32 +68,44 @@ validateForm(field: string) {
       this.invalidFields = this.invalidFields.filter(f => f !== fieldName);
     }
   };
-
   if (field === 'name') {
-    const isInvalid = !this.name || this.name.trim().length < 2;
-    addFieldIfInvalid(isInvalid, 'name');
+    this.validateName(addFieldIfInvalid)
   }
-
   if (field === 'email') {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    const email = this.email;    
-    const isInvalid = !email || !emailRegex.test(email) ;
-    addFieldIfInvalid(isInvalid, 'email');
+    this.validateMail(addFieldIfInvalid)
   }
-
   if (field === 'password') {
-    const isInvalid = !this.password || this.password.length < 6;
-    addFieldIfInvalid(isInvalid, 'password');
-
-    if (this.newUserData.confirmPassword) {
-      this.validateForm('confirmPassword');
-    }
+    this.validatePassword(addFieldIfInvalid)
   }
-
   if (field === 'confirmPassword') {
-    const isInvalid = this.passwordConfirm !== this.password;
-    addFieldIfInvalid(isInvalid, 'confirmPassword');
+    this.validateConfirmedPassword(addFieldIfInvalid)
   }
 }
-  
+
+validateName(addFieldIfInvalid:Function){
+  const isInvalid = !this.name || this.name.trim().length < 2;
+addFieldIfInvalid(isInvalid, 'name');
+}
+
+validateMail(addFieldIfInvalid:Function){
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+  const email = this.email;    
+  const isInvalid = !email || !emailRegex.test(email) ;
+  addFieldIfInvalid(isInvalid, 'email');
+}
+
+validatePassword(addFieldIfInvalid:Function){
+  const isInvalid = !this.password || this.password.length < 6;
+  addFieldIfInvalid(isInvalid, 'password');
+
+  if (this.newUserData.confirmPassword) {
+    this.validateForm('confirmPassword');
+  }
+}
+
+validateConfirmedPassword(addFieldIfInvalid:Function){
+  const isInvalid = this.passwordConfirm !== this.password;
+  addFieldIfInvalid(isInvalid, 'confirmPassword');
+}
+
 }

@@ -46,12 +46,23 @@ export class addContactComponent {
   validateForm(field: string) {
     this.invalidFields = this.invalidFields.filter(f => f !== field);
     if(field === 'name'){
-    if (!this.contactService.contactData.name || this.contactService.contactData.name.length < 2) {
-      this.invalidFields.push('name');
-      
-    }
+    this.validateName()
   }
     if(field === 'email'){
+    this.validateEmail()
+  }
+  if( field === 'phone'){
+    this.validatePhone()
+  }
+  }
+
+  validateName(){
+    if (!this.contactService.contactData.name || this.contactService.contactData.name.length < 2) {
+      this.invalidFields.push('name');      
+    }
+  }
+
+  validateEmail(){
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     if (
       !this.contactService.contactData.email || 
@@ -64,14 +75,14 @@ export class addContactComponent {
       this.invalidFields.push('email');
     }
   }
-  if( field === 'phone'){
+  
+  validatePhone(){
     const phoneRegex = /^(?:\+?\d{1,4}[ \-]?)?(\(?\d{1,4}\)?[ \-]?)?[\d\- ]{5,15}$/;
     if (!this.contactService.contactData.phone || !phoneRegex.test(this.contactService.contactData.phone)) {
       this.invalidFields.push('phone');
       
       
     }
-  }
   }
 
   isFormValid(): boolean {

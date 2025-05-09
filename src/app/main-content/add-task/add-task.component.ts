@@ -74,9 +74,7 @@ export class AddTaskComponent {
     const taskToEdit = this.taskService.currentEditedTask();
     if (taskToEdit) {
       this.taskService.taskData = structuredClone(taskToEdit);
-    }
-  
-    
+    }    
     const isoDate = this.taskService.taskData.date;
     if (isoDate) {
       const { day, month, year } = this.inputDateService.parseISOToParts(isoDate);
@@ -266,14 +264,11 @@ export class AddTaskComponent {
     const sanitized = this.inputDateService.sanitizeInput(input);
     const withSlashes = this.inputDateService.addSlashes(sanitized);
     const limited = this.inputDateService.limitLength(withSlashes);
-
     this.displayDate = limited;
-
     const parsed = this.inputDateService.parseDateFromDisplay(limited);
     if (parsed) {
       const isoDate = this.inputDateService.formatDateISO(parsed.day, parsed.month, parsed.year);
       this.taskService.taskData.date = isoDate;
-
       if (this.hiddenDateInput) {
         this.hiddenDateInput.nativeElement.value = isoDate;
       }
