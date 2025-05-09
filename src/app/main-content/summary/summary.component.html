@@ -32,20 +32,23 @@
   
           <button class="buttoncard buttoncard-middle" routerLink="/board" routerLinkActive="active">
             <div class="middle-content">
-              <img src="assets\img\summary\Urgent.svg" alt="priority" />
+              <img src="assets/img/summary/Urgent.svg" alt="priority" />
               <div>
-                <h3>1</h3>
+                <h3>{{ urgentTasksCount() }}</h3>
                 <p>Urgent</p>
               </div>
               <div class="middle-divider"></div>
               <div class="deadline">
-                <p>October 16, 2022</p>
-                <small>Upcoming Deadline</small>
+                <p>
+                  {{ nextUrgentDate() ? (nextUrgentDate() | date: 'longDate') : '' }}
+                </p>
+                <small>
+                  {{ nextUrgentText() }}
+                </small>
               </div>
             </div>
           </button>
-  
-    
+        
           <div class="buttoncard-row" routerLink="/board" routerLinkActive="active">
             <button class="buttoncard">
               <div>

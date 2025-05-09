@@ -109,6 +109,7 @@ export class TaskService implements OnDestroy {
     this.taskData.status = task.status
   }
 
+isTasksLoaded = signal(false);
   snap() {
     let q = query(this.getTasksRef(), orderBy('priority'));
     this.unsubTasksList = onSnapshot(q, (list) => {
@@ -119,11 +120,10 @@ export class TaskService implements OnDestroy {
       
         this.fillBoardTaskLists();
         this.isBoardListFull = true;
-      
+        this.isTasksLoaded.set(true);
     });
-
   }
-
+  
   async addTask(task: Task) {
     task.status = this.newTaskStatus;
     task.dropDownOpen = false;
@@ -198,4 +198,5 @@ export class TaskService implements OnDestroy {
     };
     return categoryMap[category] || '';
   }
+  
 }
