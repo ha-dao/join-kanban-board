@@ -6,7 +6,7 @@
     <h1>Sign up</h1>
     </div>
     <div class="divider"></div>
-    <form #form="ngForm" (ngSubmit)="onRegister()">
+    <form #form="ngForm" (ngSubmit)="test()">
       <input type="text" placeholder="Name" required
       name="name"
      [(ngModel)]="name"
@@ -19,7 +19,7 @@
     <input type="email" placeholder="Email" required
      name="email"
      [(ngModel)]="email"
-     (blur)="validateForm('email')"
+     (ngModelChange)="validateForm('email')"
      [class.invalid]="invalidFields.includes('email')"
 
      />
@@ -28,7 +28,7 @@
     <input type="password" placeholder="Password" required
     name="password"
     [(ngModel)]="password"
-    (blur)="validateForm('password')"
+    (ngModelChange)="validateForm('password')"
     [class.invalid]="invalidFields.includes('password')"
      />
      <span [ngClass]="{visible: invalidFields.includes('password'), invisible: !invalidFields.includes('password')}">
@@ -37,7 +37,7 @@
     <input type="password" placeholder="Confirm Password" required
     name="confirmPassword"
     [(ngModel)]="passwordConfirm"
-    (blur)="validateForm('confirmPassword')"
+    (ngModelChange)="validateForm('confirmPassword')"
     [class.invalid]="invalidFields.includes('confirmPassword')"
      />
      <span [ngClass]="{visible: invalidFields.includes('confirmPassword'), invisible: !invalidFields.includes('confirmPassword')}">
@@ -49,7 +49,7 @@
         >I accept the <a href="/.....">Privacy policy</a></label
       >
     </div>
-    <button type="submit" [disabled]="!form.valid || invalidFields.length > 0 || !privacyAccepted">Sign up</button>
+    <button class="create-button" type="submit" [disabled]="!privacyAccepted || invalidFields.length > 0 || !isFormValid ">Sign up</button>
     <div class="footer">
       <a href="/.....">Privacy Policy</a>
       <a href="/.....">Legal notice</a>

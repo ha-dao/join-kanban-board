@@ -110,3 +110,16 @@ align-items: center;
 .footer a:hover {
   color: #29ABE2;
 }
+
+.visible {
+  display: inline;
+  color: red;
+}
+
+.invisible {
+  display: none;
+}
+
+input.invalid {
+  border: 1px solid red;
+}

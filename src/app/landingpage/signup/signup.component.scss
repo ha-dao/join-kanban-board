@@ -88,13 +88,13 @@
         }
       }
 
-      button[type='submit'] {
-        @include button-base($primary-color, $white, $primary-color, 700);
+      // button[type='submit'] {
+      //   @include button-base($primary-color, $white, $primary-color, 700);
 
-        &:hover {
-          @include button-hover($hover-color, $hover-color);
-        }
-      }
+      //   &:hover {
+      //     @include button-hover($hover-color, $hover-color);
+      //   }
+      // }
     }
   }
 }

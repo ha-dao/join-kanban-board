@@ -13,13 +13,13 @@ import { SignupComponent } from './landingpage/signup/signup.component';
 export const routes: Routes = [
   // { path: '', redirectTo: '/summary', pathMatch: 'full' },
   {
-    path: '', component: SignupComponent,
+    path: '', component: LoginComponent,
   },
   // {
   //   path: '', component: LoginComponent,
   // },
   {
-    path: '', component: SignupComponent,
+    path: 'sign-up', component: SignupComponent,
   },
   {
     path: 'summary', component: SummaryComponent,

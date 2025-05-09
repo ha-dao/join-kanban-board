@@ -3,7 +3,7 @@ import { FormsModule, NgModel } from '@angular/forms';
 import { ContactService } from '../../services/contact.service';
 import { FeedbackServiceService } from '../../services/feedback.service';
 import { Userdata } from '../../interfaces/userdata';
-import { NgClass } from '@angular/common';
+import { NgClass, CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service'; 
 @Component({
   selector: 'app-signup',
@@ -31,6 +31,10 @@ name: string = '';
   passwordConfirm = '';
   public error = '';
 
+  test(){
+    console.log('klappt');
+    
+  }
   constructor(private authService: AuthService) {}
 
   public async onRegister() {    
@@ -44,7 +48,14 @@ name: string = '';
     }
   }
 
-
+  get isFormValid(): boolean {
+    const isEmailValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(this.email);
+    const isEmailUnique = !this.contactService.contactList.some(
+      contact => contact.email === this.email
+    );
+    return this.name.trim().length >= 2 && isEmailValid && isEmailUnique;
+  }
+  
 
 
 

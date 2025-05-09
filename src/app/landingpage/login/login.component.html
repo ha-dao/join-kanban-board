@@ -1,8 +1,8 @@
 <div class="header">
-  <a href=""><img src="../../../assets/img/login/joinLogo.png" alt="JOIN Logo"/></a>
+  <a routerLink="/"><img src="assets/img/login/joinLogo.png" alt="JOIN Logo"/></a>
   <div class="signup-section">
   <p>Not a Join user?</p>
-  <button class="login-btn" (click)="login()">Sign up</button>
+  <a routerLink="/sign-up"><button class="login-btn">Sign up</button></a>
 </div>
 </div>
 
@@ -13,15 +13,25 @@
   <form action="">
     <div class="input-container">
       <img src="assets/img/login/mail.svg" alt="Email icon">
-      <input type="email" placeholder="Email" [(ngModel)]="emailOrUsername" name="email" />
+      <input type="email" placeholder="Email"
+       [(ngModel)]="emailOrUsername"
+        name="email"
+        (blur)="validateMail('email')"
+         />
+         <span [ngClass]="{visible: invalidFields.includes('email'), invisible: !invalidFields.includes('email')}">Your email seems invalid</span>
     </div>
     <div class="input-container">
       <img src="assets/img/login/lock.svg" alt="Password icon">
-      <input type="password" placeholder="Password" [(ngModel)]="password" name="password" />
+      <input type="password" placeholder="Password"
+       [(ngModel)]="password"
+        name="password"
+
+         />
+         <span [ngClass]="{visible: invalidFields.includes('email'), invisible: !invalidFields.includes('email')}">Password for this Email is incorrect</span>
     </div>
     
     <div class="buttons">
-      <button class="login-btn" (click)="onLogin('nouira@gmail.com', 'soufiane')">Log in</button>
+      <button class="create-button" (click)="onLogin()" [disabled]="!isFormValid ">Log in</button>
       <button class="guest-login-btn" (click)="guestLogin()">Guest Log in</button>
     </div>
   </form>
