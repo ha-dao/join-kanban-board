@@ -1,7 +1,11 @@
 
 <section class="sign-up-container">
+  <div class="content-wrapper">
+    <div class="form-header">
     <img src="assets/img/header/help-vector.svg" alt="Back arrow">
     <h1>Sign up</h1>
+    </div>
+    <div class="divider"></div>
     <form #form="ngForm" (ngSubmit)="onRegister()">
       <input type="text" placeholder="Name" required
       name="name"
