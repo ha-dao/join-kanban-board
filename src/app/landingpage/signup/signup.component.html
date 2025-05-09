@@ -1,19 +1,50 @@
 <section class="sign-up-container">
     <img src="assets/img/header/help-vector.svg" alt="Back arrow">
     <h1>Sign up</h1>
-  <form action="">
-    <input type="text" placeholder="Name" required />
-    <input type="email" placeholder="Email" required />
-    <input type="password" placeholder="Password" required />
-    <input type="password" placeholder="Confirm Password" required />
+    <form #form="ngForm" (ngSubmit)="createUser()">
+      <input type="text" placeholder="Name" required
+      name="name"
+     [(ngModel)]="newUserData.name"
+     (ngModelChange)="validateForm('name')"
+     
+     />
+     <span [ngClass]="{visible: invalidFields.includes('name'), invisible: !invalidFields.includes('name')}">Please enter a name (at least 2 characters)</span>
 
+
+    <input type="email" placeholder="Email" required
+     name="email"
+     [(ngModel)]="newUserData.email"
+     (blur)="validateForm('email')"
+     [class.invalid]="invalidFields.includes('email')"
+
+     />
+     <span [ngClass]="{visible: invalidFields.includes('email'), invisible: !invalidFields.includes('email')}">Your email seems invalid or is already existing</span>
+
+    <input type="password" placeholder="Password" required
+    name="password"
+    [(ngModel)]="newUserData.password"
+    (blur)="validateForm('password')"
+    [class.invalid]="invalidFields.includes('password')"
+     />
+     <span [ngClass]="{visible: invalidFields.includes('password'), invisible: !invalidFields.includes('password')}">
+      Password must be at least 6 characters
+    </span>
+    <input type="password" placeholder="Confirm Password" required
+    name="confirmPassword"
+    [(ngModel)]="newUserData.confirmPassword"
+    (blur)="validateForm('confirmPassword')"
+    [class.invalid]="invalidFields.includes('confirmPassword')"
+     />
+     <span [ngClass]="{visible: invalidFields.includes('confirmPassword'), invisible: !invalidFields.includes('confirmPassword')}">
+      Passwords do not match
+    </span>
     <div class="check-box">
-      <input type="checkbox" id="privacy" required />
+      <input type="checkbox" id="privacy" required #privacyCheckbox [(ngModel)]="privacyAccepted" name="privacy" />
       <label for="privacy"
         >I accept the <a href="/.....">Privacy policy</a></label
       >
     </div>
-    <button type="submit">Sign up</button>
+    <button type="submit" [disabled]="!form.valid || invalidFields.length > 0 || !privacyAccepted">Sign up</button>
     <div class="footer">
       <a href="/.....">Privacy Policy</a>
       <a href="/.....">Legal notice</a>

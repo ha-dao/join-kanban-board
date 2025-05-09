@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component, inject } from '@angular/core';
+import { FormsModule, NgModel } from '@angular/forms';
+import { FeedbackServiceService } from '../../services/feedback.service';
+import { ContactService } from '../../services/contact.service';
 
 @Component({
   selector: 'app-login',
@@ -9,6 +11,8 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './login.component.scss'
 })
 export class LoginComponent {
+  feedbackService= inject(FeedbackServiceService)
+  contactService= inject(ContactService)
   email = '';
   password = '';
 
