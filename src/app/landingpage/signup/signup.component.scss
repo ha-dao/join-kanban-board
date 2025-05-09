@@ -1,0 +1,119 @@
+@import './../../styles/variables.scss';
+@import './../../styles/mixins.scss';
+@import './../../styles/buttons.scss';
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  width: 100%;
+}
+
+.sign-up-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .content-wrapper {
+    max-width: 652px;
+    height: 100%;
+    margin: 100px auto;
+    padding: 48px 115px;
+    border-radius: 30px;
+    background: $white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    position: relative;
+
+    .form-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-bottom: 24px;
+
+      img {
+        position: absolute;
+        left: 0;
+        cursor: pointer;
+        height: 24px;
+      }
+
+      h1 {
+        margin: 0 auto;
+        font-size: 32px;
+      }
+    }
+
+    .divider {
+      height: 4px;
+      background: $hover-color;
+      width: 40%;
+      margin: 0 auto 24px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+
+      input[type="text"],
+      input[type="email"],
+      input[type="password"] {
+        display: block;
+        width: 100%;
+        padding: 12px;
+        margin-bottom: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+      }
+
+      .check-box {
+        margin: 16px 0 32px;
+        text-align: left;
+
+        label {
+          font-size: 14px;
+
+          a {
+            color: $hover-color;
+            text-decoration: none;
+
+            &:hover {
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+
+      button[type='submit'] {
+        @include button-base($primary-color, $white, $primary-color, 700);
+
+        &:hover {
+          @include button-hover($hover-color, $hover-color);
+        }
+      }
+    }
+  }
+}
+
+.footer {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+  gap: 35px;
+  font-size: 14px;
+
+  a {
+    color: #a8a8a8;
+    text-decoration: none;
+    transition: color 0.2s ease;
+    cursor: pointer;
+
+    &:hover {
+      color: $hover-color;
+    }
+  }
+}
