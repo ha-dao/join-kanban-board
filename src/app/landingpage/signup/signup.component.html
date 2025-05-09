@@ -1,10 +1,10 @@
 <section class="sign-up-container">
     <img src="assets/img/header/help-vector.svg" alt="Back arrow">
     <h1>Sign up</h1>
-    <form #form="ngForm" (ngSubmit)="createUser()">
+    <form #form="ngForm" (ngSubmit)="onRegister()">
       <input type="text" placeholder="Name" required
       name="name"
-     [(ngModel)]="newUserData.name"
+     [(ngModel)]="name"
      (ngModelChange)="validateForm('name')"
      
      />
@@ -13,7 +13,7 @@
 
     <input type="email" placeholder="Email" required
      name="email"
-     [(ngModel)]="newUserData.email"
+     [(ngModel)]="email"
      (blur)="validateForm('email')"
      [class.invalid]="invalidFields.includes('email')"
 
@@ -22,7 +22,7 @@
 
     <input type="password" placeholder="Password" required
     name="password"
-    [(ngModel)]="newUserData.password"
+    [(ngModel)]="password"
     (blur)="validateForm('password')"
     [class.invalid]="invalidFields.includes('password')"
      />
@@ -31,7 +31,7 @@
     </span>
     <input type="password" placeholder="Confirm Password" required
     name="confirmPassword"
-    [(ngModel)]="newUserData.confirmPassword"
+    [(ngModel)]="passwordConfirm"
     (blur)="validateForm('confirmPassword')"
     [class.invalid]="invalidFields.includes('confirmPassword')"
      />

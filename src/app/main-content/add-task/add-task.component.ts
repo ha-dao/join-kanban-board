@@ -10,11 +10,13 @@ import { Task } from '../../interfaces/task';
 import { OverlayService } from '../../services/overlay.service';
 import { OverlayComponent } from '../contact/overlay/overlay.component';
 import { InputdateService } from '../../services/inputdate.service';
+import { LoginComponent } from "../../landingpage/login/login.component";
+import { SignupComponent } from '../../landingpage/signup/signup.component';
 
 @Component({
   selector: 'app-add-task',
   standalone: true,
-  imports: [NgClass, CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [NgClass, CommonModule, FormsModule, ReactiveFormsModule, LoginComponent, SignupComponent],
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss',
 })

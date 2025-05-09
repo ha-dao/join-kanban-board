@@ -2,43 +2,43 @@
 @import './../../styles/mixins.scss';
 @import './../../styles/buttons.scss';
 
-@mixin fontStyle($size, $weight, $color, $transform: none) {
-  font-size: $size;
-  font-weight: $weight;
-  color: $color;
-  text-transform: $transform;
-}
-
-@mixin button-base($bg, $color, $border, $weight) {
-  background-color: $bg;
-  @include fontStyle(15px, $weight, $color);
-  padding: 15px 24px;
-  border: 2px solid $border;
-  border-radius: 8px;
-  transition: all 200ms ease;
-  display: inline-flex;
+.header {
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  cursor: pointer;
+  padding: 20px;
+  width: 100%;
 }
 
-@mixin button-hover($bg, $border, $shadow: true) {
-  background-color: $bg;
-  border: 2px solid $border;
-  @if $shadow {
-    box-shadow: 0 4px 4px 0 rgba(0,0,0,0.25);
-  }
+.signup-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.signup-section p {
+  margin: 0;
+}
+
+.logo-container {
+  max-width: 100px;
 }
 
 .login-container {
-  max-width: 652px;
-  margin: 100px auto;
-  padding: 48px 115px;
-  border-radius: 30px;
-  background: $white;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-  text-align: center;
+width: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+  .content-wrapper {
+    max-width: 652px;
+    margin: 100px auto;
+    padding: 48px 115px;
+    border-radius: 30px;
+    background: $white;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+    position: relative; 
+  }
 
   h1 { margin-bottom: 16px; }
 
@@ -77,20 +77,36 @@
     height: 48px;
     margin: 32px auto 0;
 
-    .login-btn {
-      @include button-base($primary-color, $white, $primary-color, 700);
+    .login-btn, .guest-login-btn {
       flex: 1;
-      &:hover {
-        @include button-hover($hover-color, $hover-color);
-      }
-    }
-    .guest-login-btn {
-      @include button-base(transparent, $primary-color, $primary-color, 400);
-      flex: 1;
-      &:hover {
-        color: $hover-color;
-        @include button-hover(transparent, $hover-color, false);
-      }
     }
   }
+}
+
+.footer {
+  width: 100%;
+  max-width: 1920px;
+  padding: 20px;
+  height: 48px;
+  position: fixed; 
+  bottom: 20px;
+  left: 58%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  gap: 35px; 
+}
+
+.footer a {
+  color: #A8A8A8;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
+
+.footer a:hover {
+  color: #29ABE2;
 }

@@ -4,7 +4,7 @@ import { ContactService } from '../../services/contact.service';
 import { FeedbackServiceService } from '../../services/feedback.service';
 import { Userdata } from '../../interfaces/userdata';
 import { NgClass } from '@angular/common';
-
+import { AuthService } from '../../services/auth.service'; 
 @Component({
   selector: 'app-signup',
   standalone: true,
@@ -25,60 +25,29 @@ newUserData:Userdata={
   confirmPassword:''
 }
 
-createUser(){
-  this.checkForExistingUser()
+name: string = '';
+  email = '';
+  password = '';
+  passwordConfirm = '';
+  public error = '';
 
-this.feedbackService.show('You Signed up!')
-}
+  constructor(private authService: AuthService) {}
 
-checkForExistingUser(){
+  public async onRegister() {    
+    if(this.password === this.passwordConfirm){
+      try {
+        await this.authService.register(this.email, this.password, this.name);
+        this.feedbackService.show('Registration successfull')
+      } catch (err: any) {
+        this.error = err.message;
+      }
+    }
+  }
 
-}
 
-// validateForm(field: string) {  
-//   this.invalidFields = this.invalidFields.filter(f => f !== field);
-//   if(field === 'name'){
-//     this.validateName()  
-// }
-//   if(field === 'email'){
-//   this.validateMail()
-// }
-//   if(field === 'password' || 'confirmPassword'){
-//     this.validatePassword()
-//   }
-// }
 
-// validateName(){
-//   if (!this.newUserData.name || this.newUserData.name.length < 2) {
-//     this.invalidFields.push('name');    
-//   }
-// }
 
-// validateMail(){
-//   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-//   if (
-//     !this.newUserData.email || 
-//     !emailRegex.test(this.newUserData.email) || 
-//     (emailRegex.test(this.newUserData.email) &&
-//      this.contactService.contactList.some(
-//        contact => contact.email === this.contactService.contactData.email
-//      ))
-//   ) {
-//     this.invalidFields.push('email');
-//   }
-// }
 
-// validatePassword(){
-//   if (!this.newUserData.password || this.newUserData.password.length < 6) {
-//     this.invalidFields.push('password');
-//   }
-//   if (
-//     !this.newUserData.confirmPassword ||
-//     this.newUserData.confirmPassword !== this.newUserData.password
-//   ) {
-//     this.invalidFields.push('confirmPassword');
-// }
-// }
 
 validateForm(field: string) {
   const addFieldIfInvalid = (condition: boolean, fieldName: string) => {
@@ -90,19 +59,19 @@ validateForm(field: string) {
   };
 
   if (field === 'name') {
-    const isInvalid = !this.newUserData.name || this.newUserData.name.trim().length < 2;
+    const isInvalid = !this.name || this.name.trim().length < 2;
     addFieldIfInvalid(isInvalid, 'name');
   }
 
   if (field === 'email') {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    const email = this.newUserData.email;    
+    const email = this.email;    
     const isInvalid = !email || !emailRegex.test(email) ;
     addFieldIfInvalid(isInvalid, 'email');
   }
 
   if (field === 'password') {
-    const isInvalid = !this.newUserData.password || this.newUserData.password.length < 6;
+    const isInvalid = !this.password || this.password.length < 6;
     addFieldIfInvalid(isInvalid, 'password');
 
     if (this.newUserData.confirmPassword) {
@@ -111,9 +80,9 @@ validateForm(field: string) {
   }
 
   if (field === 'confirmPassword') {
-    const isInvalid = this.newUserData.confirmPassword !== this.newUserData.password;
+    const isInvalid = this.passwordConfirm !== this.password;
     addFieldIfInvalid(isInvalid, 'confirmPassword');
   }
 }
-
+  
 }
