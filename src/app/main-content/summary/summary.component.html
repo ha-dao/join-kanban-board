@@ -1,84 +1,84 @@
-<div>
-    <div class="headline-container">
-      <h1>Join 360</h1>
-      <div class="divider"></div>
-      <h2>Key Metrics at a Glance</h2>
-    </div>
-  
-    <div class="containers">
-      <div>
-        <div class="buttons">
+<section>
+  <div class="headline-container">
+    <h1>Join 360</h1>
+    <div class="divider"></div>
+    <p class="subtitle">Key Metrics at a Glance</p>
+  </div>
 
-          <div class="buttoncard-row">
-            <button class="buttoncard" routerLink="/board" routerLinkActive="active">
-              <img class="icon-default" src="assets/img/summary/pencil.svg" alt="pencil icon" />
-              <img class="icon-hover" src="assets/img/summary/pencil-light.svg" alt="pencil icon" />
-              <div>
-                <h3> {{ todoCount() }} </h3>
-                <p>To-do</p>
-              </div>
-            </button>
-  
-            <button class="buttoncard" routerLink="/board" routerLinkActive="active">
-              <img class="icon-default" src="assets\img\summary\checked.svg" alt="checked icon" />
-              <img class="icon-hover" src="assets/img/summary/checked-light.svg" alt="checked icon" />
-              <div>
-                <h3> {{ doneCount() }} </h3>
-                <p>Done</p>
-              </div>
-            </button>
-            
-          </div>
-  
-          <button class="buttoncard buttoncard-middle" routerLink="/board" routerLinkActive="active">
-            <div class="middle-content">
+  <div class="containers">
+    <div>
+      <div class="buttons">
+        <div class="buttoncard-row">
+          <button class="buttoncard" routerLink="/board" routerLinkActive="active">
+            <img class="icon-default" src="assets/img/summary/pencil.svg" alt="pencil icon" />
+            <img class="icon-hover" src="assets/img/summary/pencil-light.svg" alt="pencil icon" />
+            <div>
+              <h3>{{ todoCount() }}</h3>
+              <p>To-do</p>
+            </div>
+          </button>
+
+          <button class="buttoncard" routerLink="/board" routerLinkActive="active">
+            <img class="icon-default" src="assets\img\summary\checked.svg" alt="checked icon" />
+            <img class="icon-hover" src="assets/img/summary/checked-light.svg" alt="checked icon" />
+            <div>
+              <h3>{{ doneCount() }}</h3>
+              <p>Done</p>
+            </div>
+          </button>
+        </div>
+
+        <button class="buttoncard buttoncard-middle" routerLink="/board" routerLinkActive="active">
+          <div class="middle-content">
+            <div>
               <img src="assets/img/summary/Urgent.svg" alt="priority" />
               <div>
                 <h3>{{ urgentTasksCount() }}</h3>
                 <p>Urgent</p>
               </div>
-              <div class="middle-divider"></div>
-              <div class="deadline">
-                <p>
-                  {{ nextUrgentDate() ? (nextUrgentDate() | date: 'longDate') : '' }}
-                </p>
-                <small>
-                  {{ nextUrgentText() }}
-                </small>
-              </div>
+            </div>
+            <div class="middle-divider"></div>
+            <div class="deadline">
+              <p>
+                {{ nextUrgentDate() ? (nextUrgentDate() | date : 'longDate') : '' }}
+              </p>
+              <small>
+                {{ nextUrgentText() }}
+              </small>
+            </div>
+          </div>
+        </button>
+
+        <div class="buttoncard-row" routerLink="/board" routerLinkActive="active">
+          <button class="buttoncard">
+            <div>
+              <h3>{{ totalCount() }}</h3>
+              <p>Tasks in Board</p>
             </div>
           </button>
-        
-          <div class="buttoncard-row" routerLink="/board" routerLinkActive="active">
-            <button class="buttoncard">
-              <div>
-                <h3> {{ totalCount() }} </h3>
-                <p>Tasks in Board</p>
-              </div>
-            </button>
-  
-            <button class="buttoncard">
-              <div>
-                <h3> {{ inProgressCount() }} </h3>
-                <p>Tasks In Progress</p>
-              </div>
-            </button>
-  
-            <button class="buttoncard">
-              <div>
-                <h3> {{ awaitFeedbackCount() }} </h3>
-                <p>Awaiting Feedback</p>
-              </div>
-            </button>
-          </div>
-        </div>
-      </div>
-  
-      <div class="right">
-        <div class="greeting">
-          <h4> {{ greeting() }} </h4>
-          <h3> {{ userName() }} </h3>
+
+          <button class="buttoncard">
+            <div>
+              <h3>{{ inProgressCount() }}</h3>
+              <p>Tasks In Progress</p>
+            </div>
+          </button>
+
+          <button class="buttoncard">
+            <div>
+              <h3>{{ awaitFeedbackCount() }}</h3>
+              <p>Awaiting Feedback</p>
+            </div>
+          </button>
         </div>
       </div>
     </div>
+
+    <div class="right">
+      <div class="greeting">
+        <h4>{{ greeting() }}</h4>
+        <h3>{{ userName() }}</h3>
+      </div>
+    </div>
   </div>
+</section>

@@ -1,66 +1,49 @@
-.headline-container {
-    display: flex;
-    align-items: center;
-    height: 73px;
-    gap: 16px;
-    margin-top: 110px;
-    margin-bottom: 56px;
-    margin-left: 96px;
+@import './../../styles/variables.scss';
+@import './../../styles/mixins.scss';
+@import './../../styles/buttons.scss';
+
+section {
+  @include displayFlex(flex, column, auto, auto, 40px, nowrap);
+  padding: 64px;
+  .headline-container {
+    @include displayFlex(flex, row, flex-start, center, 40px, nowrap);
+    .divider {
+      width: 3px;
+      height: 59px;
+      border-radius: 12px;
+      background-color: #29abe2;
+    }
   }
-  
-  .headline-container h1 {
-    font-size: 61px !important;
-    padding-right:30px;
-  }
-  
-  .headline-container .divider {
-    width: 2px;
-    height: 59px;
-    background-color: #29ABE2;
-  }
-  
-  .headline-container h2 {
-    font-weight: 400;
-    font-size: 27px;
-    padding-left: 30px;
-    color: #2A3647;
-  }
+}
 
 .containers {
-display: flex;
-justify-content: space-around;
-align-items: center;
+  @include displayFlex(flex, row, flex-start, center, 64px, nowrap);
 }
 
 .right {
-  display: flex;
-  align-items: flex-start;
-  justify-content: flex-end;
+  @include displayFlex(flex, row, flex-end, flex-start, 0, nowrap);
 
   .greeting {
-    text-align: right;
+    text-align: left;
   }
-  h3{
-    color: #29ABE2;
+  h3 {
+    color: #29abe2;
     font-size: 64px;
   }
-  h4{
+  h4 {
     font-size: 64px;
-    color: #2A3647;
+    color: #2a3647;
   }
 }
 
 .buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 28px;
+  @include displayFlex(flex, column, auto, auto, 28px, nowrap);
   width: 560px;
   height: 562px;
 }
 
 .buttoncard-row {
-  display: flex;
-  gap: 32px;
+  @include displayFlex(flex, row, auto, auto, 32px, nowrap);
 }
 
 .buttoncard {
@@ -68,13 +51,12 @@ align-items: center;
   border: none;
   border-radius: 12px;
   padding: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 18px;
+  @include displayFlex(flex, row, center, center, 18px, nowrap);
   cursor: pointer;
   transition: all 0.3s ease;
-
+  background-color: $white;
+  -webkit-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
   img {
     height: 69px;
   }
@@ -90,37 +72,31 @@ align-items: center;
   }
 
   &:hover {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     transform: scale(1.05);
-    background-color: #2A3647;
-    h3,p{
-      color:#FFFFFF;
+    background-color: #2a3647;
+    h3,
+    p {
+      color: #ffffff;
     }
   }
-
 }
 
 .buttoncard-middle {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  
+  @include displayFlex(flex, row, center, auto, 0, nowrap);
+
   .middle-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    @include displayFlex(flex, row, center, center, 64px, nowrap);
     width: 560px;
     height: 168px;
-    
-    > div {
-      display: flex;
-      flex-direction: column;
-      align-items: flex-start;
+
+    > div:nth-child(1) {
+      @include displayFlex(flex, row, auto, center, 24px, nowrap);
     }
 
     .deadline {
-      text-align: right;
-
+      @include displayFlex(flex, column, flex-start, flex-start, 8px, nowrap);
+      text-align: left;
       p {
         font-size: 21px;
         font-weight: bold;
@@ -129,7 +105,7 @@ align-items: center;
 
       small {
         font-size: 16px;
-        color: #2A3647;
+        color: #666;
       }
     }
 
@@ -141,12 +117,17 @@ align-items: center;
   }
 
   &:hover {
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
     transform: scale(1.05);
-    background-color: #2A3647;
-
-    h3,p{
-      color: #FFFFFF;
+    background-color: #2a3647;
+    .middle-content {
+      .deadline {
+        h3,
+        p,
+        small {
+          color: $white;
+        }
+      }
     }
   }
 }
@@ -161,4 +142,120 @@ align-items: center;
 
 .buttoncard:hover .icon-hover {
   display: block;
+}
+
+@media (max-width: 1280px) {
+  section {
+    padding: 0;
+    .headline-container {
+      @include displayFlex(flex, column, flex-start, flex-start, 8px, nowrap);
+      .divider {
+        width: 80px;
+        height: 2px;
+        order: 3;
+      }
+    }
+  }
+
+  .containers {
+    @include displayFlex(flex, column, flex-start, flex-start, 8px, nowrap);
+    .right {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      @include displayFlex(flex, column, center, center, 0, nowrap);
+      opacity: 1;
+      background-color: $white;
+      animation: greetingOverlay 2s forwards;
+      z-index: 999;
+      .greeting {
+        text-align: center;
+        h4,
+        h3 {
+          font-size: clamp(16px, 8vw, 32px);
+        }
+      }
+    }
+    @keyframes greetingOverlay {
+      0% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 1;
+      }
+      100% {
+        opacity: 0;
+        z-index: -1;
+      }
+    }
+  }
+
+  .buttons {
+    width: 100%;
+    height: 100%;
+  }
+
+  .buttoncard {
+    img {
+      height: 6vw;
+      min-height: 40px;
+    }
+    h3 {
+      font-size: clamp(24px, 8vw, 61px);
+      margin: 0;
+    }
+  }
+
+  .buttoncard-middle {
+    .middle-content {
+      width: 100%;
+      height: auto;
+      .deadline {
+        p,
+        small {
+          font-size: clamp(14px, 2.3vw, 18px);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .containers {
+    .right {
+      z-index: 99;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .containers {
+    > div {
+      width: 100%;
+      .buttons {
+        width: 100%;
+        gap: 8px;
+        .buttoncard-row {
+          flex-direction: row;
+          flex: 1 0 50%;
+          flex-wrap: wrap;
+          gap: 8px;
+        }
+      }
+      .buttoncard-middle {
+        .middle-content {
+          gap: 16px;
+          > div {
+            gap: 8px;
+          }
+        }
+      }
+    }
+  }
+
+  .buttoncard {
+    padding: 10px;
+  }
 }
