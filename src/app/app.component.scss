@@ -1,3 +1,5 @@
+@import './styles/variables.scss';
+
 section{
     height: 100vh;
     position: relative;
@@ -54,10 +56,6 @@ app-sidebar {
     transform: translate(-50%, -50%) scale(1.05);
   }
 }
-
-
-
-
 
 @media (max-width: 768px) {
   app-header{
