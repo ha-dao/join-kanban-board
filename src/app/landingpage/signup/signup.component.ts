@@ -44,8 +44,10 @@ name: string = '';
         if(!this.checkIfMailinUseInContact()){
           this.contactService.addContact({name:this.name,email: this.email, phone: 'Not existing yet'})
         }
-        this.authService.login(this.email, this.password )       
+        this.authService.login(this.email, this.password )  
+        this.authService.UserLoggedIn = this.authService.getUsername(this.email)     
         this.router.navigate(['/summary']);
+        localStorage.setItem('loggedIn', this.authService.UserLoggedIn)
       } catch (err: any) {
         this.error = err.message;
       }

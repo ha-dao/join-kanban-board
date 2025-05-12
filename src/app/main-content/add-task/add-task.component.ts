@@ -16,7 +16,7 @@ import { SignupComponent } from '../../landingpage/signup/signup.component';
 @Component({
   selector: 'app-add-task',
   standalone: true,
-  imports: [NgClass, CommonModule, FormsModule, ReactiveFormsModule, LoginComponent, SignupComponent],
+  imports: [NgClass, CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss',
 })
@@ -36,6 +36,7 @@ export class AddTaskComponent {
       },
       { allowSignalWrites: true }
     );
+    
   }
 
   contactService = inject(ContactService);
@@ -121,7 +122,6 @@ export class AddTaskComponent {
   }
   setAssignedTo(item: Contact) {
     const index = this.taskService.tempAssignedTo.findIndex((c) => c.id === item.id);
-
     if (item.selected) {
       if (index === -1) {
         this.taskService.tempAssignedTo.push(item);
@@ -179,17 +179,14 @@ export class AddTaskComponent {
     this.taskService.tempAssignedTo.forEach((c) => this.taskService.taskData.assignedTo!.push(c));
     this.taskService.taskData.subtasks = this.taskService.currentSubtasks;
     if (this.overlayService.setTemplate() == 'add-task') {
-      if(this.taskService.taskData.priority !== 'Urgent' || 'Medium' || 'Low'){
+      if(this.taskService.taskData.priority == ''){
         this.taskService.taskData.priority = 'Medium'
       }
       this.taskService.addTask(this.taskService.taskData);
     } else if (this.overlayService.setTemplate() == 'edit-task') {
       this.taskService.updateTask(this.taskService.taskData.id, this.taskService.taskData);
     }
-    this.resetSubtasks();
-    this.setInputsUntouched();
-    this.overlayService.closeOverlay();
-    this.router.navigate(['/board'])
+    this.resetExtrasTask()    
   }
 
   setInputsUntouched() {
@@ -197,9 +194,7 @@ export class AddTaskComponent {
     if (this.taskDate) this.taskDate.control.markAsUntouched();
     if (this.categoryField) this.categoryField.control.markAsUntouched();
   }
-  resetForm() {
-    this.resetContacts();
-    this.setInputsUntouched();
+  resetForm() {    
     this.taskService.clickedButton.set('Medium');
     this.taskService.taskData = {
       id: '',
@@ -213,8 +208,22 @@ export class AddTaskComponent {
       status: '',
       dropDownOpen: false
     };
+    this.resetExtrasForm()
+   
+  }
+
+  resetExtrasForm(){
     this.taskService.tempAssignedTo = [];
     this.clearDate();
+    this.resetContacts();
+    this.setInputsUntouched();
+  }
+
+  resetExtrasTask(){
+    this.resetSubtasks();
+    this.setInputsUntouched();
+    this.overlayService.closeOverlay();
+    this.router.navigate(['/board'])
   }
 
   resetContacts() {

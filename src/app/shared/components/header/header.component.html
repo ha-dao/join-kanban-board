@@ -20,7 +20,7 @@
       />
     </a>
 
-    <div class="profile" (click)="toggleMenu($event)">G</div>
+    <div class="profile" (click)="toggleMenu($event)">{{contactService.getFirstAndLastNameFirstLetter(this.authService.UserLoggedIn!)}}</div>
 
     <div class="dropdown-menu" [class.active]="showMenu" #menuRef>
       <a
@@ -46,7 +46,7 @@
       </a>
       <a
         class="menu-item"
-        (click)="closeMenu()"
+        (click)="closeMenu(); this.authService.logout()"
       >
         Log out
       </a>

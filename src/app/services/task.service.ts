@@ -126,6 +126,7 @@ isTasksLoaded = signal(false);
   
   async addTask(task: Task) {
     task.status = this.newTaskStatus;
+    task.priority= this.taskData.priority
     task.dropDownOpen = false;
     await addDoc(this.getTasksRef(), task)
       .catch((err) => {

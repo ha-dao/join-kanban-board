@@ -11,13 +11,9 @@ import { LoginComponent } from './landingpage/login/login.component';
 import { SignupComponent } from './landingpage/signup/signup.component';
 
 export const routes: Routes = [
-  // { path: '', redirectTo: '/summary', pathMatch: 'full' },
   {
     path: '', component: LoginComponent,
   },
-  // {
-  //   path: '', component: LoginComponent,
-  // },
   {
     path: 'sign-up', component: SignupComponent,
   },
@@ -33,7 +29,9 @@ export const routes: Routes = [
   {
     path: 'contact', component: ContactComponent,
   },
-  { path: 'help', component: HelpComponent },
+  { path: 'help', component: HelpComponent
+
+   },
   {
     path: 'privacy', component: PrivacyPolicyComponent,
   },

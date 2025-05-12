@@ -1,6 +1,8 @@
-<section class="layout">
+<section class="layout" (load)="getLocalStorage()">
+  @if(getRouterPath('legal-notice') || getRouterPath('privacy') || this.authService.UserLoggedIn){
     <app-header></app-header>
     <app-sidebar></app-sidebar>
+  }
     <main class="content-wrapper">
       <div class="content-scroll">
         <router-outlet></router-outlet>

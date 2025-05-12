@@ -33,8 +33,11 @@ export class LoginComponent {
     return isEmailValid && this.password.length >=6
   }
 
-  guestLogin() {
-    this.goToAnotherPage('/summary')
+  async guestLogin() {
+    await this.authService.login('guest@guest.de', '123456')
+          this.authService.UserLoggedIn = 'Guest'
+          this.router.navigate(['/summary'])
+          localStorage.setItem('loggedIn', 'Guest')
   }
 
   validateMail(field:string){    
@@ -56,22 +59,13 @@ export class LoginComponent {
     public async onLogin() {
       try {
         await this.authService.login(this.emailOrUsername, this.password);
-        this.authService.UserLoggedIn = this.getUsername()
+        this.authService.UserLoggedIn = this.authService.getUsername(this.emailOrUsername)
         this.goToAnotherPage('/summary')
+        localStorage.setItem('loggedIn', this.authService.UserLoggedIn)
       } catch (err: any) {
         this.loginSuccessfull = false
       }
     }
 
-    getUsername(){
-      let userName=''
-      this.contactService.contactList.forEach(c =>{
-        if(c.email == this.emailOrUsername){          
-          userName=  c.name
-        }
-      })
-      return userName
-
-      
-    }
+   
 }

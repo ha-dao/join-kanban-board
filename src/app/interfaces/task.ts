@@ -5,7 +5,7 @@ export interface Task {
     title:string,
     description:string,
     date: string,
-    priority: 'Urgent' | 'Medium' | 'Low',
+    priority: 'Urgent' | 'Medium' | 'Low' | '',
     assignedTo?:Contact[],
     category:string,
     subtasks: { title: string, isDone: boolean }[];

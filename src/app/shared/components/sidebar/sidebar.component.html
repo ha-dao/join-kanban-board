@@ -5,7 +5,7 @@
         <img src="assets/icon/Capa 2.png" alt="Join Logo" class="logo">
       </a>
       </div>
-
+      @if(this.authService.UserLoggedIn !=''){
       <nav class="sidebar-nav">
 
         <a routerLink="/summary" routerLinkActive="active">
@@ -29,6 +29,7 @@
         </a>
 
       </nav>
+       }
    </div>
 
     <app-footer></app-footer>
@@ -37,7 +38,7 @@
 
 <section class="mobile-navbar-wrapper">
   <nav class="mobile-navbar">
-
+    @if(this.authService.UserLoggedIn !=''){
     <a routerLink="/summary" routerLinkActive="active">
       <img src="assets/icon/summary-icon.png" alt="Summary Icon">
       <span>Summary</span>
@@ -57,6 +58,7 @@
       <img src="assets/icon/contacts-icon.png" alt="Contacts Icon">
       <span>Contacts</span>
     </a>
+  }
 
   </nav>
 </section>
