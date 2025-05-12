@@ -21,6 +21,7 @@ export class LoginComponent {
   password = '';
   error = '';
   invalidFields:string[]=[]
+  loginSuccessfull:boolean= true;
   constructor(private routerModule: RouterModule, private router: Router, private authService: AuthService) {}
 
   goToAnotherPage(target:string): void {
@@ -55,9 +56,22 @@ export class LoginComponent {
     public async onLogin() {
       try {
         await this.authService.login(this.emailOrUsername, this.password);
+        this.authService.UserLoggedIn = this.getUsername()
         this.goToAnotherPage('/summary')
       } catch (err: any) {
-        this.error = err.message;
+        this.loginSuccessfull = false
       }
+    }
+
+    getUsername(){
+      let userName=''
+      this.contactService.contactList.forEach(c =>{
+        if(c.email == this.emailOrUsername){          
+          userName=  c.name
+        }
+      })
+      return userName
+
+      
     }
 }

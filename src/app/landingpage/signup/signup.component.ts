@@ -33,29 +33,37 @@ name: string = '';
   passwordConfirm = '';
   public error = '';
 
-  test(){
-    console.log('klappt');
-    
-  }
-  constructor(private authService: AuthService, private router: Router) {}
+  
+  constructor(public authService: AuthService, private router: Router) {}
 
   public async onRegister() {    
     if(this.password === this.passwordConfirm){
       try {
         await this.authService.register(this.email, this.password, this.name);
         this.feedbackService.show('Registration successfull')
+        if(!this.checkIfMailinUseInContact()){
+          this.contactService.addContact({name:this.name,email: this.email, phone: 'Not existing yet'})
+        }
+        this.authService.login(this.email, this.password )       
+        this.router.navigate(['/summary']);
       } catch (err: any) {
         this.error = err.message;
       }
     }
   }
 
+  checkIfMailinUseInContact():boolean{
+    let include =false 
+    this.contactService.contactList.forEach(c => {
+      if(this.email == c.email){
+        include = true
+      }
+    });
+    return include
+  }
   get isFormValid(): boolean {
-    const isEmailValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(this.email);
-    const isEmailUnique = !this.contactService.contactList.some(
-      contact => contact.email === this.email
-    );
-    return this.name.trim().length >= 2 && isEmailValid && isEmailUnique;
+    const isEmailValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(this.email);    
+    return this.name.trim().length >= 2 && isEmailValid 
   }
   
 validateForm(field: string) {
@@ -80,6 +88,8 @@ validateForm(field: string) {
   }
 }
 
+
+
 validateName(addFieldIfInvalid:Function){
   const isInvalid = !this.name || this.name.trim().length < 2;
 addFieldIfInvalid(isInvalid, 'name');
@@ -88,11 +98,8 @@ addFieldIfInvalid(isInvalid, 'name');
 validateMail(addFieldIfInvalid: Function) {
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   const email = this.email?.trim().toLowerCase();      
-  const isFormatInvalid = !email || !emailRegex.test(email);  
-  const isDuplicate = this.contactService.contactList.some(
-    contact => contact.email.toLowerCase() === email
-  );
-  const isInvalid = isFormatInvalid || isDuplicate;
+  const isFormatInvalid = !email || !emailRegex.test(email);    
+  const isInvalid = isFormatInvalid;
   addFieldIfInvalid(isInvalid, 'email');
 }
 

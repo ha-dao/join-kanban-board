@@ -19,16 +19,15 @@
           <img src="assets/img/login/mail.svg" alt="Email icon" />
           <input type="email" placeholder="Email" [(ngModel)]="emailOrUsername" name="email" (blur)="validateMail('email')" />
         </div>
-        <span [ngClass]="{ visible: invalidFields.includes('email'), invisible: !invalidFields.includes('email') }">Your email seems invalid</span>
         <div class="input-container">
           <img src="assets/img/login/lock.svg" alt="Password icon" />
           <input type="password" placeholder="Password" [(ngModel)]="password" name="password" />
         </div>
-        <span [ngClass]="{ visible: invalidFields.includes('email'), invisible: !invalidFields.includes('email') }">Password for this Email is incorrect</span>
+        <span [ngClass]="{ visible: this.loginSuccessfull==false, invisible: !this.loginSuccessfull==false }">Your comibnation for Email/Password is incorrect</span>
 
         <div class="buttons">
           <button class="login-btn" (click)="onLogin()" [disabled]="!isFormValid">Log in</button>
-          <button class="guest-login-btn" (click)="guestLogin()">Guest Log in</button>
+          <button class="guest-login-btn" (click)="guestLogin()">Guest Log in</button>          
         </div>
       </form>
     </div>

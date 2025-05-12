@@ -76,7 +76,7 @@
 
     <div class="right">
       <div class="greeting">
-        <h4>{{ greeting() }}</h4>
+        <h4>{{ greeting() }}@if(this.authService.UserLoggedIn){,}</h4>
         <h3>{{ userName() }}</h3>
       </div>
     </div>

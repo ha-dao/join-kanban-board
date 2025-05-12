@@ -2,6 +2,7 @@ import { Component, signal, computed, inject, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TaskService } from '../../services/task.service';
+import { AuthService } from '../../services/auth.service';
 @Component({
   selector: 'app-summary',
   standalone: true,
@@ -11,6 +12,7 @@ import { TaskService } from '../../services/task.service';
 })
 export class SummaryComponent {
   private taskService = inject(TaskService);
+  authService = inject(AuthService)
 
   isLoaded = computed(() => this.taskService.isTasksLoaded());
 
@@ -59,12 +61,12 @@ export class SummaryComponent {
     ).length;
   });
 
-  userName = signal('Sofia Müller');
+  userName = signal(this.authService.UserLoggedIn);
   greeting = computed(() => {
     const hour = new Date().getHours();
 
-    if (hour < 12) return 'Good morning,';
-    if (hour < 18) return 'Good afternoon,';
-    return 'Good evening,';
+    if (hour < 12) return 'Good morning';
+    if (hour < 18) return 'Good afternoon';
+    return 'Good evening';
   });
 }

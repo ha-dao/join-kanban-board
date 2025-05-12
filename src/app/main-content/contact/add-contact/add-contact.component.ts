@@ -112,22 +112,27 @@ export class addContactComponent {
 
   addOrSave(){
     if(this.overlayService.buttonRight == 'Create Contact'){
+      this.addContact()
+    }else if(this.overlayService.buttonRight == 'Save'){
+     this.saveContact()
+    }
+  }
+
+  addContact(){
       this.contactService.addContact(this.contactService.contactData);
-      this.clearForm();
-           
+      this.clearForm();           
       this.overlayService.closeOverlay()
       this.feedbackService.show('Contact added!');
       this.invalidFields = []
-    }else if(this.overlayService.buttonRight == 'Save'){
+  }
+
+  saveContact(){
       this.contactService.updateContact(this.contactService.contactData);
       this.feedbackService.show('Contact changed!');
       this.clearForm();
       this.overlayService.closeOverlay()
       this.invalidFields = []
-    }
   }
-
-
 
   clearForm(){
     this.contactService.contactData.name= '';

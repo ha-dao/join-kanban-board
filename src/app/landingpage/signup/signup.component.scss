@@ -125,12 +125,12 @@
           margin-top: 2px;
           margin-bottom: 0;
           text-align: left;
-          &.visible {
-            visibility: visible;
-          }
           &.invisible {
             visibility: hidden;
           }
+          &.visible {
+            visibility: visible;
+          }          
         }
       }
 

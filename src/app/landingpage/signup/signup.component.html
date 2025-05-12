@@ -10,7 +10,7 @@
     <h1>Sign up</h1>
     </div>
     <div class="divider"></div>
-    <form #form="ngForm" (ngSubmit)="test()">
+    <form #form="ngForm" (ngSubmit)="onRegister()">
       <div class="input-wrapper">
       <input type="text" placeholder="Name" required
       name="name"
@@ -26,10 +26,10 @@
     <input type="email" placeholder="Email" required
      name="email"
      [(ngModel)]="email"
-     (ngModelChange)="validateForm('email')"
+     (ngModelChange)="validateForm('email');this.authService.emailAlreadyUsed = false"
      [class.invalid]="invalidFields.includes('email')"
      />
-     <span [ngClass]="{visible: invalidFields.includes('email'), invisible: !invalidFields.includes('email')}">Your email seems invalid or is already existing</span>
+     <span [ngClass]="{visible: invalidFields.includes('email') || authService.emailAlreadyUsed==true , invisible: !invalidFields.includes('email')}">Your email seems invalid or is already existing</span>
      <img src="assets/img/login/mail.svg" alt="Email icon" />
     </div>
     <div class="input-wrapper">

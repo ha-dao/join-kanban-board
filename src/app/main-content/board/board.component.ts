@@ -97,9 +97,7 @@ getProgressWidth(task: Task): number {
 
   drop(event: CdkDragDrop<any[]>, newStatus: string) {
     const task = event.previousContainer.data[event.previousIndex];
-
     if (this.isMobile) return;
-
     if (event.previousContainer !== event.container) {
       task.status = newStatus;
       this.taskService.updateTask(task.id, task);
@@ -112,8 +110,6 @@ getProgressWidth(task: Task): number {
     } else {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     }
-
-
   }
 
   @HostListener('window:resize')
