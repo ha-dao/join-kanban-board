@@ -5,6 +5,7 @@ import { FeedbackServiceService } from '../../services/feedback.service';
 import { Userdata } from '../../interfaces/userdata';
 import { NgClass, CommonModule } from '@angular/common';
 import { AuthService } from '../../services/auth.service'; 
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-signup',
   standalone: true,
@@ -17,6 +18,7 @@ contactService = inject(ContactService)
 feedbackService = inject(FeedbackServiceService)
 invalidFields:string[]=[]
 privacyAccepted:boolean = false;
+showPrivacy = false;
 
 newUserData:Userdata={
   name: '',
@@ -35,7 +37,7 @@ name: string = '';
     console.log('klappt');
     
   }
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   public async onRegister() {    
     if(this.password === this.passwordConfirm){
@@ -56,10 +58,6 @@ name: string = '';
     return this.name.trim().length >= 2 && isEmailValid && isEmailUnique;
   }
   
-
-
-
-
 validateForm(field: string) {
   const addFieldIfInvalid = (condition: boolean, fieldName: string) => {
     if (condition && !this.invalidFields.includes(fieldName)) {
@@ -87,10 +85,14 @@ validateName(addFieldIfInvalid:Function){
 addFieldIfInvalid(isInvalid, 'name');
 }
 
-validateMail(addFieldIfInvalid:Function){
+validateMail(addFieldIfInvalid: Function) {
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  const email = this.email;    
-  const isInvalid = !email || !emailRegex.test(email) ;
+  const email = this.email?.trim().toLowerCase();      
+  const isFormatInvalid = !email || !emailRegex.test(email);  
+  const isDuplicate = this.contactService.contactList.some(
+    contact => contact.email.toLowerCase() === email
+  );
+  const isInvalid = isFormatInvalid || isDuplicate;
   addFieldIfInvalid(isInvalid, 'email');
 }
 
@@ -108,4 +110,16 @@ validateConfirmedPassword(addFieldIfInvalid:Function){
   addFieldIfInvalid(isInvalid, 'confirmPassword');
 }
 
+goToAnotherPage(target:string): void {
+  this.router.navigate([target]);
+}
+
+onBackClick(): void {
+  this.router.navigate(['/']);
+}
+
+closePrivacy() {
+  this.showPrivacy = false;
+}
+  
 }

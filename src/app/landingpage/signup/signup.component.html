@@ -1,12 +1,17 @@
-
+<div class="header">
+  <a routerLink="/"><img src="assets/img/login/joinLogo.png" alt="JOIN Logo"/></a>
+</div>
 <section class="sign-up-container">
   <div class="content-wrapper">
     <div class="form-header">
-    <img src="assets/img/header/help-vector.svg" alt="Back arrow">
+      <button class="help-back-btn" (click)="onBackClick()">
+        <img class="back" src="assets/img/header/help-vector.svg" alt="Back arrow">
+      </button>
     <h1>Sign up</h1>
     </div>
     <div class="divider"></div>
     <form #form="ngForm" (ngSubmit)="test()">
+      <div class="input-wrapper">
       <input type="text" placeholder="Name" required
       name="name"
      [(ngModel)]="name"
@@ -14,17 +19,20 @@
      
      />
      <span [ngClass]="{visible: invalidFields.includes('name'), invisible: !invalidFields.includes('name')}">Please enter a name (at least 2 characters)</span>
-
-
+      <img src="assets/img/singUp/person.svg" alt="Email icon" />
+    </div>
+      
+    <div class="input-wrapper">
     <input type="email" placeholder="Email" required
      name="email"
      [(ngModel)]="email"
      (ngModelChange)="validateForm('email')"
      [class.invalid]="invalidFields.includes('email')"
-
      />
      <span [ngClass]="{visible: invalidFields.includes('email'), invisible: !invalidFields.includes('email')}">Your email seems invalid or is already existing</span>
-
+     <img src="assets/img/login/mail.svg" alt="Email icon" />
+    </div>
+    <div class="input-wrapper">
     <input type="password" placeholder="Password" required
     name="password"
     [(ngModel)]="password"
@@ -34,6 +42,9 @@
      <span [ngClass]="{visible: invalidFields.includes('password'), invisible: !invalidFields.includes('password')}">
       Password must be at least 6 characters
     </span>
+    <img src="assets/img/login/lock.svg" alt="Password icon" />
+    </div>
+    <div class="input-wrapper">
     <input type="password" placeholder="Confirm Password" required
     name="confirmPassword"
     [(ngModel)]="passwordConfirm"
@@ -43,17 +54,20 @@
      <span [ngClass]="{visible: invalidFields.includes('confirmPassword'), invisible: !invalidFields.includes('confirmPassword')}">
       Passwords do not match
     </span>
+    <img src="assets/img/login/lock.svg" alt="Password icon" />
+  </div>
     <div class="check-box">
       <input type="checkbox" id="privacy" required #privacyCheckbox [(ngModel)]="privacyAccepted" name="privacy" />
       <label for="privacy"
-        >I accept the <a href="/.....">Privacy policy</a></label
-      >
+        >I accept the <a routerLink="/privacy"
+        (click)="goToAnotherPage('/privacy')">Privacy Policy</a>
+      </label>
     </div>
     <button class="create-button" type="submit" [disabled]="!privacyAccepted || invalidFields.length > 0 || !isFormValid ">Sign up</button>
-    <div class="footer">
-      <a href="/.....">Privacy Policy</a>
-      <a href="/.....">Legal notice</a>
-    </div>
   </form>
+</div>
+<div class="footer">
+  <a (click)="goToAnotherPage('/privacy')">Privacy Policy</a>
+  <a (click)="goToAnotherPage('/legal-notice')">Legal notice</a>
 </div>
 </section>

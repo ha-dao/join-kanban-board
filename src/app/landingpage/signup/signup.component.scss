@@ -1,6 +1,6 @@
 @import './../../styles/variables.scss';
 @import './../../styles/mixins.scss';
-@import './../../styles/buttons.scss';
+@import './../../styles/buttons.scss'; 
 
 .header {
   display: flex;
@@ -15,6 +15,40 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  .back {
+    position: sticky;
+    left: 100%;
+    top: 0;
+    z-index: 1;
+    width: 27px;
+    height: 27px;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;  
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;  
+    transition: background 0.2s, transform 0.2s;
+  
+    img {
+      width: 60%;         
+      height: 60%;
+      object-fit: contain;
+      transition: transform 0.2s;
+    }
+  
+    &:hover {
+      background: #e0e0e0; 
+      transform: scale(1.1);
+  
+      img {
+        transform: scale(1.2);
+      }
+    }
+  }
 
   .content-wrapper {
     max-width: 652px;
@@ -58,21 +92,59 @@
       display: flex;
       flex-direction: column;
 
-      input[type="text"],
-      input[type="email"],
-      input[type="password"] {
-        display: block;
-        width: 100%;
-        padding: 12px;
-        margin-bottom: 16px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 16px;
+      .input-wrapper {
+        position: relative;
+        margin-bottom: 24px;
+
+        input[type="text"],
+        input[type="email"],
+        input[type="password"] {
+          display: block;
+          width: 100%;
+          padding: 12px;
+          padding-right: 44px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          font-size: 16px;
+          box-sizing: border-box;
+        }
+
+        img {
+          position: absolute;
+          top: 50%;
+          right: 14px;
+          transform: translateY(-50%);
+          height: 22px;
+          pointer-events: none;
+        }
+
+        span {
+          display: block;
+          font-size: 13px;
+          color: #e74c3c;
+          margin-top: 2px;
+          margin-bottom: 0;
+          text-align: left;
+          &.visible {
+            visibility: visible;
+          }
+          &.invisible {
+            visibility: hidden;
+          }
+        }
       }
 
       .check-box {
         margin: 16px 0 32px;
-        text-align: left;
+        justify-content: center; 
+        align-items: center;   
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+
+        input[type="checkbox"] {
+          margin-top: 2px;
+        }
 
         label {
           font-size: 14px;
@@ -87,24 +159,24 @@
           }
         }
       }
-
-      // button[type='submit'] {
-      //   @include button-base($primary-color, $white, $primary-color, 700);
-
-      //   &:hover {
-      //     @include button-hover($hover-color, $hover-color);
-      //   }
-      // }
     }
   }
 }
 
 .footer {
-  margin-top: 32px;
+  width: 100%;
+  max-width: 1920px;
+  padding: 20px;
+  height: 48px;
+  position: fixed; 
+  bottom: 20px;
+  left: 58%;
+  transform: translateX(-50%);
   display: flex;
   justify-content: center;
+  align-items: center;
+  text-align: center;
   gap: 35px;
-  font-size: 14px;
 
   a {
     color: #a8a8a8;
@@ -117,16 +189,3 @@
     }
   }
 }
-.visible {
-    display: inline;
-    color: red;
-  }
-  
-  .invisible {
-    display: none;
-  }
-  
-  input.invalid {
-    border: 1px solid red;
-  }
-  
