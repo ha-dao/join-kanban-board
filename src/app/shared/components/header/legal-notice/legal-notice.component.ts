@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 
+/**
+ * @component
+ * The LegalNoticeComponent displays the legal notice information for the application.
+ */
 @Component({
   selector: 'app-legal-notice',
   standalone: true,

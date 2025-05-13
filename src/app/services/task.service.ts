@@ -65,14 +65,20 @@ export class TaskService implements OnDestroy {
     "": 4
   };
   
+  /**
+   * Initializes the TaskService and starts listening to task changes.
+   */
   constructor() {
     this.snap();
   }
   
+  /**
+   * Fills the board columns with tasks based on their status and sorts them by priority.
+   */
   fillBoardTaskLists(){
-  this.boardColumns.forEach(column =>{
-    column.list = [];
-  })
+    this.boardColumns.forEach(column =>{
+      column.list = [];
+    })
     this.tasksList.forEach((task)=>{
       if(task.status == 'ToDo'){
         this.boardColumns[0].list.push(task);
@@ -89,14 +95,26 @@ export class TaskService implements OnDestroy {
     })
   }
 
+  /**
+   * Converts a priority value to a string. (Currently not implemented)
+   * @param {string} proirity - The priority to convert.
+   */
   proirityToString(proirity: string){
     return
   }
 
+  /**
+   * Sets the temporary assigned contacts for a task.
+   * @param {Contact[]} contacts - The contacts to assign temporarily.
+   */
   setTempAssignedTo(contacts:Contact[]){
     this.tempAssignedTo = contacts;
   }
 
+  /**
+   * Sets the current task data to be edited.
+   * @param {Task} task - The task to edit.
+   */
   setEditedTask(task: Task) {
     this.taskData.title = task.title;
     this.taskData.description = task.description;
@@ -109,7 +127,11 @@ export class TaskService implements OnDestroy {
     this.taskData.status = task.status
   }
 
-isTasksLoaded = signal(false);
+  isTasksLoaded = signal(false);
+
+  /**
+   * Subscribes to Firestore task changes and updates the local task lists.
+   */
   snap() {
     let q = query(this.getTasksRef(), orderBy('priority'));
     this.unsubTasksList = onSnapshot(q, (list) => {
@@ -117,13 +139,16 @@ isTasksLoaded = signal(false);
       list.forEach((element) => {
         this.tasksList.push(this.setTaskObj(element.data(), element.id));
       });
-      
-        this.fillBoardTaskLists();
-        this.isBoardListFull = true;
-        this.isTasksLoaded.set(true);
+      this.fillBoardTaskLists();
+      this.isBoardListFull = true;
+      this.isTasksLoaded.set(true);
     });
   }
   
+  /**
+   * Adds a new task to Firestore and updates the board.
+   * @param {Task} task - The task to add.
+   */
   async addTask(task: Task) {
     task.status = this.newTaskStatus;
     task.priority= this.taskData.priority
@@ -133,17 +158,25 @@ isTasksLoaded = signal(false);
         console.error(err);
       })
       .then((docRef) => {});
-      this.fillBoardTaskLists();
-      this.feedbackService.show('Task Created')
+    this.fillBoardTaskLists();
+    this.feedbackService.show('Task Created')
   }
 
+  /**
+   * Updates an existing task in Firestore and refreshes the board.
+   * @param {string} taskId - The ID of the task to update.
+   * @param {{}} taskData - The data to update.
+   */
   async updateTask(taskId: string, taskData: {}){
     await updateDoc(this.getSingleTask('tasks', taskId), taskData);
     this.fillBoardTaskLists();
     this.feedbackService.show('Task Updated')
   }
 
-
+  /**
+   * Deletes a task from Firestore and updates the board.
+   * @param {string} id - The ID of the task to delete.
+   */
   async deleteTask(id: string) {
     if (id) {
       await deleteDoc(this.getSingleTask('tasks', id));
@@ -152,12 +185,21 @@ isTasksLoaded = signal(false);
     this.feedbackService.show('Task Deleted')
   }
 
+  /**
+   * Cleans up the Firestore subscription on service destroy.
+   */
   ngOnDestroy() {
     if (this.unsubTasksList()) {
       this.unsubTasksList();
     }
   }
 
+  /**
+   * Creates a Task object from Firestore data and ID.
+   * @param {any} obj - The Firestore data object.
+   * @param {string} id - The Firestore document ID.
+   * @returns {Task} The constructed Task object.
+   */
   setTaskObj(obj: any, id: string): Task {
     return {
       id: id,
@@ -173,24 +215,53 @@ isTasksLoaded = signal(false);
     };
   }
 
+  /**
+   * Gets the Firestore collection reference for tasks.
+   * @returns The Firestore collection reference.
+   */
   getTasksRef() {
     return collection(this.firestore, 'tasks');
   }
 
+  /**
+   * Gets a Firestore document reference for a single task.
+   * @param {string} collectionRef - The collection name.
+   * @param {string} docId - The document ID.
+   * @returns The Firestore document reference.
+   */
   getSingleTask(collectionRef: string, docId: string) {
     return doc(collection(this.firestore, collectionRef), docId);
   }
+
+  /**
+   * Handles search and filter input changes.
+   * @param {Event} event - The input event.
+   * @param {string} value - The search value.
+   */
   searchAndFilter(event:Event, value: string){
     this.searchInputFieldValue = value;
   }
 
+  /**
+   * Sets the currently selected task.
+   * @param {Task} task - The task to select.
+   */
   setSelectedTask(task: Task) {
     this.selectedTask.set(task);
   }
+
+  /**
+   * Clears the currently selected task.
+   */
   clearSelectedTask() {
     this.selectedTask.set(null);
   }
 
+  /**
+   * Returns the CSS class for a given category.
+   * @param {string} category - The category name.
+   * @returns {string} The corresponding CSS class.
+   */
   getCategoryClass(category: string): string {
     const categoryMap: { [key: string]: string } = {
       'User Story': 'user-story',
@@ -199,5 +270,4 @@ isTasksLoaded = signal(false);
     };
     return categoryMap[category] || '';
   }
-  
 }

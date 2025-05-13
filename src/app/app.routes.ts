@@ -10,34 +10,77 @@ import { TaskComponent } from './main-content/task/task.component';
 import { LoginComponent } from './landingpage/login/login.component';
 import { SignupComponent } from './landingpage/signup/signup.component';
 
+/**
+ * @fileoverview
+ * Application routes configuration for Angular Router.
+ */
 export const routes: Routes = [
+  /**
+   * Route for the login component (default path).
+   */
   {
     path: '', component: LoginComponent,
   },
+
+  /**
+   * Route for the signup component.
+   */
   {
     path: 'sign-up', component: SignupComponent,
   },
+
+  /**
+   * Route for the summary component.
+   */
   {
     path: 'summary', component: SummaryComponent,
   },
+
+  /**
+   * Route for the add-task component.
+   */
   {
     path: 'add-task', component: AddTaskComponent,
   },
+
+  /**
+   * Route for the board component.
+   */
   {
     path: 'board', component: BoardComponent,
   },
+
+  /**
+   * Route for the contact component.
+   */
   {
     path: 'contact', component: ContactComponent,
   },
-  { path: 'help', component: HelpComponent
 
-   },
+  /**
+   * Route for the help component.
+   */
+  { 
+    path: 'help', component: HelpComponent
+  },
+
+  /**
+   * Route for the privacy policy component.
+   */
   {
     path: 'privacy', component: PrivacyPolicyComponent,
   },
+
+  /**
+   * Route for the legal notice component.
+   */
   {
     path: 'legal-notice', component: LegalNoticeComponent,
   },
+
+  /**
+   * Route for the login component (explicit path).
+   */
   {
     path: 'login', component: LoginComponent,
   }
