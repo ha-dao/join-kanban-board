@@ -70,7 +70,7 @@ export class addContactComponent {
       (emailRegex.test(this.contactService.contactData.email) &&
        this.contactService.contactList.some(
          contact => contact.email === this.contactService.contactData.email
-       ))
+       ) && this.overlayService.buttonRight == 'Create Contact')
     ) {
       this.invalidFields.push('email');
     }
@@ -90,10 +90,10 @@ export class addContactComponent {
       this.contactService.contactData.name.length >= 2 &&
       (/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(this.contactService.contactData.email) && !this.contactService.contactList.some(
         contact => contact.email === this.contactService.contactData.email
-      )) &&
+      ) && this.overlayService.buttonRight == 'Create Contact') &&
       /^(?:\+?\d{1,4}[ \-]?)?(\(?\d{1,4}\)?[ \-]?)?[\d\- ]{5,15}$/.test(this.contactService.contactData.phone)
       
-    );
+    ) || ( this.contactService.contactData.name.length >= 2 && /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(this.contactService.contactData.email) && this.overlayService.buttonRight == 'Save') ;
   }
 
   
@@ -123,7 +123,6 @@ export class addContactComponent {
       this.clearForm();           
       this.overlayService.closeOverlay()
       this.feedbackService.show('Contact added!');
-      this.invalidFields = []
   }
 
   saveContact(){
@@ -131,7 +130,6 @@ export class addContactComponent {
       this.feedbackService.show('Contact changed!');
       this.clearForm();
       this.overlayService.closeOverlay()
-      this.invalidFields = []
   }
 
   clearForm(){
