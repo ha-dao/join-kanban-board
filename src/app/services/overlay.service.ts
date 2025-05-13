@@ -12,9 +12,7 @@ export class OverlayService {
 
   isOpen = signal(false)
   setTemplate = signal<string>('');
-  taskService= inject(TaskService)
-  private contactDataSource = new BehaviorSubject<{ name: string; email: string; phone: string } | null>(null);
-  contactData$ = this.contactDataSource.asObservable();
+  taskService= inject(TaskService)  
   ContactOverlayH2Text: string = 'Add Contact';
   buttonLeft = 'Cancel';
   buttonRight = 'Create';
@@ -108,4 +106,5 @@ export class OverlayService {
   setContactData(data: { name: string; email: string; phone: string }) {
     this.contactDataSource.next(data);
   }
+  
 }

@@ -74,7 +74,7 @@ export class SignupComponent {
         await this.authService.register(this.email, this.password, this.name);
         this.feedbackService.show('Registration successfull');
         if(!this.checkIfMailinUseInContact()){
-          this.contactService.addContact({name: this.name, email: this.email, phone: 'Not existing yet'});
+          await this.contactService.addContact({name:this.name,email: this.email, phone: 'Not existing yet'})
         }
         this.authService.login(this.email, this.password);  
         this.authService.UserLoggedIn = this.authService.getUsername(this.email);     

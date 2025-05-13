@@ -1,20 +1,23 @@
 <section class="login-page-wrapper">
   <section class="header">
-     <a href=""><img src="assets/img/login/joinLogo.png" alt="JOIN Logo" class="original-logo"/></a>
+    <a href=""><img src="assets/img/login/joinLogo.png" alt="JOIN Logo" /></a>
     <div class="signup-section">
       <p>Not a Join user?</p>
       <a routerLink="/sign-up"><button class="login-btn">Sign up</button></a>
     </div>
   </section>
 
-<div class="splash-screen">
-</div>
+  <div class="splash-screen">
+    <section class="header2">
+      <a href=""><img src="assets/img/login/joinLogo.png" alt="JOIN Logo" class="original-logo" /></a>
+    </section>
+  </div>
 
   <section class="login-container">
     <div class="content-wrapper">
       <h1>Log in</h1>
       <div class="divider"></div>
-      <form action="">
+      <form action="" autocomplete="off">
         <div class="input-container">
           <img src="assets/img/login/mail.svg" alt="Email icon" />
           <input type="email" placeholder="Email" [(ngModel)]="emailOrUsername" name="email" (blur)="validateMail('email')" />
@@ -23,21 +26,19 @@
           <img src="assets/img/login/lock.svg" alt="Password icon" />
           <input type="password" placeholder="Password" [(ngModel)]="password" name="password" />
         </div>
-        <span [ngClass]="{ visible: this.loginSuccessfull==false, invisible: !this.loginSuccessfull==false }">Your comibnation for Email/Password is incorrect</span>
+        <span [ngClass]="{ visible: this.loginSuccessfull == false, invisible: !this.loginSuccessfull == false }">Your comibnation for Email/Password is incorrect</span>
 
         <div class="buttons">
           <button class="login-btn" (click)="onLogin()" [disabled]="!isFormValid">Log in</button>
-          <button class="guest-login-btn" (click)="guestLogin()">Guest Log in</button>          
+          <button class="guest-login-btn" (click)="guestLogin()">Guest Log in</button>
         </div>
       </form>
     </div>
-      <section class="signup-section-footer">
-    <p>Not a Join user?</p>
-    <a routerLink="/sign-up"><button class="login-btn">Sign up</button></a>
+    <section class="signup-section-footer">
+      <p>Not a Join user?</p>
+      <a routerLink="/sign-up"><button class="login-btn">Sign up</button></a>
+    </section>
   </section>
-  </section>
-
-
 
   <section class="footer">
     <div>

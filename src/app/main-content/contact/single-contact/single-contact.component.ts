@@ -40,12 +40,9 @@ export class SingleContactComponent {
    */
   editContact() {
     this.overlayService.setOverlayButtons('Delete', 'Save');
-  
-    this.overlayService.setContactData({
-      name: this.contactService.currentContact.name,
-      email: this.contactService.currentContact.email,
-      phone: this.contactService.currentContact.phone
-    });
+    this.contactService.contactData.name = this.contactService.currentContact.name
+    this.contactService.contactData.email = this.contactService.currentContact.email
+    this.contactService.contactData.phone = this.contactService.currentContact.phone   
     this.overlayService.openOverlay('add-contact');
   }
 }

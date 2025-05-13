@@ -18,7 +18,7 @@ import { AuthService } from './services/auth.service';
   standalone: true,
   imports: [CommonModule, RouterOutlet, HeaderComponent, SidebarComponent, OverlayComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   /**

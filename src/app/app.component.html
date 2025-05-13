@@ -1,20 +1,24 @@
 <section class="layout" (load)="getLocalStorage()">
-  @if(getRouterPath('legal-notice') || getRouterPath('privacy') || this.authService.UserLoggedIn){
-    <app-header></app-header>
-    <app-sidebar></app-sidebar>
-  }
+  @if(isAuthRoute()) {
+    <router-outlet></router-outlet>
+  } @else {
+    @if(getRouterPath('legal-notice') || getRouterPath('privacy') || this.authService.UserLoggedIn){
+      <app-header></app-header>
+      <app-sidebar></app-sidebar>
+    }
     <main class="content-wrapper">
       <div class="content-scroll">
         <router-outlet></router-outlet>
       </div>
     </main>
-  </section>
-  @if (feedbackService.message()) {
-    <span
-      class="feedback-message"
-      [class.visible]="feedbackService.visible()"
-    >
-      {{ feedbackService.message() }}
-    </span>
   }
-  <app-overlay ></app-overlay>
+</section>
+@if (feedbackService.message()) {
+  <span
+    class="feedback-message"
+    [class.visible]="feedbackService.visible()"
+  >
+    {{ feedbackService.message() }}
+  </span>
+}
+<app-overlay></app-overlay>

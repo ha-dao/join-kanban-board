@@ -98,11 +98,6 @@ export class ContactService implements OnDestroy{
     });
   }
 
-  /**
-   * Gets first and last name from a full name
-   * @param {string} name - Full name of contact
-   * @returns {string} First and last name
-   */
   getFirstAndLastName(name: string): string {
     if (!name) return '';
     const words = name.trim().split(/\s+/);
@@ -231,8 +226,11 @@ export class ContactService implements OnDestroy{
   async updateContact(contactData: {name: string;
     email: string;
     phone: string;
-    letters?: string;}){
+    letters?: string;
+    color?: string;
+  }){
     contactData.letters = this.getFirstAndLastNameFirstLetter(contactData.name)
+    contactData.color = this.currentContact.color
     if(this.currentContact.id){
       await updateDoc(this.getSingleContact('contacts', this.currentContact.id), contactData);
       this.selectItem(this.currentContact.id);
