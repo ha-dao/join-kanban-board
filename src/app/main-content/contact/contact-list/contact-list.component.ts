@@ -3,6 +3,9 @@ import { CommonModule } from '@angular/common';
 import { ContactService } from '../../../services/contact.service';
 import { OverlayService } from '../../../services/overlay.service';
 
+/**
+ * Component responsible for displaying and interacting with a list of contacts.
+ */
 @Component({
   selector: 'app-contact-list',
   standalone: true,
@@ -16,13 +19,26 @@ export class ContactListComponent {
     private overlayService: OverlayService
   ) {}
 
-    @Output() singleContactTransform = new EventEmitter<string>()
-  setOverlayButtonsFromList(leftButton:string, rightButton: string) {
+  /**
+   * Emits an event to transform the contact view to a single contact display.
+   */
+  @Output() singleContactTransform = new EventEmitter<string>()
+
+  /**
+   * Sets the overlay buttons and opens the 'add-contact' overlay.
+   * 
+   * @param leftButton - Label for the left overlay button
+   * @param rightButton - Label for the right overlay button
+   */
+  setOverlayButtonsFromList(leftButton: string, rightButton: string) {
     this.overlayService.setOverlayButtons(leftButton, rightButton)    
     this.overlayService.openOverlay('add-contact');
   }
 
-  toggleSingleContact(){
+  /**
+   * Emits a transformation event to slide the single contact view into position.
+   */
+  toggleSingleContact() {
     this.singleContactTransform.emit('translateX(0%)')
   }
 }

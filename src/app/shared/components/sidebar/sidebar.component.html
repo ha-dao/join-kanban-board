@@ -1,9 +1,15 @@
 <section class="sidebar">
   <div class="sb-container">
     <div class="sidebar-header">
+      @if(this.authService.UserLoggedIn !=''){
+      <a routerLink="/summary">
+        <img src="assets/icon/Capa 2.png" alt="Join Logo" class="logo" />
+      </a>
+    }@else {
       <a href="">
         <img src="assets/icon/join-logo-sidebar.png" alt="Join Logo" class="logo" />
       </a>
+    }
     </div>
     @if(this.authService.UserLoggedIn !=''){
     <nav class="sidebar-nav">
