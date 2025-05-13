@@ -1,7 +1,7 @@
 <section>
   <div class="contact-list-wrapper">
   <div>
-    <button (click)="setOverlayButtonsFromList('Cancel', 'Create Contact')">Add new contact<img src="assets/img/4-contacts/person-add-icon.svg" alt="Edit Icon"></button>
+    <button (click)=" setOverlayButtonsFromList('Cancel', 'Create Contact'); ">Add new contact<img src="assets/img/4-contacts/person-add-icon.svg" alt="Edit Icon"></button>
   </div>
   <div class="list-content">
     @for (letter of (contactService.contactListLetter); track letter; let index = $index) {

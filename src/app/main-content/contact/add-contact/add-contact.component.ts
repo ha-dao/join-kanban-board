@@ -24,14 +24,7 @@ export class addContactComponent {
   
   invalidFields: string[] = [];
   showSuccessMessage:boolean = false;
-
-  ngOnInit() {
-    this.overlayService.contactData$.subscribe(data => {
-      if (data) {
-        this.contactService.contactData = { ...data }; 
-      }
-    });
-  }
+  
 
   handleBackdropClick(event: MouseEvent) {
     const clickedInside = this.overlayRef.nativeElement.contains(event.target);

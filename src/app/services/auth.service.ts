@@ -69,7 +69,8 @@ export class AuthService {
         if(c.email == email){          
           userName=  c.name
         }
-      })
+      })      
+      
       return userName
 
       
