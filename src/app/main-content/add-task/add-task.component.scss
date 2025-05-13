@@ -1,6 +1,9 @@
 @import './../../styles/variables.scss';
 @import './../../styles/mixins.scss';
 @import './../../styles/buttons.scss';
+@import './subtask-style.component.scss';
+@import './custom-checkbox.component.scss';
+@import './host-style.component.scss';
 
 section {
   @include displayFlex(flex, column, flex-start, flex-start, 24px);
@@ -8,26 +11,24 @@ section {
   max-width: 1920px;
   padding: 64px;
   .title-close-wrapper {
-    display: flex;
-    justify-content: space-between;
+    @include displayFlex(flex, row, space-between, auto, 0);
     padding: 0;
     width: 100%;
     .close-button {
-        padding: 8px;
-        border-radius: 50%;
-        width: 32px;
-        height: 32px;
-        z-index: 999;
-        img {
-          width: 16px;
-          height: 16px;
-        }
-        &:hover {
-          background-color: darken($grey, 0.5);
-        }
+      padding: 8px;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      z-index: 999;
+      img {
+        width: 16px;
+        height: 16px;
+      }
+      &:hover {
+        background-color: darken($grey, 0.5);
+      }
     }
   }
-
   form {
     input.ng-invalid.ng-touched {
       border: 1px solid $border-alert-color;
@@ -84,46 +85,40 @@ section {
       .task-user {
         flex: 2;
         .priority-div {
-          @include displayFlex(flex, row, flex-start, auto, 8px);
+          @include displayFlex(flex, row, flex-start, auto, 8px, nowrap);
           margin-bottom: 16px;
           button {
             @include displayFlex(flex, row, auto, center, 8px, nowrap);
+            @include fontStyle(16px, inherit, inherit, none);
             background-color: $white;
             padding: 8px 16px;
             border: none;
             border-radius: 10px;
-            font-size: 16px;
             -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.2);
             box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.2);
             transition: all 250ms ease;
             &.inactive {
               opacity: 0.7;
             }
-
             &.active {
-              color: white;
+              color: $white;
               img {
                 filter: brightness(0) saturate(100%) invert(95%) sepia(95%) saturate(21%) hue-rotate(357deg) brightness(104%) contrast(107%);
               }
             }
-
             &:nth-child(1).active {
               background-color: #ff3d00;
             }
-
             &:nth-child(2).active {
               background-color: #ffa800;
             }
-
             &:nth-child(3).active {
               background-color: #7ae229;
             }
-
             img {
               width: 16px;
               height: 16px;
             }
-
             &:hover {
               -webkit-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
               box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
@@ -136,63 +131,53 @@ section {
       display: none;
     }
   }
-
   .input-div {
-    @include displayFlex(flex, column, auto, auto);
+    @include displayFlex(flex, column, auto, auto, 0, nowrap);
     width: 100%;
-      .hidden-date-input {
+    .hidden-date-input {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+      z-index: -1;
+      margin-top: 45px;
+    }
+    .custom-date-input {
+      position: relative;
+      @include displayFlex(flex, row, auto, center);
+      .calendar-icon {
         position: absolute;
-        opacity: 0;
-        width: 0;
-        height: 0;
-        z-index: -1;
-        margin-top: 45px;
-      }
-
-      .custom-date-input {
-        position: relative;
-        display: flex;
-        align-items: center;
-        
-        .calendar-icon {
-          position: absolute;
-          right: 12px;
-          top: 15%;
-          cursor: pointer;
-
-          img {
-            width: 16px;
-            height: 16px;
-          }
+        right: 12px;
+        top: 15%;
+        cursor: pointer;
+        img {
+          width: 16px;
+          height: 16px;
         }
       }
+    }
   }
   .bottom-form-wrapper {
-    @include displayFlex(flex, row, space-between, flex-end);
+    @include displayFlex(flex, row, space-between, flex-end, 0, nowrap);
     margin-top: 24px;
     .btn-div {
-      display: flex;
-      justify-content: flex-end;
-      gap: 16px;
+      @include displayFlex(flex, row, flex-end, auto, 16px, nowrap);
     }
     p.req-desktop {
       .req-marker {
         letter-spacing: 0.2em;
-        font-size: 18px;
+        @include fontStyle(18px, inherit, inherit, none);
       }
     }
   }
 }
-
 .req-marker {
   color: $text-alert-color;
 }
-
 // "assigned to" custom dropdown input field
 #assigned-to {
   margin-bottom: 0;
 }
-
 .input-with-arrow {
   position: relative;
   width: 100%;
@@ -208,7 +193,6 @@ section {
       }
     }
   }
-
   .dropdown-arrow {
     position: absolute;
     right: 18px;
@@ -220,17 +204,14 @@ section {
     background-position: center;
     background-size: contain;
     pointer-events: none;
-
     &.down {
       background-image: url('../../../assets/img/2-add-task/arrow-drop-up-icon.svg');
     }
-
     &.up {
       background-image: url('../../../assets/img/2-add-task/arrow-drop-down-icon.svg');
     }
   }
 }
-
 .dropdown-menu {
   border-radius: 0 0 10px 10px;
   background-color: $white;
@@ -242,295 +223,116 @@ section {
 .visible {
   display: block;
 }
-
 .flexvisible {
   display: inline-flex;
 }
-
 .invisible {
   display: none;
 }
 .contact {
-  display: flex;
-  justify-content: flex-start;
-  gap: 16px;
-  align-items: center;
+  @include displayFlex(flex, row, flex-start, center, 16px, nowrap);
   border-radius: 10px;
   padding: 0 16px 0 8px;
   color: $black;
-
   &:hover {
     background: -webkit-linear-gradient(0deg, rgba(249, 249, 249, 1) 0%, rgba(240, 240, 240, 1) 100%);
     background: -moz-linear-gradient(0deg, rgba(249, 249, 249, 1) 0%, rgba(240, 240, 240, 1) 100%);
     background: linear-gradient(0deg, rgba(249, 249, 249, 1) 0%, rgba(240, 240, 240, 1) 100%);
     cursor: pointer;
   }
-
   > ul {
     display: inline-block;
     > li {
-      font-size: 14px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      @include fontStyle(14px, inherit, inherit, none);
+      @include displayFlex(flex, row, space-between, center, 0, nowrap);
     }
   }
-
-
 }
-
 .selected-contact-background {
   background: $primary-color;
   color: $white;
-    >ul {
-      >li {
-        color: $white;
-        .checkbox-wrapper {
-          .check-box {
-            background-color: $primary-color;
-            border: 2.8px solid #fff;
-            &::before {
-              width: 1px;
-              height: 16px;
-              background-color: $white;
-            }
-            &::after {
-              width: 3px;
-              background-color: $white;
-            }
+  > ul {
+    > li {
+      color: $white;
+      .checkbox-wrapper {
+        .check-box {
+          background-color: $primary-color;
+          border: 2.8px solid $white;
+          &::before {
+            width: 1px;
+            height: 16px;
+            background-color: $white;
+          }
+          &::after {
+            width: 3px;
+            background-color: $white;
           }
         }
       }
     }
-
+  }
   &:hover {
     background: $primary-color;
-    >ul {
-      >li {
+    > ul {
+      > li {
         color: $white;
         .checkbox-wrapper {
           .check-box {
             background-color: $primary-color;
-            border: 2.8px solid #fff;
-            &::before, &::after {
+            border: 2.8px solid $white;
+            &::before,
+            &::after {
               background-color: $white;
             }
           }
         }
       }
     }
-
   }
 }
-
 .selected-contact-wrapper {
-  display: flex;
-  justify-content: flex-start;
-  gap: 8px;
-  flex-wrap: wrap;
+  @include displayFlex(flex, row, flex-start, auto, 8px, nowrap);
   margin-bottom: 16px;
   margin-top: 8px;
 }
-
 .selected-contact {
-  display: inline-flex;
+  @include displayFlex(inline-flex, row, center, center, 0, nowrap);
+  @include fontStyle(clamp(12px, 13px, 14px), inherit, $white, none);
   width: clamp(32px, 36px, 40px);
   height: clamp(32px, 36px, 40px);
-  font-size: clamp(12px, 13px, 14px);
-  justify-content: center;
-  align-items: center;
   border-radius: 50%;
   border: 2px solid $white;
-  color: $white;
   cursor: pointer;
 }
-
 .contact-img {
-  font-size: 12px;
+  @include fontStyle(12px, inherit, $white, none);
   background-color: #9327ff;
   min-width: 32px;
   min-height: 32px;
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  border: 2px solid white;
-  color: white;
+  border: 2px solid $white;
   letter-spacing: -1px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include displayFlex(flex, row, center, center, 0, nowrap);
 }
-
 p {
   text-align: start;
 }
-
 .name-email {
   width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @include displayFlex(flex, row, space-between, center, 0, nowrap);
 }
-
 .letter-container {
   border-top: solid 1px #d1d1d1;
   padding-top: 8px;
   margin-top: 25px;
 }
-div.current-sub-task-list-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  height: clamp(0, 0, auto);
-  margin-top: 16px;
-  .input-icon-wrapper {
-    position: relative;
-    display: inline-block;
-    width: 100%;
-    height: 80px;
-    margin-bottom: 0;
-    .action-icons {
-      position: absolute;
-      right: 10px;
-      top: 12%;
-      display: flex;
-      gap: 8px;
-      &:nth-child(2){
-        color: $grey;
-      }
-      .input-icon {
-        width: 18px;
-        height: 18px;
-        padding: 2px;
-
-        &:hover {
-          cursor: pointer;
-          background-color: #d1d1d1;
-        }
-      }
-      .input-icon-black{
-        width: 18px;
-        height: 18px;
-        padding: 2px;
-
-        &:hover {
-          cursor: pointer;
-          background-color: #d1d1d1;
-        }
-  }
-
-    }
-    input {
-      padding: 10px;
-      width: 100%;
-    }
-
-
-
-    .input-icon-add {
-      position: absolute;
-      right: 16px;
-      top: 12%;
-      width: 18px;
-      height: 18px;
-      padding: 2px;
-
-      &:hover {
-        cursor: pointer;
-        background-color: #d1d1d1;
-      }
-    }
-
-  }
-
-  .list-wrapper {
-    width: 100%;
-    max-height: 120px;
-    overflow-y: auto;
-    margin-top: -40px;
-    z-index: 2;
-    .subtask-edit-input {
-      display: flex;
-      position: relative;
-      input {
-        margin-top: 2px;
-        flex: 4;
-        border: none;
-        border-radius: 0;
-        &:focus {
-          border-bottom: 1px solid $hover-color;
-        }
-      }
-      > span {
-        position: absolute;
-        right: 8px;
-        top: 8px;
-        color: #d1d1d1;
-        span {
-          padding: 2px;
-          height: clamp(24px, 24px, 24px);
-          width: clamp(24px, 24px, 24px);
-          border-radius: 50%;
-          flex: 1;
-          &:hover {
-            background-color: #eee;
-            cursor: pointer;
-          }
-          img {
-            width: clamp(16px, 16px, 16px);
-            height: clamp(16px, 16px, 16px);
-            padding: 2px 0 0 0;
-            filter: brightness(0) saturate(100%);
-            transition: all 250ms ease;
-          }
-        }
-      }
-    }
-    ul {
-      width: 100%;
-      padding: 0 0 0 40px;
-      &:hover {
-        background-color: #eee;
-        border-radius: 10px;
-        transition: all 250ms ease;
-        span.edit-delete-hover-content {
-          display: block !important;
-        }
-      }
-      li {
-        width: 100%;
-        height: auto;
-        padding: 8px;
-
-        p {
-          float: left;
-        }
-        > span.edit-delete-hover-content {
-          display: none;
-          color: #d1d1d1;
-          float: right;
-          > span {
-            padding: 2px;
-            height: clamp(24px, 24px, 24px);
-            width: clamp(24px, 24px, 24px);
-            border-radius: 50%;
-            flex: 1;
-            &:hover {
-              background-color: #eee;
-              cursor: pointer;
-            }
-            img {
-              width: clamp(16px, 16px, 16px);
-              height: clamp(16px, 16px, 16px);
-              padding: 2px 0 0 0;
-              filter: brightness(0) saturate(100%);
-              transition: all 250ms ease;
-            }
-          }
-        }
-      }
-    }
-  }
+.error-message {
+  @include fontStyle(14px, inherit, $text-alert-color, none);
+  padding: 4px;
+  margin-top: -16px;
+  margin-bottom: 8px;
 }
 
 @media (max-width: 1280px) {
@@ -615,349 +417,6 @@ div.current-sub-task-list-wrapper {
               flex: 1;
               justify-content: center;
             }
-          }
-        }
-      }
-    }
-  }
-}
-
-// custom checkbox style
-$checkbox-height: 18px;
-
-.checkbox-wrapper {
-  box-sizing: border-box;
-  padding-top: 8px;
-  input[type='checkbox'] {
-    display: none;
-  }
-
-  .check-box {
-    height: $checkbox-height;
-    width: $checkbox-height;
-    background-color: transparent;
-    border: calc($checkbox-height * 0.1) solid $primary-color;
-    border-radius: 5px;
-    position: relative;
-    display: inline-block;
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    -moz-transition: border-color ease 0.2s;
-    -o-transition: border-color ease 0.2s;
-    -webkit-transition: border-color ease 0.2s;
-    transition: border-color ease 0.2s;
-    cursor: pointer;
-
-    &::before,
-    &::after {
-      -moz-box-sizing: border-box;
-      -webkit-box-sizing: border-box;
-      box-sizing: border-box;
-      position: absolute;
-      height: 0;
-      width: calc($checkbox-height * 0.1);
-      background-color: $primary-color;
-      display: inline-block;
-      -moz-transform-origin: left top;
-      -ms-transform-origin: left top;
-      -o-transform-origin: left top;
-      -webkit-transform-origin: left top;
-      transform-origin: left top;
-      border-radius: 15px;
-      content: ' ';
-      -webkit-transition: opacity ease 0.5;
-      -moz-transition: opacity ease 0.5;
-      transition: opacity ease 0.5;
-    }
-
-    &::before {
-      top: calc($checkbox-height * 0.68);
-      left: calc($checkbox-height * 0.41);
-      box-shadow: 0 0 0 calc($checkbox-height * 0.05) $white;
-      -moz-transform: rotate(-135deg);
-      -ms-transform: rotate(-135deg);
-      -o-transform: rotate(-135deg);
-      -webkit-transform: rotate(-135deg);
-      transform: rotate(-135deg);
-    }
-
-    &::after {
-      top: calc($checkbox-height * 0.37);
-      left: calc($checkbox-height * 0.05);
-      -moz-transform: rotate(-45deg);
-      -ms-transform: rotate(-45deg);
-      -o-transform: rotate(-45deg);
-      -webkit-transform: rotate(-45deg);
-      transform: rotate(-45deg);
-    }
-  }
-
-  input[type='checkbox']:checked + .check-box,
-  .check-box.checked {
-    border-color: $primary-color;
-
-    &::after {
-      height: calc($checkbox-height / 2);
-      -moz-animation: dothabottomcheck-19 0.2s ease 0s forwards;
-      -o-animation: dothabottomcheck-19 0.2s ease 0s forwards;
-      -webkit-animation: dothabottomcheck-19 0.2s ease 0s forwards;
-      animation: dothabottomcheck-19 0.2s ease 0s forwards;
-    }
-
-    &::before {
-      height: calc($checkbox-height * 0.5);
-      -moz-animation: dothatopcheck-19 0.4s ease 0s forwards;
-      -o-animation: dothatopcheck-19 0.4s ease 0s forwards;
-      -webkit-animation: dothatopcheck-19 0.4s ease 0s forwards;
-      animation: dothatopcheck-19 0.4s ease 0s forwards;
-    }
-  }
-}
-
-.error-message {
-  color: $text-alert-color;
-  font-size: 14px;
-  padding: 4px;
-  margin-top: -16px;
-  margin-bottom: 8px;
-}
-
-:host-context(app-overlay) {
-  @media (max-width: 1280px) {
-    section {
-      height: 100%;
-      width: 100%;
-      max-height: 800px;
-      overflow-y: auto;
-      display: flex;
-      flex-wrap: nowrap;
-      padding-right: 24px;
-      form {
-        p.req-mobile {
-          margin-top: 24px;
-        }
-        .bottom-form-wrapper {
-          position: unset;
-          background-color: transparent;
-        }
-      }
-    }
-  }
-}
-
-:host-context(.edit-task) {
-  section {
-    width: 100%;
-    padding: 0 24px 0 0;
-    height: 100%;
-    max-height: 700px;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: nowrap;
-    overflow-y: auto;
-    .title-close-wrapper {
-      display: flex;
-      justify-content: flex-end;
-      padding: 2px;
-      width: 100%;
-      position: sticky;
-      top: 16px;
-      .close-button {
-          padding: 8px;
-          border-radius: 50%;
-          width: 32px;
-          height: 32px;
-          z-index: 999;
-          img {
-            width: 16px;
-            height: 16px;
-          }
-          &:hover {
-            background-color: darken($grey, 0.5);
-          }
-      }
-    }
-
-    form {
-      input.ng-invalid.ng-touched {
-        border: 1px solid $border-alert-color;
-      }
-      select.ng-invalid.ng-touched {
-        border: 1px solid $border-alert-color;
-      }
-      @include displayFlex(flex, column, flex-start, auto);
-      width: 100%;
-      label {
-        @include displayFlex(flex, row, flex-start, center);
-        margin-bottom: 8px;
-      }
-      input,
-      textarea,
-      select {
-        cursor: pointer;
-        padding: 8px;
-        border-radius: 10px;
-        border: 1px solid #ccc;
-        outline: none;
-        margin-bottom: 16px;
-        width: 100%;
-        &:focus {
-          border: 1px solid $hover-color;
-        }
-        &:hover {
-          border: 1px solid $hover-color;
-        }
-      }
-      select {
-        appearance: none;
-        -webkit-appearance: none;
-        -moz-appearance: none;
-        background-image: url('../../../assets/img/2-add-task/arrow-drop-up-icon.svg');
-        background-repeat: no-repeat;
-        background-position: right 18px center;
-        padding-right: 30px;
-        &.open {
-          background-image: url('../../../assets/img/2-add-task/arrow-drop-down-icon.svg');
-        }
-      }
-      .input-wrapper {
-        @include displayFlex(flex, column, space-between, flex-start, 40px);
-        width: 100%;
-        .task-data {
-          width: 100%;
-        }
-        .sep-line {
-          display: none;
-        }
-        .task-user {
-          width: 100%;
-          .priority-div {
-            @include displayFlex(flex, row, flex-start, auto, 8px);
-            margin-bottom: 16px;
-            button {
-              @include displayFlex(flex, row, auto, center, 8px, nowrap);
-              background-color: $white;
-              padding: 8px 16px;
-              border: none;
-              border-radius: 10px;
-              font-size: 16px;
-              -webkit-box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.2);
-              box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.2);
-              transition: all 250ms ease;
-              &.inactive {
-                opacity: 0.7;
-              }
-
-              &.active {
-                color: white;
-                img {
-                  filter: brightness(0) saturate(100%) invert(95%) sepia(95%) saturate(21%) hue-rotate(357deg) brightness(104%) contrast(107%);
-                }
-              }
-
-              &:nth-child(1).active {
-                background-color: #ff3d00;
-              }
-
-              &:nth-child(2).active {
-                background-color: #ffa800;
-              }
-
-              &:nth-child(3).active {
-                background-color: #7ae229;
-              }
-
-              img {
-                width: 16px;
-                height: 16px;
-              }
-
-              &:hover {
-                -webkit-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-                box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-              }
-            }
-          }
-        }
-      }
-      p.req-mobile {
-        display: none;
-      }
-    }
-
-    .input-div {
-      @include displayFlex(flex, column, auto, auto);
-      width: 100%;
-        .hidden-date-input {
-          position: absolute;
-          opacity: 0;
-          width: 0;
-          height: 0;
-          z-index: -1;
-          margin-top: 45px;
-        }
-
-        .custom-date-input {
-          position: relative;
-          display: flex;
-          align-items: center;
-
-          .calendar-icon {
-            position: absolute;
-            right: 12px;
-            top: 15%;
-            cursor: pointer;
-
-            img {
-              width: 16px;
-              height: 16px;
-            }
-          }
-        }
-    }
-    .bottom-form-wrapper {
-      @include displayFlex(flex, row, space-between, flex-end);
-      margin-top: 24px;
-      position: sticky;
-      bottom: -2px;
-      background-color: $white;
-      padding: 2px;
-      z-index: 999;
-      .btn-div {
-        display: flex;
-        justify-content: flex-end;
-        gap: 16px;
-      }
-      p.req-desktop {
-        .req-marker {
-          letter-spacing: 0.2em;
-          font-size: 18px;
-        }
-      }
-    }
-  }
-  @media (max-width: 1280px) {
-    section {
-      padding-bottom: 32px;
-      gap: 0;
-      padding-right: 24px;
-      .title-close-wrapper {
-        position: sticky;
-        top: 8px;
-        >a {
-          background-color: $white;
-        }
-      }
-      form {
-        p.req-mobile {
-          display: block;
-        }
-        .bottom-form-wrapper {
-          position: sticky;
-          bottom: 0;
-          .btn-div {
-            width: 100%;
           }
         }
       }

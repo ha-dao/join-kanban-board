@@ -1,73 +1,63 @@
-<div class="header">
-  <a routerLink="/"><img src="assets/img/login/joinLogo.png" alt="JOIN Logo"/></a>
-</div>
-<section class="sign-up-container">
-  <div class="content-wrapper">
-    <div class="form-header">
-      <button class="help-back-btn" (click)="onBackClick()">
-        <img class="back" src="assets/img/header/help-vector.svg" alt="Back arrow">
-      </button>
-    <h1>Sign up</h1>
-    </div>
-    <div class="divider"></div>
-    <form #form="ngForm" (ngSubmit)="onRegister()">
-      <div class="input-wrapper">
-      <input type="text" placeholder="Name" required
-      name="name"
-     [(ngModel)]="name"
-     (ngModelChange)="validateForm('name')"
-     
-     />
-     <span [ngClass]="{visible: invalidFields.includes('name'), invisible: !invalidFields.includes('name')}">Please enter a name (at least 2 characters)</span>
-      <img src="assets/img/singUp/person.svg" alt="Email icon" />
-    </div>
-      
-    <div class="input-wrapper">
-    <input type="email" placeholder="Email" required
-     name="email"
-     [(ngModel)]="email"
-     (ngModelChange)="validateForm('email');this.authService.emailAlreadyUsed = false"
-     [class.invalid]="invalidFields.includes('email')"
-     />
-     <span [ngClass]="{visible: invalidFields.includes('email') || authService.emailAlreadyUsed==true , invisible: !invalidFields.includes('email')}">Your email seems invalid or is already existing</span>
-     <img src="assets/img/login/mail.svg" alt="Email icon" />
-    </div>
-    <div class="input-wrapper">
-    <input type="password" placeholder="Password" required
-    name="password"
-    [(ngModel)]="password"
-    (ngModelChange)="validateForm('password')"
-    [class.invalid]="invalidFields.includes('password')"
-     />
-     <span [ngClass]="{visible: invalidFields.includes('password'), invisible: !invalidFields.includes('password')}">
-      Password must be at least 6 characters
-    </span>
-    <img src="assets/img/login/lock.svg" alt="Password icon" />
-    </div>
-    <div class="input-wrapper">
-    <input type="password" placeholder="Confirm Password" required
-    name="confirmPassword"
-    [(ngModel)]="passwordConfirm"
-    (ngModelChange)="validateForm('confirmPassword')"
-    [class.invalid]="invalidFields.includes('confirmPassword')"
-     />
-     <span [ngClass]="{visible: invalidFields.includes('confirmPassword'), invisible: !invalidFields.includes('confirmPassword')}">
-      Passwords do not match
-    </span>
-    <img src="assets/img/login/lock.svg" alt="Password icon" />
+<section class="sign-up-page-wrapper">
+  <div class="header">
+    <a href=""><img src="assets/img/login/joinLogo.png" alt="JOIN Logo" /></a>
   </div>
-    <div class="check-box">
-      <input type="checkbox" id="privacy" required #privacyCheckbox [(ngModel)]="privacyAccepted" name="privacy" />
-      <label for="privacy"
-        >I accept the <a routerLink="/privacy"
-        (click)="goToAnotherPage('/privacy')">Privacy Policy</a>
-      </label>
+
+  <div class="splash-screen">
+    <section class="header2">
+      <a href=""><img src="assets/img/login/joinLogo.png" alt="JOIN Logo" class="original-logo" /></a>
+    </section>
+  </div>
+
+  <section class="sign-up-container">
+    <div class="content-wrapper">
+      <div class="form-header">
+        <button class="help-back-btn" (click)="onBackClick()">
+          <img class="back" src="assets/img/header/help-vector.svg" alt="Back arrow" />
+        </button>
+        <h1>Sign up</h1>
+      </div>
+      <div class="divider"></div>
+      <form #form="ngForm" (ngSubmit)="onRegister()" autocomplete="off">
+        <div class="input-wrapper">
+          <input type="text" placeholder="Name" required name="name" [(ngModel)]="name" (ngModelChange)="validateForm('name')" />
+          <img src="assets/img/singUp/person.svg" alt="Email icon" />
+        </div>
+        <span [ngClass]="{ visible: invalidFields.includes('name'), invisible: !invalidFields.includes('name') }">Please enter a name (at least 2 characters)</span>
+
+        <div class="input-wrapper">
+          <input type="email" placeholder="Email" required name="email" [(ngModel)]="email" (ngModelChange)="validateForm('email'); this.authService.emailAlreadyUsed = false" [class.invalid]="invalidFields.includes('email')" />
+          <img src="assets/img/login/mail.svg" alt="Email icon" />
+        </div>
+        <span [ngClass]="{ visible: invalidFields.includes('email') || authService.emailAlreadyUsed == true, invisible: !invalidFields.includes('email') }">Your email seems invalid or is already existing</span>
+
+        <div class="input-wrapper">
+          <input type="password" placeholder="Password" required name="password" [(ngModel)]="password" (ngModelChange)="validateForm('password')" [class.invalid]="invalidFields.includes('password')" />
+          <img src="assets/img/login/lock.svg" alt="Password icon" />
+        </div>
+        <span [ngClass]="{ visible: invalidFields.includes('password'), invisible: !invalidFields.includes('password') }"> Password must be at least 6 characters </span>
+
+        <div class="input-wrapper">
+          <input type="password" placeholder="Confirm Password" required name="confirmPassword" [(ngModel)]="passwordConfirm" (ngModelChange)="validateForm('confirmPassword')" [class.invalid]="invalidFields.includes('confirmPassword')" />
+          <img src="assets/img/login/lock.svg" alt="Password icon" />
+        </div>
+        <span [ngClass]="{ visible: invalidFields.includes('confirmPassword'), invisible: !invalidFields.includes('confirmPassword') }"> Passwords do not match </span>
+
+        <div class="check-box">
+          <span>
+          <input type="checkbox" id="privacy" required #privacyCheckbox [(ngModel)]="privacyAccepted" name="privacy" [ngClass]="privacyAccepted ? 'checkbox-checked' : 'checkbox-unchecked'"  />
+          </span>
+          <label for="privacy">I accept the <a routerLink="/privacy" (click)="goToAnotherPage('/privacy')">Privacy Policy</a> </label>
+        </div>
+        <button class="sign-up-btn" type="submit" [disabled]="!privacyAccepted || invalidFields.length > 0 || !isFormValid">Sign up</button>
+      </form>
     </div>
-    <button class="create-button" type="submit" [disabled]="!privacyAccepted || invalidFields.length > 0 || !isFormValid ">Sign up</button>
-  </form>
-</div>
-<div class="footer">
-  <a (click)="goToAnotherPage('/privacy')">Privacy Policy</a>
-  <a (click)="goToAnotherPage('/legal-notice')">Legal notice</a>
-</div>
+  </section>
+
+  <section class="footer">
+    <div>
+      <a (click)="goToAnotherPage('/privacy')">Privacy Policy</a>
+      <a (click)="goToAnotherPage('/legal-notice')">Legal notice</a>
+    </div>
+  </section>
 </section>

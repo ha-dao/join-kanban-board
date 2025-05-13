@@ -277,7 +277,7 @@ input.invalid {
 
 @media (max-width: 480px) {
   .login-container {
-    @include displayFlex(flex, column, flex-start, center, 24px, nowrap);
+    @include displayFlex(flex, column, space-evenly, center, 24px, nowrap);
     .content-wrapper {
       margin: 0;
       width: 100%;

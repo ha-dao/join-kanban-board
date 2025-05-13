@@ -1,12 +1,12 @@
 <section>
-  
+
     <div class="title-close-wrapper">
         <h2 [ngClass]="{
           'user-story': task!.category === 'User Story',
           'technical-task': task!.category === 'Technical Task',
           'design': task!.category === 'Design'
       }">{{task!.category}}</h2>
-        <a class="close-button" ><img src="assets/img/addContactOverlay/X.svg" alt="x-icon close button" (click)="this.overlayService.closeOverlay(); $event.stopPropagation(); " /></a>
+        <a class="close-button" ><img src="assets/img/4-contacts/X.svg" alt="x-icon close button" (click)="this.overlayService.closeOverlay(); $event.stopPropagation(); " /></a>
     </div>
     <h2>{{task!.title}}</h2>
     <div class="task-details">
