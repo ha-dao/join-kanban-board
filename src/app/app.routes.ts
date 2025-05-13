@@ -29,9 +29,9 @@ export const routes: Routes = [
   {
     path: 'contact', component: ContactComponent,
   },
-  { path: 'help', component: HelpComponent
-
-   },
+  {
+    path: 'help', component: HelpComponent
+  },
   {
     path: 'privacy', component: PrivacyPolicyComponent,
   },

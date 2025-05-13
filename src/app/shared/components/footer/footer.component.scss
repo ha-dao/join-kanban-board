@@ -1,21 +1,32 @@
+@import './../../../styles/variables.scss';
+@import './../../../styles/mixins.scss';
+
 .sidebar-footer {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-end;
-  gap: 12px;
- 
+  @include displayFlex(flex, column, flex-end, flex-start, 0, nowrap);
   padding-bottom: 64px;
 
-
   a {
-    color: #CDCDCD;
+    color: #cdcdcd;
     font-size: 14px;
     text-decoration: none;
-    padding-left: 52px;
+    padding: 8px 8px 8px 56px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    transition: all 0.3s;
     &:hover {
-      color: #29ABE2;
-      transform: scale(1.05)
+      color: #29abe2;
+    }
+    &.active {
+      background-color: #091931 !important;
+      pointer-events: none;
+    }
+
+    &:not(.active):hover {
+      background-color: #2a3d59;
+      cursor: pointer;
     }
   }
 }
