@@ -10,7 +10,7 @@
   </a>
     <h1 class="header-title">Kanban Project Management Tool</h1>
   </div>
-
+  @if(this.authService.UserLoggedIn != ''){
   <div class="profile-section">
     <a routerLink="/help">
       <img
@@ -52,5 +52,6 @@
       </a>
     </div>
   </div>
+}
 </div>
 </header>
