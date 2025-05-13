@@ -97,7 +97,12 @@ export class ContactService implements OnDestroy{
       }
     });
   }
-
+  
+  /**
+   * Gets first and last name from a full name
+   * @param {string} name - Full name of contact
+   * @returns {string} First and last name
+   */
   getFirstAndLastName(name: string): string {
     if (!name) return '';
     const words = name.trim().split(/\s+/);

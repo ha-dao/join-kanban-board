@@ -38,19 +38,6 @@ export class addContactComponent {
   showSuccessMessage:boolean = false;
 
   /**
-   * Lifecycle hook that initializes the component
-   * Subscribes to contact data observable
-   */
-  ngOnInit() {
-    this.overlayService.contactData$.subscribe(data => {
-      if (data) {
-        this.contactService.contactData = { ...data }; 
-      }
-    });
-  }
-  
-
-  /**
    * Handles clicks outside the contact form to close overlay
    * @param event - The mouse event
    */

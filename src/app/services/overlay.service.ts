@@ -98,13 +98,4 @@ export class OverlayService {
     this.buttonLeft = left;
     this.buttonRight = right;
   }
-
-  /**
-   * Updates the contact data observable with new data.
-   * @param {{ name: string; email: string; phone: string }} data - The contact data to set.
-   */
-  setContactData(data: { name: string; email: string; phone: string }) {
-    this.contactDataSource.next(data);
-  }
-  
 }
