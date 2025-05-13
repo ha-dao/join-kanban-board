@@ -1,4 +1,3 @@
-
 @import '../../../../styles/variables.scss';
 @import '../../../../styles/mixins.scss';
 @import '../../../../styles/buttons.scss';
@@ -22,4 +21,34 @@ h2 {
     line-height: 1.6;
     margin-bottom: 14px;
   }
+
+  .join-blue, .developer-akademie-blue {
+  color: #29abe2;
+  font-weight: 500;
+}
+
+.span {
+  font-size: clamp(11px, 2.2vw, 14px);
+  line-height: 1.6;
+  margin-bottom: 14px;
+}
+
+.legal-text {
+  font-size: clamp(11px, 2.2vw, 14px);
+  line-height: 1.6;
+}
+
+.legal-text p {
+  margin-bottom: 14px;
+}
+
+.spacer {
+  display: block;
+  
+}
+
+.email-link {
+  color: hsl(229, 92%, 43%);
+  text-decoration: underline;
+}
   

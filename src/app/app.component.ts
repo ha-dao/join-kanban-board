@@ -9,29 +9,29 @@ import { OverlayComponent } from './main-content/contact/overlay/overlay.compone
 import { TaskComponent } from './main-content/task/task.component';
 import { AuthService } from './services/auth.service';
 
-
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule, RouterOutlet, HeaderComponent, SidebarComponent, OverlayComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'project';
-  router = inject(Router)
-  authService = inject(AuthService)
+  router = inject(Router);
+  authService = inject(AuthService);
 
-  constructor(public feedbackService: FeedbackServiceService,
-              public overlayService: OverlayService
+  constructor(public feedbackService: FeedbackServiceService, public overlayService: OverlayService) {}
 
-  ) {}
-
-  getRouterPath(path:string){
-    return this.router.url.includes(path)
+  getRouterPath(path: string) {
+    return this.router.url.includes(path);
   }
 
-  getLocalStorage(){
-    this.authService.UserLoggedIn = localStorage.getItem('loggedIn')
+  getLocalStorage() {
+    this.authService.UserLoggedIn = localStorage.getItem('loggedIn');
+  }
+
+  isAuthRoute() {
+    return this.router.url === '/' || this.router.url === '/login' || this.router.url === '/sign-up';
   }
 }

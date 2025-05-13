@@ -1,64 +1,78 @@
 <section class="sidebar">
-   <div class="sb-container">
+  <div class="sb-container">
     <div class="sidebar-header">
       <a href="">
-        <img src="assets/icon/Capa 2.png" alt="Join Logo" class="logo">
+        <img src="assets/icon/Capa 2.png" alt="Join Logo" class="logo" />
       </a>
-      </div>
-      @if(this.authService.UserLoggedIn !=''){
-      <nav class="sidebar-nav">
+    </div>
+    @if(this.authService.UserLoggedIn !=''){
+    <nav class="sidebar-nav">
+      <a routerLink="/summary" routerLinkActive="active">
+        <img src="assets/icon/summary-icon.png" alt="Summary Icon" />
+        <span>Summary</span>
+      </a>
 
-        <a routerLink="/summary" routerLinkActive="active">
-          <img src="assets/icon/summary-icon.png" alt="Summary Icon">
-          <span>Summary</span>
-        </a>
+      <a routerLink="/add-task" routerLinkActive="active">
+        <img src="assets/icon/add-tast-icon.png" alt="Add Task Icon" />
+        <span>Add Task</span>
+      </a>
 
-        <a routerLink="/add-task" routerLinkActive="active">
-          <img src="assets/icon/add-tast-icon.png" alt="Add Task Icon">
-          <span>Add Task</span>
-        </a>
+      <a routerLink="/board" routerLinkActive="active">
+        <img src="assets/icon/board-icon.png" alt="Board Icon" />
+        <span>Board</span>
+      </a>
 
-        <a routerLink="/board" routerLinkActive="active">
-          <img src="assets/icon/board-icon.png" alt="Board Icon">
-          <span>Board</span>
-        </a>
+      <a routerLink="/contact" routerLinkActive="active">
+        <img src="assets/icon/contacts-icon.png" alt="Contacts Icon" />
+        <span>Contacts</span>
+      </a>
+    </nav>
+    } @else {
+    <nav class="sidebar-nav">
+      <a routerLink="/login" routerLinkActive="active">
+        <img src="assets/img/0-sidebar/login-icon.svg" alt="Log In Icon" />
+        <span>Log In</span>
+      </a>
+    </nav>
+    }
+  </div>
 
-        <a routerLink="/contact" routerLinkActive="active">
-          <img src="assets/icon/contacts-icon.png" alt="Contacts Icon">
-          <span>Contacts</span>
-        </a>
-
-      </nav>
-       }
-   </div>
-
-    <app-footer></app-footer>
-
+  <app-footer></app-footer>
 </section>
 
 <section class="mobile-navbar-wrapper">
+  @if(this.authService.UserLoggedIn !=''){
   <nav class="mobile-navbar">
-    @if(this.authService.UserLoggedIn !=''){
     <a routerLink="/summary" routerLinkActive="active">
-      <img src="assets/icon/summary-icon.png" alt="Summary Icon">
+      <img src="assets/icon/summary-icon.png" alt="Summary Icon" />
       <span>Summary</span>
     </a>
 
     <a routerLink="/add-task" routerLinkActive="active">
-      <img src="assets/icon/add-tast-icon.png" alt="Add Task Icon">
+      <img src="assets/icon/add-tast-icon.png" alt="Add Task Icon" />
       <span>Add Task</span>
     </a>
 
     <a routerLink="/board" routerLinkActive="active">
-      <img src="assets/icon/board-icon.png" alt="Board Icon">
+      <img src="assets/icon/board-icon.png" alt="Board Icon" />
       <span>Board</span>
     </a>
 
     <a routerLink="/contact" routerLinkActive="active">
-      <img src="assets/icon/contacts-icon.png" alt="Contacts Icon">
+      <img src="assets/icon/contacts-icon.png" alt="Contacts Icon" />
       <span>Contacts</span>
     </a>
-  }
-
   </nav>
+  } @else {
+  <nav class="mobile-navbar">
+    <a routerLink="/login" routerLinkActive="active">
+      <img src="assets/img/0-sidebar/login-icon.svg" alt="Log In Icon" />
+      <span>Log In</span>
+    </a>
+    <div class="mobile-footer-links-wrapper">
+      <a routerLink="/privacy" routerLinkActive="active" class="footer-link"><span>Privacy Policy</span></a>
+      <a routerLink="/legal-notice" routerLinkActive="active" class="footer-link"><span>Legal Notice</span></a>
+    </div>
+  </nav>
+  }
 </section>
