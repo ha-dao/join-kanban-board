@@ -8,9 +8,11 @@
   justify-content: flex-start;
   gap: 40px;
 
-  >div {
-    height: 53px;
-    border: solid 3px #29ABE2;
+  > div {
+    height: 59px;
+    width: 3px;
+    background-color: #29abe2;
+    border-radius: 12px;
   }
   .separator2 {
     display: none;
@@ -70,9 +72,9 @@
         }
       }
     }
-app-contact-overlay {
-  z-index: 9999;
-}
+    app-contact-overlay {
+      z-index: 9999;
+    }
   }
 
   .back-btn {
@@ -104,7 +106,7 @@ app-contact-overlay {
     margin-top: 40px;
     gap: 16px;
 
-    >p {
+    > p {
       font-size: 20px;
       font-weight: 400;
     }
@@ -113,7 +115,6 @@ app-contact-overlay {
       color: $blue-link;
     }
   }
-
 }
 
 @media (max-width: 1440px) {
@@ -128,7 +129,7 @@ app-contact-overlay {
     align-items: flex-start;
     gap: 8px;
 
-    >div {
+    > div {
       height: 3px;
       width: 53px;
     }
@@ -137,6 +138,10 @@ app-contact-overlay {
     }
     .separator2 {
       display: block;
+      height: 3px;
+      width: 59px;
+      background-color: #29abe2;
+      border-radius: 12px;
     }
   }
 
@@ -161,9 +166,9 @@ app-contact-overlay {
       gap: 40px;
 
       .img {
-        width: 80px;
-        height: 80px;
-       
+        min-width: 64px;
+        min-height: 64px;
+        font-size: 20px;
       }
     }
   }
@@ -185,11 +190,6 @@ app-contact-overlay {
       gap: 16px;
       h3 {
         font-size: 24px;
-      }
-      .img {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
       }
     }
   }

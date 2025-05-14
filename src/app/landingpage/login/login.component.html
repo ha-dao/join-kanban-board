@@ -20,11 +20,11 @@
       <form action="" autocomplete="off">
         <div class="input-container">
           <img src="assets/img/login/mail.svg" alt="Email icon" />
-          <input type="email" placeholder="Email" [(ngModel)]="emailOrUsername" name="email" (blur)="validateMail('email')" />
+          <input type="email" placeholder="Email" [(ngModel)]="emailOrUsername" name="email" (blur)="validateMail('email')" [ngClass]="{ 'error-container': !loginSuccessfull }" />
         </div>
-        <div class="input-container">
+        <div class="input-container" [ngClass]="{ 'error-container': !loginSuccessfull }">
           <img src="assets/img/login/lock.svg" alt="Password icon" />
-          <input type="password" placeholder="Password" [(ngModel)]="password" name="password" />
+          <input type="password" placeholder="Password" [(ngModel)]="password" name="password" [ngClass]="{'error-input': !loginSuccessfull}" />
         </div>
         <span [ngClass]="{ visible: this.loginSuccessfull == false, invisible: !this.loginSuccessfull == false }">Your comibnation for Email/Password is incorrect</span>
 

@@ -45,8 +45,8 @@
               [class.invalid]="invalidFields.includes('name')"
               placeholder ="Name"
             />
-            <span [ngClass]="{visible: invalidFields.includes('name'), invisible: !invalidFields.includes('name')}">Please enter a name (at least 2 characters)</span>
           </div>
+          <span [ngClass]="{visible: invalidFields.includes('name'), invisible: !invalidFields.includes('name')}">Please enter a name (at least 2 characters)</span>
           <div class="input-div">
             <img
               src="assets/img/4-contacts/mail.svg"
@@ -64,8 +64,8 @@
               [class.invalid]="invalidFields.includes('email')"
               placeholder="Email"
             />
-            <span [ngClass]="{visible: invalidFields.includes('email'), invisible: !invalidFields.includes('email')}">Your email seems invalid or is already existing</span>
           </div>
+          <span [ngClass]="{visible: invalidFields.includes('email'), invisible: !invalidFields.includes('email')}">Your email seems invalid or is already existing</span>
           <div class="input-div">
             <img
               src="assets/img/4-contacts/phone.svg"
@@ -84,8 +84,8 @@
               placeholder=" Phone"
 
             />
-            <span [ngClass]="{visible: invalidFields.includes('phone'), invisible: !invalidFields.includes('phone')}">Your phone number looks wrong</span>
           </div>
+          <span [ngClass]="{visible: invalidFields.includes('phone'), invisible: !invalidFields.includes('phone')}">Your phone number looks wrong</span>
           <div class="button-div">
             <button class="cancel-button" (click)="cancelOrDelete()">
               {{this.overlayService.buttonLeft}}

@@ -135,9 +135,7 @@
       padding: 0 80px;
       > .input-container {
         width: 100%;
-        &span.visible {
-          border: 1px solid $border-alert-color;
-        }
+
       }
       > span {
         margin-top: -6px;
@@ -181,6 +179,7 @@
         border: 1px solid $hover-color;
       }
     }
+
   }
 
   .buttons {
@@ -226,8 +225,12 @@
   opacity: 0;
 }
 
-input.invalid {
-  border: 1px solid $border-alert-color;
+.error-input {
+  border: 1px solid $text-alert-color !important;
+
+  &:focus {
+    border: 1px solid $text-alert-color !important;
+  }
 }
 
 @media (max-width: 1280px) {

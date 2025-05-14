@@ -107,7 +107,7 @@
   padding: 0;
   margin: 0;
   .form-wrapper {
-    @include displayFlex(flex, column, center, start, 32px, nowrap);
+    @include displayFlex(flex, column, center, start, 0, nowrap);
     > div {
       position: relative;
       display: inline-block;
@@ -144,14 +144,18 @@
       @include displayFlex(flex, row, flex-start, center, 16px, nowrap);
     }
   }
-  .invisible {
-    display: none;
-  }
-  .visible {
-    margin: 24px 8px -24px 8px;
-    color: $text-alert-color;
-    font-size: 14px;
-  }
+}
+.invisible {
+  opacity: 0;
+  color: $text-alert-color;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+.visible {
+  opacity: 1;
+  color: $text-alert-color;
+  font-size: 12px;
+  margin-bottom: 12px;
 }
 
 .confirmed-div {
