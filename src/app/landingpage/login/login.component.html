@@ -20,7 +20,9 @@
       <form action="" autocomplete="off">
         <div class="input-container">
           <img src="assets/img/login/mail.svg" alt="Email icon" />
-          <input type="email" placeholder="Email" [(ngModel)]="emailOrUsername" name="email" (blur)="validateMail('email')" [ngClass]="{ 'error-container': !loginSuccessfull }" />
+          <input type="email" placeholder="Email" [(ngModel)]="emailOrUsername" name="email" (ngModelChange)="validateMail('email')" [ngClass]="{ 'error-container': !loginSuccessfull }" />
+                  <span [ngClass]="{ visible: invalidFields.includes('email') , invisible: !invalidFields.includes('email') }">Your email seems invalid </span>
+
         </div>
         <div class="input-container" [ngClass]="{ 'error-container': !loginSuccessfull }">
   <img
@@ -35,7 +37,16 @@
     name="password"
     (input)="onPasswordInput()"
     [ngClass]="{ 'error-input': !loginSuccessfull }"
+    (ngModelChange)="validatePassword()"
   />
+  <span
+  [ngClass]="{
+    visible: invalidFields.includes('password'),
+    invisible: !invalidFields.includes('password')
+  }"
+>
+  Password must be at least 6 characters
+</span>
 </div>
 
 <span

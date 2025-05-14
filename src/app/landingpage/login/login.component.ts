@@ -133,6 +133,20 @@ export class LoginComponent {
       addFieldIfInvalid(isInvalid, 'email');
     }    
   }
+
+   validatePassword() {
+    const addFieldIfInvalid = (condition: boolean, fieldName: string) => {
+      if (condition && !this.invalidFields.includes(fieldName)) {
+        this.invalidFields.push(fieldName);
+      } else if (!condition) {
+        this.invalidFields = this.invalidFields.filter(f => f !== fieldName);
+      }
+    };
+    const isInvalid = !this.password || this.password.length < 6;
+    addFieldIfInvalid(isInvalid, 'password');
+
+      
+  }
   
   /**
    * Handles the login form submission.

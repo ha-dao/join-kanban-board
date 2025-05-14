@@ -122,15 +122,13 @@ export class SignupComponent {
   public async onRegister() {    
     if(this.password === this.passwordConfirm){
       try {
-        await this.authService.register(this.email, this.password, this.name);
-        this.feedbackService.show('Registration successfull');
+        await this.authService.register(this.email, this.password, this.name);        
         if(!this.checkIfMailinUseInContact()){
           await this.contactService.addContact({name:this.name,email: this.email, phone: 'Not existing yet'})
-        }
-        this.authService.login(this.email, this.password);  
+        }        
         this.authService.UserLoggedIn = this.authService.getUsername(this.email);     
-        this.router.navigate(['/summary']);
-        localStorage.setItem('loggedIn', this.authService.UserLoggedIn);
+        this.router.navigate(['/login']);
+        this.feedbackService.show('Registration successfull');        
       } catch (err: any) {
         this.error = err.message;
       }
