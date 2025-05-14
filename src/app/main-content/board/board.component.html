@@ -28,12 +28,12 @@
           <div class="column-header">
             <div class="column-title">
               <span>{{column.title}}</span>
-              @if(column.title != 'Done' && !desktopView){
+              @if(column.title != 'Done' && !desktopView()){
                 <button (click)="setNewTaskStatus(column.status); overlayService.openOverlay('add-task')"
                  class="add-button">
                   <img src="assets/img/3-board/plus.svg" alt="Add" />
                 </button>
-              } @if (desktopView) {
+              } @else if(column.title != 'Done' && desktopView()){
                  <button (click)="setNewTaskStatus(column.status); goToAnotherPage('add-task')"
                  class="add-button">
                   <img src="assets/img/3-board/plus.svg" alt="Add" />

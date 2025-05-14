@@ -1,4 +1,4 @@
-import { Component, ElementRef, inject, ViewChild, OnInit, HostListener } from '@angular/core';
+import { Component, ElementRef, inject, ViewChild, OnInit, HostListener, signal, effect } from '@angular/core';
 import { ContactService } from '../../services/contact.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -20,9 +20,12 @@ import { Router, RouterLink } from '@angular/router';
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
 })
-export class BoardComponent implements OnInit {
+export class BoardComponent  {
   /** Flag to track if search is active */
   isActive = false;
+ 
+  desktopView = signal(window.innerWidth < 1440);
+  
   /** Search query string */
   searchQuery = '';
   /** Service for managing overlay content */
@@ -35,7 +38,6 @@ export class BoardComponent implements OnInit {
   dropDownOpen: boolean = false;
   /** Flag to track if the device is mobile */
   isMobile = false;
-desktopView: boolean = window.innerWidth <= 1440;
   /** Reference to the overlay element */
   @ViewChild('overlayRef') overlayRef!: ElementRef;
   /** Reference to the dropdown overlay element */
@@ -44,7 +46,17 @@ desktopView: boolean = window.innerWidth <= 1440;
   /**
    * Lifecycle hook that is called after data-bound properties are initialized
    */
-  ngOnInit(): void {}
+
+  constructor() {
+    this.checkWindowSize();
+    effect(() => {
+      
+    });
+    window.addEventListener('resize', () => {
+      this.desktopView.set(window.innerWidth < 1440);
+    });
+  }
+  
 
   /**
    * Updates the status of a task
@@ -59,7 +71,9 @@ desktopView: boolean = window.innerWidth <= 1440;
 
   @HostListener('window:resize', [])
   onResize() {
-    this.desktopView = window.innerWidth <= 1440;
+    console.log(this.desktopView);
+    
+   
   }
 
   /**
@@ -185,9 +199,7 @@ desktopView: boolean = window.innerWidth <= 1440;
   /**
    * Constructor initializes and checks window size
    */
-  constructor() {
-    this.checkWindowSize();
-  }
+ 
 
   /**
    * Navigates to the specified route.
