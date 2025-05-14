@@ -126,6 +126,9 @@
   .header {
     padding: 0 20px;
     height: 80px;
+    .content {
+      padding: 0;
+    }
   }
 
   .header-content {

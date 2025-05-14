@@ -1,15 +1,15 @@
 
 <div class="overlay" [ngClass]="{ open: overlayService.isOpen(), closed: !overlayService.isOpen() }"  (click)="handleBackdropClick($event)">
     <div class="content-wrapper" #overlayRef >
-      <a 
+      <a
         ><img
-          src="assets/img/addContactOverlay/X.svg"
+          src="assets/img/4-contacts/X.svg"
           alt="x-icon close button"
           (click)="clearForm(); this.overlayService.closeOverlay(); $event.stopPropagation()"
       /></a>
-  
+
       <div class="logo-div">
-        <img src="assets/img/addContactOverlay/joinLogo.svg" alt="join Logo" />
+        <img src="assets/img/4-contacts/joinLogo.svg" alt="join Logo" />
         <h2>{{overlayService.ContactOverlayH2Text}}</h2>
         <span class="subtitle">Tasks are better with a team!</span>
         <div class="line-div"></div>
@@ -21,7 +21,7 @@
           </div>
         }@else {
           <img
-            src="assets/img/addContactOverlay/profile-image-empty.svg"
+            src="assets/img/4-contacts/profile-image-empty.svg"
             alt=""
           />
         }
@@ -30,7 +30,7 @@
         <div class="form-wrapper">
           <div class="input-div">
             <img
-              src="assets/img/addContactOverlay/person.svg"
+              src="assets/img/4-contacts/person.svg"
               alt="search"
             />
             <input
@@ -45,11 +45,11 @@
               [class.invalid]="invalidFields.includes('name')"
               placeholder ="Name"
             />
-            <span [ngClass]="{visible: invalidFields.includes('name'), invisible: !invalidFields.includes('name')}">Please enter a name (at least 2 characters)</span>
           </div>
+          <span [ngClass]="{visible: invalidFields.includes('name'), invisible: !invalidFields.includes('name')}">Please enter a name (at least 2 characters)</span>
           <div class="input-div">
             <img
-              src="assets/img/addContactOverlay/mail.svg"
+              src="assets/img/4-contacts/mail.svg"
               alt="search"
             />
             <input
@@ -64,11 +64,11 @@
               [class.invalid]="invalidFields.includes('email')"
               placeholder="Email"
             />
-            <span [ngClass]="{visible: invalidFields.includes('email'), invisible: !invalidFields.includes('email')}">Your email seems invalid or is already existing</span>
           </div>
+          <span [ngClass]="{visible: invalidFields.includes('email'), invisible: !invalidFields.includes('email')}">Your email seems invalid or is already existing</span>
           <div class="input-div">
             <img
-              src="assets/img/addContactOverlay/phone.svg"
+              src="assets/img/4-contacts/phone.svg"
               alt="search"
             />
             <input
@@ -82,14 +82,14 @@
               (blur)="validateForm('phone')"
               [class.invalid]="invalidFields.includes('phone')"
               placeholder=" Phone"
-  
+
             />
-            <span [ngClass]="{visible: invalidFields.includes('phone'), invisible: !invalidFields.includes('phone')}">Your phone number looks wrong</span>
           </div>
+          <span [ngClass]="{visible: invalidFields.includes('phone'), invisible: !invalidFields.includes('phone')}">Your phone number looks wrong</span>
           <div class="button-div">
             <button class="cancel-button" (click)="cancelOrDelete()">
               {{this.overlayService.buttonLeft}}
-              <img src="assets/img/addContactOverlay/X.svg" alt="Close Icon" />
+              <img src="assets/img/4-contacts/X.svg" alt="Close Icon" />
             </button>
             <button
               class="create-button"
@@ -98,7 +98,7 @@
             >
             {{this.overlayService.buttonRight}}
               <img
-                src="assets/img/addContactOverlay/check.svg"
+                src="assets/img/4-contacts/check-icon.svg"
                 alt=""
               />
             </button>
@@ -107,4 +107,3 @@
       </div>
     </div>
   </div>
-  

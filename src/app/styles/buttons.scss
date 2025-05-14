@@ -55,7 +55,7 @@
   }
 }
 
-.login-btn {
+.login-btn, .sign-up-btn {
   @include button-base($primary-color, $white, $primary-color, 700);
 
   &:hover {
@@ -71,7 +71,7 @@
   }
 }
 
-.login-btn:disabled {
+.login-btn:disabled, .sign-up-btn:disabled {
   background-color: $grey;
   border-color: $grey;
   cursor: not-allowed;

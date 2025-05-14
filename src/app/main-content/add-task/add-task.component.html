@@ -2,7 +2,7 @@
   <div class="title-close-wrapper">
     <h2 [ngClass]="{ visible: overlayService.setTemplate() !=='edit-task', invisible: overlayService.setTemplate() =='edit-task' }">Add Task</h2>
     <a class="close-button" [ngClass]="{ visible: overlayService.isOpen(), invisible: !overlayService.isOpen() }">
-      <img src="assets/img/addContactOverlay/X.svg" alt="x-icon close button" (click)="this.overlayService.closeOverlay(); $event.stopPropagation(); resetForm()" />
+      <img src="assets/img/4-contacts/X.svg" alt="x-icon close button" (click)="this.overlayService.closeOverlay(); $event.stopPropagation(); resetForm()" />
     </a>
   </div>
 
@@ -160,13 +160,11 @@
             <input [(ngModel)]="newSubtask.title" type="text" name="Subtasks" placeholder="Add new subtask" (input)="onInputChangeSubtask()" (keyup.enter)="addSubtask()"
             />
             @if(!showActionIcons){
-              <img src="assets/icon/+Symbol.svg" class="input-icon-add" alt="Plus" (click)="addSubtask()"   />
+              <img src="assets/icon/plus-icon.svg" class="input-icon-add" alt="Plus" (click)="addSubtask()"   />
 
             }
             @if (showActionIcons) {
               <div class="action-icons">
-
-
                 <span>
                   <img
                   src="assets/icon/trash.svg"

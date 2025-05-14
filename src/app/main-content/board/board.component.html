@@ -8,17 +8,17 @@
           (input)="onInputChange($event, searchQuery)" />
         <span class="separator">|</span>
         <button class="search-button" (click)="toggleActive()">
-          <img src="assets/img/board/search.svg" alt="Search" />
+          <img src="assets/img/3-board/search.svg" alt="Search" />
         </button>
       </div>
 
       <button (click)="setNewTaskStatus('ToDo'); overlayService.openOverlay('add-task')"
         class="add-task-button create-button">
         Add task
-        <img src="assets/img/board/plus.svg" alt="Add Task" />
+        <img src="assets/img/3-board/plus.svg" alt="Add Task" />
       </button>
     </div>
-      <img src="assets/img/board/plus.svg" alt="Add Task" class="plus-button" routerLink="/add-task" />
+      <img src="assets/img/3-board/plus.svg" alt="Add Task" class="plus-button" routerLink="/add-task" />
   </div>
 
   <div class="columns-container">
@@ -31,7 +31,7 @@
               @if(column.title != 'Done'){
                 <button (click)="setNewTaskStatus(column.status); overlayService.openOverlay('add-task')"
                  class="add-button">
-                  <img src="assets/img/board/plus.svg" alt="Add" />
+                  <img src="assets/img/3-board/plus.svg" alt="Add" />
                 </button>
               }
             </div>

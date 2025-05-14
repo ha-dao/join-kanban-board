@@ -1,21 +1,111 @@
 @import './../../styles/variables.scss';
 @import './../../styles/mixins.scss';
-@import './../../styles/buttons.scss'; 
+@import './../../styles/buttons.scss';
+
+.sign-up-page-wrapper {
+  @include displayFlex(flex, column, flex-start, flex-start, 24px, nowrap);
+  height: 100vh;
+  overflow-y: auto;
+  background-color: $background-color;
+}
 
 .header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @include displayFlex(flex, row, space-between, center, 0, nowrap);
   padding: 20px;
   width: 100%;
+  max-width: 1920px;
+  margin: 0 auto;
+  > a {
+    img {
+      width: clamp(40px, 10vw, 80px);
+      height: auto;
+      opacity: 1;
+      z-index: 999;
+      animation: fadeIn 1s ease 1s forwards;
+      transition: all 250ms ease-in;
+    }
+  }
+}
+
+.splash-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: $white;
+  animation: fadeOut 1s ease 1s forwards;
+  z-index: 998;
+  padding: 0;
+  .header2 {
+    position: relative;
+    max-width: 1920px;
+    min-height: 100vh;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 20px;
+    > a {
+      img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 999;
+        transform: scale(2);
+        animation: moveToHeader 0.6s ease 0.6s forwards;
+        width: clamp(40px, 10vw, 80px);
+        height: auto;
+        opacity: 1;
+        transition: all 250ms ease;
+      }
+    }
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    visibility: hidden;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes moveToHeader {
+  0% {
+    transform: scale(2);
+  }
+  55% {
+    position: absolute;
+  }
+  90% {
+    position: initial;
+    top: 0;
+    left: 0;
+  }
+  100% {
+    transform: scale(1);
+    position: initial;
+  }
 }
 
 .sign-up-container {
   width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
+  margin: 0 auto;
+  max-width: 1920px;
+  flex: 1;
+  @include displayFlex(flex, column, flex-start, center, 40px, nowrap);
   .back {
     position: sticky;
     left: 100%;
@@ -27,23 +117,18 @@
     border: none;
     padding: 0;
     cursor: pointer;
-    display: flex;  
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;  
+    @include displayFlex(flex, row, center, center, 0, nowrap);
+    border-radius: 50%;
     transition: background 0.2s, transform 0.2s;
-  
     img {
-      width: 60%;         
+      width: 60%;
       height: 60%;
       object-fit: contain;
       transition: transform 0.2s;
     }
-  
     &:hover {
-      background: #e0e0e0; 
+      background: #e0e0e0;
       transform: scale(1.1);
-  
       img {
         transform: scale(1.2);
       }
@@ -51,30 +136,24 @@
   }
 
   .content-wrapper {
-    max-width: 652px;
-    height: 100%;
+    width: 650px;
+    max-width: 100%;
     margin: 100px auto;
-    padding: 48px 115px;
+    padding: 48px;
     border-radius: 30px;
-    background: $white;
+    background-color: $white;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-    position: relative;
-
     .form-header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @include displayFlex(flex, row, center, center, 0, nowrap);
       position: relative;
       margin-bottom: 24px;
-
       img {
         position: absolute;
         left: 0;
         cursor: pointer;
         height: 24px;
       }
-
       h1 {
         margin: 0 auto;
         font-size: 32px;
@@ -84,31 +163,34 @@
     .divider {
       height: 4px;
       background: $hover-color;
-      width: 40%;
+      width: 15%;
       margin: 0 auto 24px;
     }
 
     form {
-      display: flex;
-      flex-direction: column;
-
+      @include displayFlex(flex, column, auto, flex-start, 0, nowrap);
+      padding: 0 80px;
       .input-wrapper {
         position: relative;
-        margin-bottom: 24px;
-
-        input[type="text"],
-        input[type="email"],
-        input[type="password"] {
+        width: 100%;
+        input[type='text'],
+        input[type='email'],
+        input[type='password'] {
           display: block;
           width: 100%;
           padding: 12px;
           padding-right: 44px;
           border: 1px solid #ccc;
-          border-radius: 4px;
+          border-radius: 8px;
           font-size: 16px;
           box-sizing: border-box;
         }
-
+        input.invalid {
+          border: 1px solid $text-alert-color !important;
+          &:focus {
+            border: 1px solid $text-alert-color !important;
+          }
+        }
         img {
           position: absolute;
           top: 50%;
@@ -117,38 +199,52 @@
           height: 22px;
           pointer-events: none;
         }
-
-        span {
-          display: block;
-          font-size: 13px;
-          color: #e74c3c;
-          margin-top: 2px;
-          margin-bottom: 0;
-          text-align: left;
-          &.invisible {
-            visibility: hidden;
-          }
-          &.visible {
-            visibility: visible;
-          }          
-        }
+      }
+      span {
+        display: inline-flex;
+        font-size: 13px;
+        color: $text-alert-color;
+        margin-top: 2px;
+        margin-bottom: 8px;
+        justify-content: flex-start;
+        text-align: left;
       }
 
       .check-box {
+        @include displayFlex(flex, row, center, flex-start, 4px, nowrap);
         margin: 16px 0 32px;
-        justify-content: center; 
-        align-items: center;   
-        display: flex;
-        align-items: flex-start;
-        gap: 10px;
+        align-self: center;
+        span {
+          display: inline-flex;
+          padding: 4px;
+          margin-top: -2px;
+          width: 24px;
+          height: 24px;
+          border-radius: 50%;
+          input[type='checkbox'] {
+            display: inline-flex;
+            appearance: none;
+            -webkit-appearance: none;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+            background-size: contain;
+            background-repeat: no-repeat;
+            border: none;
+            &.checkbox-unchecked {
+              background-image: url('./../../../assets/img/3-board/checkbox-unchecked-icon.svg');
+            }
 
-        input[type="checkbox"] {
-          margin-top: 2px;
+            &.checkbox-checked {
+              background-image: url('./../../../assets/img/3-board/checkbox-checked-icon.svg');
+            }
+          }
+          &:hover {
+            background-color: $grey;
+          }
         }
-
         label {
           font-size: 14px;
-
           a {
             color: $hover-color;
             text-decoration: none;
@@ -159,33 +255,76 @@
           }
         }
       }
+      button {
+        align-self: center;
+      }
     }
   }
 }
 
+.invisible {
+  opacity: 0;
+}
+.visible {
+  opacity: 1;
+}
+
 .footer {
   width: 100%;
-  max-width: 1920px;
   padding: 20px;
-  height: 48px;
-  position: fixed; 
-  bottom: 20px;
-  left: 58%;
-  transform: translateX(-50%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include displayFlex(flex, column, center, center, 32px, nowrap);
   text-align: center;
-  gap: 35px;
+  > div {
+    @include displayFlex(flex, row, center, center, 32px, nowrap);
+  }
+}
 
-  a {
-    color: #a8a8a8;
-    text-decoration: none;
-    transition: color 0.2s ease;
-    cursor: pointer;
+.footer a {
+  color: #a8a8a8;
+  text-decoration: none;
+  font-size: 16px;
+  transition: color 0.2s ease;
+  cursor: pointer;
+}
 
-    &:hover {
-      color: $hover-color;
+.footer a:hover {
+  color: #29abe2;
+}
+
+@media (max-width: 768px) {
+  .sign-up-page-wrapper {
+    gap: 0;
+  }
+  .splash-screen {
+    background-color: $primary-color;
+    .header2 {
+      > a {
+        img {
+          filter: brightness(0) saturate(100%) invert(99%) sepia(4%) saturate(617%) hue-rotate(322deg) brightness(116%) contrast(100%);
+        }
+      }
+    }
+  }
+  .sign-up-container {
+    width: calc(100% - 16px);
+    .content-wrapper {
+      margin: 0;
+      padding: 24px;
+      .form-header {
+        margin-bottom: 16px;
+      }
+      form {
+        padding: 0;
+        .check-box {
+          margin: 0;
+        }
+        span {
+          font-size: 11px;
+        }
+        > button {
+          padding: 8px 32px;
+        }
+      }
     }
   }
 }
