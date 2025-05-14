@@ -20,7 +20,7 @@
       <form action="" autocomplete="off">
         <div class="input-container">
           <img src="assets/img/login/mail.svg" alt="Email icon" />
-          <input type="email" placeholder="Email" [(ngModel)]="emailOrUsername" name="email" (ngModelChange)="validateMail('email')" [ngClass]="{ 'error-container': !loginSuccessfull }" />
+          <input type="email" placeholder="Email" [(ngModel)]="emailOrUsername" name="email" (blur)="validateMail('email')" (ngModelChange)="validateMail('email')" [ngClass]="{ 'error-container': !loginSuccessfull }" />
                   <span [ngClass]="{ visible: invalidFields.includes('email') , invisible: !invalidFields.includes('email') }">Your email seems invalid </span>
 
         </div>
@@ -35,6 +35,7 @@
     placeholder="Password"
     [(ngModel)]="password"
     name="password"
+    (blur)="validatePassword()"
     (input)="onPasswordInput()"
     [ngClass]="{ 'error-input': !loginSuccessfull }"
     (ngModelChange)="validatePassword()"

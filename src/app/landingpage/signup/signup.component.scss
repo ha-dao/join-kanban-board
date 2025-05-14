@@ -210,6 +210,12 @@
         text-align: left;
       }
 
+      .checkBoxError{
+        width: 100%;
+        text-align:center;
+        justify-content: center;        
+      }
+
       .check-box {
         @include displayFlex(flex, row, center, flex-start, 4px, nowrap);
         margin: 16px 0 32px;

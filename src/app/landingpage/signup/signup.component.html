@@ -20,13 +20,13 @@
       <div class="divider"></div>
       <form #form="ngForm" (ngSubmit)="onRegister()" autocomplete="off">
         <div class="input-wrapper">
-          <input type="text" placeholder="Name" required name="name" [(ngModel)]="name" (ngModelChange)="validateForm('name')" [class.invalid]="invalidFields.includes('name')" />
+          <input type="text" placeholder="Name" required name="name" [(ngModel)]="name" (blur)="validateForm('name')" (ngModelChange)="validateForm('name')" [class.invalid]="invalidFields.includes('name')" />
           <img src="assets/img/singUp/person.svg" alt="Email icon" />
         </div>
         <span [ngClass]="{ visible: invalidFields.includes('name'), invisible: !invalidFields.includes('name') }">Please enter a name (at least 2 characters)</span>
 
         <div class="input-wrapper">
-          <input type="email" placeholder="Email" required name="email" [(ngModel)]="email" (ngModelChange)="validateForm('email'); this.authService.emailAlreadyUsed = false" [class.invalid]="invalidFields.includes('email')"[class.invalid]="invalidFields.includes('email') || authService.emailAlreadyUsed == true" />
+          <input type="email" placeholder="Email" required name="email" [(ngModel)]="email" (blur)="validateForm('email')" (ngModelChange)="validateForm('email'); this.authService.emailAlreadyUsed = false" [class.invalid]="invalidFields.includes('email')"[class.invalid]="invalidFields.includes('email') || authService.emailAlreadyUsed == true" />
           <img src="assets/img/login/mail.svg" alt="Email icon" />
         </div>
         <span [ngClass]="{ visible: invalidFields.includes('email') || authService.emailAlreadyUsed == true, invisible: !invalidFields.includes('email') }">Your email seems invalid or is already existing</span>
@@ -47,6 +47,7 @@
     [type]="passwordVisible ? 'text' : 'password'"
     placeholder="Password"
     required
+    (blur)="validateForm('password')"
     name="password"
     [(ngModel)]="password"
     (input)="onPasswordInput('password')"
@@ -69,6 +70,7 @@
     [type]="confirmPasswordVisible ? 'text' : 'password'"
     placeholder="Confirm Password"
     required
+    (blur)="validateForm('confirmPassword')"
     name="confirmPassword"
     [(ngModel)]="passwordConfirm"
     (input)="onPasswordInput('confirmPassword')"
@@ -97,10 +99,14 @@
 </span>
         <div class="check-box">
           <span>
-          <input type="checkbox" id="privacy" required #privacyCheckbox [(ngModel)]="privacyAccepted" name="privacy" [ngClass]="privacyAccepted ? 'checkbox-checked' : 'checkbox-unchecked'"  />
+          <input type="checkbox" id="privacy" required #privacyCheckbox [(ngModel)]="privacyAccepted" name="privacy"  (change)="validatePrivacy()" [ngClass]="privacyAccepted ? 'checkbox-checked' : 'checkbox-unchecked'"  />
           </span>
+          
           <label for="privacy">I accept the <a routerLink="/privacy" (click)="goToAnotherPage('/privacy')">Privacy Policy</a> </label>
         </div>
+        @if(showPrivacyError){
+          <span class="checkBoxError">Please accept our privacy policy</span>
+          }
         <button class="sign-up-btn" type="submit" [disabled]="!privacyAccepted || invalidFields.length > 0 || !isFormValid">Sign up</button>
       </form>
     </div>

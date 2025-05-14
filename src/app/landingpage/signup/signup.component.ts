@@ -56,7 +56,8 @@ export class SignupComponent {
   
   /** Error message to display when registration fails */
   public error = '';
-
+  privacyError:boolean = false
+  showPrivacyError:boolean= false
   
   /**
    * Indicates whether the password field input should be visible (shown as plain text).
@@ -100,6 +101,11 @@ export class SignupComponent {
       this.confirmPasswordEntered = this.passwordConfirm.length > 0;
       if (!this.confirmPasswordEntered) this.confirmPasswordVisible = false;
     }
+  }
+
+  validatePrivacy(){
+      this.showPrivacyError = !this.privacyAccepted;
+
   }
 
   /**
