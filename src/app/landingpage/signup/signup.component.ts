@@ -57,13 +57,64 @@ export class SignupComponent {
   /** Error message to display when registration fails */
   public error = '';
 
+  
+  /**
+   * Indicates whether the password field input should be visible (shown as plain text).
+   */
+  passwordVisible: boolean = false;
+
+  /**
+   * Indicates whether the confirm password field input should be visible (shown as plain text).
+   */
+  confirmPasswordVisible: boolean = false;
+
+  /**
+   * True if the user has entered any value into the password field.
+   */
+  passwordEntered: boolean = false;
+
+  /**
+   * True if the user has entered any value into the confirm password field.
+   */
+  confirmPasswordEntered: boolean = false;
+
   /**
    * Creates an instance of SignupComponent.
-   * @param authService - Service for authentication operations
-   * @param router - Angular Router service for navigation
+   * 
+   * @param authService - Service used to perform authentication operations
+   * @param router - Angular Router service used for navigation
    */
   constructor(public authService: AuthService, private router: Router) {}
 
+  /**
+   * Handles input events for both password fields.
+   * Tracks whether the user has entered content and resets visibility if empty.
+   * 
+   * @param field - Either 'password' or 'confirmPassword' to determine which input is being updated
+   */
+  onPasswordInput(field: 'password' | 'confirmPassword'): void {
+    if (field === 'password') {
+      this.passwordEntered = this.password.length > 0;
+      if (!this.passwordEntered) this.passwordVisible = false;
+    } else {
+      this.confirmPasswordEntered = this.passwordConfirm.length > 0;
+      if (!this.confirmPasswordEntered) this.confirmPasswordVisible = false;
+    }
+  }
+
+  /**
+   * Toggles visibility of the specified password input.
+   * Only works if the corresponding field contains text.
+   * 
+   * @param field - Either 'password' or 'confirmPassword' indicating which input should toggle visibility
+   */
+  togglePasswordVisibility(field: 'password' | 'confirmPassword'): void {
+    if (field === 'password' && this.passwordEntered) {
+      this.passwordVisible = !this.passwordVisible;
+    } else if (field === 'confirmPassword' && this.confirmPasswordEntered) {
+      this.confirmPasswordVisible = !this.confirmPasswordVisible;
+    }
+  }
   /**
    * Handles the registration form submission.
    * Validates passwords match, registers the user, and redirects on success.
