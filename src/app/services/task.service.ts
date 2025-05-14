@@ -57,21 +57,21 @@ export class TaskService implements OnDestroy {
     dropDownOpen: false
   };
   tempAssignedTo:Contact[]=[];
-  
+
   priorityOrder = {
     "Urgent": 1,
     "Medium": 2,
     "Low": 3,
     "": 4
   };
-  
+
   /**
    * Initializes the TaskService and starts listening to task changes.
    */
   constructor() {
     this.snap();
   }
-  
+
   /**
    * Fills the board columns with tasks based on their status and sorts them by priority.
    */
@@ -145,7 +145,7 @@ export class TaskService implements OnDestroy {
       this.isTasksLoaded.set(true);
     });
   }
-  
+
   /**
    * Adds a new task to Firestore and updates the board.
    * @param {Task} task - The task to add.
@@ -154,6 +154,9 @@ export class TaskService implements OnDestroy {
     task.status = this.newTaskStatus;
     task.priority= this.taskData.priority
     task.dropDownOpen = false;
+    if (task.status == '') {
+      task.status = 'ToDo';
+    }
     await addDoc(this.getTasksRef(), task)
       .catch((err) => {
         console.error(err);
