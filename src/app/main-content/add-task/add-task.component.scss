@@ -291,7 +291,7 @@ section {
   }
 }
 .selected-contact-wrapper {
-  @include displayFlex(flex, row, flex-start, auto, 8px, wrap);
+  @include displayFlex(flex, row, flex-start, auto, 8px, nowrap);
   margin-bottom: 16px;
   margin-top: 8px;
 }

@@ -7,7 +7,7 @@ import { TaskService } from '../../services/task.service';
 import { Task } from '../../interfaces/task';
 import { TaskComponent } from '../task/task.component';
 import { CdkDragDrop, moveItemInArray, transferArrayItem, CdkDrag, CdkDropList, CdkDragPreview } from '@angular/cdk/drag-drop';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 /**
  * Component for managing task board functionality.
@@ -26,36 +26,42 @@ export class BoardComponent implements OnInit {
   /** Search query string */
   searchQuery = '';
   /** Service for managing overlay content */
-  overlayService = inject(OverlayService)
+  overlayService = inject(OverlayService);
   /** Service for managing tasks */
   taskService = inject(TaskService);
+    /** Service for managing routes */
+  router = inject(Router);
   /** Flag to track if dropdown is open */
-  dropDownOpen:boolean = false
+  dropDownOpen: boolean = false;
   /** Flag to track if the device is mobile */
   isMobile = false;
-  
+desktopView: boolean = window.innerWidth <= 1440;
   /** Reference to the overlay element */
   @ViewChild('overlayRef') overlayRef!: ElementRef;
   /** Reference to the dropdown overlay element */
   @ViewChild('overlayRef') overlayRefDropDown!: ElementRef;
-  
+
   /**
    * Lifecycle hook that is called after data-bound properties are initialized
    */
-  ngOnInit(): void {
-  }
-  
+  ngOnInit(): void {}
+
   /**
    * Updates the status of a task
    * @param status - The new status to set
    * @param task - The task to update
    */
-  setNewStatus(status:string, task:Task){
+  setNewStatus(status: string, task: Task) {
     task.status = status;
-    task.dropDownOpen = false
-    this.taskService.updateTask(task.id, task)
+    task.dropDownOpen = false;
+    this.taskService.updateTask(task.id, task);
   }
-  
+
+  @HostListener('window:resize', [])
+  onResize() {
+    this.desktopView = window.innerWidth <= 1440;
+  }
+
   /**
    * Toggles the search functionality
    * Resets search query when deactivated
@@ -71,10 +77,10 @@ export class BoardComponent implements OnInit {
    * Toggles the dropdown visibility for a task
    * @param task - The task associated with the dropdown
    */
-  openDropDown(task:Task){
-    task.dropDownOpen = !task.dropDownOpen
+  openDropDown(task: Task) {
+    task.dropDownOpen = !task.dropDownOpen;
   }
-  
+
   /**
    * Handles input changes for search and filtering
    * @param event - The input event
@@ -83,50 +89,50 @@ export class BoardComponent implements OnInit {
   onInputChange(event: Event, inputField: string) {
     this.taskService.searchAndFilter(event, inputField);
   }
-  
+
   /**
    * Global click handler to close task dropdowns when clicking outside
    * @param event - The mouse event
    */
   @HostListener('document:click', ['$event'])
-  onDocumentClick(event:MouseEvent){
-    this.taskService.boardColumns.forEach(taskList => {
-      taskList.list.forEach(task =>{
-        const dropdownElement= document.getElementById('dropdown' + task.id);
-        if(task.dropDownOpen && dropdownElement && !dropdownElement.contains(event.target as Node)){
+  onDocumentClick(event: MouseEvent) {
+    this.taskService.boardColumns.forEach((taskList) => {
+      taskList.list.forEach((task) => {
+        const dropdownElement = document.getElementById('dropdown' + task.id);
+        if (task.dropDownOpen && dropdownElement && !dropdownElement.contains(event.target as Node)) {
           task.dropDownOpen = false;
         }
-      })
-    })
+      });
+    });
   }
-  
+
   /**
    * Handles clicks on the backdrop to close overlay if needed
    * @param event - The mouse event
    * @param task - The associated task
    */
-  handleBackdropClick(event: MouseEvent, task:Task) {
+  handleBackdropClick(event: MouseEvent, task: Task) {
     const clickedInside = this.overlayRef.nativeElement.contains(event.target);
     if (!clickedInside && this.overlayService.isOpen()) {
       this.overlayService.closeOverlay();
     }
   }
-  
+
   /**
    * Sets the status for a new task
    * @param status - The status to set
    */
-  setNewTaskStatus(status:string){
+  setNewTaskStatus(status: string) {
     this.taskService.newTaskStatus = status;
   }
-  
+
   /**
    * Calculates the number of completed subtasks for a task
    * @param task - The task to check
    * @returns The number of completed subtasks
    */
   getCompletedSubtasks(task: Task): number {
-    return task.subtasks?.filter(t => t.isDone).length || 0;
+    return task.subtasks?.filter((t) => t.isDone).length || 0;
   }
 
   /**
@@ -138,7 +144,7 @@ export class BoardComponent implements OnInit {
     if (!task.subtasks?.length) return 0;
     return (this.getCompletedSubtasks(task) / task.subtasks.length) * 100;
   }
-  
+
   /**
    * Opens the task detail view
    * @param task - The task to display details for
@@ -147,10 +153,10 @@ export class BoardComponent implements OnInit {
     this.taskService.setSelectedTask(task);
     this.overlayService.openOverlay('show-task');
   }
-  
+
   /** Lists that can be connected for drag-drop operations */
   connectedDropLists = ['todoList', 'inProgressList', 'awaitFeedbackList', 'doneList'];
-  
+
   /**
    * Handles the drop event for drag-drop operations
    * @param event - The drag drop event
@@ -162,17 +168,12 @@ export class BoardComponent implements OnInit {
     if (event.previousContainer !== event.container) {
       task.status = newStatus;
       this.taskService.updateTask(task.id, task);
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
+      transferArrayItem(event.previousContainer.data, event.container.data, event.previousIndex, event.currentIndex);
     } else {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     }
   }
-  
+
   /**
    * Host listener to check window size and set mobile flag
    */
@@ -180,11 +181,19 @@ export class BoardComponent implements OnInit {
   checkWindowSize() {
     this.isMobile = window.innerWidth <= 1280;
   }
-  
+
   /**
    * Constructor initializes and checks window size
    */
   constructor() {
     this.checkWindowSize();
+  }
+
+  /**
+   * Navigates to the specified route.
+   * @param target - Route path to navigate to
+   */
+  goToAnotherPage(target: string): void {
+    this.router.navigate([target]);
   }
 }

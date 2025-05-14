@@ -18,7 +18,7 @@
         <img src="assets/img/3-board/plus.svg" alt="Add Task" />
       </button>
     </div>
-      <img src="assets/img/3-board/plus.svg" alt="Add Task" class="plus-button" routerLink="/add-task" />
+      <img src="assets/img/3-board/plus.svg" alt="Add Task" class="plus-button" (click)="setNewTaskStatus('ToDo');" routerLink="/add-task" />
   </div>
 
   <div class="columns-container">
@@ -28,8 +28,13 @@
           <div class="column-header">
             <div class="column-title">
               <span>{{column.title}}</span>
-              @if(column.title != 'Done'){
+              @if(column.title != 'Done' && !desktopView){
                 <button (click)="setNewTaskStatus(column.status); overlayService.openOverlay('add-task')"
+                 class="add-button">
+                  <img src="assets/img/3-board/plus.svg" alt="Add" />
+                </button>
+              } @if (desktopView) {
+                 <button (click)="setNewTaskStatus(column.status); goToAnotherPage('add-task')"
                  class="add-button">
                   <img src="assets/img/3-board/plus.svg" alt="Add" />
                 </button>
