@@ -61,6 +61,7 @@ app-sidebar {
   app-header{
     width: 100%;
   }
+
   .content-wrapper {
     max-width: 100%;
     margin-left: 0;
@@ -68,6 +69,9 @@ app-sidebar {
       width: 100%;
       router-outlet {
         width: 100%;
+        display: flex;
+        justify-content: center;
+
       }
     }
   }

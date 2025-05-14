@@ -5,14 +5,14 @@
 h2 {
     margin-bottom: 20px;
   }
-  
+
   h3 {
-  
+
     margin-bottom: 16px;
   }
-  
+
   h4 {
-  
+
     margin-top: 1em;
   }
 
@@ -21,7 +21,7 @@ h2 {
 }
 
   span {
-    font-size: clamp(11px, 2.2vw, 14px);
+    font-size: 16px;
     line-height: 1.6;
     margin-bottom: 14px;
   }
@@ -32,13 +32,13 @@ h2 {
 }
 
 .span {
-  font-size: clamp(11px, 2.2vw, 14px);
+  font-size: 16px;
   line-height: 1.6;
   margin-bottom: 14px;
 }
 
 .legal-text {
-  font-size: clamp(11px, 2.2vw, 14px);
+  font-size: 16px;
   line-height: 1.6;
 }
 
@@ -48,11 +48,11 @@ h2 {
 
 .spacer {
   display: block;
-  
+
 }
 
 .email-link {
   color: hsl(229, 92%, 43%);
   text-decoration: underline;
 }
-  
+

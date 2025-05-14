@@ -4,7 +4,7 @@ import { ContactService } from '../../services/contact.service';
 import { FeedbackServiceService } from '../../services/feedback.service';
 import { Userdata } from '../../interfaces/userdata';
 import { NgClass, CommonModule } from '@angular/common';
-import { AuthService } from '../../services/auth.service'; 
+import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 
 /**
@@ -21,16 +21,16 @@ import { Router } from '@angular/router';
 export class SignupComponent {
   /** Service for managing contacts */
   contactService = inject(ContactService);
-  
+
   /** Service for displaying feedback messages to users */
   feedbackService = inject(FeedbackServiceService);
-  
+
   /** Tracks which form fields have validation errors */
   invalidFields: string[] = [];
-  
+
   /** Indicates if the user has accepted the privacy policy */
   privacyAccepted: boolean = false;
-  
+
   /** Controls visibility of the privacy policy */
   showPrivacy = false;
 
@@ -44,21 +44,21 @@ export class SignupComponent {
 
   /** User's full name */
   name: string = '';
-  
+
   /** User's email address */
   email = '';
-  
+
   /** User's password */
   password = '';
-  
+
   /** Password confirmation for validation */
   passwordConfirm = '';
-  
+
   /** Error message to display when registration fails */
   public error = '';
   privacyError:boolean = false
   showPrivacyError:boolean= false
-  
+
   /**
    * Indicates whether the password field input should be visible (shown as plain text).
    */
@@ -81,7 +81,7 @@ export class SignupComponent {
 
   /**
    * Creates an instance of SignupComponent.
-   * 
+   *
    * @param authService - Service used to perform authentication operations
    * @param router - Angular Router service used for navigation
    */
@@ -90,7 +90,7 @@ export class SignupComponent {
   /**
    * Handles input events for both password fields.
    * Tracks whether the user has entered content and resets visibility if empty.
-   * 
+   *
    * @param field - Either 'password' or 'confirmPassword' to determine which input is being updated
    */
   onPasswordInput(field: 'password' | 'confirmPassword'): void {
@@ -105,13 +105,12 @@ export class SignupComponent {
 
   validatePrivacy(){
       this.showPrivacyError = !this.privacyAccepted;
-
   }
 
   /**
    * Toggles visibility of the specified password input.
    * Only works if the corresponding field contains text.
-   * 
+   *
    * @param field - Either 'password' or 'confirmPassword' indicating which input should toggle visibility
    */
   togglePasswordVisibility(field: 'password' | 'confirmPassword'): void {
@@ -125,16 +124,16 @@ export class SignupComponent {
    * Handles the registration form submission.
    * Validates passwords match, registers the user, and redirects on success.
    */
-  public async onRegister() {    
+  public async onRegister() {
     if(this.password === this.passwordConfirm){
       try {
-        await this.authService.register(this.email, this.password, this.name);        
+        await this.authService.register(this.email, this.password, this.name);
         if(!this.checkIfMailinUseInContact()){
           await this.contactService.addContact({name:this.name,email: this.email, phone: 'Not existing yet'})
-        }        
-        this.authService.UserLoggedIn = this.authService.getUsername(this.email);     
+        }
+        this.authService.UserLoggedIn = this.authService.getUsername(this.email);
         this.router.navigate(['/login']);
-        this.feedbackService.show('Registration successfull');        
+        this.feedbackService.show('Registration successfull');
       } catch (err: any) {
         this.error = err.message;
       }
@@ -146,7 +145,7 @@ export class SignupComponent {
    * @returns Boolean indicating if the email is already in use
    */
   checkIfMailinUseInContact(): boolean {
-    let include = false; 
+    let include = false;
     this.contactService.contactList.forEach(c => {
       if(this.email == c.email){
         include = true;
@@ -160,10 +159,10 @@ export class SignupComponent {
    * @returns Boolean indicating if the form is valid
    */
   get isFormValid(): boolean {
-    const isEmailValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(this.email);    
+    const isEmailValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(this.email);
     return this.name.trim().length >= 2 && isEmailValid;
   }
-  
+
   /**
    * Validates specific form fields and updates the invalidFields array.
    * @param field - Name of the field to validate
@@ -205,8 +204,8 @@ export class SignupComponent {
    */
   validateMail(addFieldIfInvalid: Function) {
     const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-    const email = this.email?.trim().toLowerCase();      
-    const isFormatInvalid = !email || !emailRegex.test(email);    
+    const email = this.email?.trim().toLowerCase();
+    const isFormatInvalid = !email || !emailRegex.test(email);
     const isInvalid = isFormatInvalid;
     addFieldIfInvalid(isInvalid, 'email');
   }
@@ -244,9 +243,10 @@ export class SignupComponent {
   /**
    * Navigates back to the home page.
    */
-  onBackClick(): void {
-    this.router.navigate(['/']);
-  }
+onBackClick(): void {
+  localStorage.setItem('skipLoginAnimation', 'true');
+  this.router.navigate(['/']);
+}
 
   /**
    * Closes the privacy policy dialog.
