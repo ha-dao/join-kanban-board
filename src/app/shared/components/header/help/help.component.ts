@@ -28,6 +28,6 @@ export class HelpComponent {
    * Navigates the user back to the home page when called.
    */
   onBackClick(): void {
-    this.router.navigate(['/']);
+    this.router.navigate(['/summary']);
   }
 }
