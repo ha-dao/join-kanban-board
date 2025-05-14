@@ -69,7 +69,5 @@ export class AppComponent {
     return this.router.url === '/' || this.router.url === '/login' || this.router.url === '/sign-up';
   }
 
-  isAuthRoute() {
-    return this.router.url === '/' || this.router.url === '/login' || this.router.url === '/sign-up';
-  }
+  
 }
