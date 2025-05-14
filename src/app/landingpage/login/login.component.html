@@ -23,10 +23,29 @@
           <input type="email" placeholder="Email" [(ngModel)]="emailOrUsername" name="email" (blur)="validateMail('email')" [ngClass]="{ 'error-container': !loginSuccessfull }" />
         </div>
         <div class="input-container" [ngClass]="{ 'error-container': !loginSuccessfull }">
-          <img src="assets/img/login/lock.svg" alt="Password icon" />
-          <input type="password" placeholder="Password" [(ngModel)]="password" name="password" [ngClass]="{'error-input': !loginSuccessfull}" />
-        </div>
-        <span [ngClass]="{ visible: this.loginSuccessfull == false, invisible: !this.loginSuccessfull == false }">Your comibnation for Email/Password is incorrect</span>
+  <img
+    [attr.src]="passwordVisible ? 'assets/img/login/visibility_off-icon.svg' : passwordEntered ? 'assets/img/login/visibility-icon.svg' : 'assets/img/login/lock.svg'"
+    alt="Password icon"
+    (click)="togglePasswordVisibility()"
+  />
+  <input
+    [type]="passwordVisible ? 'text' : 'password'"
+    placeholder="Password"
+    [(ngModel)]="password"
+    name="password"
+    (input)="onPasswordInput()"
+    [ngClass]="{ 'error-input': !loginSuccessfull }"
+  />
+</div>
+
+<span
+  [ngClass]="{
+    visible: loginSuccessfull === false,
+    invisible: loginSuccessfull !== false
+  }"
+>
+  Your combination for Email/Password is incorrect
+</span>
 
         <div class="buttons">
           <button class="login-btn" (click)="onLogin()" [disabled]="!isFormValid">Log in</button>

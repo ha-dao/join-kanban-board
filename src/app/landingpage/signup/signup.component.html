@@ -31,18 +31,70 @@
         </div>
         <span [ngClass]="{ visible: invalidFields.includes('email') || authService.emailAlreadyUsed == true, invisible: !invalidFields.includes('email') }">Your email seems invalid or is already existing</span>
 
-        <div class="input-wrapper">
-          <input type="password" placeholder="Password" required name="password" [(ngModel)]="password" (ngModelChange)="validateForm('password')" [class.invalid]="invalidFields.includes('password')" />
-          <img src="assets/img/login/lock.svg" alt="Password icon" />
-        </div>
-        <span [ngClass]="{ visible: invalidFields.includes('password'), invisible: !invalidFields.includes('password') }"> Password must be at least 6 characters </span>
+       <div class="input-wrapper">
+        <img
+    [attr.src]="
+      passwordVisible
+        ? 'assets/img/login/visibility_off-icon.svg'
+        : passwordEntered
+          ? 'assets/img/login/visibility-icon.svg'
+          : 'assets/img/login/lock.svg'
+    "
+    alt="Password icon"
+    (click)="togglePasswordVisibility('password')"
+  />
+  <input
+    [type]="passwordVisible ? 'text' : 'password'"
+    placeholder="Password"
+    required
+    name="password"
+    [(ngModel)]="password"
+    (input)="onPasswordInput('password')"
+    (ngModelChange)="validateForm('password')"
+    [class.invalid]="invalidFields.includes('password')"
+  />
+  
+</div>
+<span
+  [ngClass]="{
+    visible: invalidFields.includes('password'),
+    invisible: !invalidFields.includes('password')
+  }"
+>
+  Password must be at least 6 characters
+</span>
 
-        <div class="input-wrapper">
-          <input type="password" placeholder="Confirm Password" required name="confirmPassword" [(ngModel)]="passwordConfirm" (ngModelChange)="validateForm('confirmPassword')" [class.invalid]="invalidFields.includes('confirmPassword')" />
-          <img src="assets/img/login/lock.svg" alt="Password icon" />
-        </div>
-        <span [ngClass]="{ visible: invalidFields.includes('confirmPassword'), invisible: !invalidFields.includes('confirmPassword') }"> Passwords do not match </span>
-
+<div class="input-wrapper">
+  <input
+    [type]="confirmPasswordVisible ? 'text' : 'password'"
+    placeholder="Confirm Password"
+    required
+    name="confirmPassword"
+    [(ngModel)]="passwordConfirm"
+    (input)="onPasswordInput('confirmPassword')"
+    (ngModelChange)="validateForm('confirmPassword')"
+    [class.invalid]="invalidFields.includes('confirmPassword')"
+  />
+  <img
+    [attr.src]="
+      confirmPasswordVisible
+        ? 'assets/img/login/visibility_off-icon.svg'
+        : confirmPasswordEntered
+          ? 'assets/img/login/visibility-icon.svg'
+          : 'assets/img/login/lock.svg'
+    "
+    alt="Password icon"
+    (click)="togglePasswordVisibility('confirmPassword')"
+  />
+</div>
+<span
+  [ngClass]="{
+    visible: invalidFields.includes('confirmPassword'),
+    invisible: !invalidFields.includes('confirmPassword')
+  }"
+>
+  Passwords do not match
+</span>
         <div class="check-box">
           <span>
           <input type="checkbox" id="privacy" required #privacyCheckbox [(ngModel)]="privacyAccepted" name="privacy" [ngClass]="privacyAccepted ? 'checkbox-checked' : 'checkbox-unchecked'"  />

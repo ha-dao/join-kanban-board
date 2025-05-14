@@ -40,20 +40,57 @@ export class LoginComponent {
   /** Flag indicating whether login was successful */
   loginSuccessfull: boolean = true;
 
-  /**
-   * Creates an instance of LoginComponent.
-   * @param routerModule - Angular RouterModule for navigation
-   * @param router - Angular Router service for navigation
-   * @param authService - Service for authentication operations
+  
+   /**
+   * Indicates whether the password should be shown in plain text.
    */
-  constructor(private routerModule: RouterModule, private router: Router, private authService: AuthService) {}
+  passwordVisible: boolean = false;
 
   /**
-   * Navigates to the specified route.
-   * @param target - Route path to navigate to
+   * True if the user has entered any text into the password field.
+   */
+  passwordEntered: boolean = false;
+
+  /**
+   * Creates an instance of LoginComponent.
+   * 
+   * @param routerModule - RouterModule (optional, likely unused here)
+   * @param router - Angular Router service for navigation
+   * @param authService - Service to perform authentication requests
+   */
+  constructor(
+    private routerModule: RouterModule,  // optional – kann entfernt werden, falls nicht verwendet
+    private router: Router,
+    private authService: AuthService
+  ) {}
+
+  /**
+   * Navigates to a given route.
+   * 
+   * @param target - The route path to navigate to (e.g., '/register')
    */
   goToAnotherPage(target: string): void {
     this.router.navigate([target]);
+  }
+
+  /**
+   * Called on input event of the password field.
+   * Tracks whether the user has entered text and hides the password if input is cleared.
+   */
+  onPasswordInput(): void {
+    this.passwordEntered = this.password.length > 0;
+    if (!this.passwordEntered) {
+      this.passwordVisible = false;
+    }
+  }
+
+  /**
+   * Toggles password visibility if the password field is not empty.
+   */
+  togglePasswordVisibility(): void {
+    if (this.passwordEntered) {
+      this.passwordVisible = !this.passwordVisible;
+    }
   }
 
   /**
