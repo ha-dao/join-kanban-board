@@ -61,4 +61,8 @@ export class AppComponent {
   getLocalStorage() {
     this.authService.UserLoggedIn = localStorage.getItem('loggedIn')
   }
+
+  isAuthRoute() {
+    return this.router.url === '/' || this.router.url === '/login' || this.router.url === '/sign-up';
+  }
 }

@@ -120,6 +120,7 @@ export class TaskService implements OnDestroy {
     this.taskData.description = task.description;
     this.taskData.date = task.date;
     this.clickedButton.set(task.priority);
+    this.taskData.priority= task.priority
     this.taskData.category = task.category;
     this.currentSubtasks = task.subtasks;
     this.taskData.assignedTo = task.assignedTo;
