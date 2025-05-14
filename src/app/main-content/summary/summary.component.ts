@@ -28,11 +28,16 @@ export class SummaryComponent {
    */
   urgentTask = computed(() => {
     if (!this.isLoaded()) return [];
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0); 
+
     return this.taskService.tasksList
-      .filter((task) => task.priority === 'Urgent')
-      .filter((task) => new Date(task.date) > new Date())
-      .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-  });
+        .filter(task => task.priority === 'Urgent')
+        .filter(task => new Date(task.date) >= today)
+        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
+});
+
 
   /**
    * Computed signal returning the number of urgent tasks.
