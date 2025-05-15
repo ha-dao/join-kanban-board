@@ -2,6 +2,10 @@
 @import '../../../../styles/mixins.scss';
 @import '../../../../styles/buttons.scss';
 
+section {
+  padding: 0 16px 0 0;
+}
+
 h2 {
     margin-bottom: 20px;
   }

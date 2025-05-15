@@ -1,24 +1,36 @@
-<section class="layout" (load)="getLocalStorage()">
+<!-- <section class="layout" (load)="getLocalStorage()">
   @if(isAuthRoute()) {
-    <router-outlet></router-outlet>
+  <router-outlet></router-outlet>
+  } @else { @if(getRouterPath('legal-notice') || getRouterPath('privacy') || this.authService.UserLoggedIn){
+  <app-header></app-header>
+  <app-sidebar></app-sidebar>
+  }
+  <main class="content-wrapper">
+    <div class="content-scroll">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+  }
+</section> -->
+<section (load)="getLocalStorage()">
+  @if(isAuthRoute()) {
+  <router-outlet></router-outlet>
   } @else {
     @if(getRouterPath('legal-notice') || getRouterPath('privacy') || this.authService.UserLoggedIn){
-      <app-header></app-header>
-      <app-sidebar></app-sidebar>
+  <app-sidebar></app-sidebar>
+  }
+  <section>
+    @if(getRouterPath('legal-notice') || getRouterPath('privacy') || this.authService.UserLoggedIn){
+    <app-header></app-header>
     }
-    <main class="content-wrapper">
-      <div class="content-scroll">
-        <router-outlet></router-outlet>
-      </div>
-    </main>
+    <router-outlet></router-outlet>
+  </section>
   }
 </section>
+
 @if (feedbackService.message()) {
-  <span
-    class="feedback-message"
-    [class.visible]="feedbackService.visible()"
-  >
-    {{ feedbackService.message() }}
-  </span>
+<span class="feedback-message" [class.visible]="feedbackService.visible()">
+  {{ feedbackService.message() }}
+</span>
 }
 <app-overlay></app-overlay>

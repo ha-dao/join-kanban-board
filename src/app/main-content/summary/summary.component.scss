@@ -28,18 +28,16 @@ section {
   }
   h3 {
     color: #29abe2;
-    font-size: 64px;
+    font-size: 48px;
   }
   h4 {
-    font-size: 64px;
+    font-size: 48px;
     color: #2a3647;
   }
 }
 
 .buttons {
   @include displayFlex(flex, column, auto, auto, 28px, nowrap);
-  width: 560px;
-  height: 562px;
 }
 
 .buttoncard-row {
@@ -50,7 +48,7 @@ section {
   flex: 1;
   border: none;
   border-radius: 12px;
-  padding: 20px;
+  padding: 12px;
   @include displayFlex(flex, row, center, center, 18px, nowrap);
   cursor: pointer;
   transition: all 0.3s ease;
@@ -58,11 +56,11 @@ section {
   -webkit-box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
   box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.1);
   img {
-    height: 69px;
+    height: 56px;
   }
 
   h3 {
-    font-size: 64px;
+    font-size: 48px;
     margin: 0;
   }
 
@@ -84,16 +82,14 @@ section {
 
 .buttoncard-middle {
   @include displayFlex(flex, row, center, auto, 0, nowrap);
-
+  padding: 16px;
+  margin: 0;
+  flex: 0;
   .middle-content {
     @include displayFlex(flex, row, center, center, 64px, nowrap);
-    width: 560px;
-    height: 168px;
-
     > div:nth-child(1) {
       @include displayFlex(flex, row, auto, center, 24px, nowrap);
     }
-
     .deadline {
       @include displayFlex(flex, column, flex-start, flex-start, 8px, nowrap);
       text-align: left;
@@ -194,7 +190,7 @@ section {
 
   .buttons {
     width: 100%;
-    height: 100%;
+    height: auto;
   }
 
   .buttoncard {
@@ -235,7 +231,7 @@ section {
     > div {
       width: 100%;
       .buttons {
-        width: 100%;
+        width: calc(100% - 16px);
         gap: 8px;
         .buttoncard-row {
           flex-direction: row;

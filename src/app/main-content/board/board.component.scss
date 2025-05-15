@@ -357,7 +357,7 @@
         background-color: $background-color;
         border-radius: 8px;
         @include displayFlex(flex, column, flex-start, auto, 8px, nowrap);
-        min-height: 100vh;
+        min-height: 70vh;
         .dashed-container {
           width: calc(100% - 20px);
           height: 48px;
@@ -390,10 +390,19 @@
 }
 
 @media (max-width: 1440px) {
+  .main-container {
+    padding: 64px 0 64px 64px;
+  }
+  .header {
+    padding-right: 16px;
+  }
   .columns-container {
     .columns-content {
       flex-direction: column;
       .column {
+        .column-header {
+          padding-right: 16px;
+        }
         .tasks-container {
           flex-direction: row;
           overflow-x: auto;
@@ -403,6 +412,7 @@
           .task-card {
             min-width: 220px;
             max-width: 220px;
+            height: 220px;
           }
         }
       }

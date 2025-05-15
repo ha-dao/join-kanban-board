@@ -3,55 +3,55 @@
 @import './../../styles/buttons.scss';
 
 section {
-    @include displayFlex(flex, column, flex-start, flex-start, 24px, nowrap);
+  @include displayFlex(flex, column, flex-start, flex-start, 24px, nowrap);
+  width: 100%;
+  max-width: 1920px;
+  padding: 64px;
+  height: 100%;
+  > h2 {
+    @include fontStyle(clamp(1em, 8vw, 3em), 700, $primary-color, capitalize);
+  }
+  .title-close-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 2px;
     width: 100%;
-    max-width: 1920px;
-    padding: 64px;
-    height:100%;
-    >h2 {
-      @include fontStyle(clamp(1em, 8vw, 3em), 700, $primary-color, capitalize);
+    position: sticky;
+    top: 0;
+    background-color: $white;
+    > h2 {
+      @include fontStyle(clamp(1em, 1.2em, 1.4em), 700, $primary-color);
     }
-    .title-close-wrapper {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 8px 2px;
-      width: 100%;
-      position: sticky;
-      top: 0;
-      background-color: $white;
-      >h2 {
-        @include fontStyle(clamp(1em, 1.2em, 1.4em), 700, $primary-color);
+    .close-button {
+      padding: 8px;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      z-index: 999;
+      img {
+        width: 16px;
+        height: 16px;
       }
-      .close-button {
-          padding: 8px;
-          border-radius: 50%;
-          width: 32px;
-          height: 32px;
-          z-index: 999;
-          img {
-            width: 16px;
-            height: 16px;
-          }
-          &:hover {
-            background-color: darken($grey, 0.5);
-          }
+      &:hover {
+        background-color: darken($grey, 0.5);
       }
     }
+  }
 }
 
-h3{
-  @include fontStyle(clamp(16px, 18px, 20px), 400, $primary-color, none)
+h3 {
+  @include fontStyle(clamp(16px, 18px, 20px), 400, $primary-color, none);
 }
 
 .task-details {
   @include displayFlex(flex, column, flex-start, flex-start, 24px);
   width: 100%;
-  }
+}
 
 .contact-img {
   @include displayFlex(flex, row, center, center, 5px);
-  background-color: #9327FF;
+  background-color: #9327ff;
   width: 42px;
   height: 42px;
   border-radius: 100%;
@@ -60,7 +60,7 @@ h3{
   letter-spacing: -1px;
 }
 
-.subtasks{
+.subtasks {
   @include displayFlex(flex, column, flex-start, flex-start, 8px);
   max-height: 200px;
   width: 100%;
@@ -70,7 +70,7 @@ h3{
     padding: 6px 10px;
     border-radius: 10px;
     width: 100%;
-    input[type="checkbox"] {
+    input[type='checkbox'] {
       appearance: none;
       -webkit-appearance: none;
       width: 24px;
@@ -88,8 +88,8 @@ h3{
         background-image: url('../../../assets/img/3-board/checkbox-checked-icon.svg');
       }
     }
-    >p{
-      @include fontStyle(clamp(14px, 16px, 18px), 400,black, none)
+    > p {
+      @include fontStyle(clamp(14px, 16px, 18px), 400, black, none);
     }
 
     &:hover {
@@ -105,7 +105,7 @@ h3{
   bottom: 0;
   background-color: $white;
   padding: 16px 0;
-  >button{
+  > button {
     background-color: transparent;
     border: none;
     font-size: 16px;
@@ -122,51 +122,55 @@ h3{
       }
     }
   }
-  >span{
+  > span {
     color: $grey;
   }
 }
 
-.contact{
+.contact {
   @include displayFlex(flex, row, flex-start, center, 12px, nowrap);
   text-align: left;
-  >p{
-    @include fontStyle(clamp(16px, 18px, 20px), 400,black, none);
-  }
-    }
-.due-date{
-  @include displayFlex(flex, row, flex-start, flex-start, 24px);
-  :first-child{
-    @include fontStyle(clamp(16px, 18px, 20px), 400, $primary-color, none)
-  }
-  >p{
-    @include fontStyle(clamp(16px, 18px, 20px), 400, black, none)
+  > p {
+    @include fontStyle(clamp(16px, 18px, 20px), 400, black, none);
   }
 }
-.priority{
+.due-date {
+  @include displayFlex(flex, row, flex-start, flex-start, 24px);
+  :first-child {
+    @include fontStyle(clamp(16px, 18px, 20px), 400, $primary-color, none);
+  }
+  > p {
+    @include fontStyle(clamp(16px, 18px, 20px), 400, black, none);
+  }
+}
+.priority {
   @include displayFlex(flex, row, flex-start, center, 24px);
 
-
-  >p{
+  > p {
     @include fontStyle(clamp(16px, 18px, 20px), 400, black, none);
-    gap:10px;
+    gap: 10px;
   }
 }
-.assigned-to{
+.assigned-to {
   @include displayFlex(flex, column, flex-start, flex-start, 24px);
 
-    >p{
-      @include fontStyle(clamp(16px, 18px, 20px), 400,white, none);
-          }
-
+  > p {
+    @include fontStyle(clamp(16px, 18px, 20px), 400, white, none);
   }
+}
 
-  :host-context(app-overlay) {
-    section {
-      overflow-y: auto;
-      padding: 0 24px 0 0;
-      height: 100%;
-      max-height: 700px;
-      width: 100%;
-    }
+:host-context(app-overlay) {
+  section {
+    overflow-y: auto;
+    padding: 0 24px 0 0;
+    height: 100%;
+    max-height: 700px;
+    width: 100%;
   }
+  .subtasks {
+    max-height: 100%;
+    height: auto;
+    @include displayFlex(flex, column, flex-start, flex-start, 8px, nowrap);
+    overflow-y: none;
+  }
+}
