@@ -8,6 +8,7 @@ import { OverlayService } from './services/overlay.service';
 import { OverlayComponent } from './main-content/contact/overlay/overlay.component';
 import { TaskComponent } from './main-content/task/task.component';
 import { AuthService } from './services/auth.service';
+import { ScrollService } from './interfaces/scroll';
 
 /**
  * @component
@@ -21,6 +22,9 @@ import { AuthService } from './services/auth.service';
   styleUrl: './app.component.scss',
 })
 export class AppComponent {
+
+ 
+
   /**
    * The title of the application.
    */
@@ -41,7 +45,7 @@ export class AppComponent {
    * @param feedbackService The service for showing feedback messages.
    * @param overlayService The service for managing overlays.
    */
-  constructor(public feedbackService: FeedbackServiceService, public overlayService: OverlayService) {}
+  constructor(public feedbackService: FeedbackServiceService, public overlayService: OverlayService, private scrollService: ScrollService){}
 
   /**
    * Checks if the current router URL contains the given path.
