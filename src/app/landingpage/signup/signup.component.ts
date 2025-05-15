@@ -103,9 +103,10 @@ export class SignupComponent {
     }
   }
 
-  validatePrivacy(){
-      this.showPrivacyError = !this.privacyAccepted;
-  }
+validatePrivacy() {
+  this.autoValidatePrivacyIfReady();
+}
+
 
   /**
    * Toggles visibility of the specified password input.
@@ -160,7 +161,7 @@ export class SignupComponent {
    */
   get isFormValid(): boolean {
     const isEmailValid = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(this.email);
-    return this.name.trim().length >= 2 && isEmailValid;
+    return this.name.trim().length >= 2 && isEmailValid && this.password.length >= 6 && this.passwordConfirm.length >= 6;
   }
 
   /**
@@ -168,26 +169,35 @@ export class SignupComponent {
    * @param field - Name of the field to validate
    */
   validateForm(field: string) {
-    const addFieldIfInvalid = (condition: boolean, fieldName: string) => {
-      if (condition && !this.invalidFields.includes(fieldName)) {
-        this.invalidFields.push(fieldName);
-      } else if (!condition) {
-        this.invalidFields = this.invalidFields.filter(f => f !== fieldName);
-      }
-    };
-    if (field === 'name') {
-      this.validateName(addFieldIfInvalid);
+  const addFieldIfInvalid = (condition: boolean, fieldName: string) => {
+    if (condition && !this.invalidFields.includes(fieldName)) {
+      this.invalidFields.push(fieldName);
+    } else if (!condition) {
+      this.invalidFields = this.invalidFields.filter(f => f !== fieldName);
     }
-    if (field === 'email') {
-      this.validateMail(addFieldIfInvalid);
-    }
-    if (field === 'password') {
-      this.validatePassword(addFieldIfInvalid);
-    }
-    if (field === 'confirmPassword') {
-      this.validateConfirmedPassword(addFieldIfInvalid);
-    }
+  };
+
+  if (field === 'name') {
+    this.validateName(addFieldIfInvalid);
   }
+  if (field === 'email') {
+    this.validateMail(addFieldIfInvalid);
+  }
+  if (field === 'password') {
+    this.validatePassword(addFieldIfInvalid);
+  }
+  if (field === 'confirmPassword') {
+    this.validateConfirmedPassword(addFieldIfInvalid);
+    }
+  this.autoValidatePrivacyIfReady();
+}
+
+autoValidatePrivacyIfReady() {
+  const allInputsValid = this.invalidFields.length === 0 && this.isFormValid;
+  this.showPrivacyError = allInputsValid && !this.privacyAccepted;
+}
+
+  
 
   /**
    * Validates the name field.
