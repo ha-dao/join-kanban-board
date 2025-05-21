@@ -15,13 +15,12 @@ export const appConfig: ApplicationConfig = {
     ),
     provideFirebaseApp(() =>
       initializeApp({
-        projectId: 'join-1-46a2d',
-        appId: '1:414847680321:web:1f023837141c2935ac6bc0',
-        storageBucket: 'join-1-46a2d.firebasestorage.app',
-        apiKey: 'AIzaSyCXcBokA4SNkxf0PRKFrD0_E0GnPnrnUAs',
-        authDomain: 'join-1-46a2d.firebaseapp.com',
-        messagingSenderId: '414847680321',
-        measurementId: 'G-RXQNVD7VXR',
+        projectId: 'join-demo-57e8f',
+        appId: '1:567987311327:web:c1af8e819ca705a4804f6a',
+        storageBucket: 'join-demo-57e8f.firebasestorage.app',
+        apiKey: 'AIzaSyB5aR44kqFRj2s-LaSV-l0nhSCkR4Jr9H4',
+        authDomain: 'join-demo-57e8f.firebaseapp.com',
+        messagingSenderId: '567987311327',
       })
     ),
     provideFirestore(() => getFirestore()),
