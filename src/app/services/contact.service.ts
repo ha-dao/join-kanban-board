@@ -7,7 +7,7 @@ import { Injectable, OnDestroy, effect} from '@angular/core';
 import { inject } from '@angular/core';
 import { Firestore, collectionData, collection, doc, onSnapshot, addDoc, deleteDoc, updateDoc} from '@angular/fire/firestore';
 import { Contact } from '../interfaces/contact';
-import { query, orderBy, limit } from 'firebase/firestore';
+import { query, orderBy, limit } from '@angular/fire/firestore';
 import { TaskService } from './task.service';
 import { OverlayService } from './overlay.service';
 
@@ -33,40 +33,40 @@ export class ContactService implements OnDestroy{
     phone: '',
     color: ''
   };
-  
+
   /** Unsubscribe function for contact list listener */
   unsubContactList: any;
-  
+
   /** Firestore database instance */
   firestore:Firestore = inject(Firestore);
-  
+
   /** Task service injection */
   taskService = inject(TaskService);
-  
+
   /** Overlay service injection */
   overlayService= inject(OverlayService);
-  
+
   /** List of all contacts */
   contactList: Contact[] = [];
-  
+
   /** Array storing contact list letter indices */
   contactListLetters: number[] = [];
-  
+
   /** Array storing unique first letters of contact names */
   contactListLetter: string[] = [];
-  
+
   /** Currently selected contact */
   currentContact: Contact = {name: '', email: '', phone: '', color: '', letters: '', selected: false};
-  
+
   /** Index of current contact in contactList */
   currentIdex: number = 0;
-  
+
   /** Display style for overlay */
   overlayDisplay: string = 'none';
-  
+
   /** Current index in colors array */
   colorIndex: number = 0;
-  
+
   /** Array of colors for contact avatars */
   colours: string[] = [
     '#FF5733', '#33FF57', '#3357FF', '#F1C40F', '#8E44AD',
@@ -80,10 +80,10 @@ export class ContactService implements OnDestroy{
     '#22A6B3', '#BE2EDD', '#30336B', '#535C68', '#B33771',
     '#3B3B98', '#FD7272', '#58B19F', '#CAD3C8', '#BDC581'
   ];
-  
+
   /** ID of the currently selected contact */
   selectedIndex: string | undefined = '';
-  
+
   /**
    * Constructor for ContactService
    * @description Sets up initial state and listeners
@@ -97,7 +97,7 @@ export class ContactService implements OnDestroy{
       }
     });
   }
-  
+
   /**
    * Gets first and last name from a full name
    * @param {string} name - Full name of contact
@@ -319,12 +319,12 @@ export class ContactService implements OnDestroy{
    */
   syncSelectedContacts() {
     const assigned = this.taskService.taskData.assignedTo;
-    const allContacts = this.contactList;  
+    const allContacts = this.contactList;
     allContacts.forEach(contact => {
       contact.selected = assigned!.some(a => a.id === contact.id);
-    });      
+    });
   }
-  
+
   /**
    * Handler for dropdown open event
    * @description Synchronizes contacts if in edit-task mode

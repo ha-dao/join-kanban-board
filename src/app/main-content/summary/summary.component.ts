@@ -24,20 +24,18 @@ export class SummaryComponent {
   isLoaded = computed(() => this.taskService.isTasksLoaded());
 
   /**
-   * Computed signal returning a sorted list of future urgent tasks.
+   * Computed signal returning a sorted list of all urgent tasks.
    */
   urgentTask = computed(() => {
     if (!this.isLoaded()) return [];
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0); 
-
     return this.taskService.tasksList
-        .filter(task => task.priority === 'Urgent')
-        .filter(task => new Date(task.date) >= today)
-        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime());
-});
-
+      .filter(task => task.priority === 'Urgent')
+      .sort((a, b) => {
+        if (!a.date || !b.date) return 0;
+        return a.date.localeCompare(b.date);
+      });
+  });
 
   /**
    * Computed signal returning the number of urgent tasks.
